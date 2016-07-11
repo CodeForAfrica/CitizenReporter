@@ -449,5 +449,8 @@
                 android:resource="@xml/widget_info" />
         </receiver>
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="5bf264306faf0b1acc698b4363212fd306850a46" />
     </application>
 </manifest>
