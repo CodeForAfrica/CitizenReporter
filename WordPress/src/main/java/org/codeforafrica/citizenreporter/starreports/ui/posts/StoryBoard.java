@@ -3,6 +3,7 @@ package org.codeforafrica.citizenreporter.starreports.ui.posts;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -431,6 +432,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         submitButton.setEnabled(false);
 
         final EditText editTextSummary = (EditText)setPriceDialog.findViewById(R.id.editTextSummary);
+        editTextSummary.setText("0.00");
 
         //find current value of summary
         own_price = "" + mPost.getOwn_price();
