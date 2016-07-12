@@ -3,7 +3,6 @@ package org.codeforafrica.citizenreporter.starreports.ui.posts;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -53,6 +52,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.android.datetimepicker.date.DatePickerDialog;
 
 import org.codeforafrica.citizenreporter.starreports.BuildConfig;
 import org.codeforafrica.citizenreporter.starreports.Constants;
@@ -98,7 +98,8 @@ import java.util.List;
 import java.util.Random;
 
 public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSliderClickListener,
-        ViewPagerEx.OnPageChangeListener, View.OnClickListener, TextView.OnEditorActionListener{
+        ViewPagerEx.OnPageChangeListener, View.OnClickListener, TextView.OnEditorActionListener,
+        DatePickerDialog.OnDateSetListener{
 
     private SliderLayout mDemoSlider;
 
@@ -156,6 +157,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     public static final String NEW_MEDIA_GALLERY = "NEW_MEDIA_GALLERY";
     public static final String NEW_MEDIA_POST = "NEW_MEDIA_POST";
     private boolean mMediaUploadServiceStarted;
+
 
     private TextView mPayment;
     private String own_price;
@@ -324,6 +326,8 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
 
         //quick capture icons
+        final Calendar calendar = Calendar.getInstance();
+        final DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         button_camera = (LinearLayout)findViewById(R.id.button_camera);
 
         button_video = (LinearLayout)findViewById(R.id.button_video);
@@ -378,7 +382,9 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showAnswerQuestionDialog(3, displayDate, thumbDate);
+                datePickerDialog.setYearRange(1985, 2028);
+                datePickerDialog.show(getFragmentManager(), "datepicker");
+                //showAnswerQuestionDialog(3, displayDate, thumbDate);
             }
         });
         CardView howButton = (CardView)findViewById(R.id.howButton);
@@ -419,6 +425,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         setUpPayment();
 
         getAndSetThumbnails();
+
 
         //setUpQuestionnaire();
     }
@@ -1325,52 +1332,6 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
             initLocation();
         }
-        //show date button
-        final DatePicker datePicker = (DatePicker)questionDialog.findViewById(R.id.datePicker);
-        final CheckBox useDatePicker = (CheckBox)questionDialog.findViewById(R.id.use_datepicker);
-        if(question_id == 3){
-
-            useDatePicker.setVisibility(View.VISIBLE);
-            useDatePicker.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (b) {
-                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-//                        editTextSummary.setVisibility(View.GONE);
-                        datePicker.setVisibility(View.VISIBLE);
-                        submitButton.setEnabled(true);
-                    } else {
-                        datePicker.setVisibility(View.GONE);
-                        if (editTextSummary.getText().toString().length() > 0) {
-                            submitButton.setEnabled(true);
-                        } else {
-                            submitButton.setEnabled(false);
-                        }
-                    }
-                }
-            });
-
-
-            //check if has calendar date
-                if (displayDate_Calendar.getText().toString().trim().length() > 0) {
-
-                    useDatePicker.setChecked(true);
-
-                    String[] dateParts = displayDate_Calendar.getText().toString().trim().split("/");
-
-                    if (dateParts.length == 3) {
-
-                        int month = Integer.parseInt(dateParts[0]) - 1;
-                        int day = Integer.parseInt(dateParts[1]);
-                        int year = Integer.parseInt(dateParts[2]);
-
-                        datePicker.updateDate(year, month, day);
-                    }
-
-                }
-
-        }
 
         //find current value of summary
         String current_answer = "" + textView.getText().toString();
@@ -1448,32 +1409,6 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                     questionThumb.setColorFilter(getResources().getColor(R.color.white), android.graphics.PorterDuff.Mode.MULTIPLY);
                 }
 
-                if(question_id == 3) {
-
-                    if(useDatePicker.isChecked()) {
-                        //if date calendar is set, we can set textview to blank if empty
-                        if(new_answer.trim().length() < 1)
-                            textView.setVisibility(View.GONE);
-
-                        int day = datePicker.getDayOfMonth();
-                        int month = datePicker.getMonth() + 1;
-                        int year = datePicker.getYear();
-
-                        string_date = String.format("%02d", month) + "/" + String.format("%02d", day) + "/" + year;
-                        mPost.setQwhen_date(string_date);
-
-                        displayDate_Calendar.setText(string_date);
-                        displayDate_Calendar.setVisibility(View.VISIBLE);
-                        questionThumb.setColorFilter(getResources().getColor(R.color.color_primary), android.graphics.PorterDuff.Mode.MULTIPLY);
-                    }else{
-                        mPost.setQwhen_date("");
-                        displayDate_Calendar.setText("");
-                        displayDate_Calendar.setVisibility(View.GONE);
-                        if(new_answer.trim().length() < 1)
-                            questionThumb.setColorFilter(getResources().getColor(R.color.white), android.graphics.PorterDuff.Mode.MULTIPLY);
-                    }
-
-                }
 
                 WordPress.wpDB.savePost(mPost);
 
@@ -1564,6 +1499,16 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     @Override
     public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
         return false;
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
+        String string_date = String.format("%02d", monthOfYear) + "/" + String.format("%02d", dayOfMonth) + "/" + year;
+        mPost.setQwhen_date(string_date);
+
+        displayDate_Calendar.setText(string_date);
+        displayDate_Calendar.setVisibility(View.VISIBLE);
+        //questionThumb.setColorFilter(getResources().getColor(R.color.color_primary), android.graphics.PorterDuff.Mode.MULTIPLY);
     }
 
     private static enum LocationStatus {NONE, FOUND, NOT_FOUND, SEARCHING}
