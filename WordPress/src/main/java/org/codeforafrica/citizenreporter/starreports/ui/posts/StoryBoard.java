@@ -552,6 +552,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
                 }
             }
+        WordPress.wpDB.updatePost(mPost);
     }
 
 
@@ -872,6 +873,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             //add thumb to story mediapaths so as to display before upload
             mPost.setMediaPaths(mPost.getMediaPaths() + "-:-" + thumb.getAbsolutePath());
         }
+        WordPress.wpDB.updatePost(mPost);
     }
     public String generateThumb(File file, String mimeType, long mediaCreationTime){
         String thumbnailUri = "";
@@ -1410,7 +1412,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                 }
 
 
-                WordPress.wpDB.savePost(mPost);
+                WordPress.wpDB.updatePost(mPost);
 
                 questionDialog.dismiss();
             }
@@ -1450,6 +1452,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
         String old_description = mPost.getDescription() + "";
         mPost.setDescription(old_description + "\n" + attachURL);
+        WordPress.wpDB.updatePost(mPost);
     }
 
 
@@ -1508,6 +1511,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
         displayDate_Calendar.setText(string_date);
         displayDate_Calendar.setVisibility(View.VISIBLE);
+        WordPress.wpDB.updatePost(mPost);
         //questionThumb.setColorFilter(getResources().getColor(R.color.color_primary), android.graphics.PorterDuff.Mode.MULTIPLY);
     }
 
