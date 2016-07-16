@@ -10,6 +10,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.view.Display;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Surface;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -113,6 +116,7 @@ public class RipotiMainActivity extends ActionBarActivity
     private boolean mIsPage = false;
     private String mErrorMsg = "";
 
+
     public RipotiPostsListFragment mPostList;
 
     public AssignmentsListFragment mAssignmentsList;
@@ -148,6 +152,7 @@ public class RipotiMainActivity extends ActionBarActivity
     public void onAssignmentAction(int action, final Post post) {
 
     }
+
 
 
     public void closePost(){
@@ -319,6 +324,7 @@ public class RipotiMainActivity extends ActionBarActivity
         void onScrollToTop();
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setStatusBarColor();
@@ -333,6 +339,13 @@ public class RipotiMainActivity extends ActionBarActivity
         toolbar.setNavigationIcon(R.drawable.app_icon);
 
         getSupportActionBar().setDisplayShowTitleEnabled(true);
+        Display display = getWindowManager().getDefaultDisplay();
+        if(display.getRotation() == Surface.ROTATION_90){
+            getSupportActionBar().hide();
+        } else if (display.getRotation() == Surface.ROTATION_270){
+            getSupportActionBar().hide();
+        }
+
 
         mViewPager = (WPMainViewPager) findViewById(R.id.viewpager_main);
         mTabAdapter = new RipotiMainTabAdapter(getFragmentManager(), RipotiMainActivity.this);
@@ -984,7 +997,7 @@ public class RipotiMainActivity extends ActionBarActivity
             GCMRegistrar.onDestroy(getApplicationContext());
 
         } catch (Exception e) {
-            Log.e("UnRegister Receiver Error", "> " + e.getMessage());
+            Log.e("UnRegisterReceiverError",">" + e.getMessage());
         }
         super.onDestroy();
     }
