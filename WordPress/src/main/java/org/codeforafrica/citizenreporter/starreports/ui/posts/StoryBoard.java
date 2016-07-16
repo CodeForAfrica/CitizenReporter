@@ -969,6 +969,26 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             }
         });
     }
+    public void confirmDeleteDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder
+                .setMessage("Are you sure you want to delete this post?")
+                .setPositiveButton("Yes",  new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        WordPress.wpDB.deletePost(mPost);
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                })
+                .show();
+    }
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
@@ -983,6 +1003,10 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         if(item.getItemId()== R.id.save){
             justSave();
         }
+        if(item.getItemId() == R.id.delete){
+            confirmDeleteDialog();
+        }
+
         if(item.getItemId()== R.id.publish){
             publishAndFinish();
         }
