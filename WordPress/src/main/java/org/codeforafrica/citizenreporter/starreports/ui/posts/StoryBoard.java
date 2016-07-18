@@ -928,6 +928,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
         return thumbnailUri;
     }
+    //to do
 
     /**
      * Starts the upload service to upload selected media.
