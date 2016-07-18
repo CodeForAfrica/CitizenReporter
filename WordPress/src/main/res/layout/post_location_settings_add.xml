@@ -10,12 +10,12 @@
     android:layout_marginRight="8dp"
     android:orientation="horizontal">
 
-    <info.hoang8f.widget.FButton
-        fbutton:buttonColor="@color/translucent_grey_lighten_10"
-        fbutton:shadowColor="@color/grey_lighten_20"
-        fbutton:shadowEnabled="true"
-        fbutton:shadowHeight="5dp"
-        fbutton:cornerRadius="5dp"
+    <Button
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/gray"
+        android:theme="@style/SubmitButton"
         android:padding="5dp"
         style="?android:attr/borderlessButtonStyle"
         android:layout_alignParentBottom="true"

@@ -170,7 +170,8 @@
         <activity
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:name=".ui.posts.StoryBoard"
-            android:theme="@style/Calypso.NoActionBar" >
+            android:theme="@style/Calypso.NoActionBar"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.posts.LessonsActivity"

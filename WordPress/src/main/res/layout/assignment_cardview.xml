@@ -164,7 +164,7 @@
                     android:src="@drawable/ic_mic_white_48dp"
                     android:layout_height="30dp"
                     android:layout_width="30dp"
-                    android:padding="5dp"
+                    android:padding="1dp"
                     android:tint="@color/assignment_media_type_not_required"
                     android:layout_alignBottom="@+id/layout_bottom"
                     android:layout_alignRight="@+id/divider"
@@ -175,7 +175,7 @@
                     android:src="@drawable/ic_videocam_white_48dp"
                     android:layout_height="30dp"
                     android:layout_width="30dp"
-                    android:padding="5dp"
+                    android:padding="1dp"
                     android:tint="@color/assignment_media_type_not_required" />
 
                 <ImageView
@@ -183,7 +183,7 @@
                     android:src="@drawable/ic_photo_camera_white_48dp"
                     android:layout_height="30dp"
                     android:layout_width="30dp"
-                    android:padding="5dp"
+                    android:padding="2dp"
                     android:tint="@color/assignment_media_type_not_required" />
 
             </LinearLayout>

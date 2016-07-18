@@ -125,10 +125,10 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     private TextView text_template;
 
 
-    private FButton enableLocation;
+    private Button enableLocation;
 
     private Dialog questionDialog;
-    private FButton submitButton;
+    private Button submitButton;
     private EditText editTextSummary;
 
     public static final String EXTRA_POSTID = "selectedId";
@@ -437,7 +437,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         setPriceDialog.setContentView(R.layout.fivew_fragment);
         setPriceDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        final FButton submitButton = (FButton)setPriceDialog.findViewById(R.id.submitButton);
+        final Button submitButton = (Button)setPriceDialog.findViewById(R.id.submitButton);
         submitButton.setEnabled(false);
 
         final EditText editTextSummary = (EditText)setPriceDialog.findViewById(R.id.editTextSummary);
@@ -1338,7 +1338,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         questionDialog.setContentView(R.layout.summary_fragment);
         questionDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        submitButton = (FButton)questionDialog.findViewById(R.id.submitButton);
+        submitButton = (Button)questionDialog.findViewById(R.id.submitButton);
         submitButton.setEnabled(false);
 
         editTextSummary = (EditText)questionDialog.findViewById(R.id.editTextSummary);
@@ -1348,7 +1348,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         if(question_id == 1){
             locationGroup.setVisibility(View.VISIBLE);
 
-            enableLocation = (FButton)questionDialog.findViewById(R.id.enableLocation);
+            enableLocation = (Button)questionDialog.findViewById(R.id.enableLocation);
             enableLocation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -1669,7 +1669,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             mLocationSearchSection = locationRootView.findViewById(R.id.sectionLocationSearch);
             mLocationViewSection = locationRootView.findViewById(R.id.sectionLocationView);
 
-            FButton addLocation = (FButton) locationRootView.findViewById(R.id.addLocation);
+            Button addLocation = (Button) locationRootView.findViewById(R.id.addLocation);
             addLocation.setOnClickListener(this);
 
             mButtonSearchLocation = (FButton) locationRootView.findViewById(R.id.searchLocation);
