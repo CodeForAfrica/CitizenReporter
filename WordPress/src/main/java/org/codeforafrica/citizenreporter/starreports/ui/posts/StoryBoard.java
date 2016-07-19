@@ -6,8 +6,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
 import android.location.Address;
 import android.location.Location;
 import android.location.LocationManager;
@@ -17,10 +19,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -36,9 +40,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -99,7 +100,7 @@ import java.util.Random;
 
 public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSliderClickListener,
         ViewPagerEx.OnPageChangeListener, View.OnClickListener, TextView.OnEditorActionListener,
-        DatePickerDialog.OnDateSetListener{
+        DatePickerDialog.OnDateSetListener {
 
     private SliderLayout mDemoSlider;
 
@@ -148,7 +149,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     private LinearLayout button_mic;
     private String mMediaCapturePath = "";
 
-    private HashMap<String,File> media_map;
+    private HashMap<String, File> media_map;
     private HashMap<String, String> media_map_remote;
 
     private boolean hasMedia = false;
@@ -163,7 +164,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     private String own_price;
 
     private Payment payment;
-    private LinearLayout confirmLayout ;
+    private LinearLayout confirmLayout;
     private ImageView confirmIcon;
     private TextView confirmText;
 
@@ -171,6 +172,8 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     private ImageView disputeIcon;
     private TextView disputeText;
     private RelativeLayout followUpLayout;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -235,11 +238,11 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             // User selected 'Quick Photo' in the menu drawer
             if (quickMediaType == Constants.QUICK_POST_PHOTO_CAMERA) {
                 launchCamera();
-            } else if(quickMediaType == Constants.QUICK_POST_VIDEO_CAMERA) {
+            } else if (quickMediaType == Constants.QUICK_POST_VIDEO_CAMERA) {
                 launchVideoCamera();
-            }else if(quickMediaType == Constants.QUICK_POST_AUDIO_MIC) {
+            } else if (quickMediaType == Constants.QUICK_POST_AUDIO_MIC) {
                 launchMic();
-            }else if (quickMediaType == Constants.QUICK_POST_PHOTO_LIBRARY) {
+            } else if (quickMediaType == Constants.QUICK_POST_PHOTO_LIBRARY) {
                 WordPressMediaUtils.launchPictureLibrary(this);
             }
             if (mPost != null) {
@@ -249,7 +252,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
         //is this from assignment
         int assignmentID = getIntent().getIntExtra("assignment_id", 0);
-        if(assignmentID != 0){
+        if (assignmentID != 0) {
             mPost.setAssignment_id(assignmentID);
         }
 
@@ -264,47 +267,47 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
         media_map = new HashMap<String, File>();
         media_map_remote = new HashMap<String, String>();
-        mDemoSlider = (SliderLayout)findViewById(R.id.slider);
+        mDemoSlider = (SliderLayout) findViewById(R.id.slider);
 
-        summaryPane = (LinearLayout)findViewById(R.id.summaryPane);
-        guidePane = (LinearLayout)findViewById(R.id.guidePane);
+        summaryPane = (LinearLayout) findViewById(R.id.summaryPane);
+        guidePane = (LinearLayout) findViewById(R.id.guidePane);
 
-        displaySummary = (TextView)findViewById(R.id.displaySummary);
-        thumbSummary = (ImageView)findViewById(R.id.thumbSummary);
-        displayWho = (TextView)findViewById(R.id.displayWho);
-        thumbWho = (ImageView)findViewById(R.id.thumbWho);
-        displayLocation = (TextView)findViewById(R.id.displayLocation);
-        thumbLocation = (ImageView)findViewById(R.id.thumbLocation);
-        displayDate = (TextView)findViewById(R.id.displayDate);
-        displayDate_Calendar = (TextView)findViewById(R.id.displayDate_Calendar);
-        thumbDate = (ImageView)findViewById(R.id.thumbDate);
-        displayCause = (TextView)findViewById(R.id.displayCause);
-        thumbCause = (ImageView)findViewById(R.id.thumbCause);
+        displaySummary = (TextView) findViewById(R.id.displaySummary);
+        thumbSummary = (ImageView) findViewById(R.id.thumbSummary);
+        displayWho = (TextView) findViewById(R.id.displayWho);
+        thumbWho = (ImageView) findViewById(R.id.thumbWho);
+        displayLocation = (TextView) findViewById(R.id.displayLocation);
+        thumbLocation = (ImageView) findViewById(R.id.thumbLocation);
+        displayDate = (TextView) findViewById(R.id.displayDate);
+        displayDate_Calendar = (TextView) findViewById(R.id.displayDate_Calendar);
+        thumbDate = (ImageView) findViewById(R.id.thumbDate);
+        displayCause = (TextView) findViewById(R.id.displayCause);
+        thumbCause = (ImageView) findViewById(R.id.thumbCause);
 
-        yesMedia = (RelativeLayout)findViewById(R.id.yesMediaPane);
-        noMedia = (RelativeLayout)findViewById(R.id.noMediaPane);
+        yesMedia = (RelativeLayout) findViewById(R.id.yesMediaPane);
+        noMedia = (RelativeLayout) findViewById(R.id.noMediaPane);
 
-        text_summary = (TextView)findViewById(R.id.text_summary);
-        text_template= (TextView)findViewById(R.id.text_template);
+        text_summary = (TextView) findViewById(R.id.text_summary);
+        text_template = (TextView) findViewById(R.id.text_template);
 
-        if(mPost !=null)
+        if (mPost != null)
             payment = WordPress.wpDB.getPostPayment(mPost.getRemotePostId());
 
-        mPayment = (TextView)findViewById(R.id.payment);
+        mPayment = (TextView) findViewById(R.id.payment);
         //TODO: if assignment set bounty & disable click
         //set own price as custom field
 
         mPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    if(mPost.isLocalDraft()){
+                if (mPost.isLocalDraft()) {
 
-                        setPriceDialog();
+                    setPriceDialog();
 
-                    }else{
+                } else {
 
-                        showPaymentDialog();
-                    }
+                    showPaymentDialog();
+                }
             }
         });
         /*
@@ -325,18 +328,21 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         */
 
 
+
         //quick capture icons
         final Calendar calendar = Calendar.getInstance();
         final DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        button_camera = (LinearLayout)findViewById(R.id.button_camera);
+        button_camera = (LinearLayout) findViewById(R.id.button_camera);
 
-        button_video = (LinearLayout)findViewById(R.id.button_video);
-        button_mic = (LinearLayout)findViewById(R.id.button_mic);
+        button_video = (LinearLayout) findViewById(R.id.button_video);
+        button_mic = (LinearLayout) findViewById(R.id.button_mic);
         //
         button_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                launchCamera();
+                showCameraDialog();
+                //WordPressMediaUtils.launchPictureGallery(StoryBoard.this);
+                //launchCamera();
             }
         });
 
@@ -357,28 +363,28 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         });
 
         //set up questionnaire
-        CardView summaryButton = (CardView)findViewById(R.id.summaryButton);
+        CardView summaryButton = (CardView) findViewById(R.id.summaryButton);
         summaryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAnswerQuestionDialog(0, displaySummary, thumbSummary);
             }
         });
-        CardView locationButton = (CardView)findViewById(R.id.locationButton);
+        CardView locationButton = (CardView) findViewById(R.id.locationButton);
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAnswerQuestionDialog(1, displayLocation, thumbLocation);
             }
         });
-        CardView entitiesButton = (CardView)findViewById(R.id.entitiesButton);
+        CardView entitiesButton = (CardView) findViewById(R.id.entitiesButton);
         entitiesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAnswerQuestionDialog(2, displayWho, thumbWho);
             }
         });
-        CardView dateButton = (CardView)findViewById(R.id.dateButton);
+        CardView dateButton = (CardView) findViewById(R.id.dateButton);
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -387,7 +393,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                 //showAnswerQuestionDialog(3, displayDate, thumbDate);
             }
         });
-        CardView howButton = (CardView)findViewById(R.id.howButton);
+        CardView howButton = (CardView) findViewById(R.id.howButton);
         howButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -396,17 +402,16 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         });
 
 
-
         //TODO: need for checking twice?
-         if (mPost != null) {
+        if (mPost != null) {
             WordPress.currentPost = mPost;
             loadPost(WordPress.currentPost);
-        }else{
-             mPost = new Post(WordPress.getCurrentLocalTableBlogId(), false);
-             WordPress.currentPost = mPost;
-             WordPress.wpDB.savePost(mPost);
-             mIsNewPost = true;
-         }
+        } else {
+            mPost = new Post(WordPress.getCurrentLocalTableBlogId(), false);
+            WordPress.currentPost = mPost;
+            WordPress.wpDB.savePost(mPost);
+            mIsNewPost = true;
+        }
 
         /*
         TODO: doesn't work, but will come back to it
@@ -418,7 +423,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             }
         }
         */
-        if(!mPost.isLocalDraft()) {
+        if (!mPost.isLocalDraft()) {
             hideEditFeatures();
 
         }
@@ -426,27 +431,52 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
         getAndSetThumbnails();
 
-
-        //setUpQuestionnaire();
     }
 
-    public void setPriceDialog(){
+    public void showCameraDialog() {
+        final Dialog mDialog = new Dialog(StoryBoard.this);
+        mDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        mDialog.setContentView(R.layout.camera_gallery_dialog);
+        mDialog.findViewById(R.id.camera_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchCamera();
+            }
+        });
+        mDialog.findViewById(R.id.gallery_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WordPressMediaUtils.launchPictureGallery(StoryBoard.this);
+            }
+        });
+
+        mDialog.show();
+    }
+
+    public void setPriceDialog() {
         final Dialog setPriceDialog = new Dialog(StoryBoard.this);
         setPriceDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         setPriceDialog.getWindow().setLayout(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
         setPriceDialog.setContentView(R.layout.fivew_fragment);
         setPriceDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        final Button submitButton = (Button)setPriceDialog.findViewById(R.id.submitButton);
+        final Button submitButton = (Button) setPriceDialog.findViewById(R.id.submitButton);
         submitButton.setEnabled(false);
 
-        final EditText editTextSummary = (EditText)setPriceDialog.findViewById(R.id.editTextSummary);
+        final EditText editTextSummary = (EditText) setPriceDialog.findViewById(R.id.editTextSummary);
         editTextSummary.setText("0.00");
+        editTextSummary.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+        if (mPost.getOwn_price() == null) {
+            own_price = "0.00";
+        } else {
+            own_price = "" + mPost.getOwn_price();
+        }
 
         //find current value of summary
-        own_price = "" + mPost.getOwn_price();
+
         //if it's not default & not empty edit editTextSummary
-        if(!own_price.equals("")){
+        if (!own_price.equals("")) {
             editTextSummary.setText(own_price);
             submitButton.setEnabled(true);
         }
@@ -496,67 +526,68 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         setPriceDialog.show();
     }
 
-    public void setUpPayment(){
-        if(!mPost.isLocalDraft()){
-            if(payment == null){
+    public void setUpPayment() {
+        if (!mPost.isLocalDraft()) {
+            if (payment == null) {
                 mPayment.setText(getResources().getString(R.string.no_payment_yet));
-            }else{
-                String confirmed = getApplicationContext().getResources().getString(R.string.not_confirmed); ;
-                if(payment.getConfirmed().equals("1")){
+            } else {
+                String confirmed = getApplicationContext().getResources().getString(R.string.not_confirmed);
+                ;
+                if (payment.getConfirmed().equals("1")) {
                     confirmed = getApplicationContext().getResources().getString(R.string.confirmed);
-                }else if(payment.getConfirmed().equals("-1")){
+                } else if (payment.getConfirmed().equals("-1")) {
                     confirmed = getApplicationContext().getResources().getString(R.string.disputed);
                 }
-                mPayment.setText(payment.getAmount()+" : "+confirmed);
+                mPayment.setText(payment.getAmount() + " : " + confirmed);
             }
-        }else{
-            if(mPost.getOwn_price()!=null)
-                if(mPost.getOwn_price().trim().length()>0) {
+        } else {
+            if (mPost.getOwn_price() != null)
+                if (mPost.getOwn_price().trim().length() > 0) {
                     mPayment.setText(mPost.getOwn_price());
                 }
         }
     }
 
-    public void hideEditFeatures(){
+    public void hideEditFeatures() {
         findViewById(R.id.bottom_action_buttons).setVisibility(View.GONE);
 
     }
 
-    public void getAndSetThumbnails(){
+    public void getAndSetThumbnails() {
         String mediaPaths;
 
-        if(mPost.isLocalDraft()){
+        if (mPost.isLocalDraft()) {
             mediaPaths = StringUtils.notNullStr(mPost.getMediaPaths());
-        }else{
+        } else {
             mediaPaths = StringUtils.notNullStr(mPost.getRemoteMediaPaths());
         }
 
-        if(mediaPaths!=""){
+        if (mediaPaths != "") {
             String[] mediaPaths_parts = mediaPaths.split("-:-");
             //for(int i = 0; i<mediaPaths_parts.length; i++){
-            for(String mediaPath : mediaPaths_parts)
-                if(!mediaPath.trim().equals("") && !mediaPath.trim().equals("null")){
+            for (String mediaPath : mediaPaths_parts)
+                if (!mediaPath.trim().equals("") && !mediaPath.trim().equals("null")) {
                     //TODO: set caption
                     Random randomGenerator = new Random();
 
-                    if(mPost.isLocalDraft()){
+                    if (mPost.isLocalDraft()) {
                         File thumb = new File(mediaPath);
                         if (thumb.exists()) {
                             media_map.put(String.valueOf(randomGenerator.nextInt(10000)), thumb);
                             setUpSlider();
                         }
-                    }else{
-                            media_map_remote.put(String.valueOf(randomGenerator.nextInt(10000)), mediaPath);
-                            setUpSlider();
+                    } else {
+                        media_map_remote.put(String.valueOf(randomGenerator.nextInt(10000)), mediaPath);
+                        setUpSlider();
                     }
 
                 }
-            }
+        }
         WordPress.wpDB.updatePost(mPost);
     }
 
 
-    public void showPaymentDialog(){
+    public void showPaymentDialog() {
         final Dialog mDialog = new Dialog(StoryBoard.this);
         mDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         mDialog.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -572,9 +603,9 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         disputeText = (TextView) mDialog.findViewById(R.id.dispute_text);
         followUpLayout = (RelativeLayout) mDialog.findViewById(R.id.followup_layout);
 
-        if(payment == null){
+        if (payment == null) {
             //payment hasn't been made yet!
-            ((TextView)mDialog.findViewById(R.id.message_text)).setText(getResources().getString(R.string.no_payment_yet));
+            ((TextView) mDialog.findViewById(R.id.message_text)).setText(getResources().getString(R.string.no_payment_yet));
 
             //hide dispute and confirm
             confirmLayout.setVisibility(View.GONE);
@@ -582,13 +613,13 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
             //show followUp
             followUpLayout.setVisibility(View.VISIBLE);
-        }else{
-            ((TextView)mDialog.findViewById(R.id.message_text)).setText(StringUtils.notNullStr(payment.getMessage()));
-            if(payment.getConfirmed().equals("1")){
+        } else {
+            ((TextView) mDialog.findViewById(R.id.message_text)).setText(StringUtils.notNullStr(payment.getMessage()));
+            if (payment.getConfirmed().equals("1")) {
                 paymentConfirmed(payment, true, false);
-            }else if(payment.getConfirmed().equals("-1")){
+            } else if (payment.getConfirmed().equals("-1")) {
                 paymentConfirmed(payment, true, false);
-            }else{
+            } else {
                 followUpLayout.setVisibility(View.VISIBLE);
                 disputeLayout.setVisibility(View.GONE);
                 confirmLayout.setVisibility(View.GONE);
@@ -621,30 +652,30 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         mDialog.show();
     }
 
-    public void paymentConfirmed(Payment payment, boolean isConfirmed, boolean update){
+    public void paymentConfirmed(Payment payment, boolean isConfirmed, boolean update) {
 
-        if(isConfirmed){
-            confirmIcon.setColorFilter(getApplicationContext().getResources().getColor(R.color.color_primary), android.graphics.PorterDuff.Mode.MULTIPLY);
+        if (isConfirmed) {
+            confirmIcon.setColorFilter(getApplicationContext().getResources().getColor(R.color.color_primary), PorterDuff.Mode.MULTIPLY);
             confirmText.setText(getApplicationContext().getResources().getString(R.string.confirmed));
             disputeLayout.setVisibility(View.GONE);
             followUpLayout.setVisibility(View.GONE);
-        }else{
-            disputeIcon.setColorFilter(getApplicationContext().getResources().getColor(R.color.alert_red), android.graphics.PorterDuff.Mode.MULTIPLY);
+        } else {
+            disputeIcon.setColorFilter(getApplicationContext().getResources().getColor(R.color.alert_red), PorterDuff.Mode.MULTIPLY);
             disputeText.setText(getApplicationContext().getResources().getString(R.string.disputed));
             confirmLayout.setVisibility(View.GONE);
             //show follow up button: takes user to chatactivity
             followUpLayout.setVisibility(View.VISIBLE);
         }
 
-        if(update){
+        if (update) {
 
             String confirm;
 
-            if(isConfirmed){
+            if (isConfirmed) {
                 confirm = "1";
                 payment.setConfirmed("1");
                 WordPress.wpDB.updatePayment(payment);
-            }else{
+            } else {
                 confirm = "0";
                 payment.setConfirmed("-1");
                 WordPress.wpDB.updatePayment(payment);
@@ -658,14 +689,14 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        if(mPost.isLocalDraft()){
+        if (mPost.isLocalDraft()) {
             getMenuInflater().inflate(R.menu.storyboard_menu, menu);
         }
         return true;
     }
 
 
-    private void launchMic(){
+    private void launchMic() {
         WordPressMediaUtils.launchMic(this, new WordPressMediaUtils.LaunchRecorderCallback() {
             @Override
             public void onMediaRecorderPathReady(String mediaCapturePath) {
@@ -674,17 +705,21 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             }
         });
     }
+
     private void launchCamera() {
         startOverlayCamera(1);
     }
+
     private void launchVideoCamera() {
         startOverlayCamera(2);
     }
-    public void startOverlayCamera(int type){
+
+    public void startOverlayCamera(int type) {
 
         (new WordPress()).startOverlayCamera(StoryBoard.this, getApplicationContext(), type);
 
     }
+
     /*
     private void launchVideoCamera() {
 
@@ -692,9 +727,38 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         AppLockManager.getInstance().setExtendedTimeout();
     }
     */
+    public String getImagePath(Uri uri) {
+        /*
+        * convert the uri in kitkat and above to full path
+        */
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        String document_id = cursor.getString(0);
+        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+        cursor.close();
+
+        cursor = getContentResolver().query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+        cursor.moveToFirst();
+        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        cursor.close();
+
+        return path;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == WordPressMediaUtils.PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            mMediaCapturePath = getImagePath(data.getData());
+            File f = new File(mMediaCapturePath);
+            if (!addMedia(f)) {
+                ToastUtils.showToast(this, R.string.gallery_error, ToastUtils.Duration.SHORT);
+            }
+        }
 
         if (data != null || ((requestCode == RequestCodes.TAKE_PHOTO ||
                 requestCode == RequestCodes.TAKE_VIDEO || requestCode == RequestCodes.OVERLAY_CAMERA))) {
@@ -704,7 +768,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             switch (requestCode) {
 
                 case RequestCodes.OVERLAY_CAMERA:
-                    if(resultCode == 1){
+                    if (resultCode == 1) {
                         WordPressMediaUtils.launchCamera(this, new WordPressMediaUtils.LaunchCameraCallback() {
                             @Override
                             public void onMediaCapturePathReady(String mediaCapturePath) {
@@ -712,7 +776,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                                 AppLockManager.getInstance().setExtendedTimeout();
                             }
                         });
-                    }else if(resultCode == 2) {
+                    } else if (resultCode == 2) {
                         WordPressMediaUtils.launchVideoCamera_SD(this, new WordPressMediaUtils.LaunchVideoCameraCallback() {
                             @Override
                             public void onMediaCapturePathReady(String mediaCapturePath) {
@@ -731,7 +795,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                                 ToastUtils.showToast(this, R.string.gallery_error, ToastUtils.Duration.SHORT);
                             }
                             //this.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"
-                             //       + Environment.getExternalStorageDirectory())));
+                            //       + Environment.getExternalStorageDirectory())));
                             AnalyticsTracker.track(AnalyticsTracker.Stat.EDITOR_ADDED_PHOTO_VIA_LOCAL_LIBRARY);
                         } catch (RuntimeException e) {
                             AppLog.e(AppLog.T.POSTS, e);
@@ -760,18 +824,19 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                     }*/
                     break;
                 case RequestCodes.TAKE_AUDIO:
-                     if(resultCode == Activity.RESULT_OK){
-                         File f = new File(mMediaCapturePath);
-                         if (!addMedia(f)) {
-                             ToastUtils.showToast(this, R.string.gallery_error, ToastUtils.Duration.SHORT);
-                         }
-                     }
+                    if (resultCode == Activity.RESULT_OK) {
+                        File f = new File(mMediaCapturePath);
+                        if (!addMedia(f)) {
+                            ToastUtils.showToast(this, R.string.gallery_error, ToastUtils.Duration.SHORT);
+                        }
+                    }
                     break;
             }
-        }else if(requestCode == RequestCodes.START_LOCATION_SERVICE){
+        } else if (requestCode == RequestCodes.START_LOCATION_SERVICE) {
             initLocation();
         }
     }
+
     private void queueFileForUpload(File file, boolean isVideoThumb) {
         // Invalid file path
         if (TextUtils.isEmpty(file.getAbsolutePath())) {
@@ -782,7 +847,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         if (!file.exists()) {
             Toast.makeText(this, R.string.file_not_found, Toast.LENGTH_SHORT).show();
 
-        }else{
+        } else {
 
             Blog blog = WordPress.getCurrentBlog();
             long currentTime = System.currentTimeMillis();
@@ -810,10 +875,10 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                 mediaFile.setMimeType(mimeType);
             }
 
-                //attach object to post
-                attachObjectToPost(mimeType, file);
+            //attach object to post
+            attachObjectToPost(mimeType, file);
 
-            if(!isVideoThumb){
+            if (!isVideoThumb) {
                 //Add thumbnail to slider and refresh
                 generateThumbAndAddToSlider(mediaFile);
 
@@ -827,7 +892,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     /*
         Generate Thumbnail
      */
-    public void generateThumbAndAddToSlider(MediaFile mediaFile){
+    public void generateThumbAndAddToSlider(MediaFile mediaFile) {
 
 
         String mimeType = mediaFile.getMimeType();
@@ -837,19 +902,19 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         //Generate Thumbnail
         File thumb = null;
 
-        if(mimeType.startsWith("image") || (mimeType.startsWith("video"))) {
+        if (mimeType.startsWith("image") || (mimeType.startsWith("video"))) {
             String thumbnailURL = generateThumb(file, mimeType, mediaFile.getDateCreatedGMT());
 
             thumb = new File(thumbnailURL);
-            if(thumb.exists()) {
+            if (thumb.exists()) {
                 mediaFile.setThumbnailURL(thumbnailURL);
             }
 
-        }else{
+        } else {
             //it's audio
             String app_name = getResources().getString(R.string.app_name);
-            thumb = new File(Environment.getExternalStorageDirectory(), app_name+"/thumbnails/thumb_audio.png");
-            if(!thumb.exists()) {
+            thumb = new File(Environment.getExternalStorageDirectory(), app_name + "/thumbnails/thumb_audio.png");
+            if (!thumb.exists()) {
                 try {
                     InputStream inputStream = getResources().openRawResource(R.raw.thumb_audio);
                     OutputStream out = new FileOutputStream(thumb);
@@ -875,12 +940,13 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         }
         WordPress.wpDB.updatePost(mPost);
     }
-    public String generateThumb(File file, String mimeType, long mediaCreationTime){
+
+    public String generateThumb(File file, String mimeType, long mediaCreationTime) {
         String thumbnailUri = "";
         //create thumbnails folder if not exists
         String app_name = getResources().getString(R.string.app_name);
 
-        File mThumbsDir = new File(Environment.getExternalStorageDirectory(), app_name+"/thumbnails");
+        File mThumbsDir = new File(Environment.getExternalStorageDirectory(), app_name + "/thumbnails");
         if (!mThumbsDir.exists()) {
             if (!mThumbsDir.mkdirs()) {
                 return thumbnailUri;
@@ -891,32 +957,32 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String mt = dateFormat.format(mediaCreationTime);
 
-        thumbnailUri = mThumbsDir.getAbsolutePath() + "/" + mt+".jpg";
+        thumbnailUri = mThumbsDir.getAbsolutePath() + "/" + mt + ".jpg";
 
         File thisThumb = new File(thumbnailUri);
 
         //if thumbnail does not exist
-        if(!thisThumb.exists()){
+        if (!thisThumb.exists()) {
 
             //Create thumbnail
             Bitmap bitThumb = null;
-            String filename=null;
+            String filename = null;
 
-            if(mimeType.startsWith("video")){
+            if (mimeType.startsWith("video")) {
                 bitThumb = ThumbnailUtils.createVideoThumbnail(file.getAbsolutePath(), MediaStore.Video.Thumbnails.MICRO_KIND);
-            }else if(mimeType.startsWith("image")){
+            } else if (mimeType.startsWith("image")) {
                 bitThumb = BitmapFactory.decodeFile(file.getAbsolutePath());
             }
 
-            try{
-                filename = mThumbsDir.getAbsolutePath() + "/" + mt+".jpg";
+            try {
+                filename = mThumbsDir.getAbsolutePath() + "/" + mt + ".jpg";
 
                 FileOutputStream out = new FileOutputStream(filename);
                 bitThumb.compress(Bitmap.CompressFormat.JPEG, 30, out);
                 out.close();
 
                 //upload video thumbnail
-                if(mimeType.startsWith("video")){
+                if (mimeType.startsWith("video")) {
                     queueFileForUpload(new File(filename), true);
                 }
 
@@ -939,6 +1005,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             mMediaUploadServiceStarted = true;
         }
     }
+
     private boolean addMedia(File file) {
         Uri imageUri = Uri.fromFile(file);
 
@@ -961,7 +1028,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         finish();
     }
 
-    public void saveDialog(){
+    public void saveDialog() {
         AlertDialog.Builder saveDialog = new AlertDialog.Builder(StoryBoard.this);
         saveDialog.setPositiveButton(getApplicationContext().getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
@@ -970,12 +1037,13 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             }
         });
     }
+
     public void confirmDeleteDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder
                 .setMessage("Are you sure you want to delete this post?")
-                .setPositiveButton("Yes",  new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         WordPress.wpDB.deletePost(mPost);
@@ -984,7 +1052,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog,int id) {
+                    public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
                 })
@@ -994,21 +1062,21 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            if(mPost.isLocalDraft()) {
+            if (mPost.isLocalDraft()) {
                 saveAndFinish();
-            }else{
+            } else {
                 finish();
             }
             return true;
         }
-        if(item.getItemId()== R.id.save){
+        if (item.getItemId() == R.id.save) {
             justSave();
         }
-        if(item.getItemId() == R.id.delete){
+        if (item.getItemId() == R.id.delete) {
             confirmDeleteDialog();
         }
 
-        if(item.getItemId()== R.id.publish){
+        if (item.getItemId() == R.id.publish) {
             publishAndFinish();
         }
         return super.onOptionsItemSelected(item);
@@ -1016,16 +1084,16 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
     private boolean hasEmptyContentFields() {
         boolean hasEmpty = false;
-        if(TextUtils.isEmpty(mPost.getTitle())){
-            thumbSummary.setColorFilter(getResources().getColor(R.color.alert_red), android.graphics.PorterDuff.Mode.MULTIPLY);
+        if (TextUtils.isEmpty(mPost.getTitle())) {
+            thumbSummary.setColorFilter(getResources().getColor(R.color.alert_red), PorterDuff.Mode.MULTIPLY);
             hasEmpty = true;
         }
-        if(TextUtils.isEmpty(mPost.getStringLocation())){
-            thumbLocation.setColorFilter(getResources().getColor(R.color.alert_red), android.graphics.PorterDuff.Mode.MULTIPLY);
+        if (TextUtils.isEmpty(mPost.getStringLocation())) {
+            thumbLocation.setColorFilter(getResources().getColor(R.color.alert_red), PorterDuff.Mode.MULTIPLY);
             hasEmpty = true;
         }
-        if(TextUtils.isEmpty(mPost.getQwhen()) && (TextUtils.isEmpty(mPost.getQwhen_date()))){
-            thumbDate.setColorFilter(getResources().getColor(R.color.alert_red), android.graphics.PorterDuff.Mode.MULTIPLY);
+        if (TextUtils.isEmpty(mPost.getQwhen()) && (TextUtils.isEmpty(mPost.getQwhen_date()))) {
+            thumbDate.setColorFilter(getResources().getColor(R.color.alert_red), PorterDuff.Mode.MULTIPLY);
             hasEmpty = true;
         }
         /*
@@ -1039,11 +1107,12 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         */
         return hasEmpty;
     }
+
     private boolean allEmptyContentFields() {
         boolean allEmpty;
         if ((TextUtils.isEmpty(mPost.getTitle())) && (TextUtils.isEmpty(mPost.getStringLocation())) && (TextUtils.isEmpty(mPost.getQhow())) && (TextUtils.isEmpty(mPost.getQwhy()) || TextUtils.isEmpty(mPost.getQwhen_date())) && (TextUtils.isEmpty(mPost.getQwhen())) && (TextUtils.isEmpty(mPost.getKeywords()))) {
             allEmpty = true;
-        }else{
+        } else {
             allEmpty = false;
         }
         return allEmpty;
@@ -1054,14 +1123,14 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         if (allEmptyContentFields() && !hasMedia) {
             // new and empty post? delete it
             //if (mIsNewPost) {
-                WordPress.wpDB.deletePost(mPost);
+            WordPress.wpDB.deletePost(mPost);
             //}
 
         } /*else if (mOriginalPost != null && !mPost.hasChanges(mOriginalPost)) {
             // if no changes have been made to the post, set it back to the original don't save it
             WordPress.wpDB.updatePost(mOriginalPost);
             WordPress.currentPost = mOriginalPost;
-        } */else {
+        } */ else {
 
             justSave();
 
@@ -1069,12 +1138,12 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         closePost();
     }
 
-    public void closePost(){
+    public void closePost() {
         finish();
 
     }
 
-    public void justSave(){
+    public void justSave() {
         //savePost(true);
         if (allEmptyContentFields()) {
             // new and empty post? delete it
@@ -1087,7 +1156,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             // if no changes have been made to the post, set it back to the original don't save it
             WordPress.wpDB.updatePost(mOriginalPost);
             WordPress.currentPost = mOriginalPost;
-        } */else {
+        } */ else {
             // changes have been made, save the post and ask for the post list to refresh.
             // We consider this being "manual save", it will replace some Android "spans" by an html
             // or a shortcode replacement (for instance for images and galleries)
@@ -1106,19 +1175,19 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
     }
 
-    public void publishAndFinish(){
+    public void publishAndFinish() {
 
         //ToastUtils.showToast(this, R.string.editor_toast_changes_saved);
         if (hasEmptyContentFields()) {
             ToastUtils.showToast(this, R.string.missing_required_fields, ToastUtils.Duration.SHORT);
 
-        }else if (!NetworkUtils.isNetworkAvailable(this)) {
+        } else if (!NetworkUtils.isNetworkAvailable(this)) {
             ToastUtils.showToast(this, R.string.error_publish_no_network, ToastUtils.Duration.SHORT);
 
             savePost(true);
             WordPress.currentPost = mPost;
 
-        }else{
+        } else {
             savePost(true);
             WordPress.currentPost = mPost;
 
@@ -1132,6 +1201,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         }
 
     }
+
     private void savePost(boolean isAutosave) {
         savePost(isAutosave, true);
     }
@@ -1144,7 +1214,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         WordPress.wpDB.updatePost(mPost);
     }
 
-    private void updatePostContent(){
+    private void updatePostContent() {
         Post post = mPost;
         post.setTitle(mPost.getTitle());
         if (!post.isLocalDraft()) {
@@ -1152,7 +1222,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         }
     }
 
-    private void updatePostSettings(){
+    private void updatePostSettings() {
         String status = PostStatus.toString(PostStatus.DRAFT);
         mPost.setPostStatus(status);
 
@@ -1165,29 +1235,29 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         mPost.setPostStatus(status);
     }
 
-    public void loadPost(Post p){
+    public void loadPost(Post p) {
         //setTitle(p.getTitle());
-        if(p != null){
-            if(!p.getTitle().equals(""))
+        if (p != null) {
+            if (!p.getTitle().equals(""))
                 displaySummary.setText("" + p.getTitle());
 
-            if(!(p.getKeywords() == null) && !p.getKeywords().equals(""))
+            if (!(p.getKeywords() == null) && !p.getKeywords().equals(""))
                 displayWho.setText(p.getKeywords());
 
-            if(!(p.getStringLocation() == null) && !p.getStringLocation().equals(""))
+            if (!(p.getStringLocation() == null) && !p.getStringLocation().equals(""))
                 displayLocation.setText(p.getStringLocation());
 
-            if(!(p.getQwhy() == null) && !p.getQwhy().equals(""))
+            if (!(p.getQwhy() == null) && !p.getQwhy().equals(""))
                 displayCause.setText(p.getQwhy());
 
-            if(!(p.getQwhen() == null) && !p.getQwhen().equals("")){
+            if (!(p.getQwhen() == null) && !p.getQwhen().equals("")) {
                 displayDate.setText(p.getQwhen());
             }
 
-            if(!(p.getQwhen_date() == null) && !p.getQwhen_date().equals("")) {
+            if (!(p.getQwhen_date() == null) && !p.getQwhen_date().equals("")) {
                 displayDate_Calendar.setText(p.getQwhen_date());
                 displayDate_Calendar.setVisibility(View.VISIBLE);
-                if(p.getQwhen() == null || p.getQwhen().equals("")){
+                if (p.getQwhen() == null || p.getQwhen().equals("")) {
                     displayDate.setText("");
 
                 }
@@ -1196,7 +1266,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         }
     }
 
-    public void setUpQuestionnaire(){
+    public void setUpQuestionnaire() {
 
         String[] myResArray = getResources().getStringArray(R.array.fivew_and_h);
         List<String> myResArrayList = Arrays.asList(myResArray);
@@ -1221,14 +1291,14 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
     }
 
-    public void togglePanes(boolean showTemplate){
+    public void togglePanes(boolean showTemplate) {
         LinearLayout.LayoutParams activeParam = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1f);
         activeParam.setMargins(3, 3, 3, 3);
 
         LinearLayout.LayoutParams inActiveParam = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1f);
         inActiveParam.setMargins(5, 5, 5, 5);
 
-        if (showTemplate){
+        if (showTemplate) {
             summaryPane.setVisibility(View.GONE);
             guidePane.setVisibility(View.VISIBLE);
 
@@ -1244,7 +1314,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             text_template.setBackgroundColor(getResources().getColor(R.color.grey_lighten_10));
             text_summary.setBackgroundColor(getResources().getColor(R.color.grey_lighten_20));
 
-        }else{
+        } else {
             summaryPane.setVisibility(View.VISIBLE);
             guidePane.setVisibility(View.GONE);
 
@@ -1262,11 +1332,11 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         }
     }
 
-    public void setUpSlider(){
+    public void setUpSlider() {
         mDemoSlider.removeAllSliders();
 
-        if(mPost.isLocalDraft()){
-            for(String name : media_map.keySet()){
+        if (mPost.isLocalDraft()) {
+            for (String name : media_map.keySet()) {
                 TextSliderView textSliderView = new TextSliderView(this);
                 // initialize a SliderLayout
                 textSliderView
@@ -1283,9 +1353,9 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                 mDemoSlider.addSlider(textSliderView);
 
             }
-        }else{
+        } else {
 
-            for(String name : media_map_remote.keySet()){
+            for (String name : media_map_remote.keySet()) {
                 TextSliderView textSliderView = new TextSliderView(this);
                 // initialize a SliderLayout
                 textSliderView
@@ -1297,7 +1367,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                 //add your extra information
                 textSliderView.bundle(new Bundle());
                 textSliderView.getBundle()
-                        .putString("extra",name);
+                        .putString("extra", name);
 
                 mDemoSlider.addSlider(textSliderView);
             }
@@ -1310,9 +1380,9 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         mDemoSlider.setDuration(4000);
         mDemoSlider.addOnPageChangeListener(this);
 
-        if(media_map.size()>0 || media_map_remote.size()>0){
+        if (media_map.size() > 0 || media_map_remote.size() > 0) {
             hasMedia = true;
-            if(media_map.size()<2 && media_map_remote.size()<2){
+            if (media_map.size() < 2 && media_map_remote.size() < 2) {
                 mDemoSlider.setDuration(100000);
             }
         }
@@ -1320,17 +1390,17 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         toggleMediaPane(hasMedia);
     }
 
-    public void toggleMediaPane(boolean hasMedia){
-        if(hasMedia){
+    public void toggleMediaPane(boolean hasMedia) {
+        if (hasMedia) {
             noMedia.setVisibility(View.GONE);
             yesMedia.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             yesMedia.setVisibility(View.GONE);
             noMedia.setVisibility(View.VISIBLE);
         }
     }
 
-    public void showAnswerQuestionDialog(final int question_id, final TextView textView, final ImageView questionThumb){
+    public void showAnswerQuestionDialog(final int question_id, final TextView textView, final ImageView questionThumb) {
 
         questionDialog = new Dialog(StoryBoard.this);
         questionDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
@@ -1338,21 +1408,21 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         questionDialog.setContentView(R.layout.summary_fragment);
         questionDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        submitButton = (Button)questionDialog.findViewById(R.id.submitButton);
+        submitButton = (Button) questionDialog.findViewById(R.id.submitButton);
         submitButton.setEnabled(false);
 
-        editTextSummary = (EditText)questionDialog.findViewById(R.id.editTextSummary);
+        editTextSummary = (EditText) questionDialog.findViewById(R.id.editTextSummary);
 
         //show location button
-        final LinearLayout locationGroup = (LinearLayout)questionDialog.findViewById(R.id.locationGroup);
-        if(question_id == 1){
+        final LinearLayout locationGroup = (LinearLayout) questionDialog.findViewById(R.id.locationGroup);
+        if (question_id == 1) {
             locationGroup.setVisibility(View.VISIBLE);
 
-            enableLocation = (Button)questionDialog.findViewById(R.id.enableLocation);
+            enableLocation = (Button) questionDialog.findViewById(R.id.enableLocation);
             enableLocation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent callGPSSettingIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    Intent callGPSSettingIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     startActivityForResult(callGPSSettingIntent, RequestCodes.START_LOCATION_SERVICE);
                 }
             });
@@ -1367,7 +1437,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         final String prompt = getResources().getStringArray(R.array.storyboard_prompts)[question_id];
 
         //if it's not default & not empty edit editTextSummary
-        if(!current_answer.equals(prompt) && (!current_answer.equals(""))){
+        if (!current_answer.equals(prompt) && (!current_answer.equals(""))) {
             editTextSummary.setText(current_answer);
             submitButton.setEnabled(true);
         }
@@ -1399,16 +1469,16 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String  new_answer = editTextSummary.getText().toString();
+                String new_answer = editTextSummary.getText().toString();
 
-                String string_date="";
+                String string_date = "";
 
                 if (new_answer.trim().length() > 0) {
 
                     if (!new_answer.equals(prompt)) {
                         //save answer;
 
-                        switch(question_id){
+                        switch (question_id) {
                             case 0:
                                 mPost.setTitle(new_answer);
                                 break;
@@ -1427,13 +1497,13 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                                 break;
                         }
                         textView.setText(new_answer);
-                        questionThumb.setColorFilter(getResources().getColor(R.color.color_primary), android.graphics.PorterDuff.Mode.MULTIPLY);
+                        questionThumb.setColorFilter(getResources().getColor(R.color.color_primary), PorterDuff.Mode.MULTIPLY);
                     }
-                }else {
+                } else {
 
                     textView.setText(prompt);
 
-                    questionThumb.setColorFilter(getResources().getColor(R.color.white), android.graphics.PorterDuff.Mode.MULTIPLY);
+                    questionThumb.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
                 }
 
 
@@ -1447,7 +1517,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     }
 
 
-    public void attachObjectToPost(String mimeType, File file){
+    public void attachObjectToPost(String mimeType, File file) {
         String attachURL = "";
 
         //get name
@@ -1461,15 +1531,15 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         //compose file url
         String file_url = BuildConfig.DEFAULT_URL + "/wp-content/uploads/" + year + "/" + month + "/wpid-" + filename;
 
-        if(mimeType.startsWith("image")){
-            attachURL = "<a href=\""+file_url+"\"><img class=\"alignnone size-medium wp-image-400\" src=\""+file_url+"\" alt=\""+filename+"\" width=\"300\" height=\"225\" /></a>";
+        if (mimeType.startsWith("image")) {
+            attachURL = "<a href=\"" + file_url + "\"><img class=\"alignnone size-medium wp-image-400\" src=\"" + file_url + "\" alt=\"" + filename + "\" width=\"300\" height=\"225\" /></a>";
             //For thumbnail
             mPost.setRemoteMediaPaths(mPost.getRemoteMediaPaths() + "-:-" + file_url);
 
-        } else if(mimeType.startsWith("video")){
-            attachURL = "[video width=\"320\" height=\"240\" mp4=\""+file_url+"\"][/video]";
-        }else if(mimeType.startsWith("audio")){
-            attachURL = "[audio mp3=\""+file_url+"\"][/audio]";
+        } else if (mimeType.startsWith("video")) {
+            attachURL = "[video width=\"320\" height=\"240\" mp4=\"" + file_url + "\"][/video]";
+        } else if (mimeType.startsWith("audio")) {
+            attachURL = "[audio mp3=\"" + file_url + "\"][/audio]";
             //use default audio thumb
             mPost.setRemoteMediaPaths(mPost.getRemoteMediaPaths() + "-:-" + BuildConfig.AUDIO_THUMB);
         }
@@ -1490,17 +1560,20 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-        Toast.makeText(this,slider.getBundle().get("extra") + "",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
     }
+
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
 
     @Override
     public void onPageSelected(int position) {
     }
 
     @Override
-    public void onPageScrollStateChanged(int state) {}
+    public void onPageScrollStateChanged(int state) {
+    }
 
 
     /**
@@ -1540,7 +1613,13 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         //questionThumb.setColorFilter(getResources().getColor(R.color.color_primary), android.graphics.PorterDuff.Mode.MULTIPLY);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
     private static enum LocationStatus {NONE, FOUND, NOT_FOUND, SEARCHING}
+
     /*
      * retrieves and displays the friendly address for a lat/long location
      */
@@ -1633,10 +1712,12 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
     private TextWatcher mLocationEditTextWatcher = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
 
         @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) { }
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
 
         @Override
         public void afterTextChanged(Editable s) {
@@ -1695,7 +1776,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             } else {
                 showLocationAdd();
             }
-        }else{
+        } else {
             enableLocation.setVisibility(View.VISIBLE);
         }
     }
@@ -1796,7 +1877,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     private void viewLocation() {
         if (mPostLocation != null && mPostLocation.isValid()) {
             String uri = "geo:" + mPostLocation.getLatitude() + "," + mPostLocation.getLongitude();
-            StoryBoard.this.startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri)));
+            StoryBoard.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)));
         } else {
             showLocationNotAvailableError();
             showLocationAdd();
@@ -1811,7 +1892,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         mLocationText.setText(locationName);
         mLocationEditText.setText(locationName);
 
-        if(!locationName.equals(getApplicationContext().getResources().getText(R.string.location_not_found)) && !(locationName.equals(getApplicationContext().getResources().getText(R.string.loading)))) {
+        if (!locationName.equals(getApplicationContext().getResources().getText(R.string.location_not_found)) && !(locationName.equals(getApplicationContext().getResources().getText(R.string.loading)))) {
             mPost.setStringLocation(locationName);
             editTextSummary.setText(locationName);
         }

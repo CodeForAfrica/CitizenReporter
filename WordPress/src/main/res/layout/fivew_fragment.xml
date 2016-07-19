@@ -19,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
+        android:text="0.00"
         android:ems="10"
         android:id="@+id/editTextSummary"
         android:layout_below="@+id/closeDialog"

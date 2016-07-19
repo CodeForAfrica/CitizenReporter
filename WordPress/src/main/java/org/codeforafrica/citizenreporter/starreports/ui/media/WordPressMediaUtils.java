@@ -35,6 +35,7 @@ import java.net.URL;
 import static org.wordpress.mediapicker.MediaUtils.fadeInImage;
 
 public class WordPressMediaUtils {
+    public static int PICK_IMAGE_REQUEST = 1;
     public interface LaunchCameraCallback {
         void onMediaCapturePathReady(String mediaCapturePath);
     }
@@ -164,6 +165,11 @@ public class WordPressMediaUtils {
         AppLockManager.getInstance().setExtendedTimeout();
         activity.startActivityForResult(preparePictureLibraryIntent(activity),
                 RequestCodes.PICTURE_LIBRARY);
+    }
+    public static void launchPictureGallery(Activity activity){
+        AppLockManager.getInstance().setExtendedTimeout();
+        activity.startActivityForResult(preparePictureLibraryIntent(activity),
+                PICK_IMAGE_REQUEST);
     }
 
     public static void launchPictureLibrary(Fragment fragment) {
