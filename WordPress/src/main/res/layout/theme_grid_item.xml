@@ -28,7 +28,7 @@
                 android:textSize="12sp" />
         </RelativeLayout>
 
-        <org.codeforafrica.citizenreporter.starreports.ui.FadeInNetworkImageView
+        <org.codeforafrica.citizenreporter.eNCA.ui.FadeInNetworkImageView
             android:id="@+id/theme_grid_item_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

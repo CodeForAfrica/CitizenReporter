@@ -18,8 +18,8 @@ import com.wordpress.rest.RestRequest.Listener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.codeforafrica.citizenreporter.starreports.WordPress;
-import org.codeforafrica.citizenreporter.starreports.models.Note;
+import org.codeforafrica.citizenreporter.eNCA.WordPress;
+import org.codeforafrica.citizenreporter.eNCA.models.Note;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

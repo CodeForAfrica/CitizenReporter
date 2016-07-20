@@ -18,7 +18,7 @@
         android:paddingRight="@dimen/margin_extra_large"
         android:paddingTop="6dp">
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.NoticonTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.NoticonTextView
             android:id="@+id/note_footer_noticon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             android:textColor="@color/grey"
             android:textSize="18sp" />
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/note_footer_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

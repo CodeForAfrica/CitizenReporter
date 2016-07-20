@@ -16,7 +16,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 
-import org.codeforafrica.citizenreporter.starreports.R;
+import org.codeforafrica.citizenreporter.eNCA.R;
 
 import java.lang.ref.WeakReference;
 

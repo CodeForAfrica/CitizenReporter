@@ -15,7 +15,7 @@
     android:paddingRight="@dimen/margin_extra_large"
     android:paddingTop="@dimen/margin_medium">
 
-    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
         android:id="@+id/text_topic"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.OpenSansEditText
+            <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
                 android:id="@+id/edit_comment"
                 style="@style/ReaderEditText"
                 android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             android:layout_centerInParent="true" />
     </RelativeLayout>
 
-    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
         android:id="@+id/text_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

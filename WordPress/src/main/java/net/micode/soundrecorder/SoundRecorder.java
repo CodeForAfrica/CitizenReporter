@@ -59,7 +59,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.codeforafrica.citizenreporter.starreports.R;
+import org.codeforafrica.citizenreporter.eNCA.R;
 
 
 public class SoundRecorder extends Activity implements Button.OnClickListener,

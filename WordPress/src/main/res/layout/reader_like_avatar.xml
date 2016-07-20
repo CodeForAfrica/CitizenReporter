@@ -3,7 +3,7 @@
 <!--
     single avatar image inserted into post detail when showing liking users
 -->
-<org.codeforafrica.citizenreporter.starreports.widgets.WPNetworkImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/image_like_avatar"
-    style="@style/ReaderImageView.Avatar.Like"
-    android:layout_marginRight="@dimen/margin_small" />
+<org.codeforafrica.citizenreporter.eNCA.widgets.WPNetworkImageView xmlns:android="http://schemas.android.com/apk/res/android"
+                                                                   android:id="@+id/image_like_avatar"
+                                                                   style="@style/ReaderImageView.Avatar.Like"
+                                                                   android:layout_marginRight="@dimen/margin_small" />

@@ -8,7 +8,7 @@ import org.wordpress.android.FactoryUtils;
 import org.wordpress.android.TestUtils;
 import org.wordpress.android.mocks.RestClientFactoryTest;
 import org.wordpress.android.mocks.XMLRPCFactoryTest;
-import org.codeforafrica.citizenreporter.starreports.models.Blog;
+import org.codeforafrica.citizenreporter.eNCA.models.Blog;
 import org.wordpress.android.util.AppLog.T;
 import org.xmlrpc.android.ApiHelper;
 import org.xmlrpc.android.ApiHelper.ErrorType;

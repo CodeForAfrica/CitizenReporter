@@ -11,7 +11,7 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPLinearLayoutSizeBound
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPLinearLayoutSizeBound
             app:maxWidth="600dp"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -20,7 +20,7 @@
             android:animateLayoutChanges="true"
             android:orientation="vertical">
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 android:id="@+id/create_account_label"
                 android:text="@string/create_new_blog_wpcom"
                 android:paddingBottom="8dp"
@@ -36,7 +36,7 @@
                 android:background="@color/white"
                 android:id="@+id/relativeLayout">
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.OpenSansEditText
+                <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
                     android:id="@+id/site_title"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                 android:background="@color/white"
                 android:layout_marginBottom="16dp">
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.OpenSansEditText
+                <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
                     android:id="@+id/site_url"
                     style="@style/WordPress.NUXEditText"
                     android:layout_width="fill_parent"
@@ -80,7 +80,7 @@
                     android:layout_toLeftOf="@+id/textView"
                     app:persistenceEnabled="true"/>
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=".wordpress.com"
@@ -117,7 +117,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp">
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     style="@style/WordPress.NUXPrimaryButton"
                     android:id="@+id/signup_button"
                     android:layout_width="match_parent"
@@ -141,7 +141,7 @@
                 </RelativeLayout>
             </RelativeLayout>
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 style="@style/WordPress.NUXWhiteButtonNoBg"
                 android:id="@+id/nux_sign_in_progress_text"
                 android:layout_width="wrap_content"
@@ -150,7 +150,7 @@
                 android:textColor="@color/blue_light"
                 android:gravity="center|top"/>
 
-        </org.codeforafrica.citizenreporter.starreports.widgets.WPLinearLayoutSizeBound>
+        </org.codeforafrica.citizenreporter.eNCA.widgets.WPLinearLayoutSizeBound>
 
         <LinearLayout
             android:orientation="vertical"
@@ -158,7 +158,7 @@
             android:layout_height="wrap_content"
             android:gravity="bottom">
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 style="@style/WordPress.NUXWhiteButtonNoBg"
                 android:id="@+id/cancel_button"
                 android:layout_width="wrap_content"

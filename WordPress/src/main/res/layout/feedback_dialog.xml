@@ -69,7 +69,7 @@
         android:background="@color/white"
         android:padding="15dp"/>
 
-    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
         android:textColor="@color/white"
         android:id="@+id/submit_feedback"
         tools:text="text_send"

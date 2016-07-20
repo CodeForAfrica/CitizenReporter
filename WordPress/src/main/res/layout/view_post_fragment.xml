@@ -20,7 +20,7 @@
         android:paddingBottom="6dp"
         android:paddingTop="6dp" >
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/postTitle"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
@@ -231,7 +231,7 @@
                     android:id="@+id/paneSwitch"
                     android:orientation="horizontal"
                     android:layout_alignParentTop="true">
-                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                         android:id="@+id/text_summary"
                         style="@style/ReaderTextView.TogglePane_Active"
                         tools:text="text_summary"
@@ -242,7 +242,7 @@
                         android:drawableLeft="@drawable/ic_summary"
                         android:padding="3dp"/>
 
-                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                         android:id="@+id/text_template"
                         style="@style/ReaderTextView.TogglePane_InActive"
                         tools:text="text_template"

@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
 
-    <org.codeforafrica.citizenreporter.starreports.widgets.SlidingTabLayout
+    <org.codeforafrica.citizenreporter.eNCA.widgets.SlidingTabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -15,7 +15,7 @@
         android:paddingLeft="@dimen/tabstrip_padding"
         android:paddingRight="@dimen/tabstrip_padding" />
 
-    <org.codeforafrica.citizenreporter.starreports.widgets.WPMainViewPager
+    <org.codeforafrica.citizenreporter.eNCA.widgets.WPMainViewPager
         android:id="@+id/viewpager_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
