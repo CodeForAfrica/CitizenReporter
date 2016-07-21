@@ -20,8 +20,7 @@
         <RelativeLayout
             android:id="@+id/mediaPanel"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_height="260dp"
             >
             <RelativeLayout
                 android:id = "@+id/yesMediaPane"
@@ -33,6 +32,8 @@
                     android:id="@+id/slider"
                     android:layout_width="match_parent"
                     custom:pager_animation="Accordion"
+                    android:scaleX="1.0"
+                    android:scaleY="1.0"
                     custom:auto_cycle="true"
                     custom:indicator_visibility="visible"
                     custom:pager_animation_span="1100"
@@ -86,8 +87,7 @@
         <RelativeLayout
             android:id="@+id/metaPanel"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             >
             <RelativeLayout
                 android:layout_height="50dp"
