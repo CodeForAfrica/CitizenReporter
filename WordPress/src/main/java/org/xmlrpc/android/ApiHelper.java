@@ -2,6 +2,7 @@ package org.xmlrpc.android;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.util.Xml;
 
 import com.google.gson.Gson;
@@ -248,7 +249,7 @@ public class ApiHelper {
                 }
 
                 // get theme post formats
-                new GetPostFormatsTask().execute(mBlog);
+                //new GetPostFormatsTask().execute(mBlog);
             }
 
             // Check if user is an admin
@@ -497,6 +498,11 @@ public class ApiHelper {
             }
         }
     }
+
+    /*
+    * testing fetch posts
+    * */
+
     public static class FetchPostsTask extends HelperAsyncTask<java.util.List<?>, Boolean, Boolean> {
         public interface Callback extends GenericErrorCallback {
             public void onSuccess(int postCount);
@@ -512,11 +518,12 @@ public class ApiHelper {
 
         @Override
         protected Boolean doInBackground(List<?>... params) {
+            Log.d("CITIZEN", "doInBackground");
             List<?> arguments = params[0];
 
             Blog blog = (Blog) arguments.get(0);
             if (blog == null)
-                return false;
+                return Boolean.valueOf(false);
 
             boolean isPage = (Boolean) arguments.get(1);
             int recordCount = (Integer) arguments.get(2);
@@ -525,12 +532,14 @@ public class ApiHelper {
                     blog.getHttppassword());
 
             Object[] result;
-            Object[] xmlrpcParams = { blog.getRemoteBlogId(),
+            Object[] xmlrpcParams = { WordPress.getCurrentBlog().getLocalTableBlogId(),
                     blog.getUsername(),
                     blog.getPassword(), recordCount };
+
             try {
-                result = (Object[]) client.call((isPage) ? "wp.getPages"
-                        : "metaWeblog.getRecentPosts", xmlrpcParams);
+                result = (Object[]) client.call("metaWeblog.getRecentPostsUser",xmlrpcParams);
+                Log.d("CITIZEN", result.toString());
+                result = null;
                 if (result != null && result.length > 0) {
                     mPostCount = result.length;
                     List<Map<?, ?>> postsList = new ArrayList<Map<?, ?>>();
@@ -593,6 +602,7 @@ public class ApiHelper {
             }
         }
     }
+
     /*
         Fetch assignments
          */

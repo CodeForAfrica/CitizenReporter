@@ -307,6 +307,8 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                 }
             }
         });
+        mPayment.setVisibility(View.GONE);
+
         /*
         text_summary.setOnClickListener(new View.OnClickListener(){
             @Override

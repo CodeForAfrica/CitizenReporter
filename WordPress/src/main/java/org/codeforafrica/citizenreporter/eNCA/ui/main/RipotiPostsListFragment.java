@@ -74,9 +74,11 @@ public class RipotiPostsListFragment extends ListFragment implements EmptyViewAn
 
     private boolean retry_click = false;
     private int retry_click_position;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (isAdded()) {
             Bundle extras = getActivity().getIntent().getExtras();
             if (extras != null) {
@@ -84,6 +86,7 @@ public class RipotiPostsListFragment extends ListFragment implements EmptyViewAn
             }
             // If PostUploadService is not running, check for posts stuck with an uploading state
             Blog currentBlog = WordPress.getCurrentBlog();
+            // Blog currentBlog = null;
             if (!ServiceUtils.isServiceRunning(getActivity(), PostUploadService.class) && currentBlog != null) {
                 WordPress.wpDB.clearAllUploadingPosts(currentBlog.getLocalTableBlogId(), mIsPage);
             }

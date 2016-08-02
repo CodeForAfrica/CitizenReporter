@@ -77,7 +77,7 @@ public class PostsListFragment extends ListFragment implements EmptyViewAnimatio
                 mIsPage = extras.getBoolean(PostsActivity.EXTRA_VIEW_PAGES);
             }
             // If PostUploadService is not running, check for posts stuck with an uploading state
-            Blog currentBlog = WordPress.getCurrentBlog();
+            Blog currentBlog = WordPress.setCurrentBlog(WordPress.getCurrentBlog().getLocalTableBlogId());
             if (!ServiceUtils.isServiceRunning(getActivity(), PostUploadService.class) && currentBlog != null) {
                 WordPress.wpDB.clearAllUploadingPosts(currentBlog.getLocalTableBlogId(), mIsPage);
             }
