@@ -448,6 +448,12 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                 WordPressMediaUtils.launchPictureGallery(StoryBoard.this);
             }
         });
+        mDialog.findViewById(R.id.cancel_textview).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.hide();
+            }
+        });
 
         mDialog.show();
     }

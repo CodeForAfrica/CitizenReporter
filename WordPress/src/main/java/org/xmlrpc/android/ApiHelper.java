@@ -537,9 +537,8 @@ public class ApiHelper {
                     blog.getPassword(), recordCount };
 
             try {
-                result = (Object[]) client.call("metaWeblog.getRecentPostsUser",xmlrpcParams);
-                Log.d("CITIZEN", result.toString());
-                result = null;
+                result = (Object[]) client.call("citizenReporter.getRecentPostsUser", xmlrpcParams);
+
                 if (result != null && result.length > 0) {
                     mPostCount = result.length;
                     List<Map<?, ?>> postsList = new ArrayList<Map<?, ?>>();
