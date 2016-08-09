@@ -20,14 +20,14 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/me_avatar_margin_top">
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPNetworkImageView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPNetworkImageView
                 android:id="@+id/me_avatar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
         </FrameLayout>
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/me_display_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             app:fontVariation="light"
             tools:text="Full Name" />
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/me_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:contentDescription="@string/me_btn_settings"
                 android:src="@drawable/me_icon_settings" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 android:id="@+id/me_settings_text_view"
                 style="@style/MeListRowTextView"
                 android:text="@string/me_btn_settings" />
@@ -82,7 +82,7 @@
                 android:contentDescription="@string/me_btn_support"
                 android:src="@drawable/me_icon_support" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPAutoResizeTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPAutoResizeTextView
                 android:id="@+id/me_support_text_view"
                 style="@style/MeListRowTextView"
                 android:text="@string/me_btn_support" />
@@ -101,7 +101,7 @@
                 android:contentDescription="@string/me_btn_login_logout"
                 android:src="@drawable/me_icon_login_logout" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPAutoResizeTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPAutoResizeTextView
                 android:id="@+id/me_login_logout_text_view"
                 style="@style/MeListRowTextView"
                 tools:text="@string/me_btn_login_logout" />

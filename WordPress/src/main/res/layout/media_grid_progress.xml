@@ -11,7 +11,7 @@
         android:layout_height="20dp"
         android:layout_centerVertical="true" />
 
-    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

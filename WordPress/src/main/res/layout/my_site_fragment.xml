@@ -30,14 +30,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <org.codeforafrica.citizenreporter.starreports.widgets.WPNetworkImageView
+                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPNetworkImageView
                         android:id="@+id/my_site_blavatar"
                         android:layout_width="@dimen/blavatar_sz"
                         android:layout_height="@dimen/blavatar_sz"
                         android:layout_margin="@dimen/margin_large"
                         android:gravity="center_vertical" />
 
-                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                         android:id="@+id/my_site_title_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                         android:textStyle="bold"
                         app:fontVariation="light" />
 
-                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                         android:id="@+id/my_site_subtitle_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                         android:layout_below="@id/my_site_blavatar"
                         android:background="@color/grey_light">
 
-                        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                             android:id="@+id/switch_site"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                     android:contentDescription="@string/my_site_btn_view_site"
                     android:src="@drawable/my_site_icon_view_site" />
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:id="@+id/my_site_view_site_text_view"
                     style="@style/MySiteListRowTextView"
                     android:layout_toRightOf="@id/my_site_view_site_icon"
@@ -120,7 +120,7 @@
                     android:contentDescription="@string/stats"
                     android:src="@drawable/my_site_icon_stats" />
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:id="@+id/my_site_stats_text_view"
                     style="@style/MySiteListRowTextView"
                     android:layout_toRightOf="@id/my_site_stats_icon"
@@ -131,7 +131,7 @@
             <!--PUBLISH-->
             <LinearLayout style="@style/MySiteListHeaderLayout">
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     style="@style/MySiteListHeaderTextView"
                     android:text="@string/my_site_header_publish" />
 
@@ -158,7 +158,7 @@
                     android:contentDescription="@string/my_site_btn_blog_posts"
                     android:src="@drawable/my_site_icon_posts" />
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:id="@+id/my_site_blog_posts_text_view"
                     style="@style/MySiteListRowTextView"
                     android:layout_toRightOf="@id/my_site_blog_posts_icon"
@@ -177,7 +177,7 @@
                     android:contentDescription="@string/media"
                     android:src="@drawable/my_site_icon_media" />
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:id="@+id/my_site_media_text_view"
                     style="@style/MySiteListRowTextView"
                     android:layout_toRightOf="@id/my_site_media_icon"
@@ -196,7 +196,7 @@
                     android:contentDescription="@string/pages"
                     android:src="@drawable/my_site_icon_pages" />
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:id="@+id/my_site_pages_text_view"
                     style="@style/MySiteListRowTextView"
                     android:layout_toRightOf="@id/my_site_pages_icon"
@@ -215,7 +215,7 @@
                     android:contentDescription="@string/my_site_btn_comments"
                     android:src="@drawable/my_site_icon_comments" />
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:id="@+id/my_site_comments_text_view"
                     style="@style/MySiteListRowTextView"
                     android:layout_toRightOf="@id/my_site_comments_icon"
@@ -228,7 +228,7 @@
                 android:id="@+id/my_site_look_and_feel_header"
                 style="@style/MySiteListHeaderLayout">
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     style="@style/MySiteListHeaderTextView"
                     android:text="@string/my_site_header_look_and_feel" />
 
@@ -247,7 +247,7 @@
                     android:contentDescription="@string/themes"
                     android:src="@drawable/my_site_icon_themes" />
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:id="@+id/my_site_themes_text_view"
                     style="@style/MySiteListRowTextView"
                     android:layout_toRightOf="@id/my_site_themes_icon"
@@ -258,7 +258,7 @@
             <!--Configuration-->
             <LinearLayout style="@style/MySiteListHeaderLayout">
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     style="@style/MySiteListHeaderTextView"
                     android:text="@string/my_site_header_configuration" />
 
@@ -277,7 +277,7 @@
                     android:contentDescription="@string/my_site_btn_site_settings"
                     android:src="@drawable/my_site_icon_settings" />
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:id="@+id/my_site_settings_text_view"
                     style="@style/MySiteListRowTextView"
                     android:layout_toRightOf="@id/my_site_settings_icon"
@@ -288,7 +288,7 @@
             <!--Admin-->
             <LinearLayout style="@style/MySiteListHeaderLayout">
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     style="@style/MySiteListHeaderTextView"
                     android:text="@string/my_site_header_admin" />
 
@@ -308,7 +308,7 @@
                     android:contentDescription="@string/my_site_btn_view_admin"
                     android:src="@drawable/my_site_icon_view_admin" />
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:id="@+id/my_site_view_admin_text_view"
                     style="@style/MySiteListRowTextView"
                     android:layout_toRightOf="@id/my_site_view_admin_icon"

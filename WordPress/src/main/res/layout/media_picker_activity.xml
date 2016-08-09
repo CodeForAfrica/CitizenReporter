@@ -7,13 +7,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <org.codeforafrica.citizenreporter.starreports.widgets.SlidingTabLayout
+    <org.codeforafrica.citizenreporter.eNCA.widgets.SlidingTabLayout
         android:id="@+id/media_picker_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/tab_background" />
 
-    <org.codeforafrica.citizenreporter.starreports.widgets.WPViewPager
+    <org.codeforafrica.citizenreporter.eNCA.widgets.WPViewPager
         android:id="@+id/media_picker_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

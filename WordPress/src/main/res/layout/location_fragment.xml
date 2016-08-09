@@ -15,15 +15,11 @@
         android:layout_alignParentStart="true"
         android:src="@drawable/ic_close_grey600_24dp" />
 
-    <info.hoang8f.widget.FButton
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hs__done_btn"
         android:id="@+id/submitButton"
-        fbutton:cornerRadius="5dp"
-        fbutton:buttonColor="@color/grey_lighten_10"
-        fbutton:shadowColor="@color/grey_lighten_20"
-        fbutton:shadowEnabled="true"
         android:padding="2dp"
         style="?android:attr/borderlessButtonStyle"
         android:layout_alignParentTop="true"
@@ -49,12 +45,7 @@
             android:layout_height="match_parent"
             android:layout="@layout/post_location_layout_pretty"
             />
-        <info.hoang8f.widget.FButton
-            fbutton:buttonColor="@color/translucent_grey_lighten_10"
-            fbutton:shadowColor="@color/grey_lighten_20"
-            fbutton:shadowEnabled="true"
-            fbutton:shadowHeight="5dp"
-            fbutton:cornerRadius="5dp"
+        <Button
             android:padding="5dp"
             style="?android:attr/borderlessButtonStyle"
             android:layout_alignParentBottom="true"

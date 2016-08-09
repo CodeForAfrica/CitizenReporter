@@ -20,8 +20,7 @@
         <RelativeLayout
             android:id="@+id/mediaPanel"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_height="260dp"
             >
             <RelativeLayout
                 android:id = "@+id/yesMediaPane"
@@ -33,6 +32,8 @@
                     android:id="@+id/slider"
                     android:layout_width="match_parent"
                     custom:pager_animation="Accordion"
+                    android:scaleX="1.0"
+                    android:scaleY="1.0"
                     custom:auto_cycle="true"
                     custom:indicator_visibility="visible"
                     custom:pager_animation_span="1100"
@@ -86,15 +87,14 @@
         <RelativeLayout
             android:id="@+id/metaPanel"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             >
             <RelativeLayout
                 android:layout_height="50dp"
                 android:layout_width="match_parent"
                 android:id="@+id/paneSwitch"
                 android:layout_alignParentTop="true">
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:id="@+id/text_summary"
                     style="@style/ReaderTextView.TogglePane_Active"
                     tools:text="text_summary"
@@ -106,7 +106,7 @@
                     android:padding="3dp"
                     android:visibility="gone"/>
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:textColor="@color/grey_darken_30"
                     android:id="@+id/text_template"
                     style="@style/ReaderTextView.TogglePane_Active"
@@ -119,7 +119,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@+id/payment"
                     android:layout_toLeftOf="@+id/payment" />
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:textColor="@color/blue_dark"
                     android:id="@+id/payment"
                     style="@style/ReaderTextView.TogglePane_Active"

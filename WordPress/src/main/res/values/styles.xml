@@ -354,4 +354,7 @@
         <item name="android:textSize">@dimen/text_sz_large</item>
         <item name="android:fontFamily">"sans-serif-light"</item>
     </style>
+    <style name="SubmitButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/color_primary</item>
+    </style>
 </resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:padding="24dp"
+              android:background="#FFFFFF"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <TextView
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Photo Source"
+        android:textSize="24sp"
+        android:textColor="#000"
+        android:layout_marginBottom="16dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:paddingLeft="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginRight="20dp">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/camera_button"
+            android:src="@drawable/ic_photo_camera_black_36dp"
+            android:background="#FFFFFF"/>
+
+        <TextView
+            android:textColor="@color/black"
+            android:layout_marginLeft="12dp"
+            android:textSize="20sp"
+            android:paddingLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Camera"
+            android:layout_gravity="center|right"
+            android:gravity="center|right"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <ImageButton
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:id="@+id/gallery_button"
+            android:src="@drawable/ic_photo_library_black_36dp"/>
+
+        <TextView
+            android:textColor="@color/black"
+            android:layout_marginLeft="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gallery"
+            android:layout_gravity="center|right"
+            android:gravity="center|right"
+            android:textSize="20sp"
+            />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/cancel_textview"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:padding="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CANCEL"
+        android:textColor="@color/blue"
+        android:layout_gravity="right"/>
+</LinearLayout>

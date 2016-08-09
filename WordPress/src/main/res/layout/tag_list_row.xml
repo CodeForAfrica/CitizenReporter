@@ -8,7 +8,7 @@
     android:orientation="horizontal"
     android:padding="@dimen/margin_large">
 
-    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
         android:id="@+id/tag_list_row_tag_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/media_gallery_settings_title"
             style="@style/MediaGalleryText"
             android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp" >
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 style="@style/MediaGalleryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@color/white" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 style="@style/MediaGalleryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -174,13 +174,13 @@
                 android:layout_marginBottom="16dp"
                 android:orientation="vertical" >
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     style="@style/MediaGalleryText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/media_gallery_num_columns" />
 
-                <org.codeforafrica.citizenreporter.starreports.ui.ExpandableHeightGridView
+                <org.codeforafrica.citizenreporter.eNCA.ui.ExpandableHeightGridView
                     android:id="@+id/media_gallery_num_columns_grid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

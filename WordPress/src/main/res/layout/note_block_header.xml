@@ -22,7 +22,7 @@
             android:paddingRight="@dimen/margin_extra_large"
             android:paddingTop="@dimen/comment_avatar_margin_top">
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPNetworkImageView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPNetworkImageView
                 android:id="@+id/header_avatar"
                 android:layout_width="@dimen/avatar_sz_small"
                 android:layout_height="@dimen/avatar_sz_small"
@@ -35,7 +35,7 @@
                 android:layout_marginStart="@dimen/notifications_adjusted_font_margin"
                 android:orientation="vertical">
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:id="@+id/header_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                     android:textSize="@dimen/text_sz_large"
                     tools:text="Bob Ross" />
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:id="@+id/header_snippet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

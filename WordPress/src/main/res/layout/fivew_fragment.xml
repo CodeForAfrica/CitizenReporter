@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="150dp"
     android:padding="10dp">
 
     <ImageView
@@ -19,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
+        android:text="0.00"
         android:ems="10"
         android:id="@+id/editTextSummary"
         android:layout_below="@+id/closeDialog"
@@ -31,22 +32,18 @@
         >
     <requestFocus/>
     </EditText>
-
-    <info.hoang8f.widget.FButton
+    <Button
+        android:id="@+id/submitButton"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hs__done_btn"
-        android:id="@+id/submitButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        fbutton:buttonColor="@color/grey_lighten_10"
-        fbutton:shadowColor="@color/grey_lighten_20"
-        fbutton:shadowEnabled="true"
-        fbutton:shadowHeight="5dp"
-        fbutton:cornerRadius="5dp"
-        android:padding="5dp"
+        android:background="@color/gray"
+        android:text="Done"
         style="?android:attr/borderlessButtonStyle"
-    />
+        android:theme="@style/SubmitButton"/>
+
 
 </RelativeLayout>

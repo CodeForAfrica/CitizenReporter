@@ -16,7 +16,7 @@
         android:paddingBottom="6dp"
         android:paddingTop="6dp" >
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/postTitle"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
@@ -36,25 +36,25 @@
         android:padding="10dp"
         android:background="@color/grey_lighten_30">
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/text_location"
             style="@style/ReaderTextView.Post.Address"
             tools:text="text_tag"
             android:layout_marginBottom="10dp"/>
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/assignment_post_author"
             style="@style/ReaderTextView.Post.Author"
             tools:text="text_author"
             android:layout_marginBottom="10dp"/>
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/text_bounty"
             style="@style/ReaderTextView.Post.Bounty"
             tools:text="text_tag"
             android:layout_marginBottom="10dp"/>
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/assignment_list_deadline"
             style="@style/ReaderTextView.Post.Deadline_2"
             tools:text="text_tag"/>

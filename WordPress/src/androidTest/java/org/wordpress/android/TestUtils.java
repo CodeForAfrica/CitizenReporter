@@ -9,8 +9,8 @@ import android.text.TextUtils;
 
 import com.google.gson.internal.StringMap;
 
-import org.codeforafrica.citizenreporter.starreports.WordPress;
-import org.codeforafrica.citizenreporter.starreports.WordPressDB;
+import org.codeforafrica.citizenreporter.eNCA.WordPress;
+import org.codeforafrica.citizenreporter.eNCA.WordPressDB;
 import org.wordpress.android.util.DateTimeUtils;
 
 import java.io.BufferedReader;

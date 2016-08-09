@@ -9,14 +9,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <org.codeforafrica.citizenreporter.starreports.ui.reader.views.ReaderRecyclerView
+    <org.codeforafrica.citizenreporter.eNCA.ui.reader.views.ReaderRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         tools:listitem="@layout/reader_listitem_tag" />
 
-    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
         android:id="@+id/text_empty"
         style="@style/ReaderTextView.EmptyList"
         android:layout_centerInParent="true"

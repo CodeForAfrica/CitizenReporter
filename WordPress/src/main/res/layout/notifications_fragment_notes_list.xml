@@ -24,14 +24,14 @@
         android:visibility="gone"
         tools:visibility="visible">
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/text_empty"
             style="@style/WordPress.EmptyList.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/notifications_empty_list" />
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.OpenSansButton
+        <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansButton
             android:id="@+id/button_sign_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

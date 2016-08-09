@@ -11,9 +11,9 @@ package org.wordpress.android.util;
  */
 import android.text.TextUtils;
 
-import org.codeforafrica.citizenreporter.starreports.models.Blog;
-import org.codeforafrica.citizenreporter.starreports.models.Post;
-import org.codeforafrica.citizenreporter.starreports.models.PostStatus;
+import org.codeforafrica.citizenreporter.eNCA.models.Blog;
+import org.codeforafrica.citizenreporter.eNCA.models.Post;
+import org.codeforafrica.citizenreporter.eNCA.models.PostStatus;
 import org.wordpress.android.util.AppLog.T;
 
 public class WPMeShortlinks {

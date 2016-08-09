@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources  xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name" translatable="false">StarReports</string>
+    <string name="app_name" translatable="false">eNCA</string>
     <string name="site_description_1">Fighting Misinformation and</string>
     <string name="site_description_2">Holding the Powerful Accountable</string>
 
@@ -798,7 +798,7 @@
 
     <!-- NUX strings -->
     <string name="create_account_wpcom">Create an account on WordPress.com</string>
-    <string name="create_account">Create an account on StarReports</string>
+    <string name="create_account">Create an account on eNCA Reports</string>
     <string name="edit_account">Edit Profile</string>
     <string name="create_new_blog_wpcom">Create WordPress.com blog</string>
     <string name="new_blog_wpcom_created">WordPress.com blog created!</string>

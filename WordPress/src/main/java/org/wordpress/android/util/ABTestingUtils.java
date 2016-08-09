@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.internal.StringMap;
 
-import org.codeforafrica.citizenreporter.starreports.WordPress;
+import org.codeforafrica.citizenreporter.eNCA.WordPress;
 import org.wordpress.android.util.AppLog.T;
 
 public class ABTestingUtils {

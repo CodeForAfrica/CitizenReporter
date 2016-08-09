@@ -5,16 +5,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <org.codeforafrica.citizenreporter.starreports.widgets.SlidingTabLayout
+
+    <org.codeforafrica.citizenreporter.eNCA.widgets.SlidingTabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:background="@color/tab_background"
         android:elevation="@dimen/tabs_elevation"
         android:paddingLeft="@dimen/tabstrip_padding"
         android:paddingRight="@dimen/tabstrip_padding" />
 
-    <org.codeforafrica.citizenreporter.starreports.widgets.WPMainViewPager
+    <org.codeforafrica.citizenreporter.eNCA.widgets.WPMainViewPager
         android:id="@+id/viewpager_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

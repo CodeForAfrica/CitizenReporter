@@ -8,7 +8,7 @@
         colorControlActivated   controls in their activated/checked state (search highlight, checked checkboxes)
         colorControlHighlight   control highlights (ripples, list selectors)
     -->
-    <color name="color_primary">#184b99</color>
+    <color name="color_primary">#0087be</color>
     <color name="color_primary_dark">@color/status_bar_tint</color>
     <color name="color_accent">@color/orange_jazzy</color>
     <color name="color_control_activated">@color/blue_light</color>

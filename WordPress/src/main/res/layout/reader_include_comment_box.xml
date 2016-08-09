@@ -18,7 +18,7 @@
         android:layout_height="1dp"
         android:background="@color/grey_lighten_20" />
 
-    <org.codeforafrica.citizenreporter.starreports.widgets.SuggestionAutoCompleteText
+    <org.codeforafrica.citizenreporter.eNCA.widgets.SuggestionAutoCompleteText
         android:id="@+id/edit_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -2,22 +2,23 @@ package org.xmlrpc.android;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.util.Xml;
 
 import com.google.gson.Gson;
 
-import org.codeforafrica.citizenreporter.starreports.WordPress;
-import org.codeforafrica.citizenreporter.starreports.chat.Message;
-import org.codeforafrica.citizenreporter.starreports.datasets.CommentTable;
-import org.codeforafrica.citizenreporter.starreports.models.Blog;
-import org.codeforafrica.citizenreporter.starreports.models.BlogIdentifier;
-import org.codeforafrica.citizenreporter.starreports.models.Comment;
-import org.codeforafrica.citizenreporter.starreports.models.CommentList;
-import org.codeforafrica.citizenreporter.starreports.models.FeatureSet;
-import org.codeforafrica.citizenreporter.starreports.ui.main.AssignmentsListFragment;
-import org.codeforafrica.citizenreporter.starreports.ui.media.MediaGridFragment.Filter;
-import org.codeforafrica.citizenreporter.starreports.ui.posts.LessonsListFragment;
-import org.codeforafrica.citizenreporter.starreports.ui.posts.PostsListFragment;
+import org.codeforafrica.citizenreporter.eNCA.WordPress;
+import org.codeforafrica.citizenreporter.eNCA.chat.Message;
+import org.codeforafrica.citizenreporter.eNCA.datasets.CommentTable;
+import org.codeforafrica.citizenreporter.eNCA.models.Blog;
+import org.codeforafrica.citizenreporter.eNCA.models.BlogIdentifier;
+import org.codeforafrica.citizenreporter.eNCA.models.Comment;
+import org.codeforafrica.citizenreporter.eNCA.models.CommentList;
+import org.codeforafrica.citizenreporter.eNCA.models.FeatureSet;
+import org.codeforafrica.citizenreporter.eNCA.ui.main.AssignmentsListFragment;
+import org.codeforafrica.citizenreporter.eNCA.ui.media.MediaGridFragment.Filter;
+import org.codeforafrica.citizenreporter.eNCA.ui.posts.LessonsListFragment;
+import org.codeforafrica.citizenreporter.eNCA.ui.posts.PostsListFragment;
 import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.AppLog.T;
 import org.wordpress.android.util.DateTimeUtils;
@@ -248,7 +249,7 @@ public class ApiHelper {
                 }
 
                 // get theme post formats
-                new GetPostFormatsTask().execute(mBlog);
+                //new GetPostFormatsTask().execute(mBlog);
             }
 
             // Check if user is an admin
@@ -497,6 +498,11 @@ public class ApiHelper {
             }
         }
     }
+
+    /*
+    * testing fetch posts
+    * */
+
     public static class FetchPostsTask extends HelperAsyncTask<java.util.List<?>, Boolean, Boolean> {
         public interface Callback extends GenericErrorCallback {
             public void onSuccess(int postCount);
@@ -512,11 +518,12 @@ public class ApiHelper {
 
         @Override
         protected Boolean doInBackground(List<?>... params) {
+            Log.d("CITIZEN", "doInBackground");
             List<?> arguments = params[0];
 
             Blog blog = (Blog) arguments.get(0);
             if (blog == null)
-                return false;
+                return Boolean.valueOf(false);
 
             boolean isPage = (Boolean) arguments.get(1);
             int recordCount = (Integer) arguments.get(2);
@@ -525,12 +532,13 @@ public class ApiHelper {
                     blog.getHttppassword());
 
             Object[] result;
-            Object[] xmlrpcParams = { blog.getRemoteBlogId(),
+            Object[] xmlrpcParams = { WordPress.getCurrentBlog().getLocalTableBlogId(),
                     blog.getUsername(),
                     blog.getPassword(), recordCount };
+
             try {
-                result = (Object[]) client.call((isPage) ? "wp.getPages"
-                        : "metaWeblog.getRecentPosts", xmlrpcParams);
+                result = (Object[]) client.call("citizenReporter.getRecentPostsUser", xmlrpcParams);
+
                 if (result != null && result.length > 0) {
                     mPostCount = result.length;
                     List<Map<?, ?>> postsList = new ArrayList<Map<?, ?>>();
@@ -593,6 +601,7 @@ public class ApiHelper {
             }
         }
     }
+
     /*
         Fetch assignments
          */
