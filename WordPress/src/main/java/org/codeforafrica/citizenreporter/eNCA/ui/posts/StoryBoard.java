@@ -201,6 +201,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                 }
 
                 // Create a new post for share intents and QuickPress
+
                 mPost = new Post(WordPress.getCurrentLocalTableBlogId(), false);
                 WordPress.wpDB.savePost(mPost);
                 mIsNewPost = true;
@@ -559,8 +560,10 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     }
 
     public void getAndSetThumbnails() {
+        Log.d("CITIZEN","get and set thumbnails");
         String mediaPaths;
-
+        String[] paths = WordPress.wpDB.getLocalMediaPaths(mPost);
+        Log.d("CITIZEN", " Local: "+ paths[0] + " Remote: " + paths[1]);
         if (mPost.isLocalDraft()) {
             mediaPaths = StringUtils.notNullStr(mPost.getMediaPaths());
         } else {
