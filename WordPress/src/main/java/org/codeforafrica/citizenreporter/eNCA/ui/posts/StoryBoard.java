@@ -587,11 +587,11 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                         Log.d("CITIZEN", "setup slider remote");
                         if (mediaPath.endsWith(".jpg")){
                             mediaPath = mediaPath.substring(0, mediaPath.length() - 4);
-                            mediaPath.concat("-150x150.jpg");
+                            mediaPath = mediaPath + "-150x150.jpg";
                         }
                         else if(mediaPath.endsWith(".png")){
                             mediaPath = mediaPath.substring(0, mediaPath.length() - 4);
-                            mediaPath = mediaPath.concat("-150x150.png");
+                            mediaPath = mediaPath + "-150x150.png";
                         }
                         Log.d("CITIZEN","remote: "+mediaPath);
                         media_map_remote.put(String.valueOf(randomGenerator.nextInt(10000)), mediaPath);
