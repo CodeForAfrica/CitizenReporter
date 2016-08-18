@@ -564,7 +564,9 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         if (mPost.isLocalDraft()) {
             mediaPaths = StringUtils.notNullStr(mPost.getMediaPaths());
         } else {
-            mediaPaths = StringUtils.notNullStr(mPost.getRemoteMediaPaths());
+            String[] paths = WordPress.wpDB.getLocalMediaPaths(mPost);
+
+            mediaPaths = StringUtils.notNullStr(paths[1]);
         }
 
         if (mediaPaths != "") {
@@ -582,6 +584,16 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                             setUpSlider();
                         }
                     } else {
+                        Log.d("CITIZEN", "setup slider remote");
+                        if (mediaPath.endsWith(".jpg")){
+                            mediaPath = mediaPath.substring(0, mediaPath.length() - 4);
+                            mediaPath.concat("-150x150.jpg");
+                        }
+                        else if(mediaPath.endsWith(".png")){
+                            mediaPath = mediaPath.substring(0, mediaPath.length() - 4);
+                            mediaPath = mediaPath.concat("-150x150.png");
+                        }
+                        Log.d("CITIZEN","remote: "+mediaPath);
                         media_map_remote.put(String.valueOf(randomGenerator.nextInt(10000)), mediaPath);
                         setUpSlider();
                     }
@@ -1534,7 +1546,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         String month = String.format("%02d", month_int);
 
         //compose file url
-        String file_url = BuildConfig.DEFAULT_URL + "/wp-content/uploads/" + year + "/" + month + "/wpid-" + filename;
+        String file_url = BuildConfig.DEFAULT_URL + "/wp-content/uploads/" + year + "/" + month + "/" + filename;
 
         if (mimeType.startsWith("image")) {
             attachURL = "<a href=\"" + file_url + "\"><img class=\"alignnone size-medium wp-image-400\" src=\"" + file_url + "\" alt=\"" + filename + "\" width=\"300\" height=\"225\" /></a>";

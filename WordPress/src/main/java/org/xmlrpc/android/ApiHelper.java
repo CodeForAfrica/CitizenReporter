@@ -537,7 +537,8 @@ public class ApiHelper {
                     blog.getPassword(), recordCount };
 
             try {
-                result = (Object[]) client.call("citizenReporter.getRecentPostsUser", xmlrpcParams);
+                result = (Object[]) client.call((isPage) ? "wp.getPages"
+                        : "metaWeblog.getRecentPosts", xmlrpcParams);
 
                 if (result != null && result.length > 0) {
                     mPostCount = result.length;

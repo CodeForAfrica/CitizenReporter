@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
@@ -1075,6 +1076,20 @@ public class WordPressDB {
         }
 
         return returnVector;
+    }
+    public String[] getLocalMediaPaths(Post post){
+        Cursor result = db.rawQuery("select mediaPaths,remote_mediapaths from posts where title=? and localDraft=1",
+                new String[] {post.getTitle()});
+        result.moveToFirst();
+        try{
+            String localPath = result.getString(0);
+            String remotePath = result.getString(1);
+            return new String[] {localPath, remotePath};
+        }
+        catch(CursorIndexOutOfBoundsException e ){
+            return new String[] {null, null};
+        }
+
     }
 
     public boolean deletePost(Post post) {
