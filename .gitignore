@@ -52,3 +52,6 @@ WordPress/src/androidTest/monkeys/settings.py
 buck-cache/
 buck-out/
 extlibs/
+
+# Log files
+.log
