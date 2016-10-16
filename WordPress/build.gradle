@@ -11,7 +11,6 @@ buildscript {
         classpath 'com.android.tools.build:gradle:1.0.0'
         classpath 'com.github.nrudenko:gradle-android-cq-plugin:0.1+'
         classpath 'io.fabric.tools:gradle:1.+'
-
     }
 }
 
@@ -42,13 +41,13 @@ android {
         versionCode 194
         minSdkVersion 16
         targetSdkVersion 21
-        multiDexEnabled = true
 
         buildConfigField "String", "APP_PN_KEY", "\"org.wordpress.android.playstore\""
     }
 
     productFlavors {
         vanilla {}
+
         zbetagroup {
             buildConfigField "String", "APP_PN_KEY", "\"org.wordpress.android.beta.build\""
             applicationId "org.wordpress.android.beta"
@@ -65,9 +64,8 @@ android {
         release {
             // Proguard is only used to fix an issue with some Samsung device
             // https://github.com/wordpress-mobile/WordPress-Android/issues/2151
-            //minifyEnabled true
-            //shrinkResources true
-            //proguardFile 'proguard.cfg'
+            minifyEnabled true
+            proguardFile 'proguard.cfg'
         }
 
         debug {
@@ -109,7 +107,9 @@ dependencies {
     compile 'com.automattic:rest:1.0.1'
     compile 'org.wordpress:graphview:3.3.0'
     compile 'org.wordpress:persistentedittext:1.0.1'
+
     compile 'com.mcxiaoke.volley:library:1.0.16'
+
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.0'
     androidTestCompile 'org.objenesis:objenesis:2.1'
     androidTestCompile 'org.mockito:mockito-core:+'
@@ -121,8 +121,13 @@ dependencies {
     compile 'org.wordpress:slidinguppanel:1.0.0'
     // not found in maven central
 
-    //compile 'org.wordpress:android-passcodelock:0.0.6'
+    // Provided by the WordPress-Android Repository
+    compile 'org.wordpress:gcm:1.0.0' // not found in maven central
+    compile 'org.wordpress:drag-sort-listview:0.6.1' // not found in maven central
+    compile 'org.wordpress:slidinguppanel:1.0.0' // not found in maven central
+    compile 'org.wordpress:android-passcodelock:0.0.6'
     compile 'org.wordpress:emailchecker:0.3'
+
     // Simperium
     compile 'com.simperium.android:simperium:0.6.4'
     releaseCompile project(path: ':libs:utils:WordPressUtils', configuration: 'release')
@@ -201,7 +206,6 @@ if (["storeFile", "storePassword", "keyAlias", "keyPassword"].count {
     !project.hasProperty(it)
 } == 0) {
     android {
-
         signingConfigs {
             release {
                 storeFile = file(project.storeFile)

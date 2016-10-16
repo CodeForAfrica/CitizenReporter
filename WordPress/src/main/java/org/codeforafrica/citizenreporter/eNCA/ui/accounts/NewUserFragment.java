@@ -136,6 +136,16 @@ public class NewUserFragment extends AbstractFragment implements TextWatcher {
             retValue = false;
         }
 
+        if (username.contains(" ")) {
+            showUsernameError(R.string.invalid_username_no_spaces);
+            retValue = false;
+        }
+
+        if (siteUrl.contains(" ")) {
+            showSiteUrlError(R.string.blog_name_no_spaced_allowed);
+            retValue = false;
+        }
+
         if (siteUrl.length() < 4) {
             showSiteUrlError(R.string.blog_name_must_be_at_least_four_characters);
             retValue = false;
@@ -281,9 +291,16 @@ public class NewUserFragment extends AbstractFragment implements TextWatcher {
 
                     @Override
                     public void onSuccess(JSONObject createSiteResponse) {
-                        AnalyticsUtils.refreshMetadata(username, email);
+                        // User has been created. From this point, all errors should close this screen and display the
+                        // sign in screen
+                        AnalyticsUtils.refreshMetadata(mUsername, email);
                         AnalyticsTracker.track(AnalyticsTracker.Stat.CREATED_ACCOUNT);
-                        endProgress();
+                        AnalyticsTracker.track(AnalyticsTracker.Stat.CREATED_SITE);
+                        // Save credentials to smart lock
+                        SmartLockHelper smartLockHelper = getSmartLockHelper();
+                        if (smartLockHelper != null) {
+                            smartLockHelper.saveCredentialsInSmartLock(mUsername, mPassword, mUsername, null);
+                        }
                         if (isAdded()) {
                             finishThisStuff(username, password);
                         }
@@ -297,6 +314,8 @@ public class NewUserFragment extends AbstractFragment implements TextWatcher {
                         }
                     }
                 });
+        AppLog.i(T.NUX, "User tries to create a new account, username: " + mUsername + ", email: " + email
+                + ", site name: " + siteName + ", site URL: " + siteUrl);
         createUserAndBlog.startCreateUserAndBlogProcess();
     }
 
@@ -379,10 +398,12 @@ public class NewUserFragment extends AbstractFragment implements TextWatcher {
 
             @Override
             public void afterTextChanged(Editable s) {
+                BlogUtils.convertToLowercase(s);
             }
         });
         mUsernameTextField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override public void onFocusChange(View v, boolean hasFocus) {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     mAutoCompleteUrl = EditTextUtils.getText(mUsernameTextField)
                             .equals(EditTextUtils.getText(mSiteUrlTextField))

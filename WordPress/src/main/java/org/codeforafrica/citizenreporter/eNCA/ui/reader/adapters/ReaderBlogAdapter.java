@@ -34,7 +34,7 @@ public class ReaderBlogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public enum ReaderBlogType {RECOMMENDED, FOLLOWED}
 
     public interface BlogClickListener {
-        public void onBlogClicked(Object blog);
+        void onBlogClicked(Object blog);
     }
 
     private final ReaderBlogType mBlogType;
@@ -109,7 +109,7 @@ public class ReaderBlogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof BlogViewHolder) {
             final BlogViewHolder blogHolder = (BlogViewHolder) holder;
             switch (getBlogType()) {
@@ -117,19 +117,24 @@ public class ReaderBlogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     final ReaderRecommendedBlog blog = mRecommendedBlogs.get(position);
                     blogHolder.txtTitle.setText(blog.getTitle());
                     blogHolder.txtDescription.setText(blog.getReason());
-                    blogHolder.txtUrl.setText(UrlUtils.getDomainFromUrl(blog.getBlogUrl()));
+                    blogHolder.txtUrl.setText(UrlUtils.getHost(blog.getBlogUrl()));
                     blogHolder.imgBlog.setImageUrl(blog.getImageUrl(), WPNetworkImageView.ImageType.BLAVATAR);
                     break;
 
                 case FOLLOWED:
                     final ReaderBlog blogInfo = mFollowedBlogs.get(position);
-                    String domain = UrlUtils.getDomainFromUrl(blogInfo.getUrl());
                     if (blogInfo.hasName()) {
                         blogHolder.txtTitle.setText(blogInfo.getName());
                     } else {
-                        blogHolder.txtTitle.setText(domain);
+                        blogHolder.txtTitle.setText(R.string.reader_untitled_post);
                     }
-                    blogHolder.txtUrl.setText(domain);
+                    if (blogInfo.hasUrl()) {
+                        blogHolder.txtUrl.setText(UrlUtils.getHost(blogInfo.getUrl()));
+                    } else if (blogInfo.hasFeedUrl()) {
+                        blogHolder.txtUrl.setText(UrlUtils.getHost(blogInfo.getFeedUrl()));
+                    } else {
+                        blogHolder.txtUrl.setText("");
+                    }
                     blogHolder.imgBlog.setImageUrl(blogInfo.getImageUrl(), WPNetworkImageView.ImageType.BLAVATAR);
                     break;
             }
@@ -138,12 +143,13 @@ public class ReaderBlogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 blogHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int clickedPosition = blogHolder.getAdapterPosition();
                         switch (getBlogType()) {
                             case RECOMMENDED:
-                                mClickListener.onBlogClicked(mRecommendedBlogs.get(position));
+                                mClickListener.onBlogClicked(mRecommendedBlogs.get(clickedPosition));
                                 break;
                             case FOLLOWED:
-                                mClickListener.onBlogClicked(mFollowedBlogs.get(position));
+                                mClickListener.onBlogClicked(mFollowedBlogs.get(clickedPosition));
                                 break;
                         }
                     }
@@ -248,7 +254,7 @@ public class ReaderBlogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             } else if (blog.hasName()) {
                 return blog.getName();
             } else if (blog.hasUrl()) {
-                return StringUtils.notNullStr(UrlUtils.getDomainFromUrl(blog.getUrl()));
+                return StringUtils.notNullStr(UrlUtils.getHost(blog.getUrl()));
             } else {
                 return "";
             }

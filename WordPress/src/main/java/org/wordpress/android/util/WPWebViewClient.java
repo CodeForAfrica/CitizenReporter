@@ -7,7 +7,6 @@ import android.webkit.HttpAuthHandler;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import org.codeforafrica.citizenreporter.eNCA.models.AccountHelper;
 import org.codeforafrica.citizenreporter.eNCA.models.Blog;
@@ -18,12 +17,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
+import java.util.List;
 
 /**
  * WebViewClient that is capable of handling HTTP authentication requests using the HTTP
  * username and password of the blog configured for this activity.
  */
-public class WPWebViewClient extends WebViewClient {
+public class WPWebViewClient extends URLFilteredWebViewClient {
     private final Blog mBlog;
     private String mToken;
 
@@ -33,14 +33,10 @@ public class WPWebViewClient extends WebViewClient {
         mToken = AccountHelper.getDefaultAccount().getAccessToken();
     }
 
-    @Override
-    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        // Found a bug on some pages where there is an incorrect
-        // auto-redirect to file:///android_asset/webkit/.
-        if (!url.equals("file:///android_asset/webkit/")) {
-            view.loadUrl(url);
-        }
-        return true;
+    public WPWebViewClient(Blog blog, List<String> urls) {
+        super(urls);
+        this.mBlog = blog;
+        mToken = AccountHelper.getDefaultAccount().getAccessToken();
     }
 
     @Override
@@ -60,8 +56,8 @@ public class WPWebViewClient extends WebViewClient {
             // NOTE: There is still a small security hole here, since the realm is not considered when getting
             // the password. Unfortunately the real is not stored when setting up the blog, and we cannot compare it
             // at this point.
-            String domainFromHttpAuthRequest = UrlUtils.getDomainFromUrl(UrlUtils.addUrlSchemeIfNeeded(host, false));
-            String currentBlogDomain = UrlUtils.getDomainFromUrl(mBlog.getUrl());
+            String domainFromHttpAuthRequest = UrlUtils.getHost(UrlUtils.addUrlSchemeIfNeeded(host, false));
+            String currentBlogDomain = UrlUtils.getHost(mBlog.getUrl());
             if (domainFromHttpAuthRequest.equals(currentBlogDomain)) {
                 handler.proceed(mBlog.getHttpuser(), mBlog.getHttppassword());
                 return;
@@ -89,11 +85,22 @@ public class WPWebViewClient extends WebViewClient {
 
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView view, String stringUrl) {
-        // Intercept requests for private images and add the WP.com authorization header
-        if (mBlog != null && mBlog.isPrivate() && !TextUtils.isEmpty(mToken) && UrlUtils.isImageUrl(stringUrl)) {
+        URL imageUrl  = null;
+        if (mBlog != null && mBlog.isPrivate() && UrlUtils.isImageUrl(stringUrl)) {
             try {
-                URL url = new URL(stringUrl);
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                imageUrl = new URL(UrlUtils.makeHttps(stringUrl));
+            } catch (MalformedURLException e) {
+                AppLog.e(AppLog.T.READER, e);
+            }
+        }
+
+        // Intercept requests for private images and add the WP.com authorization header
+        if (imageUrl != null &&
+                WPUrlUtils.safeToAddWordPressComAuthToken(imageUrl) &&
+                !TextUtils.isEmpty(mToken)) {
+            try {
+                // Force use of HTTPS for the resource, otherwise the request will fail for private sites
+                HttpURLConnection urlConnection = (HttpURLConnection) imageUrl.openConnection();
                 urlConnection.setRequestProperty("Authorization", "Bearer " + mToken);
                 urlConnection.setReadTimeout(WPRestClient.REST_TIMEOUT_MS);
                 urlConnection.setConnectTimeout(WPRestClient.REST_TIMEOUT_MS);

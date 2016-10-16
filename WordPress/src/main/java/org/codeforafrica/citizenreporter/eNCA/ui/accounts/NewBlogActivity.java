@@ -1,12 +1,12 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.accounts;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 
 import org.codeforafrica.citizenreporter.eNCA.R;
 
-public class NewBlogActivity extends ActionBarActivity {
+public class NewBlogActivity extends AppCompatActivity {
     public static final String KEY_START_MODE = "start-mode";
     public static final int CREATE_BLOG = 1;
     public static final int CREATE_BLOG_LOGOUT_ON_CANCEL = 2;
@@ -18,7 +18,7 @@ public class NewBlogActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_blog_activity);
 
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         mNewBlogFragment = (NewBlogFragment) fragmentManager.
                 findFragmentById(R.id.new_blog_fragment);
         if (getActionMode() == CREATE_BLOG_LOGOUT_ON_CANCEL) {

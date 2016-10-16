@@ -18,8 +18,12 @@ import java.util.List;
 import java.util.Map;
 
 public class FetchBlogListWPCom extends FetchBlogListAbstract {
-    public FetchBlogListWPCom() {
+
+    private Context mContext;
+
+    public FetchBlogListWPCom(Context context) {
         super(null, null);
+        mContext = context;
     }
 
     protected void fetchBlogList(final Callback callback) {
@@ -59,11 +63,11 @@ public class FetchBlogListWPCom extends FetchBlogListAbstract {
     }
 
     private void getUsersBlogsRequestREST(final FetchBlogListAbstract.Callback callback) {
-        WordPress.getRestClientUtils().get("me/sites", new RestRequest.Listener() {
+        WordPress.getRestClientUtils().get("me/sites", RestClientUtils.getRestLocaleParams(mContext), null, new RestRequest.Listener() {
             @Override
             public void onResponse(JSONObject response) {
                 if (response != null) {
-                    List<Map<String, Object>> userBlogListReceiver = convertJSONObjectToSiteList(response, false);
+                    List<Map<String, Object>> userBlogListReceiver = convertJSONObjectToSiteList(response, true);
                     callback.onSuccess(userBlogListReceiver);
                 } else {
                     callback.onSuccess(null);

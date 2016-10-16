@@ -254,6 +254,13 @@ public class WPRestClient {
         getXL(path, params, listener, errorListener);
     }
 
+    public void getSiteDescription(String siteId, Listener listener, ErrorListener errorListener) {
+        String path = String.format("rest/v1.1/sites/%s", siteId);
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("fields", "description");
+        get(path, params, null, listener, errorListener);
+    }
+
     /**
      * This method is for simulating stats APIs using the XL Studio API simulator. It should be removed once the other APIs are implemented. 
      **/
@@ -400,7 +407,7 @@ public class WPRestClient {
         }
 
         public void sendWithAccessToken(String token){
-            mRequest.setAccessToken(token.toString());
+            mRequest.setAccessToken(token);
             mRestClient.send(mRequest);
         }
 

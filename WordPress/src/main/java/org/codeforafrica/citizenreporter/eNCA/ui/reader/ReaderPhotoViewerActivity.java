@@ -4,9 +4,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -18,20 +19,20 @@ import org.codeforafrica.citizenreporter.eNCA.ui.reader.utils.ReaderImageScanner
 import org.codeforafrica.citizenreporter.eNCA.ui.reader.views.ReaderPhotoView.PhotoViewListener;
 import org.wordpress.android.util.AniUtils;
 import org.wordpress.android.util.AppLog;
-
-import javax.annotation.Nonnull;
+import org.wordpress.android.widgets.WPViewPager;
 
 /**
  * Full-screen photo viewer - uses a ViewPager to enable scrolling between images in a blog
  * post, but also supports viewing a single image
  */
-public class ReaderPhotoViewerActivity extends ActionBarActivity
+public class ReaderPhotoViewerActivity extends AppCompatActivity
         implements PhotoViewListener {
 
     private String mInitialImageUrl;
     private boolean mIsPrivate;
+    private boolean mIsGallery;
     private String mContent;
-    private ViewPager mViewPager;
+    private WPViewPager mViewPager;
     private PhotoPagerAdapter mAdapter;
     private TextView mTxtTitle;
     private boolean mIsTitleVisible;
@@ -41,7 +42,7 @@ public class ReaderPhotoViewerActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reader_activity_photo_viewer);
 
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mViewPager = (WPViewPager) findViewById(R.id.viewpager);
         mTxtTitle = (TextView) findViewById(R.id.text_title);
 
         // title is hidden until we know we can show it
@@ -50,15 +51,17 @@ public class ReaderPhotoViewerActivity extends ActionBarActivity
         if (savedInstanceState != null) {
             mInitialImageUrl = savedInstanceState.getString(ReaderConstants.ARG_IMAGE_URL);
             mIsPrivate = savedInstanceState.getBoolean(ReaderConstants.ARG_IS_PRIVATE);
+            mIsGallery = savedInstanceState.getBoolean(ReaderConstants.ARG_IS_GALLERY);
             mContent = savedInstanceState.getString(ReaderConstants.ARG_CONTENT);
         } else if (getIntent() != null) {
             mInitialImageUrl = getIntent().getStringExtra(ReaderConstants.ARG_IMAGE_URL);
             mIsPrivate = getIntent().getBooleanExtra(ReaderConstants.ARG_IS_PRIVATE, false);
+            mIsGallery = getIntent().getBooleanExtra(ReaderConstants.ARG_IS_GALLERY, false);
             mContent = getIntent().getStringExtra(ReaderConstants.ARG_CONTENT);
         }
 
         mViewPager.setPageTransformer(false, new ReaderViewPagerTransformer(TransformType.FLOW));
-        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 updateTitle(position);
@@ -70,12 +73,14 @@ public class ReaderPhotoViewerActivity extends ActionBarActivity
     }
 
     private void loadImageList() {
+        // content will be empty when viewing a single image, otherwise content is HTML
+        // so parse images from it
         final ReaderImageList imageList;
         if (TextUtils.isEmpty(mContent)) {
-            // content will be empty when we're viewing a single image
             imageList = new ReaderImageList(mIsPrivate);
+        } else if (mIsGallery) {
+            imageList = new ReaderImageScanner(mContent, mIsPrivate).getGalleryImageList();
         } else {
-            // otherwise content is HTML so parse images from it
             imageList = new ReaderImageScanner(mContent, mIsPrivate).getImageList();
         }
 
@@ -99,13 +104,14 @@ public class ReaderPhotoViewerActivity extends ActionBarActivity
     }
 
     @Override
-    public void onSaveInstanceState(@Nonnull Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         if (hasAdapter()) {
             String imageUrl = getAdapter().getImageUrl(mViewPager.getCurrentItem());
             outState.putString(ReaderConstants.ARG_IMAGE_URL, imageUrl);
         }
 
         outState.putBoolean(ReaderConstants.ARG_IS_PRIVATE, mIsPrivate);
+        outState.putBoolean(ReaderConstants.ARG_IS_GALLERY, mIsGallery);
         outState.putString(ReaderConstants.ARG_CONTENT, mContent);
 
         super.onSaveInstanceState(outState);
@@ -124,7 +130,8 @@ public class ReaderPhotoViewerActivity extends ActionBarActivity
             return;
         }
 
-        final String title = getString(R.string.reader_title_photo_viewer, position + 1, getImageCount());
+        String titlePhotoViewer = getString(R.string.reader_title_photo_viewer);
+        String title = String.format(titlePhotoViewer, position + 1, getImageCount());
         if (title.equals(mTxtTitle.getText())) {
             return;
         }

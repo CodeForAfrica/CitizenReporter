@@ -59,12 +59,13 @@ public class ReaderBlogFragment extends Fragment
         return view;
     }
 
-    void checkEmptyView() {
-        if (!isAdded()) {
-            return;
-        }
-        boolean isEmpty = hasBlogAdapter() && getBlogAdapter().isEmpty();
+    private void checkEmptyView() {
+        if (!isAdded()) return;
+
         TextView emptyView = (TextView) getView().findViewById(R.id.text_empty);
+        if (emptyView == null) return;
+
+        boolean isEmpty = hasBlogAdapter() && getBlogAdapter().isEmpty();
         if (isEmpty) {
             switch (getBlogType()) {
                 case RECOMMENDED:
@@ -120,6 +121,7 @@ public class ReaderBlogFragment extends Fragment
 
     void refresh() {
         if (hasBlogAdapter()) {
+            AppLog.d(AppLog.T.READER, "reader subs > refreshing blog fragment " + getBlogType().name());
             getBlogAdapter().refresh();
         }
     }
@@ -150,8 +152,8 @@ public class ReaderBlogFragment extends Fragment
 
     @Override
     public void onBlogClicked(Object item) {
-        final long blogId;
-        final long feedId;
+        long blogId;
+        long feedId;
         if (item instanceof ReaderRecommendedBlog) {
             ReaderRecommendedBlog blog = (ReaderRecommendedBlog) item;
             blogId = blog.blogId;

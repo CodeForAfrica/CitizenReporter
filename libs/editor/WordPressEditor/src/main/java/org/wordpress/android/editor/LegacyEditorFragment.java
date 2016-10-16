@@ -9,12 +9,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.Parcelable;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Layout;
 import android.text.Selection;
@@ -54,8 +53,6 @@ import android.widget.ToggleButton;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 
-import org.wordpress.android.analytics.AnalyticsTracker;
-import org.wordpress.android.analytics.AnalyticsTracker.Stat;
 import org.wordpress.android.editor.legacy.EditLinkActivity;
 import org.wordpress.android.editor.legacy.WPEditImageSpan;
 import org.wordpress.android.util.AppLog;
@@ -63,12 +60,16 @@ import org.wordpress.android.util.AppLog.T;
 import org.wordpress.android.util.DisplayUtils;
 import org.wordpress.android.util.ImageUtils;
 import org.wordpress.android.util.MediaUtils;
+import org.wordpress.android.util.ToastUtils;
+import org.wordpress.android.util.ToastUtils.Duration;
 import org.wordpress.android.util.helpers.MediaFile;
 import org.wordpress.android.util.helpers.MediaGallery;
 import org.wordpress.android.util.helpers.MediaGalleryImageSpan;
 import org.wordpress.android.util.helpers.WPImageSpan;
 import org.wordpress.android.util.helpers.WPUnderlineSpan;
 import org.wordpress.android.util.widgets.WPEditText;
+
+import java.util.Locale;
 
 public class LegacyEditorFragment extends EditorFragmentAbstract implements TextWatcher,
         WPEditText.OnSelectionChangedListener, View.OnTouchListener {
@@ -88,7 +89,6 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
     private static final String TAG_FORMAT_BAR_BUTTON_STRIKE = "strike";
     private static final String TAG_FORMAT_BAR_BUTTON_QUOTE = "blockquote";
 
-    private ActionBarActivity mActivity;
     private View mRootView;
     private WPEditText mContentEditText;
     private EditText mTitleEditText;
@@ -110,7 +110,7 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
     @Override
     public boolean onBackPressed() {
         // leave full screen mode back button is pressed
-        if (getActivity().getActionBar() != null && !getActivity().getActionBar().isShowing()) {
+        if (getActionBar() != null && !getActionBar().isShowing()) {
             setContentEditingModeVisible(false);
             return true;
         }
@@ -165,8 +165,6 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mActivity = (ActionBarActivity) getActivity();
-
         final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_edit_post_content, container, false);
 
         mFormatBar = (LinearLayout) rootView.findViewById(R.id.format_bar);
@@ -176,8 +174,8 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 // Go to full screen editor when 'next' button is tapped on soft keyboard
-                if (actionId == EditorInfo.IME_ACTION_NEXT && isAdded() && mActivity.getSupportActionBar() != null &&
-                        mActivity.getSupportActionBar().isShowing()) {
+                ActionBar actionBar = getActionBar();
+                if (actionId == EditorInfo.IME_ACTION_NEXT && actionBar != null && actionBar.isShowing()) {
                     setContentEditingModeVisible(true);
                 }
                 return false;
@@ -215,8 +213,8 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
             public void onImeBack(WPEditText ctrl, String text) {
                 // Go back to regular editor if IME keyboard is dismissed
                 // Bottom comparison is there to ensure that the keyboard is actually showing
-                if (mRootView.getBottom() < mFullViewBottom && isAdded() && mActivity.getSupportActionBar() != null
-                        && !mActivity.getSupportActionBar().isShowing()) {
+                ActionBar actionBar = getActionBar();
+                if (mRootView.getBottom() < mFullViewBottom && actionBar != null && !actionBar.isShowing()) {
                     setContentEditingModeVisible(false);
                 }
             }
@@ -265,11 +263,22 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
         }
     };
 
+    private ActionBar getActionBar() {
+        if (!isAdded()) {
+            return null;
+        }
+        if (getActivity() instanceof AppCompatActivity) {
+            return ((AppCompatActivity) getActivity()).getSupportActionBar();
+        } else {
+            return null;
+        }
+    }
+
     public void setContentEditingModeVisible(boolean isVisible) {
         if (!isAdded()) {
             return;
         }
-        ActionBar actionBar = mActivity.getSupportActionBar();
+        ActionBar actionBar = getActionBar();
         if (isVisible) {
             Animation fadeAnimation = new AlphaAnimation(1, 0);
             fadeAnimation.setDuration(CONTENT_ANIMATION_DURATION);
@@ -314,7 +323,7 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
                 }
             });
             mPostContentLinearLayout.startAnimation(fadeAnimation);
-            mActivity.invalidateOptionsMenu();
+            getActivity().invalidateOptionsMenu();
             if (actionBar != null) {
                 actionBar.show();
             }
@@ -407,22 +416,22 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
         public void onClick(View v) {
             int id = v.getId();
             if (id == R.id.bold) {
-                AnalyticsTracker.track(Stat.EDITOR_TAPPED_BOLD);
+                mEditorFragmentListener.onTrackableEvent(TrackableEvent.BOLD_BUTTON_TAPPED);
                 onFormatButtonClick(mBoldToggleButton, TAG_FORMAT_BAR_BUTTON_STRONG);
             } else if (id == R.id.em) {
-                AnalyticsTracker.track(Stat.EDITOR_TAPPED_ITALIC);
+                mEditorFragmentListener.onTrackableEvent(TrackableEvent.ITALIC_BUTTON_TAPPED);
                 onFormatButtonClick(mEmToggleButton, TAG_FORMAT_BAR_BUTTON_EM);
             } else if (id == R.id.underline) {
-                AnalyticsTracker.track(Stat.EDITOR_TAPPED_UNDERLINE);
+                mEditorFragmentListener.onTrackableEvent(TrackableEvent.UNDERLINE_BUTTON_TAPPED);
                 onFormatButtonClick(mUnderlineToggleButton, TAG_FORMAT_BAR_BUTTON_UNDERLINE);
             } else if (id == R.id.strike) {
-                AnalyticsTracker.track(Stat.EDITOR_TAPPED_STRIKETHROUGH);
+                mEditorFragmentListener.onTrackableEvent(TrackableEvent.STRIKETHROUGH_BUTTON_TAPPED);
                 onFormatButtonClick(mStrikeToggleButton, TAG_FORMAT_BAR_BUTTON_STRIKE);
             } else if (id == R.id.bquote) {
-                AnalyticsTracker.track(Stat.EDITOR_TAPPED_BLOCKQUOTE);
+                mEditorFragmentListener.onTrackableEvent(TrackableEvent.BLOCKQUOTE_BUTTON_TAPPED);
                 onFormatButtonClick(mBquoteToggleButton, TAG_FORMAT_BAR_BUTTON_QUOTE);
             } else if (id == R.id.more) {
-                AnalyticsTracker.track(Stat.EDITOR_TAPPED_MORE);
+                mEditorFragmentListener.onTrackableEvent(TrackableEvent.MORE_BUTTON_TAPPED);
                 mSelectionEnd = mContentEditText.getSelectionEnd();
                 Editable str = mContentEditText.getText();
                 if (str != null) {
@@ -431,7 +440,7 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
                     str.insert(mSelectionEnd, "\n<!--more-->\n");
                 }
             } else if (id == R.id.link) {
-                AnalyticsTracker.track(Stat.EDITOR_TAPPED_LINK);
+                mEditorFragmentListener.onTrackableEvent(TrackableEvent.LINK_BUTTON_TAPPED);
                 mSelectionStart = mContentEditText.getSelectionStart();
                 mStyleStart = mSelectionStart;
                 mSelectionEnd = mContentEditText.getSelectionEnd();
@@ -449,7 +458,7 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
                 }
                 startActivityForResult(i, ACTIVITY_REQUEST_CODE_CREATE_LINK);
             } else if (id == R.id.addPictureButton) {
-                AnalyticsTracker.track(Stat.EDITOR_TAPPED_IMAGE);
+                mEditorFragmentListener.onTrackableEvent(TrackableEvent.MEDIA_BUTTON_TAPPED);
                 mEditorFragmentListener.onAddMediaClicked();
                 if (isAdded()) {
                     getActivity().openContextMenu(mAddPictureButton);
@@ -459,6 +468,9 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
     };
 
     private WPEditImageSpan createWPEditImageSpanLocal(Context context, MediaFile mediaFile) {
+        if (context == null || mediaFile == null || mediaFile.getFilePath() == null) {
+            return null;
+        }
         Uri imageUri = Uri.parse(mediaFile.getFilePath());
         Bitmap thumbnailBitmap;
         if (MediaUtils.isVideo(imageUri.toString())) {
@@ -473,11 +485,15 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
             }
         }
         WPEditImageSpan imageSpan = new WPEditImageSpan(context, thumbnailBitmap, imageUri);
-        mediaFile.setWidth(MediaUtils.getMinimumImageWidth(context, imageUri, mBlogSettingMaxImageWidth));
+        mediaFile.setWidth(MediaUtils.getMaximumImageWidth(context, imageUri, mBlogSettingMaxImageWidth));
+        imageSpan.setMediaFile(mediaFile);
         return imageSpan;
     }
 
     private WPEditImageSpan createWPEditImageSpanRemote(Context context, MediaFile mediaFile) {
+        if (context == null || mediaFile == null || mediaFile.getFileURL() == null) {
+            return null;
+        }
         int drawable = mediaFile.isVideo() ? R.drawable.media_movieclip : R.drawable.legacy_dashicon_format_image_big_grey;
         Uri uri = Uri.parse(mediaFile.getFileURL());
         WPEditImageSpan imageSpan = new WPEditImageSpan(context, drawable, uri);
@@ -661,7 +677,8 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
         mLastYPos = pos;
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            if (isAdded() && mActivity.getSupportActionBar() != null && mActivity.getSupportActionBar().isShowing()) {
+            ActionBar actionBar = getActionBar();
+            if (actionBar != null && actionBar.isShowing()) {
                 setContentEditingModeVisible(true);
                 return false;
             }
@@ -727,7 +744,6 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         alignmentSpinner.setAdapter(adapter);
 
-                        imageWidthText.setText(String.valueOf(mediaFile.getWidth()) + "px");
                         seekBar.setProgress(mediaFile.getWidth());
                         titleText.setText(mediaFile.getTitle());
                         caption.setText(mediaFile.getCaption());
@@ -743,9 +759,10 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
 
                         alignmentSpinner.setSelection(mediaFile.getHorizontalAlignment(), true);
 
-                        final int maxWidth = MediaUtils.getMinimumImageWidth(getActivity(),
+                        final int maxWidth = MediaUtils.getMaximumImageWidth(getActivity(),
                                 imageSpan.getImageSource(), mBlogSettingMaxImageWidth);
                         seekBar.setMax(maxWidth / 10);
+                        imageWidthText.setText(String.format(Locale.US, "%dpx", maxWidth));
                         if (mediaFile.getWidth() != 0) {
                             seekBar.setProgress(mediaFile.getWidth() / 10);
                         }
@@ -763,7 +780,7 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
                                 if (progress == 0) {
                                     progress = 1;
                                 }
-                                imageWidthText.setText(progress * 10 + "px");
+                                imageWidthText.setText(String.format(Locale.US, "%dpx", progress * 10));
                             }
                         });
 
@@ -811,7 +828,7 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
                     final MediaGalleryImageSpan gallerySpan = gallerySpans[0];
                     Intent intent = new Intent(ACTION_MEDIA_GALLERY_TOUCHED);
                     intent.putExtra(EXTRA_MEDIA_GALLERY, gallerySpan.getMediaGallery());
-                    mActivity.sendBroadcast(intent);
+                    getActivity().sendBroadcast(intent);
                 }
             }
         } else if (event.getAction() == 1) {
@@ -975,7 +992,7 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
                     return;
                 }
                 WPImageSpan[] spans = s.getSpans(0, s.length(), WPImageSpan.class);
-                if (spans.length != 0) {
+                if (spans.length != 0 && getActivity() != null) {
                     for (WPImageSpan is : spans) {
                         MediaFile mediaFile = is.getMediaFile();
                         if (mediaFile == null) {
@@ -1016,66 +1033,89 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
         outState.putString(KEY_CONTENT, mContentEditText.getText().toString());
     }
 
-    public void addMediaFile(final MediaFile mediaFile, final String imageUrl, final ImageLoader imageLoader, final int start, final int end) {
-        mediaFile.setFileURL(imageUrl);
-        mediaFile.setFilePath(imageUrl);
-        final WPEditImageSpan imageSpan = createWPEditImageSpan(mActivity, mediaFile);
-        mEditorFragmentListener.saveMediaFile(mediaFile);
-        imageSpan.setMediaFile(mediaFile);
+    private class AddMediaFileTask extends AsyncTask<Void, Void, WPEditImageSpan> {
+        private MediaFile mMediaFile;
+        private String mImageUrl;
+        private ImageLoader mImageLoader;
+        private int mStart;
+        private int mEnd;
 
-        Handler handler = new Handler(Looper.getMainLooper());
-        final Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                // Insert the WPImageSpan in the content field
-                int selectionStart = start;
-                int selectionEnd = end;
+        public AddMediaFileTask(MediaFile mediaFile, String imageUrl, ImageLoader imageLoader, int start, int end) {
+            mMediaFile = mediaFile;
+            mImageUrl = imageUrl;
+            mImageLoader = imageLoader;
+            mStart = start;
+            mEnd = end;
+        }
 
-                if (selectionStart > selectionEnd) {
-                    int temp = selectionEnd;
-                    selectionEnd = selectionStart;
-                    selectionStart = temp;
+        protected WPEditImageSpan doInBackground(Void... voids) {
+            mMediaFile.setFileURL(mImageUrl);
+            mMediaFile.setFilePath(mImageUrl);
+            WPEditImageSpan imageSpan = createWPEditImageSpan(getActivity(), mMediaFile);
+            mEditorFragmentListener.saveMediaFile(mMediaFile);
+            return imageSpan;
+        }
+
+        protected void onPostExecute(WPEditImageSpan imageSpan) {
+            if (imageSpan == null) {
+                if (isAdded()) {
+                    ToastUtils.showToast(getActivity(), R.string.alert_error_adding_media, Duration.LONG);
                 }
-
-                imageSpan.setPosition(selectionStart, selectionEnd);
-
-                int line, column = 0;
-                if (mContentEditText.getLayout() != null) {
-                    line = mContentEditText.getLayout().getLineForOffset(selectionStart);
-                    column = selectionStart - mContentEditText.getLayout().getLineStart(line);
-                }
-
-                Editable s = mContentEditText.getText();
-                if (s == null) {
-                    return;
-                }
-
-                WPImageSpan[] imageSpans = s.getSpans(selectionStart, selectionEnd, WPImageSpan.class);
-                if (imageSpans.length != 0) {
-                    // insert a few line breaks if the cursor is already on an image
-                    s.insert(selectionEnd, "\n\n");
-                    selectionStart = selectionStart + 2;
-                    selectionEnd = selectionEnd + 2;
-                } else if (column != 0) {
-                    // insert one line break if the cursor is not at the first column
-                    s.insert(selectionEnd, "\n");
-                    selectionStart = selectionStart + 1;
-                    selectionEnd = selectionEnd + 1;
-                }
-
-                s.insert(selectionStart, " ");
-                s.setSpan(imageSpan, selectionStart, selectionEnd + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                AlignmentSpan.Standard as = new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER);
-                s.setSpan(as, selectionStart, selectionEnd + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                s.insert(selectionEnd + 1, "\n\n");
-
-                // Fetch and replace the WPImageSpan if it's a remote media
-                if (imageLoader != null && URLUtil.isNetworkUrl(imageUrl)) {
-                    loadWPImageSpanThumbnail(mediaFile, imageUrl, imageLoader);
-                }
+                return ;
             }
-        };
-        handler.postDelayed(r, 1);
+            // Insert the WPImageSpan in the content field
+            int selectionStart = mStart;
+            int selectionEnd = mEnd;
+
+            if (selectionStart > selectionEnd) {
+                int temp = selectionEnd;
+                selectionEnd = selectionStart;
+                selectionStart = temp;
+            }
+
+            imageSpan.setPosition(selectionStart, selectionEnd);
+
+            int line, column = 0;
+            if (mContentEditText.getLayout() != null) {
+                line = mContentEditText.getLayout().getLineForOffset(selectionStart);
+                column = selectionStart - mContentEditText.getLayout().getLineStart(line);
+            }
+
+            Editable s = mContentEditText.getText();
+            if (s == null) {
+                return;
+            }
+
+            WPImageSpan[] imageSpans = s.getSpans(selectionStart, selectionEnd, WPImageSpan.class);
+            if (imageSpans.length != 0) {
+                // insert a few line breaks if the cursor is already on an image
+                s.insert(selectionEnd, "\n\n");
+                selectionStart = selectionStart + 2;
+                selectionEnd = selectionEnd + 2;
+            } else if (column != 0) {
+                // insert one line break if the cursor is not at the first column
+                s.insert(selectionEnd, "\n");
+                selectionStart = selectionStart + 1;
+                selectionEnd = selectionEnd + 1;
+            }
+
+            s.insert(selectionStart, " ");
+            s.setSpan(imageSpan, selectionStart, selectionEnd + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            AlignmentSpan.Standard as = new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER);
+            s.setSpan(as, selectionStart, selectionEnd + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            s.insert(selectionEnd + 1, "\n\n");
+
+            // Fetch and replace the WPImageSpan if it's a remote media
+            if (mImageLoader != null && URLUtil.isNetworkUrl(mImageUrl)) {
+                loadWPImageSpanThumbnail(mMediaFile, mImageUrl, mImageLoader);
+            }
+        }
+    }
+
+    public void addMediaFile(final MediaFile mediaFile, final String imageUrl, final ImageLoader imageLoader,
+                             final int start, final int end) {
+        AddMediaFileTask addMediaFileTask = new AddMediaFileTask(mediaFile, imageUrl, imageLoader, start, end);
+        addMediaFileTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     @Override
@@ -1119,5 +1159,36 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
         AlignmentSpan.Standard as = new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER);
         editableText.setSpan(as, selectionStart, selectionEnd + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         editableText.insert(selectionEnd + 1, "\n\n");
+    }
+
+    @Override
+    public void setUrlForVideoPressId(String videoPressId, String url, String posterUrl) {
+
+    }
+
+    @Override
+    public boolean isUploadingMedia() {
+        return false;
+    }
+
+    @Override
+    public boolean hasFailedMediaUploads() {
+        return false;
+    }
+
+    @Override
+    public void removeAllFailedMediaUploads() {}
+
+    @Override
+    public void setTitlePlaceholder(CharSequence text) {
+    }
+
+    @Override
+    public void setContentPlaceholder(CharSequence text) {
+    }
+
+    @Override
+    public boolean isActionInProgress() {
+        return false;
     }
 }

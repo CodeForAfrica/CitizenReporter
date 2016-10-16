@@ -1,0 +1,313 @@
+package org.codeforafrica.citizenreporter.eNCA.ui.accounts.helpers;
+
+import org.wordpress.android.analytics.AnalyticsTracker;
+import org.wordpress.android.analytics.AnalyticsTracker.Stat;
+
+import org.xmlrpc.android.XMLRPCUtils;
+import org.xmlrpc.android.XMLRPCUtils.XMLRPCUtilsException;
+
+import android.os.AsyncTask;
+
+import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class FetchBlogListWPOrg extends FetchBlogListAbstract {
+    private String mSelfHostedUrl;
+    private String mHttpUsername;
+    private String mHttpPassword;
+
+    public FetchBlogListWPOrg(String username, String password, String selfHostedUrl) {
+        super(username, password);
+        mSelfHostedUrl = selfHostedUrl;
+    }
+
+    public void setHttpCredentials(String username, String password) {
+        mHttpUsername = username;
+        mHttpPassword = password;
+    }
+
+<<<<<<< HEAD:WordPress/src/main/java/org/codeforafrica/citizenreporter/eNCA/ui/accounts/helpers/FetchBlogListWPOrg.java
+    private void handleXmlRpcFault(XMLRPCFault xmlRpcFault) {
+        AppLog.e(T.NUX, "XMLRPCFault received from XMLRPC call wp.getUsersBlogs", xmlRpcFault);
+        switch (xmlRpcFault.getFaultCode()) {
+            case 403:
+                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.username_or_password_incorrect;
+                break;
+            case 404:
+                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.xmlrpc_error;
+                break;
+            case 425:
+                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.account_two_step_auth_enabled;
+                break;
+            default:
+                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.no_site_error;
+                break;
+        }
+    }
+
+=======
+>>>>>>> upstream/master:WordPress/src/main/java/org/wordpress/android/ui/accounts/helpers/FetchBlogListWPOrg.java
+    public void fetchBlogList(Callback callback) {
+        (new FetchBlogListTask(callback)).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+<<<<<<< HEAD:WordPress/src/main/java/org/codeforafrica/citizenreporter/eNCA/ui/accounts/helpers/FetchBlogListWPOrg.java
+    private String getRsdUrl(String baseUrl) throws SSLHandshakeException {
+        String rsdUrl;
+        rsdUrl = ApiHelper.getRSDMetaTagHrefRegEx(baseUrl);
+        if (rsdUrl == null) {
+            rsdUrl = ApiHelper.getRSDMetaTagHref(baseUrl);
+        }
+        return rsdUrl;
+    }
+
+    private boolean isHTTPAuthErrorMessage(Exception e) {
+        if (e != null && e.getMessage() != null && e.getMessage().contains("401")) {
+            mHttpAuthRequired = true;
+            return true;
+        }
+        return false;
+    }
+
+    private String getXmlrpcByUserEnteredPath(String baseUrl) {
+        String xmlRpcUrl;
+        if (!UrlUtils.isValidUrlAndHostNotNull(baseUrl)) {
+            AppLog.e(T.NUX, "invalid URL: " + baseUrl);
+            mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.invalid_url_message;
+            return null;
+        }
+        URI uri = URI.create(baseUrl);
+        XMLRPCClientInterface client = XMLRPCFactory.instantiate(uri, mHttpUsername, mHttpPassword);
+        try {
+            client.call("system.listMethods");
+            xmlRpcUrl = baseUrl;
+            return xmlRpcUrl;
+        } catch (XMLRPCException e) {
+            AppLog.i(T.NUX, "system.listMethods failed on: " + baseUrl);
+            if (isHTTPAuthErrorMessage(e)) {
+                return null;
+            }
+        } catch (SSLHandshakeException e) {
+            if (!UrlUtils.getDomainFromUrl(baseUrl).endsWith("wordpress.com")) {
+                mErroneousSslCertificate = true;
+            }
+            AppLog.w(T.NUX, "SSLHandshakeException failed. Erroneous SSL certificate detected.");
+            return null;
+        } catch (SSLPeerUnverifiedException e) {
+            if (!UrlUtils.getDomainFromUrl(baseUrl).endsWith("wordpress.com")) {
+                mErroneousSslCertificate = true;
+            }
+            AppLog.w(T.NUX, "SSLPeerUnverifiedException failed. Erroneous SSL certificate detected.");
+            return null;
+        } catch (IOException e) {
+            AppLog.i(T.NUX, "system.listMethods failed on: " + baseUrl);
+            if (isHTTPAuthErrorMessage(e)) {
+                return null;
+            }
+        } catch (XmlPullParserException e) {
+            AppLog.i(T.NUX, "system.listMethods failed on: " + baseUrl);
+            if (isHTTPAuthErrorMessage(e)) {
+                return null;
+            }
+        } catch (IllegalArgumentException e) {
+            // TODO: Hopefully a temporary log - remove it if we find a pattern of failing URLs
+            CrashlyticsUtils.setString(ExtraKey.ENTERED_URL, baseUrl);
+            CrashlyticsUtils.logException(e, ExceptionType.SPECIFIC, T.NUX);
+            mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.invalid_url_message;
+            return null;
+        }
+
+        // Guess the xmlrpc path
+        String guessURL = baseUrl;
+        if (guessURL.substring(guessURL.length() - 1, guessURL.length()).equals("/")) {
+            guessURL = guessURL.substring(0, guessURL.length() - 1);
+        }
+        guessURL += "/xmlrpc.php";
+        uri = URI.create(guessURL);
+        client = XMLRPCFactory.instantiate(uri, mHttpUsername, mHttpPassword);
+        try {
+            client.call("system.listMethods");
+            xmlRpcUrl = guessURL;
+            return xmlRpcUrl;
+        } catch (XMLRPCException e) {
+            AnalyticsTracker.track(Stat.LOGIN_FAILED_TO_GUESS_XMLRPC);
+            AppLog.e(T.NUX, "system.listMethods failed on: " + guessURL, e);
+        } catch (SSLHandshakeException e) {
+            if (!UrlUtils.getDomainFromUrl(baseUrl).endsWith("wordpress.com")) {
+                mErroneousSslCertificate = true;
+            }
+            AppLog.w(T.NUX, "SSLHandshakeException failed. Erroneous SSL certificate detected.");
+            return null;
+        } catch (SSLPeerUnverifiedException e) {
+            if (!UrlUtils.getDomainFromUrl(baseUrl).endsWith("wordpress.com")) {
+                mErroneousSslCertificate = true;
+            }
+            AppLog.w(T.NUX, "SSLPeerUnverifiedException failed. Erroneous SSL certificate detected.");
+            return null;
+        } catch (IOException e) {
+            AnalyticsTracker.track(Stat.LOGIN_FAILED_TO_GUESS_XMLRPC);
+            AppLog.e(T.NUX, "system.listMethods failed on: " + guessURL, e);
+        } catch (XmlPullParserException e) {
+            AnalyticsTracker.track(Stat.LOGIN_FAILED_TO_GUESS_XMLRPC);
+            AppLog.e(T.NUX, "system.listMethods failed on: " + guessURL, e);
+        }
+
+        return null;
+    }
+
+    // Attempts to retrieve the xmlrpc url for a self-hosted site, in this order:
+    // 1: Try to retrieve it by finding the ?rsd url in the site's header
+    // 2: Take whatever URL the user entered to see if that returns a correct response
+    // 3: Finally, just guess as to what the xmlrpc url should be
+    private String getSelfHostedXmlrpcUrl(String url) {
+        String xmlrpcUrl;
+
+        // Convert IDN names to punycode if necessary
+        url = UrlUtils.convertUrlToPunycodeIfNeeded(url);
+
+        // Add http to the beginning of the URL if needed
+        url = UrlUtils.addUrlSchemeIfNeeded(url, false);
+
+        if (!URLUtil.isValidUrl(url)) {
+            mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.invalid_url_message;
+            return null;
+        }
+
+        // Attempt to get the XMLRPC URL via RSD
+        String rsdUrl;
+        try {
+            rsdUrl = UrlUtils.addUrlSchemeIfNeeded(getRsdUrl(url), false);
+        } catch (SSLHandshakeException e) {
+            if (!UrlUtils.getDomainFromUrl(url).endsWith("wordpress.com")) {
+                mErroneousSslCertificate = true;
+            }
+            AppLog.w(T.NUX, "SSLHandshakeException failed. Erroneous SSL certificate detected.");
+            return null;
+        }
+
+        try {
+            if (rsdUrl != null) {
+                xmlrpcUrl = UrlUtils.addUrlSchemeIfNeeded(ApiHelper.getXMLRPCUrl(rsdUrl), false);
+                if (xmlrpcUrl == null) {
+                    xmlrpcUrl = UrlUtils.addUrlSchemeIfNeeded(rsdUrl.replace("?rsd", ""), false);
+                }
+            } else {
+                xmlrpcUrl = UrlUtils.addUrlSchemeIfNeeded(getXmlrpcByUserEnteredPath(url), false);
+            }
+        } catch (SSLHandshakeException e) {
+            if (!UrlUtils.getDomainFromUrl(url).endsWith("wordpress.com")) {
+                mErroneousSslCertificate = true;
+            }
+            AppLog.w(T.NUX, "SSLHandshakeException failed. Erroneous SSL certificate detected.");
+            return null;
+        }
+
+        return xmlrpcUrl;
+    }
+
+=======
+>>>>>>> upstream/master:WordPress/src/main/java/org/wordpress/android/ui/accounts/helpers/FetchBlogListWPOrg.java
+    public class FetchBlogListTask extends AsyncTask<Void, Void, List<Map<String, Object>>> {
+        private final Callback mCallback;
+        private boolean mHttpAuthRequired;
+        private boolean mErroneousSslCertificate;
+        private int mErrorMsgId;
+        private String mClientResponse = "";
+
+        public FetchBlogListTask(Callback callback) {
+            mCallback = callback;
+        }
+
+        private void trackInvalidInsertedURL(String url){
+            Map<String, Object> properties = new HashMap<>();
+            properties.put("user_inserted_url", url);
+            AnalyticsTracker.track(Stat.LOGIN_INSERTED_INVALID_URL, properties);
+        }
+
+        @Override
+        protected List<Map<String, Object>> doInBackground(Void... notUsed) {
+<<<<<<< HEAD:WordPress/src/main/java/org/codeforafrica/citizenreporter/eNCA/ui/accounts/helpers/FetchBlogListWPOrg.java
+            String xmlrpcUrl = null;
+            if (mSelfHostedUrl != null && mSelfHostedUrl.length() != 0) {
+                xmlrpcUrl = getSelfHostedXmlrpcUrl(mSelfHostedUrl);
+            }
+
+            if (xmlrpcUrl == null) {
+                if (!mHttpAuthRequired && mErrorMsgId == 0) {
+                    mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.no_site_error;
+                }
+                return null;
+            }
+
+            // Validate the URL found before calling the client. Prevent a crash that can occur
+            // during the setup of self-hosted sites.
+            URI xmlrpcUri;
+            xmlrpcUri = URI.create(xmlrpcUrl);
+            XMLRPCClientInterface client = XMLRPCFactory.instantiate(xmlrpcUri, mHttpUsername, mHttpPassword);
+            Object[] params = {mUsername, mPassword};
+            try {
+                Object[] userBlogs = (Object[]) client.call("wp.getUsersBlogs", params);
+                if (userBlogs == null) {
+                    // Could happen if the returned server response is truncated
+                    mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.xmlrpc_error;
+                    mClientResponse = client.getResponse();
+                    return null;
+                }
+                Arrays.sort(userBlogs, BlogUtils.BlogNameComparator);
+                List<Map<String, Object>> userBlogList = new ArrayList<Map<String, Object>>();
+                for (Object blog : userBlogs) {
+                    try {
+                        userBlogList.add((Map<String, Object>) blog);
+                    } catch (ClassCastException e) {
+                        AppLog.e(T.NUX, "invalid data received from XMLRPC call wp.getUsersBlogs");
+                    }
+                }
+                return userBlogList;
+            } catch (XmlPullParserException parserException) {
+                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.xmlrpc_error;
+                AppLog.e(T.NUX, "invalid data received from XMLRPC call wp.getUsersBlogs", parserException);
+            } catch (XMLRPCFault xmlRpcFault) {
+                handleXmlRpcFault(xmlRpcFault);
+            } catch (XMLRPCException xmlRpcException) {
+                AppLog.e(T.NUX, "XMLRPCException received from XMLRPC call wp.getUsersBlogs", xmlRpcException);
+                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.no_site_error;
+            } catch (SSLHandshakeException e) {
+                if (xmlrpcUri.getHost() != null && xmlrpcUri.getHost().endsWith("wordpress.com")) {
+                    mErroneousSslCertificate = true;
+                }
+                AppLog.w(T.NUX, "SSLHandshakeException failed. Erroneous SSL certificate detected.");
+            } catch (IOException e) {
+                AppLog.e(T.NUX, "Exception received from XMLRPC call wp.getUsersBlogs", e);
+                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.no_site_error;
+=======
+            try {
+                String xmlrpcUrl = XMLRPCUtils.verifyOrDiscoverXmlRpcUrl(mSelfHostedUrl, mHttpUsername, mHttpPassword);
+
+                // The XML-RPC address is now available. Call wp.getUsersBlogs and load the sites.
+                return XMLRPCUtils.getUserBlogsList(URI.create(xmlrpcUrl), mUsername, mPassword, mHttpUsername,
+                        mHttpPassword);
+            } catch (XMLRPCUtilsException hce) {
+                mErrorMsgId = hce.errorMsgId;
+                mHttpAuthRequired = (hce.kind == XMLRPCUtilsException.Kind.HTTP_AUTH_REQUIRED);
+                mErroneousSslCertificate = (hce.kind == XMLRPCUtilsException.Kind.ERRONEOUS_SSL_CERTIFICATE);
+                trackInvalidInsertedURL(hce.failedUrl);
+                return null;
+>>>>>>> upstream/master:WordPress/src/main/java/org/wordpress/android/ui/accounts/helpers/FetchBlogListWPOrg.java
+            }
+        }
+
+        protected void onPostExecute(List<Map<String, Object>> userBlogList) {
+            if (userBlogList == null) {
+                mCallback.onError(mErrorMsgId, false, mHttpAuthRequired, mErroneousSslCertificate, mClientResponse);
+            } else {
+                mCallback.onSuccess(userBlogList);
+            }
+        }
+
+        protected void onCancelled() {
+            mCallback.onError(mErrorMsgId, false, mHttpAuthRequired, mErroneousSslCertificate, mClientResponse);
+        }
+    }
+}

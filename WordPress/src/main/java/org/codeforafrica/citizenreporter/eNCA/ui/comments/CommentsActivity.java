@@ -6,8 +6,10 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.v7.app.ActionBarActivity;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
@@ -26,13 +28,13 @@ import org.codeforafrica.citizenreporter.eNCA.ui.reader.ReaderPostDetailFragment
 import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.ToastUtils;
 
-import javax.annotation.Nonnull;
+import de.greenrobot.event.EventBus;
 
-public class CommentsActivity extends ActionBarActivity
+public class CommentsActivity extends AppCompatActivity
         implements OnCommentSelectedListener,
-                   NotificationFragment.OnPostClickListener,
-                   CommentActions.OnCommentActionListener,
-                   CommentActions.OnCommentChangeListener {
+        NotificationFragment.OnPostClickListener,
+        CommentActions.OnCommentActionListener,
+        CommentActions.OnCommentChangeListener {
     private static final String KEY_SELECTED_COMMENT_ID = "selected_comment_id";
     private static final String KEY_SELECTED_POST_ID = "selected_post_id";
     static final String KEY_AUTO_REFRESHED = "has_auto_refreshed";
@@ -41,41 +43,47 @@ public class CommentsActivity extends ActionBarActivity
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(null);
+        super.onCreate(savedInstanceState);
 
         setContentView(R.layout.comment_activity);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(getString(R.string.feedback));
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setElevation(0);
+            actionBar.setTitle(R.string.comments);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
-        restoreSavedInstance(savedInstanceState);
-    }
+        if (getIntent() != null && getIntent().hasExtra(SAVED_COMMENTS_STATUS_TYPE)) {
+            mCurrentCommentStatusType = (CommentStatus) getIntent().getSerializableExtra(SAVED_COMMENTS_STATUS_TYPE);
+        } else {
+            // Read the value from app preferences here. Default to 0 - All
+            mCurrentCommentStatusType = AppPrefs.getCommentsStatusFilter();
+        }
 
-    private void restoreSavedInstance(Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
+        if (savedInstanceState == null) {
+            CommentsListFragment commentsListFragment = new CommentsListFragment();
+            // initialize comment status filter first time
+            commentsListFragment.setCommentStatusFilter(mCurrentCommentStatusType);
+            getFragmentManager().beginTransaction()
+                    .add(R.id.layout_fragment_container, commentsListFragment, getString(R.string
+                            .fragment_tag_comment_list))
+                    .commitAllowingStateLoss();
+        } else {
             getIntent().putExtra(KEY_AUTO_REFRESHED, savedInstanceState.getBoolean(KEY_AUTO_REFRESHED));
             getIntent().putExtra(KEY_EMPTY_VIEW_MESSAGE, savedInstanceState.getString(KEY_EMPTY_VIEW_MESSAGE));
 
-            // restore the selected comment
-            long commentId = savedInstanceState.getLong(KEY_SELECTED_COMMENT_ID);
-            if (commentId != 0) {
-                onCommentSelected(commentId);
-            }
-            // restore the post detail fragment if one was selected
-            BlogPairId selectedPostId = (BlogPairId) savedInstanceState.get(KEY_SELECTED_POST_ID);
-            if (selectedPostId != null) {
-                showReaderFragment(selectedPostId.getRemoteBlogId(), selectedPostId.getId());
-            }
+            mSelectedCommentId = savedInstanceState.getLong(KEY_SELECTED_COMMENT_ID);
         }
     }
 
     @Override
-    public void finish() {
-        super.finish();
-        ActivityLauncher.slideOutToRight(this);
+    public void onResume() {
+        super.onResume();
+        ActivityId.trackLastActivity(ActivityId.COMMENTS);
     }
 
     @Override
@@ -128,8 +136,8 @@ public class CommentsActivity extends ActionBarActivity
         FragmentTransaction ft = fm.beginTransaction();
         String tagForFragment = getString(R.string.fragment_tag_reader_post_detail);
         ft.add(R.id.layout_fragment_container, fragment, tagForFragment)
-          .addToBackStack(tagForFragment)
-          .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                .addToBackStack(tagForFragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         if (hasDetailFragment())
             ft.hide(getDetailFragment());
         ft.commit();
@@ -142,9 +150,8 @@ public class CommentsActivity extends ActionBarActivity
     public void onCommentSelected(long commentId) {
         mSelectedCommentId = commentId;
         FragmentManager fm = getFragmentManager();
-        if (fm == null) {
-            return;
-        }
+        if (fm == null) return;
+
         fm.executePendingTransactions();
         CommentsListFragment listFragment = getListFragment();
 
@@ -153,7 +160,7 @@ public class CommentsActivity extends ActionBarActivity
         CommentDetailFragment detailFragment = CommentDetailFragment.newInstance(WordPress.getCurrentLocalTableBlogId(),
                 commentId);
         ft.add(R.id.layout_fragment_container, detailFragment, tagForFragment).addToBackStack(tagForFragment)
-          .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         if (listFragment != null) {
             ft.hide(listFragment);
         }
@@ -226,8 +233,23 @@ public class CommentsActivity extends ActionBarActivity
 
         if (newStatus == CommentStatus.APPROVED || newStatus == CommentStatus.UNAPPROVED) {
             getListFragment().setCommentIsModerating(comment.commentID, true);
+            getListFragment().updateEmptyView();
             CommentActions.moderateComment(accountId, comment, newStatus,
                     new CommentActions.CommentActionListener() {
+                        @Override
+                        public void onActionResult(CommentActionResult result) {
+                            EventBus.getDefault().post(new CommentEvents.CommentModerationFinishedEvent
+                                    (result.isSuccess(), true, comment.commentID, newStatus));
+                        }
+                    });
+        } else if (newStatus == CommentStatus.SPAM || newStatus == CommentStatus.TRASH || newStatus == CommentStatus.DELETE) {
+            mTrashedComments.add(comment);
+            getListFragment().removeComment(comment);
+            getListFragment().setCommentIsModerating(comment.commentID, true);
+            getListFragment().updateEmptyView();
+
+            String message = (newStatus == CommentStatus.TRASH ? getString(R.string.comment_trashed) : newStatus == CommentStatus.SPAM ? getString(R.string.comment_spammed) : getString(R.string.comment_deleted_permanently));
+            View.OnClickListener undoListener = new View.OnClickListener() {
                 @Override
                 public void onActionResult(boolean succeeded) {
                     if (isFinishing() || !hasListFragment()) {

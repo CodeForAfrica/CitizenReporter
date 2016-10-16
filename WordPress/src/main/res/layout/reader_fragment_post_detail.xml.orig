@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/layout_post_detail_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:descendantFocusability="blocksDescendants">
+
+<<<<<<< HEAD
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPScrollView
+            android:id="@+id/scroll_view_reader"
+=======
+        <org.wordpress.android.util.widgets.CustomSwipeRefreshLayout
+            android:id="@+id/swipe_to_refresh"
+>>>>>>> upstream/master
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <org.wordpress.android.widgets.WPScrollView
+                android:id="@+id/scroll_view_reader"
+                android:layout_width="match_parent"
+<<<<<<< HEAD
+                android:layout_height="wrap_content" />
+            
+        </org.codeforafrica.citizenreporter.eNCA.widgets.WPScrollView>
+=======
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:scrollbarStyle="insideOverlay">
+>>>>>>> upstream/master
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/margin_large">
+
+                    <include
+                        layout="@layout/reader_include_post_detail_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/layout_post_detail_content"
+                        android:layout_alignRight="@+id/layout_post_detail_content"
+                        android:layout_marginBottom="@dimen/margin_large"
+                        android:layout_marginTop="@dimen/margin_large" />
+
+                    <include
+                        layout="@layout/reader_include_post_detail_content"
+                        android:layout_below="@+id/layout_post_detail_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="@dimen/reader_detail_margin"
+                        android:layout_marginRight="@dimen/reader_detail_margin" />
+
+<<<<<<< HEAD
+                <org.codeforafrica.citizenreporter.eNCA.ui.reader.views.ReaderIconCountView
+                    android:id="@+id/count_comments"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    wp:readerIcon="comment" />
+
+                <org.codeforafrica.citizenreporter.eNCA.ui.reader.views.ReaderIconCountView
+                    android:id="@+id/count_likes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    wp:readerIcon="like" />
+            </LinearLayout>
+=======
+                    <org.wordpress.android.widgets.WPTextView
+                        android:id="@+id/text_related_posts_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layout_post_detail_content"
+                        android:layout_alignLeft="@+id/layout_post_detail_content"
+                        android:layout_alignRight="@+id/layout_post_detail_content"
+                        android:layout_marginBottom="@dimen/reader_related_post_margin"
+                        android:layout_marginTop="@dimen/reader_related_post_margin"
+                        android:text="@string/reader_label_related_posts"
+                        android:textAllCaps="true"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/text_sz_large"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <LinearLayout
+                        android:id="@+id/container_related_posts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text_related_posts_label"
+                        android:layout_alignLeft="@+id/layout_post_detail_content"
+                        android:layout_alignRight="@+id/layout_post_detail_content"
+                        android:background="@drawable/reader_related_posts_background"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <View
+                        android:id="@+id/footer_spacer"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/toolbar_height"
+                        android:layout_below="@id/container_related_posts" />
+
+                </RelativeLayout>
+
+            </org.wordpress.android.widgets.WPScrollView>
+>>>>>>> upstream/master
+
+        </org.wordpress.android.util.widgets.CustomSwipeRefreshLayout>
+
+        <include
+            android:id="@+id/layout_post_detail_footer"
+            layout="@layout/reader_include_post_detail_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+
+        <ProgressBar
+            android:id="@+id/progress_loading"
+            style="@style/ReaderProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </RelativeLayout>
+
+    <!-- error message when requesting post fails -->
+    <org.wordpress.android.widgets.WPTextView
+        android:id="@+id/text_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/reader_detail_margin"
+        android:layout_marginRight="@dimen/reader_detail_margin"
+        android:drawablePadding="@dimen/margin_small"
+        android:drawableTop="@drawable/noticon_warning_big_grey"
+        android:gravity="center"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/text_sz_extra_large"
+        android:visibility="gone"
+        tools:text="Error message"
+        tools:visibility="visible" />
+
+    <!-- container for webView custom view - this is where fullscreen video will appear -->
+    <FrameLayout
+        android:id="@+id/layout_custom_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone" />
+
+</FrameLayout>

@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
+    android:background="@color/color_primary"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPLinearLayoutSizeBound
+            app:maxWidth="@dimen/nux_width"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:baselineAligned="true"
+            android:layout_gravity="center_horizontal|bottom">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/info_button"
+                app:srcCompat="@drawable/dashicon_info"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/help"
+                android:tint="@color/blue_dark"/>
+        </org.codeforafrica.citizenreporter.eNCA.widgets.WPLinearLayoutSizeBound>
+
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPLinearLayoutSizeBound
+            app:maxWidth="@dimen/nux_width"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/nux_fragment_icon"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/app_icon"/>
+
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                android:id="@+id/create_account_label"
+                android:text="@string/create_account"
+                style="@style/WordPress.NUXTitle"
+                android:fontFamily="sans-serif-light"
+                app:fixWidowWords="true"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_margin="5dp">
+
+<<<<<<< HEAD
+                <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
+=======
+                <org.wordpress.android.widgets.WPEditText
+>>>>>>> upstream/master
+                    android:id="@+id/email_address"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/WordPress.NUXEditText"
+                    android:hint="@string/email_hint"
+                    android:inputType="textEmailAddress"
+                    app:persistenceEnabled="true"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentStart="false"
+                    app:srcCompat="@drawable/dashicon_email"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:tint="@color/grey_darken_10"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:id="@+id/relativeLayout"
+                android:layout_margin="5dp">
+
+<<<<<<< HEAD
+                <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
+=======
+                <org.wordpress.android.widgets.WPEditText
+>>>>>>> upstream/master
+                    android:id="@+id/username"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/WordPress.NUXEditText"
+                    android:inputType="textUri"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:hint="@string/username"
+                    android:maxLength="@integer/max_length_username"
+                    app:persistenceEnabled="true"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView2"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentStart="false"
+                    app:srcCompat="@drawable/dashicon_admin_users"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:tint="@color/grey_darken_10"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:id="@+id/relativeLayout2"
+                android:layout_margin="5dp">
+
+<<<<<<< HEAD
+                <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
+=======
+                <org.wordpress.android.widgets.WPEditText
+>>>>>>> upstream/master
+                    android:id="@+id/password"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    style="@style/WordPress.NUXEditText"
+                    android:hint="@string/password"
+                    android:maxLength="@integer/max_length_password"
+                    android:layout_marginRight="38dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView3"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentStart="false"
+                    app:srcCompat="@drawable/dashicon_lock"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:tint="@color/grey_darken_10"/>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/password_visibility"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentStart="false"
+                    app:srcCompat="@drawable/dashicon_eye_closed"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_alignParentRight="true"
+                    android:tint="@color/nux_eye_icon_color_closed"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:id="@+id/relativeLayout22"
+                android:layout_margin="5dp">
+
+                <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
+                    android:id="@+id/phone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/WordPress.NUXEditText"
+                    android:inputType="textUri"
+                    android:hint="Phone Number"
+                    app:persistenceEnabled="true"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView22"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentStart="false"
+                    android:src="@android:drawable/ic_menu_call"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:tint="@color/grey_darken_10"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:id="@+id/relativeLayout23"
+                android:layout_margin="5dp">
+
+                <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
+                    android:id="@+id/location"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/WordPress.NUXEditText"
+                    android:inputType="textUri"
+                    android:hint="@string/location_prompt"
+                    app:persistenceEnabled="true"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView23"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentStart="false"
+                    android:src="@android:drawable/ic_dialog_map"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:tint="@color/grey_darken_10"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone">
+
+<<<<<<< HEAD
+                <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
+=======
+                <org.wordpress.android.widgets.WPEditText
+>>>>>>> upstream/master
+                    android:id="@+id/site_url"
+                    style="@style/WordPress.NUXEditText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/add_account_blog_url"
+                    android:inputType="textUri"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:clickable="true"
+                    android:paddingLeft="0dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="0dp"
+                    android:paddingBottom="12dp"
+                    android:layout_toLeftOf="@+id/textView"
+                    app:persistenceEnabled="true"/>
+
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dot_wordpress_dot_com_url"
+                    android:id="@+id/textView"
+                    android:layout_alignParentEnd="false"
+                    android:layout_marginTop="4dp"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentTop="false"
+                    android:paddingRight="8dp"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="4dp"
+                    android:textColor="@color/grey_darken_10"
+                    android:textSize="@dimen/nux_edit_field_font_size"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView4"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentStart="false"
+                    app:srcCompat="@drawable/dashicon_admin_site"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:tint="@color/grey_darken_10"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+<<<<<<< HEAD
+                android:layout_height="@dimen/nux_button_height"
+                android:layout_margin="2dp">
+=======
+                android:layout_height="@dimen/nux_main_button_height"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+>>>>>>> upstream/master
+
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    style="@style/WordPress.NUXPrimaryButton"
+                    android:id="@+id/signup_button"
+                    android:layout_width="match_parent"
+                    android:text="@string/nux_welcome_create_account"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:enabled="false"/>
+
+                <RelativeLayout
+                    android:id="@+id/nux_sign_in_progress_bar"
+                    style="@style/WordPress.NUXPrimaryButton"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:enabled="false">
+
+                    <ProgressBar
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+<<<<<<< HEAD
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                style="@style/WordPress.NUXWhiteButtonNoBg"
+=======
+            <org.wordpress.android.widgets.WPTextView
+                style="@style/WordPress.NUXFlatButton"
+>>>>>>> upstream/master
+                android:id="@+id/nux_sign_in_progress_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textColor="@color/blue_light"
+                android:gravity="center|top"/>
+
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                android:id="@+id/l_agree_terms_of_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/agree_terms_of_service"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                style="@style/WordPress.NUXGreyButtonNoBg"
+                app:fixWidowWords="true"/>
+
+        </org.codeforafrica.citizenreporter.eNCA.widgets.WPLinearLayoutSizeBound>
+    </LinearLayout>
+</ScrollView>

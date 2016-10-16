@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/media_grid_frame_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
     <FrameLayout
         android:id="@+id/drag_handle"
@@ -13,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:src="@drawable/gallery_tablet_move_file" />
+            app:srcCompat="@drawable/gallery_tablet_move_file" />
     </FrameLayout>
 
     <com.android.volley.toolbox.NetworkImageView
@@ -42,7 +43,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textSize="12sp"
+            android:textSize="@dimen/text_sz_small"
             android:textStyle="bold" />
 
         <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
@@ -50,14 +51,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_sz_small" />
 
         <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/media_grid_item_filename"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_sz_small" />
 
         <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/media_grid_item_filetype"
@@ -65,14 +66,14 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_sz_small" />
 
         <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/media_grid_item_dimension"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_sz_small" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -3,13 +3,13 @@ package org.codeforafrica.citizenreporter.eNCA.ui.stats.models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.wordpress.android.ui.stats.StatsConstants;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class CommentsModel implements Serializable {
+public class CommentsModel extends BaseStatsModel {
     private String mDate;
     private String mBlogID;
     private int mMonthlyComments;
@@ -40,7 +40,7 @@ public class CommentsModel implements Serializable {
                 String name = currentPostJSON.getString("name");
                 int totals = currentPostJSON.getInt("comments");
                 String link = currentPostJSON.getString("link");
-                PostModel currentPost = new PostModel(blogID, mDate, itemID, name, totals, link, "post");
+                PostModel currentPost = new PostModel(blogID, mDate, itemID, name, totals, link, StatsConstants.ITEM_TYPE_POST);
                 mPosts.add(currentPost);
             }
         }

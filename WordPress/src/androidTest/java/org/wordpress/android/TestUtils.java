@@ -24,6 +24,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Map;
+
+import de.greenrobot.event.EventBus;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -66,6 +69,19 @@ public class TestUtils {
         return null;
     }
 
+    public static void resetEventBus() {
+        Field dbField;
+        try {
+            dbField = EventBus.class.getDeclaredField("defaultInstance");
+            dbField.setAccessible(true);
+            dbField.set(EventBus.class, null);
+        } catch (NoSuchFieldException e) {
+            assertTrue(e.toString(), false);
+        } catch (IllegalAccessException e) {
+            assertTrue(e.toString(), false);
+        }
+    }
+
     public static void clearDefaultSharedPreferences(Context targetContext) {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(targetContext);
         Editor editor = settings.edit();
@@ -85,7 +101,7 @@ public class TestUtils {
             } catch (Exception e) {
                 // noop
             }
-       }
+        }
         TestUtils.clearDefaultSharedPreferences(context);
         TestUtils.dropDB(context);
     }
@@ -120,7 +136,7 @@ public class TestUtils {
 
     public static Date parseStringToDate(String value) {
         // try do parseit as a Date
-        Date newValue = DateTimeUtils.iso8601ToJavaDate(value);
+        Date newValue = DateTimeUtils.dateFromIso8601(value);
         if (newValue != null) {
             return newValue;
         }
@@ -133,7 +149,7 @@ public class TestUtils {
 
     public static Object castIt(Object value) {
         if (value instanceof HashMap) {
-            return injectDateInHashMap((HashMap<String, Object>) value);
+            return injectDateInMap((Map<String, Object>) value);
         } else if (value instanceof String) {
             Date newValue = parseStringToDate((String) value);
             if (newValue != null) {
@@ -159,8 +175,8 @@ public class TestUtils {
         return res.toArray();
     }
 
-    public static HashMap<String, Object> injectDateInHashMap(HashMap<String, Object> hashMap) {
-        HashMap<String, Object> res = new HashMap<String, Object>();
+    public static Map<String, Object> injectDateInMap(Map<String, Object> hashMap) {
+        Map<String, Object> res = new HashMap<String, Object>();
         for (String key : hashMap.keySet()) {
             Object value = hashMap.get(key);
             res.put(key, castIt(value));

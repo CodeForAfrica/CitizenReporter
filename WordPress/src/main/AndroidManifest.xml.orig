@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.codeforafrica.citizenreporter.eNCA"
+    android:installLocation="auto" >
+=======
+<manifest package="org.wordpress.android"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:installLocation="auto">
+>>>>>>> upstream/master
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true" />
+
+    <!-- Normal permissions, access automatically granted to app -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
+
+    <!-- Dangerous permissions, access must be requested at runtime -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- GCM all build types configuration -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+<<<<<<< HEAD
+    <permission android:name="org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE" />
+
+    <!--micode sound things -->
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+=======
+    <!-- self-defined permission prevents other apps to hijack PNs -->
+    <permission
+        android:name="${applicationId}.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
+>>>>>>> upstream/master
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.network"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.screen.portrait"
+        android:required="false" />
+
+    <application
+<<<<<<< HEAD
+        android:name="org.codeforafrica.citizenreporter.eNCA.WordPress"
+        android:allowBackup="false"
+=======
+        android:name=".WordPress"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_scheme"
+>>>>>>> upstream/master
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/app_icon"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/WordPress"
+        tools:replace="allowBackup, icon">
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.WPLaunchActivity"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Main tab activity -->
+<<<<<<< HEAD
+=======
+        <activity
+            android:name=".ui.main.WPMainActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+>>>>>>> upstream/master
+
+        <!-- Account activities -->
+        <activity
+        android:name="org.codeforafrica.citizenreporter.eNCA.ui.accounts.RegisterActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:windowSoftInputMode="stateAlwaysHidden"
+        android:theme="@style/SignInTheme" />
+        <activity
+        android:name="org.codeforafrica.citizenreporter.eNCA.ui.accounts.EditProfileActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:windowSoftInputMode="stateAlwaysHidden"
+        android:theme="@style/Calypso.NoActionBar" />
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.accounts.SignInActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+<<<<<<< HEAD
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/SignInTheme" />
+        <activity android:name="org.codeforafrica.citizenreporter.eNCA.ui.accounts.NewAccountActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+=======
+>>>>>>> upstream/master
+            android:theme="@style/SignInTheme"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="signin"
+                    android:scheme="wordpress" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.accounts.NewBlogActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/SignInTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+<<<<<<< HEAD
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.accounts.HelpActivity"
+            android:theme="@style/CalypsoTheme"
+            android:label=""/> <!-- empty title -->
+
+        <!-- Preferences activities -->
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.prefs.AboutActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.prefs.BlogPreferencesActivity"
+            android:theme="@style/CalypsoTheme"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.prefs.LicensesActivity"
+            android:theme="@style/Calypso.NoActionBar"/>
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.prefs.SettingsActivity"
+            android:configChanges="locale|orientation"
+            android:theme="@style/CalypsoTheme"/>
+=======
+            android:name=".ui.accounts.HelpActivity"
+            android:label=""
+            android:theme="@style/CalypsoTheme.NoActionBarShadow" />
+        <!-- empty title -->
+
+        <!-- Preferences activities -->
+        <activity
+            android:name=".ui.prefs.AboutActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".ui.prefs.BlogPreferencesActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/settings"
+            android:theme="@style/CalypsoTheme" />
+        <activity
+            android:name=".ui.prefs.LicensesActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+        <activity
+            android:name=".ui.prefs.AccountSettingsActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/account_settings"
+            android:theme="@style/CalypsoTheme" />
+        <activity
+            android:name=".ui.prefs.AppSettingsActivity"
+            android:configChanges="locale|orientation|screenSize"
+            android:label="@string/me_btn_app_settings"
+            android:theme="@style/CalypsoTheme" />
+        <activity
+            android:name=".ui.prefs.notifications.NotificationsSettingsActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/CalypsoTheme" />
+>>>>>>> upstream/master
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.networking.SSLCertsViewActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+
+        <!-- Comments activities -->
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.comments.CommentsActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.comments.CommentDetailActivity"
+            android:theme="@style/CalypsoTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+<<<<<<< HEAD
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.comments.EditCommentActivity"
+            android:theme="@style/CalypsoTheme"/>
+=======
+            android:name=".ui.comments.EditCommentActivity"
+            android:theme="@style/CalypsoTheme" />
+>>>>>>> upstream/master
+
+        <!-- Posts activities -->
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.posts.AddCategoryActivity"
+            android:label="@string/add_new_category"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+        <activity
+            android:name="org.wordpress.android.editor.legacy.EditLinkActivity"
+            android:label="@string/create_a_link"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.posts.EditPostActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+<<<<<<< HEAD
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:theme="@style/Calypso.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.codeforafrica.citizenreporter.eNCA.ui.posts.PostsActivity" />
+=======
+            android:theme="@style/CalypsoTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.posts.PostsListActivity" />
+
+>>>>>>> upstream/master
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+<<<<<<< HEAD
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.storyboard.StoryBoardActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:theme="@style/Calypso.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.codeforafrica.citizenreporter.eNCA.ui.main.RipotiMainActivity" />
+        </activity>
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.posts.PostsActivity"
+            android:theme="@style/Calypso.NoActionBar" >
+=======
+        <!-- Workaround for old launcher icon pointing to .ui.posts.PostsActivity -->
+        <activity-alias
+            android:name=".ui.posts.PostsActivity"
+            android:enabled="true"
+            android:targetActivity=".ui.WPLaunchActivity">
+>>>>>>> upstream/master
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity
+            android:name=".ui.posts.PostsListActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+        <activity
+<<<<<<< HEAD
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.posts.StoryBoard"
+            android:theme="@style/Calypso.NoActionBar"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.posts.LessonsActivity"
+            android:theme="@style/Calypso.NoActionBar" >
+        </activity>
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.chat.ChatActivity"
+            android:theme="@style/Calypso.NoActionBar" >
+        </activity>
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.wallet.PaymentsListActivity"
+            android:theme="@style/Calypso.NoActionBar" >
+        </activity>
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.wallet.Stats"
+            android:theme="@style/Calypso.NoActionBar" >
+        </activity>
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.overlaycamera.OverlayCameraActivity"
+            android:theme="@style/Calypso.NoActionBar"
+            android:screenOrientation="landscape"
+            >
+        </activity>
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.main.RipotiMainActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.main.UserMenuActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.posts.PagesActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.posts.SelectCategoriesActivity"
+            android:theme="@style/CalypsoTheme"/>
+
+        <!-- Stats Activities -->
+        <activity android:name="org.codeforafrica.citizenreporter.eNCA.ui.stats.StatsActivity"
+                  android:theme="@style/Calypso.NoActionBar"/>
+
+        <activity android:name="org.codeforafrica.citizenreporter.eNCA.ui.stats.StatsViewAllActivity"
+                  android:theme="@style/CalypsoTheme"/>
+
+        <activity android:name="org.codeforafrica.citizenreporter.eNCA.ui.stats.StatsSinglePostDetailsActivity"
+            android:theme="@style/CalypsoTheme"/>
+
+        <activity android:name="org.codeforafrica.citizenreporter.eNCA.ui.WPWebViewActivity"
+            android:theme="@style/Calypso.NoActionBar"/>
+=======
+            android:name=".ui.posts.PostPreviewActivity"
+            android:label="@string/preview_post"
+            android:theme="@style/Calypso.NoActionBar" />
+        <activity
+            android:name=".ui.posts.SelectCategoriesActivity"
+            android:theme="@style/CalypsoTheme" />
+
+        <!-- plans -->
+        <activity android:name=".ui.plans.PlansActivity"
+                  android:theme="@style/Calypso.NoActionBar"/>
+        <activity android:name=".ui.plans.PlanPostPurchaseActivity"
+                  android:theme="@style/Calypso.NoActionBar"/>
+
+        <!-- Stats Activities -->
+        <activity
+            android:name=".ui.stats.StatsActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+        <activity
+            android:name=".ui.stats.StatsViewAllActivity"
+            android:theme="@style/CalypsoTheme" />
+        <activity
+            android:name=".ui.stats.StatsSingleItemDetailsActivity"
+            android:theme="@style/CalypsoTheme" />
+        <activity
+            android:name=".ui.stats.StatsWidgetConfigureActivity"
+            android:label="@string/site_picker_title"
+            android:theme="@style/CalypsoTheme">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.WPWebViewActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+>>>>>>> upstream/master
+
+        <!-- Media Activities -->
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.media.MediaPickerActivity"
+            android:theme="@style/CalypsoTheme"
+            android:windowSoftInputMode="stateHidden" />
+<<<<<<< HEAD
+
+        <activity android:name="org.codeforafrica.citizenreporter.eNCA.ui.media.MediaBrowserActivity"
+                  android:theme="@style/Calypso.NoActionBar" >
+        </activity>
+
+        <activity android:name="org.codeforafrica.citizenreporter.eNCA.ui.media.MediaGalleryActivity">
+        </activity>
+
+        <activity android:name="org.codeforafrica.citizenreporter.eNCA.ui.media.MediaGalleryPickerActivity">
+        </activity>
+
+        <!-- Theme Activities -->
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.themes.ThemeBrowserActivity"
+            android:theme="@style/Calypso.NoActionBar" >
+=======
+        <activity
+            android:name=".ui.media.MediaBrowserActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+        <activity android:name=".ui.media.MediaGalleryActivity" />
+        <activity android:name=".ui.media.MediaGalleryPickerActivity" />
+
+        <!-- Theme Activities -->
+        <activity
+            android:name=".ui.themes.ThemeBrowserActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+        <activity
+            android:name=".ui.themes.ThemeWebActivity"
+            android:label="@string/selected_theme"
+            android:parentActivityName=".ui.themes.ThemeBrowserActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.themes.ThemeBrowserActivity" />
+>>>>>>> upstream/master
+        </activity>
+
+        <!-- Deep Linking Activity -->
+        <activity
+<<<<<<< HEAD
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.DeepLinkingIntentReceiverActivity"
+            android:theme="@style/Calypso.NoActionBar" >
+=======
+            android:name=".ui.DeepLinkingIntentReceiverActivity"
+            android:theme="@style/Calypso.NoActionBar">
+>>>>>>> upstream/master
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="viewpost"
+                    android:scheme="wordpress" />
+            </intent-filter>
+        </activity>
+
+        <!-- Reader Activities -->
+        <activity
+<<<<<<< HEAD
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.reader.ReaderPostListActivity"
+            android:theme="@style/Calypso.NoActionBar"
+            android:label="@string/reader" />
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.reader.ReaderPostPagerActivity"
+            android:theme="@style/Calypso.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.reader.ReaderCommentListActivity"
+            android:theme="@style/Calypso.NoActionBar"
+=======
+            android:name=".ui.reader.ReaderPostListActivity"
+            android:label="@string/reader"
+            android:theme="@style/Calypso.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.reader.ReaderPostPagerActivity"
+            android:label="@string/reader_title_post_detail"
+            android:theme="@style/Calypso.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.reader.ReaderCommentListActivity"
+>>>>>>> upstream/master
+            android:label="@string/reader_title_comments"
+            android:theme="@style/Calypso.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+<<<<<<< HEAD
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.AppLogViewerActivity"
+            android:theme="@style/CalypsoTheme"
+            android:label="@string/reader_title_applog" />
+=======
+            android:name=".ui.AppLogViewerActivity"
+            android:label="@string/reader_title_applog"
+            android:theme="@style/CalypsoTheme" />
+>>>>>>> upstream/master
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.reader.ReaderUserListActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.reader.ReaderSubsActivity"
+            android:label="@string/reader_title_subs"
+            android:theme="@style/Calypso.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+<<<<<<< HEAD
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.reader.ReaderReblogActivity"
+            android:theme="@style/Calypso.NoActionBar"
+            android:label="@string/reader_title_reblog"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.reader.ReaderPhotoViewerActivity"
+=======
+            android:name=".ui.reader.ReaderPhotoViewerActivity"
+>>>>>>> upstream/master
+            android:theme="@style/ReaderPhotoViewerTheme" />
+
+        <!-- Other activities -->
+
+<<<<<<< HEAD
+        <activity android:name="org.codeforafrica.citizenreporter.eNCA.ui.ShareIntentReceiverActivity" android:theme="@style/Calypso.FloatingActivity">
+=======
+        <activity
+            android:name=".ui.ShareIntentReceiverActivity"
+            android:theme="@style/Calypso.FloatingActivity">
+>>>>>>> upstream/master
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="image/*" />
+                <data android:mimeType="video/*" />
+            </intent-filter>
+        </activity>
+
+        <activity
+<<<<<<< HEAD
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.AddQuickPressShortcutActivity"
+            android:label="QuickPress" >
+=======
+            android:name=".ui.AddQuickPressShortcutActivity"
+            android:label="WordPress QuickPress">
+>>>>>>> upstream/master
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+<<<<<<< HEAD
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.ViewSiteActivity"
+            android:theme="@style/Calypso.NoActionBar" />
+
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.main.SitePickerActivity"
+            android:theme="@style/CalypsoTheme"
+            android:label="@string/site_picker_title" />
+=======
+
+        <activity
+            android:name=".ui.main.SitePickerActivity"
+            android:label="@string/site_picker_title"
+            android:theme="@style/CalypsoTheme" />
+>>>>>>> upstream/master
+
+        <!-- Notifications activities -->
+        <activity
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.notifications.NotificationsDetailActivity"
+            android:theme="@style/CalypsoTheme" />
+
+        <!-- Passcode lock activities -->
+        <activity
+            android:name="org.wordpress.passcodelock.PasscodeUnlockActivity"
+            android:theme="@style/CalypsoTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="org.wordpress.passcodelock.PasscodeManagePasswordActivity"
+            android:theme="@style/CalypsoTheme"
+            android:windowSoftInputMode="stateHidden" />
+
+        <!--People Management-->
+        <activity
+            android:name=".ui.people.PeopleManagementActivity"
+            android:label="@string/people"
+            android:theme="@style/Calypso.NoActionBar"/>
+
+        <!-- Me activities -->
+        <activity
+            android:name=".ui.prefs.MyProfileActivity"
+            android:label="@string/my_profile"
+            android:theme="@style/CalypsoTheme" />
+
+        <activity android:name=".ui.VisualEditorOptionsReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="editor"
+                    android:scheme="wordpress" />
+            </intent-filter>
+        </activity>
+
+<<<<<<< HEAD
+
+
+    <activity
+            android:configChanges="keyboardHidden"
+            android:launchMode="singleTop"
+            android:name="net.micode.soundrecorder.SoundRecorder"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter >
+                <action android:name="android.intent.action.GET_CONTENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.OPENABLE" />
+
+                <data android:mimeType="audio/amr" />
+                <data android:mimeType="audio/3gpp" />
+            </intent-filter>
+            <intent-filter >
+                <action android:name="android.provider.MediaStore.RECORD_SOUND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:label="@string/preferences_title"
+            android:launchMode="singleTop"
+            android:name="net.micode.soundrecorder.SoundRecorderPreferenceActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+
+        <service
+            android:exported="false"
+            android:name="net.micode.soundrecorder.RecorderService" >
+        </service>
+		<!-- Services -->
+        <service
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.posts.PostUploadService"
+            android:label="Post Upload Service" >
+        </service>
+=======
+        <!-- Lib activities-->
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+>>>>>>> upstream/master
+
+        <!-- Services -->
+        <service
+            android:name=".ui.posts.services.PostUploadService"
+            android:label="Post Upload Service" />
+        <service
+            android:name=".ui.posts.services.PostMediaService"
+            android:exported="false"
+            android:label="Post Media Service" />
+        <service
+            android:name=".ui.posts.services.PostUpdateService"
+            android:exported="false"
+            android:label="Post Update Service" />
+        <service
+<<<<<<< HEAD
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.media.services.MediaUploadService"
+            android:label="Media Upload Service" >
+        </service>
+
+        <service
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.media.services.MediaDeleteService"
+            android:label="Media Delete Service" >
+        </service>
+
+        <service android:name="org.codeforafrica.citizenreporter.eNCA.ui.stats.service.StatsService"
+            android:label="Stats Update Service"
+            android:exported="false" />
+
+        <service android:name="org.codeforafrica.citizenreporter.eNCA.ui.reader.services.ReaderUpdateService"
+            android:label="Reader Update Service"
+            android:exported="false"/>
+        <service android:name="org.codeforafrica.citizenreporter.eNCA.ui.reader.services.ReaderPostService"
+            android:label="Reader Post Service"
+            android:exported="false"/>
+        <service android:name="org.codeforafrica.citizenreporter.eNCA.ui.reader.services.ReaderCommentService"
+            android:label="Reader Comment Service"
+            android:exported="false"/>
+        <!--
+        <service android:name="org.codeforafrica.citizenreporter.starreports.GCMIntentService"/>
+        -->
+        <service android:name="org.codeforafrica.citizenreporter.eNCA.GCMIntentService"/>
+
+        <service
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.suggestion.service.SuggestionService"
+            android:label="Suggestion Service"
+            android:exported="false" >
+=======
+            android:name=".ui.media.services.MediaUploadService"
+            android:label="Media Upload Service" />
+        <service
+            android:name=".ui.media.services.MediaDeleteService"
+            android:label="Media Delete Service" />
+        <service
+            android:name=".ui.stats.service.StatsService"
+            android:exported="false"
+            android:label="Stats Update Service" />
+        <service
+            android:name=".ui.reader.services.ReaderUpdateService"
+            android:exported="false"
+            android:label="Reader Update Service" />
+        <service
+            android:name=".ui.reader.services.ReaderPostService"
+            android:exported="false"
+            android:label="Reader Post Service" />
+        <service
+            android:name=".ui.reader.services.ReaderSearchService"
+            android:exported="false"
+            android:label="Reader Search Service" />
+        <service
+            android:name=".ui.reader.services.ReaderCommentService"
+            android:exported="false"
+            android:label="Reader Comment Service" />
+        <service
+            android:name=".ui.suggestion.service.SuggestionService"
+            android:exported="false"
+            android:label="Suggestion Service" />
+        <service
+            android:name=".ui.plans.PlanUpdateService"
+            android:exported="false"
+            android:label="Plans Update Service" />
+
+        <uses-library
+            android:name="com.sec.android.app.multiwindow"
+            android:required="false" />
+
+        <meta-data
+            android:name="com.sec.android.support.multiwindow"
+            android:value="true" />
+
+        <receiver android:name=".ui.notifications.NotificationDismissBroadcastReceiver" />
+        <receiver android:name=".ui.notifications.ShareAndDismissNotificationReceiver" />
+        <receiver
+            android:name=".networking.ConnectionChangeReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".ui.stats.StatsWidgetProvider"
+            android:label="@string/stats_widget_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/stats_widget_info" />
+        </receiver>
+
+        <!-- Google Cloud Messaging receiver and services -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".GCMRegistrationIntentService"
+            android:exported="false" />
+
+        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+        <service
+            android:name=".GCMMessageService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".InstanceIDService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+>>>>>>> upstream/master
+        </service>
+
+        <activity
+            android:theme="@style/Calypso.NoActionBar"
+            android:name=".ui.accounts.login.MagicLinkSignInActivity"
+            android:label="@string/sign_in"
+            android:windowSoftInputMode="stateAlwaysHidden">
+
+<<<<<<< HEAD
+        <receiver
+            android:name="com.google.android.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+
+                <!-- Receives the actual messages. -->
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <!-- Receives the registration id. -->
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="org.codeforafrica.citizenreporter.starreports" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:label="Quick Capture Widget"
+            android:name="org.codeforafrica.citizenreporter.eNCA.ui.main.QuickCaptureWidget" >
+            <intent-filter >
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="5bf264306faf0b1acc698b4363212fd306850a46" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+=======
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="magic-login"
+                    android:scheme="wordpress" >
+                </data>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.HelpshiftDeepLinkReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="helpshift"
+                    android:scheme="wordpress" />
+            </intent-filter>
+        </activity>
+
+        <!-- Smart Lock for Passwords -->
+        <meta-data android:name="asset_statements" android:resource="@string/asset_statements" />
+
+        <!-- Provider for exposing file URIs on Android 7+ -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+>>>>>>> upstream/master
+    </application>
+</manifest>

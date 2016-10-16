@@ -207,8 +207,8 @@ public class EditPostActivity extends ActionBarActivity implements EditorFragmen
                 long localTablePostId = extras.getLong(EXTRA_POSTID, -1);
                 mIsPage = extras.getBoolean(EXTRA_IS_PAGE);
                 mIsNewPost = extras.getBoolean(EXTRA_IS_NEW_POST);
-                mPost = WordPress.wpDB.getPostForLocalTablePostId(localTablePostId, false);
-                mOriginalPost = WordPress.wpDB.getPostForLocalTablePostId(localTablePostId, false);
+                mPost = WordPress.wpDB.getPostForLocalTablePostId(localTablePostId);
+                mOriginalPost = WordPress.wpDB.getPostForLocalTablePostId(localTablePostId);
             } else {
                 // A postId extra must be passed to this activity
                 showErrorAndFinish(R.string.post_not_found);

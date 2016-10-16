@@ -19,10 +19,13 @@ import org.xmlrpc.android.XMLRPCException;
 import org.xmlrpc.android.XMLRPCFactory;
 import org.xmlrpc.android.XMLRPCFault;
 
-import java.io.IOException;
+import org.xmlrpc.android.XMLRPCUtils;
+import org.xmlrpc.android.XMLRPCUtils.XMLRPCUtilsException;
+
+import android.os.AsyncTask;
+
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,16 +54,16 @@ public class FetchBlogListWPOrg extends FetchBlogListAbstract {
         AppLog.e(T.NUX, "XMLRPCFault received from XMLRPC call wp.getUsersBlogs", xmlRpcFault);
         switch (xmlRpcFault.getFaultCode()) {
             case 403:
-                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.username_or_password_incorrect;
+                mErrorMsgId = org.wordpress.android.R.string.username_or_password_incorrect;
                 break;
             case 404:
-                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.xmlrpc_error;
+                mErrorMsgId = org.wordpress.android.R.string.xmlrpc_error;
                 break;
             case 425:
-                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.account_two_step_auth_enabled;
+                mErrorMsgId = org.wordpress.android.R.string.account_two_step_auth_enabled;
                 break;
             default:
-                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.no_site_error;
+                mErrorMsgId = org.wordpress.android.R.string.no_site_error;
                 break;
         }
     }
@@ -90,7 +93,7 @@ public class FetchBlogListWPOrg extends FetchBlogListAbstract {
         String xmlRpcUrl;
         if (!UrlUtils.isValidUrlAndHostNotNull(baseUrl)) {
             AppLog.e(T.NUX, "invalid URL: " + baseUrl);
-            mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.invalid_url_message;
+            mErrorMsgId = org.wordpress.android.R.string.invalid_url_message;
             return null;
         }
         URI uri = URI.create(baseUrl);
@@ -130,7 +133,7 @@ public class FetchBlogListWPOrg extends FetchBlogListAbstract {
             // TODO: Hopefully a temporary log - remove it if we find a pattern of failing URLs
             CrashlyticsUtils.setString(ExtraKey.ENTERED_URL, baseUrl);
             CrashlyticsUtils.logException(e, ExceptionType.SPECIFIC, T.NUX);
-            mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.invalid_url_message;
+            mErrorMsgId = org.wordpress.android.R.string.invalid_url_message;
             return null;
         }
 
@@ -186,7 +189,7 @@ public class FetchBlogListWPOrg extends FetchBlogListAbstract {
         url = UrlUtils.addUrlSchemeIfNeeded(url, false);
 
         if (!URLUtil.isValidUrl(url)) {
-            mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.invalid_url_message;
+            mErrorMsgId = org.wordpress.android.R.string.invalid_url_message;
             return null;
         }
 
@@ -239,7 +242,7 @@ public class FetchBlogListWPOrg extends FetchBlogListAbstract {
 
             if (xmlrpcUrl == null) {
                 if (!mHttpAuthRequired && mErrorMsgId == 0) {
-                    mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.no_site_error;
+                    mErrorMsgId = org.wordpress.android.R.string.no_site_error;
                 }
                 return null;
             }
@@ -254,7 +257,7 @@ public class FetchBlogListWPOrg extends FetchBlogListAbstract {
                 Object[] userBlogs = (Object[]) client.call("wp.getUsersBlogs", params);
                 if (userBlogs == null) {
                     // Could happen if the returned server response is truncated
-                    mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.xmlrpc_error;
+                    mErrorMsgId = org.wordpress.android.R.string.xmlrpc_error;
                     mClientResponse = client.getResponse();
                     return null;
                 }
@@ -269,13 +272,13 @@ public class FetchBlogListWPOrg extends FetchBlogListAbstract {
                 }
                 return userBlogList;
             } catch (XmlPullParserException parserException) {
-                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.xmlrpc_error;
+                mErrorMsgId = org.wordpress.android.R.string.xmlrpc_error;
                 AppLog.e(T.NUX, "invalid data received from XMLRPC call wp.getUsersBlogs", parserException);
             } catch (XMLRPCFault xmlRpcFault) {
                 handleXmlRpcFault(xmlRpcFault);
             } catch (XMLRPCException xmlRpcException) {
                 AppLog.e(T.NUX, "XMLRPCException received from XMLRPC call wp.getUsersBlogs", xmlRpcException);
-                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.no_site_error;
+                mErrorMsgId = org.wordpress.android.R.string.no_site_error;
             } catch (SSLHandshakeException e) {
                 if (xmlrpcUri.getHost() != null && xmlrpcUri.getHost().endsWith("wordpress.com")) {
                     mErroneousSslCertificate = true;
@@ -283,7 +286,7 @@ public class FetchBlogListWPOrg extends FetchBlogListAbstract {
                 AppLog.w(T.NUX, "SSLHandshakeException failed. Erroneous SSL certificate detected.");
             } catch (IOException e) {
                 AppLog.e(T.NUX, "Exception received from XMLRPC call wp.getUsersBlogs", e);
-                mErrorMsgId = org.codeforafrica.citizenreporter.eNCA.R.string.no_site_error;
+                mErrorMsgId = org.wordpress.android.R.string.no_site_error;
             }
             mClientResponse = client.getResponse();
             return null;

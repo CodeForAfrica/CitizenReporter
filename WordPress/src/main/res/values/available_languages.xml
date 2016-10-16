@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--Warning: Auto-generated file, don't edit it.-->
 <resources>
 <string-array name="available_languages" translatable="false">
 
 <item>
-en-US
+en_US
 </item>
 
 <item>
@@ -20,6 +21,10 @@ el
 
 <item>
 es
+</item>
+
+<item>
+es_CL
 </item>
 
 <item>
@@ -83,19 +88,19 @@ uz
 </item>
 
 <item>
-zh-CN
+zh_CN
 </item>
 
 <item>
-zh-TW
+zh_TW
 </item>
 
 <item>
-zh-HK
+zh_HK
 </item>
 
 <item>
-en-GB
+en_GB
 </item>
 
 <item>
@@ -111,7 +116,7 @@ he
 </item>
 
 <item>
-pt-BR
+pt_BR
 </item>
 
 <item>
@@ -127,7 +132,7 @@ mk
 </item>
 
 <item>
-en-AU
+en_AU
 </item>
 
 <item>
@@ -144,6 +149,38 @@ cy
 
 <item>
 da
+</item>
+
+<item>
+bg
+</item>
+
+<item>
+sq
+</item>
+
+<item>
+hr
+</item>
+
+<item>
+cs
+</item>
+
+<item>
+en_CA
+</item>
+
+<item>
+ms
+</item>
+
+<item>
+es_VE
+</item>
+
+<item>
+gl
 </item>
 
 </string-array>

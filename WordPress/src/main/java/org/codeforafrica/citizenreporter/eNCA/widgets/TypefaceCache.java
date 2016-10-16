@@ -11,55 +11,55 @@ import org.codeforafrica.citizenreporter.eNCA.R;
 import java.util.Hashtable;
 
 public class TypefaceCache {
-    private static final int VARIATION_NORMAL = 0;
-    private static final int VARIATION_LIGHT = 1;
+
+    /**
+     * Cache used for all views that support custom fonts - defaults to the system font, but
+     * Merriweather is also available via the "wpFontFamily" attribute
+     */
+    public static final int FAMILY_DEFAULT = 0;
+    public static final int FAMILY_DEFAULT_LIGHT = 1;
+    public static final int FAMILY_MERRIWEATHER = 2;
 
     private static final Hashtable<String, Typeface> mTypefaceCache = new Hashtable<>();
 
     public static Typeface getTypeface(Context context) {
-        return getTypeface(context, Typeface.NORMAL, VARIATION_NORMAL);
+        return getTypeface(context, FAMILY_DEFAULT, Typeface.NORMAL);
     }
-    private static Typeface getTypeface(Context context, int fontStyle, int variation) {
+    public static Typeface getTypeface(Context context, int family, int fontStyle) {
         if (context == null) {
             return null;
         }
 
-        final String typefaceName;
-        if (variation == VARIATION_LIGHT) {
+        if (family == FAMILY_MERRIWEATHER) {
+            final String typefaceName;
             switch (fontStyle) {
                 case Typeface.BOLD:
-                    typefaceName = "OpenSans-LightBold.ttf";
+                    typefaceName = "Merriweather-Bold.ttf";
                     break;
                 case Typeface.ITALIC:
-                    typefaceName = "OpenSans-LightItalic.ttf";
+                    typefaceName = "Merriweather-Italic.ttf";
                     break;
                 case Typeface.BOLD_ITALIC:
-                    typefaceName = "OpenSans-LightBoldItalic.ttf";
+                    typefaceName = "Merriweather-BoldItalic.ttf";
                     break;
                 default:
-                    typefaceName = "OpenSans-Light.ttf";
+                    typefaceName = "Merriweather-Regular.ttf";
                     break;
             }
-        } else {
-            switch (fontStyle) {
-                case Typeface.BOLD:
-                    typefaceName = "OpenSans-Bold.ttf";
-                    break;
-                case Typeface.ITALIC:
-                    typefaceName = "OpenSans-Italic.ttf";
-                    break;
-                case Typeface.BOLD_ITALIC:
-                    typefaceName = "OpenSans-BoldItalic.ttf";
-                    break;
-                default:
-                    typefaceName = "OpenSans-Regular.ttf";
-                    break;
-            }
+            return getTypefaceForTypefaceName(context, typefaceName);
         }
 
-        return getTypefaceForTypefaceName(context, typefaceName);
+        // default system font
+        if (family == FAMILY_DEFAULT_LIGHT) {
+            return Typeface.create("sans-serif-light", fontStyle);
+        } else {
+            return Typeface.defaultFromStyle(fontStyle);
+        }
     }
 
+    /*
+     * returns the desired typeface from the cache, loading it from app's assets if necessary
+     */
     protected static Typeface getTypefaceForTypefaceName(Context context, String typefaceName) {
         if (!mTypefaceCache.containsKey(typefaceName)) {
             Typeface typeface = Typeface.createFromAsset(context.getApplicationContext().getAssets(), "fonts/"
@@ -74,28 +74,30 @@ public class TypefaceCache {
 
     /*
      * sets the typeface for a TextView (or TextView descendant such as EditText or Button) based on
-     * the passed attributes, defaults to normal typeface
+     * the passed attributes, defaults to normal
      */
     protected static void setCustomTypeface(Context context, TextView view, AttributeSet attrs) {
-        if (context == null || view == null)
-            return;
+        if (context == null || view == null) return;
 
         // skip at design-time
-        if (view.isInEditMode())
-            return;
+        if (view.isInEditMode()) return;
 
-        // read custom fontVariation from attributes, default to normal
-        int variation = TypefaceCache.VARIATION_NORMAL;
+        // default if not set in attributes
+        int family = FAMILY_DEFAULT;
         if (attrs != null) {
             TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.WPTextView, 0, 0);
-
             if (a != null) {
                 try {
-                    variation = a.getInteger(R.styleable.WPTextView_fontVariation, TypefaceCache.VARIATION_NORMAL);
+                    family = a.getInteger(R.styleable.WPTextView_wpFontFamily, FAMILY_DEFAULT);
                 } finally {
                     a.recycle();
                 }
             }
+        }
+
+        // nothing more to do if this is the default system font
+        if (family == FAMILY_DEFAULT) {
+            return;
         }
 
         // determine the font style from the existing typeface
@@ -116,7 +118,7 @@ public class TypefaceCache {
             fontStyle = Typeface.NORMAL;
         }
 
-        Typeface typeface = getTypeface(context, fontStyle, variation);
+        Typeface typeface = getTypeface(context, family, fontStyle);
         if (typeface != null) {
             view.setTypeface(typeface);
         }

@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +16,7 @@ import org.codeforafrica.citizenreporter.eNCA.models.CategoryNode;
 
 import java.util.ArrayList;
 
-public class AddCategoryActivity extends ActionBarActivity {
+public class AddCategoryActivity extends AppCompatActivity {
     private int id;
 
     @Override
@@ -29,7 +29,6 @@ public class AddCategoryActivity extends ActionBarActivity {
         if (extras != null) {
             id = extras.getInt("id");
         }
-
         loadCategories();
 
         final Button cancelButton = (Button) findViewById(R.id.cancel);

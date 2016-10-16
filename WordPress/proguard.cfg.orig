@@ -1,0 +1,56 @@
+<<<<<<< HEAD
+-keepattributes **
+# Used as a workaround for some Samsung devices on 4.2.2 - https://github.com/wordpress-mobile/WordPress-Android/issues/2151
+-keep class !android.support.v7.internal.view.menu.**,** {*;}
+-dontpreverify
+-dontoptimize
+-dontshrink
+-dontskipnonpubliclibraryclasses
+-dontskipnonpubliclibraryclassmembers
+-dontskipnonpubliclibraryclassmembers
+-verbose
+=======
+-dontobfuscate
+
+>>>>>>> upstream/master
+-keepclassmembers class ** {
+    public void onEvent*(**);
+}
+
+# Only required if you use AsyncExecutor
+-keepclassmembers class * extends de.greenrobot.event.util.ThrowableFailureEvent {
+    ** *(java.lang.Throwable);
+}
+<<<<<<< HEAD
+-keepattributes SourceFile,LineNumberTable
+-keep class com.parse.*{ *; }
+-dontwarn com.parse.**
+-dontwarn com.squareup.picasso.**
+-dontwarn android.support.v4.**
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+-dontwarn **CompatHoneycomb
+-keep public class * extends android.support.v4.app.Fragment
+=======
+
+# These classes generate a warning on setLatestEventInfo but target API < 11
+-dontwarn com.mixpanel.android.mpmetrics.GCMReceiver
+-dontwarn com.google.android.gms.auth.GoogleAuthUtil
+
+# TODO: Temporary fix - remove that when mixpanel fixes it
+-dontwarn com.mixpanel.android.mpmetrics.Tweaks
+
+-dontwarn okio.**
+
+-dontwarn com.squareup.okhttp.**
+-keep class com.squareup.okhttp.** { *; }
+-keep interface com.squareup.okhttp.** { *; }
+
+-keepattributes Signature
+-keepattributes *Annotation*
+
+-dontwarn com.yalantis.ucrop**
+-keep class com.yalantis.ucrop** { *; }
+-keep interface com.yalantis.ucrop** { *; }
+>>>>>>> upstream/master

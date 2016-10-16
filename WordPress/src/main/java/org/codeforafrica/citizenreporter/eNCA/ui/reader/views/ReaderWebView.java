@@ -19,9 +19,11 @@ import org.codeforafrica.citizenreporter.eNCA.models.AccountHelper;
 import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.UrlUtils;
 import org.wordpress.android.util.WPRestClient;
+import org.wordpress.android.util.WPUrlUtils;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /*
@@ -31,6 +33,7 @@ import java.net.URL;
 public class ReaderWebView extends WebView {
 
     public interface ReaderWebViewUrlClickListener {
+        @SuppressWarnings("SameReturnValue")
         boolean onUrlClick(String url);
         boolean onImageUrlClick(String imageUrl, View view, int x, int y);
     }
@@ -53,12 +56,13 @@ public class ReaderWebView extends WebView {
 
     private static String mToken;
     private static boolean mIsPrivatePost;
+    private static boolean mBlogSchemeIsHttps;
 
     private boolean mIsDestroyed;
 
-
     public ReaderWebView(Context context) {
         super(context);
+
         init();
     }
 
@@ -74,11 +78,13 @@ public class ReaderWebView extends WebView {
 
     public ReaderWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
         init();
     }
 
     public ReaderWebView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+
         init();
     }
 
@@ -91,12 +97,27 @@ public class ReaderWebView extends WebView {
             this.setWebChromeClient(mReaderChromeClient);
             this.setWebViewClient(new ReaderWebViewClient(this));
             this.getSettings().setUserAgentString(WordPress.getUserAgent());
+
+            // Adjust content font size on APIs 19 and below as those do not do it automatically.
+            //  If fontScale is close to 1, just let it be 1.
+            final float fontScale = getResources().getConfiguration().fontScale;
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT && ((int) (fontScale * 10000)) != 10000) {
+
+                this.getSettings().setDefaultFontSize((int) (this.getSettings().getDefaultFontSize() * fontScale));
+                this.getSettings().setDefaultFixedFontSize(
+                        (int) (this.getSettings().getDefaultFixedFontSize() * fontScale));
+            }
+
             // Lollipop disables third-party cookies by default, but we need them in order
             // to support authenticated images
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 CookieManager.getInstance().setAcceptThirdPartyCookies(this, true);
             }
         }
+    }
+
+    public void clearContent() {
+        loadUrl("about:blank");
     }
 
     private ReaderWebViewUrlClickListener getUrlClickListener() {
@@ -139,9 +160,13 @@ public class ReaderWebView extends WebView {
         mIsPrivatePost = isPrivatePost;
     }
 
+    public void setBlogSchemeIsHttps(boolean blogSchemeIsHttps) {
+        mBlogSchemeIsHttps = blogSchemeIsHttps;
+    }
+
     private static boolean isValidClickedUrl(String url) {
         // only return true for http(s) urls so we avoid file: and data: clicks
-        return (url != null && url.startsWith("http"));
+        return (url != null && (url.startsWith("http") || url.startsWith("wordpress:")));
     }
 
     public boolean isCustomViewShowing() {
@@ -155,21 +180,21 @@ public class ReaderWebView extends WebView {
     }
 
     /*
-     * detect when an image is tapped
+     * detect when a link is tapped
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP && mUrlClickListener != null) {
             HitTestResult hr = getHitTestResult();
-            if (hr != null && (hr.getType() == HitTestResult.IMAGE_TYPE
-                            || hr.getType() == HitTestResult.SRC_IMAGE_ANCHOR_TYPE)) {
-                String imageUrl = hr.getExtra();
-                if (isValidClickedUrl(imageUrl) ) {
+            if (hr != null && isValidClickedUrl(hr.getExtra())) {
+                if (UrlUtils.isImageUrl(hr.getExtra())) {
                     return mUrlClickListener.onImageUrlClick(
-                            imageUrl,
+                            hr.getExtra(),
                             this,
                             (int) event.getX(),
                             (int) event.getY());
+                } else {
+                    return mUrlClickListener.onUrlClick(hr.getExtra());
                 }
             }
         }
@@ -199,21 +224,27 @@ public class ReaderWebView extends WebView {
             // loaded (is visible) - have seen some posts containing iframes
             // automatically try to open urls (without being clicked)
             // before the page has loaded
-            if (view.getVisibility() == View.VISIBLE
+            return view.getVisibility() == View.VISIBLE
                     && mReaderWebView.hasUrlClickListener()
-                    && isValidClickedUrl(url)) {
-                return mReaderWebView.getUrlClickListener().onUrlClick(url);
-            } else {
-                return false;
-            }
+                    && isValidClickedUrl(url)
+                    && mReaderWebView.getUrlClickListener().onUrlClick(url);
         }
 
+        @SuppressWarnings("deprecation")
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
-            // Intercept requests for private images and add the WP.com authorization header
-            if (mIsPrivatePost && !TextUtils.isEmpty(mToken) && UrlUtils.isImageUrl(url)) {
+            URL imageUrl  = null;
+            if (mIsPrivatePost && mBlogSchemeIsHttps && UrlUtils.isImageUrl(url)) {
                 try {
-                    URL imageUrl = new URL(url);
+                    imageUrl = new URL(UrlUtils.makeHttps(url));
+                } catch (MalformedURLException e) {
+                    AppLog.e(AppLog.T.READER, e);
+                }
+            }
+            // Intercept requests for private images and add the WP.com authorization header
+            if (imageUrl != null && WPUrlUtils.safeToAddWordPressComAuthToken(imageUrl) &&
+                    !TextUtils.isEmpty(mToken)) {
+                try {
                     HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
                     conn.setRequestProperty("Authorization", "Bearer " + mToken);
                     conn.setReadTimeout(WPRestClient.REST_TIMEOUT_MS);
@@ -328,8 +359,6 @@ public class ReaderWebView extends WebView {
 
             mCustomView = null;
             mCustomViewCallback = null;
-
-            mReaderWebView.onPause();
         }
 
         boolean isCustomViewShowing() {

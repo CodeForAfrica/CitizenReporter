@@ -380,6 +380,7 @@ public class WordPressDB {
             case 28:
                 // Remove WordPress.com credentials
                 removeDotComCredentials();
+                currentVersion++;
             case 29:
                 // Migrate WordPress.com token and infos to the DB
                 AccountTable.createTables(db);
@@ -817,7 +818,6 @@ public class WordPressDB {
     public void dangerouslyDeleteAllContent() {
         db.delete(BLOGS_TABLE, null, null);
         db.delete(POSTS_TABLE, null, null);
-        db.delete(ASSIGNMENTS_TABLE, null, null);
         db.delete(MEDIA_TABLE, null, null);
         db.delete(CATEGORIES_TABLE, null, null);
         db.delete(CommentTable.COMMENTS_TABLE, null, null);
@@ -1111,7 +1111,6 @@ public class WordPressDB {
     // Deletes all posts for the given blogId
     private void deleteAllPostsForLocalTableBlogId(int localBlogId) {
         db.delete(POSTS_TABLE, "blogID=?", new String[]{String.valueOf(localBlogId)});
-        db.delete(ASSIGNMENTS_TABLE, "blogID=?", new String[]{String.valueOf(localBlogId)});
     }
 
     public Object[] arrayListToArray(Object array) {

@@ -20,8 +20,8 @@ import java.util.concurrent.TimeUnit;
 public class ApiHelperTest extends InstrumentationTestCase {
     protected Context mTargetContext;
 
-    public ApiHelperTest() {
-        super();
+    @Override
+    protected void setUp() {
         FactoryUtils.initWithTestFactories();
     }
 
@@ -44,6 +44,16 @@ public class ApiHelperTest extends InstrumentationTestCase {
 
     @Override
     protected void tearDown() {
+        FactoryUtils.clearFactories();
+    }
+
+    private void countDownAfterOtherAsyncTasks(final CountDownLatch countDownLatch) {
+        AsyncTask.SERIAL_EXECUTOR.execute(new Runnable() {
+            @Override
+            public void run() {
+                countDownLatch.countDown();
+            }
+        });
     }
 
     // This test failed before #773 was fixed
@@ -55,15 +65,17 @@ public class ApiHelperTest extends InstrumentationTestCase {
             @Override
             public void onSuccess() {
                 assertTrue(true);
-                countDownLatch.countDown();
+                // countDown() after the serially invoked (nested) AsyncTask in RefreshBlogContentTask.
+                countDownAfterOtherAsyncTasks(countDownLatch);
             }
 
             @Override
             public void onFailure(ErrorType errorType, String errorMessage, Throwable throwable) {
                 assertTrue(false);
-                countDownLatch.countDown();
+                // countDown() after the serially invoked (nested) AsyncTask in RefreshBlogContentTask.
+                countDownAfterOtherAsyncTasks(countDownLatch);
             }
-        }).execute(false);
+        }).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, false);
         countDownLatch.await(5000, TimeUnit.SECONDS);
     }
 
@@ -76,15 +88,37 @@ public class ApiHelperTest extends InstrumentationTestCase {
             @Override
             public void onSuccess() {
                 assertTrue(false);
-                countDownLatch.countDown();
+                // countDown() after the serially invoked (nested) AsyncTask in RefreshBlogContentTask.
+                countDownAfterOtherAsyncTasks(countDownLatch);
             }
 
             @Override
             public void onFailure(ErrorType errorType, String errorMessage, Throwable throwable) {
                 assertTrue(true);
-                countDownLatch.countDown();
+                // countDown() after the serially invoked (nested) AsyncTask in RefreshBlogContentTask.
+                countDownAfterOtherAsyncTasks(countDownLatch);
             }
-        }).execute(false);
+        }).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, false);
         countDownLatch.await(5000, TimeUnit.SECONDS);
+    }
+
+    public void testSpamSpammedComment() {
+        XMLRPCFactoryTest.sMode = XMLRPCFactoryTest.Mode.CUSTOMIZABLE_XML;
+        XMLRPCFactoryTest.setPrefixAllInstances("comment-already-spammed");
+        Blog dummyBlog = new Blog("", "", "");
+        // contrstust a dummy (albeit invalid) comment object to pass the comment id
+        Comment comment = new Comment(1, 2, null, null, null, null, null, null, null, null);
+
+        assertTrue(ApiHelper.editComment(dummyBlog, comment, CommentStatus.SPAM));
+    }
+
+    public void testGetSpammedCommentStatus() {
+        XMLRPCFactoryTest.sMode = XMLRPCFactoryTest.Mode.CUSTOMIZABLE_XML;
+        XMLRPCFactoryTest.setPrefixAllInstances("comment-already-spammed");
+        Blog dummyBlog = new Blog("", "", "");
+        // contrstust a dummy (albeit invalid) comment object to pass the comment id
+        Comment comment = new Comment(1, 2, null, null, null, null, null, null, null, null);
+
+        assertEquals(CommentStatus.SPAM, ApiHelper.getCommentStatus(dummyBlog, comment));
     }
 }

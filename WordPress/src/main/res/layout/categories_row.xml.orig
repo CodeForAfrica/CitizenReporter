@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<<<<<<< HEAD
+<org.codeforafrica.citizenreporter.eNCA.widgets.CheckedLinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/category_row_height"
+        android:orientation="horizontal"
+        android:id="@+id/categoryRow" android:clickable="false">
+=======
+<org.wordpress.android.widgets.CheckedLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/category_row_height"
+    android:orientation="horizontal"
+    android:id="@+id/categoryRow"
+    android:clickable="false">
+>>>>>>> upstream/master
+    <ImageView android:layout_width="@dimen/category_row_height"
+               android:layout_height="@dimen/category_row_height"
+               app:srcCompat="@drawable/ic_level_indicator"
+               android:id="@+id/categoryRowLevelIndicator" android:scaleType="fitEnd"/>
+    <CheckedTextView
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:gravity="center_vertical"
+            android:textColor="#464646"
+            android:paddingLeft="6dip"
+            android:paddingRight="6dip"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:id="@+id/categoryRowText"/>
+</org.codeforafrica.citizenreporter.eNCA.widgets.CheckedLinearLayout>

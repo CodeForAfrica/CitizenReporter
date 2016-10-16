@@ -1,4 +1,4 @@
-package org.codeforafrica.citizenreporter.eNCA.ui;
+package org.wordpress.android.ui;
 
 /**
  * Global intent identifiers
