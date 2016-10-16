@@ -1,15 +1,16 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.accounts;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.text.method.PasswordTransformationMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -24,7 +25,6 @@ import org.codeforafrica.citizenreporter.eNCA.R;
 import org.codeforafrica.citizenreporter.eNCA.networking.RestClientUtils;
 import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.AppLog.T;
-import org.wordpress.android.util.WPActivityUtils;
 
 /**
  * A fragment representing a single step in a wizard. The fragment shows a dummy title indicating
@@ -39,6 +39,7 @@ public abstract class AbstractFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppLog.v(T.NUX, "NewAccountAbstractOage.onCreate()");
         mSystemService = (ConnectivityManager) getActivity().getApplicationContext().
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         if (requestQueue == null) {
@@ -48,7 +49,7 @@ public abstract class AbstractFragment extends Fragment {
 
     protected RestClientUtils getRestClientUtils() {
         if (mRestClientUtils == null) {
-            mRestClientUtils = new RestClientUtils(getContext(), requestQueue, null, null);
+            mRestClientUtils = new RestClientUtils(requestQueue, null, null);
         }
         return mRestClientUtils;
     }
@@ -67,30 +68,25 @@ public abstract class AbstractFragment extends Fragment {
     protected abstract boolean isUserDataValid();
 
     protected boolean onDoneEvent(int actionId, KeyEvent event) {
-        if (didPressEnterKey(actionId, event)) {
+        if (actionId == EditorInfo.IME_ACTION_DONE || event != null && (event.getAction() == KeyEvent.ACTION_DOWN
+                && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
             if (!isUserDataValid()) {
                 return true;
             }
 
             // hide keyboard before calling the done action
+            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(
+                    Context.INPUT_METHOD_SERVICE);
             View view = getActivity().getCurrentFocus();
-            if (view != null) WPActivityUtils.hideKeyboard(view);
+            if (view != null) {
+                inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
 
             // call child action
             onDoneAction();
             return true;
         }
         return false;
-    }
-
-    protected boolean didPressNextKey(int actionId, KeyEvent event) {
-        return actionId == EditorInfo.IME_ACTION_NEXT || event != null && (event.getAction() == KeyEvent.ACTION_DOWN
-                && event.getKeyCode() == KeyEvent.KEYCODE_NAVIGATE_NEXT);
-    }
-
-    protected boolean didPressEnterKey(int actionId, KeyEvent event) {
-        return actionId == EditorInfo.IME_ACTION_DONE || event != null && (event.getAction() == KeyEvent.ACTION_DOWN
-                && event.getKeyCode() == KeyEvent.KEYCODE_ENTER);
     }
 
     protected void initPasswordVisibilityButton(View rootView, final EditText passwordEditText) {

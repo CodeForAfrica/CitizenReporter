@@ -20,14 +20,4 @@ public class NotificationEvents {
             mIsHidden = isHidden;
         }
     }
-    public static class NotificationsSettingsStatusChanged {
-        String mMessage;
-        public NotificationsSettingsStatusChanged(String message) {
-            mMessage = message;
-        }
-
-        public String getMessage() {
-            return mMessage;
-        }
-    }
 }

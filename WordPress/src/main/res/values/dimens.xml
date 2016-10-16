@@ -297,4 +297,13 @@
     <dimen name="people_list_row_role_margin_top">20dp</dimen>
     <dimen name="people_list_divider_height">1dp</dimen>
     <dimen name="people_list_divider_left_margin">72dp</dimen>
+
+    <!--Assignment-->
+    <dimen name="assignment_card_content_padding_big">16dp</dimen>
+    <dimen name="assignment_card_content_padding">10dp</dimen>
+    <dimen name="subtile_height">56dp</dimen>
+
+    <!-- spacing between icons in main tab strip -->
+    <dimen name="tabstrip_icon_spacing_zero">0dp</dimen>
+    <dimen name="tabstrip_icon_spacing_medium">24dp</dimen>
 </resources>

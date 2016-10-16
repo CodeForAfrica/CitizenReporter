@@ -6,7 +6,9 @@ import org.codeforafrica.citizenreporter.eNCA.models.AccountHelper;
 import org.wordpress.android.util.StringUtils;
 
 public class OAuthAuthenticator implements Authenticator {
-    public static String getAccessToken(final String siteId) {
+    @Override
+    public void authenticate(final AuthenticatorRequest request) {
+        String siteId = request.getSiteId();
         String token = AccountHelper.getDefaultAccount().getAccessToken();
 
         if (siteId != null) {
@@ -23,13 +25,6 @@ public class OAuthAuthenticator implements Authenticator {
             }
         }
 
-        return token;
-    }
-
-    @Override
-    public void authenticate(final AuthenticatorRequest request) {
-        String siteId = request.getSiteId();
-        String token = getAccessToken(siteId);
         request.sendWithAccessToken(StringUtils.notNullStr(token));
     }
 }

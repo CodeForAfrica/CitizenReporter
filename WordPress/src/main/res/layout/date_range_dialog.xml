@@ -1,5 +1,4 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -13,7 +12,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingTop="10dp"
-            android:text="@string/date_range_start_date"
+            android:text="Start Date"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
@@ -23,8 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            tools:targetApi="LOLLIPOP"/>
+            android:datePickerMode="spinner"/>
 
         <View
             android:layout_width="fill_parent"
@@ -36,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/date_range_end_date"
+            android:text="End Date"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
@@ -46,8 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            tools:targetApi="LOLLIPOP"/>
+            android:datePickerMode="spinner"/>
     </LinearLayout>
 
 </ScrollView>

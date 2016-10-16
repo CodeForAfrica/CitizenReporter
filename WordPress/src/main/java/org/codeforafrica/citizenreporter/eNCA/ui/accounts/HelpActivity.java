@@ -25,7 +25,11 @@ public class HelpActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initHelpshiftLayout();
+        //if (ABTestingUtils.isFeatureEnabled(Feature.HELPSHIFT)) {
+            initHelpshiftLayout();
+       // } else {
+       //     initDefaultLayout();
+       // }
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -37,7 +41,7 @@ public class HelpActivity extends ActionBarActivity {
 
         // Init common elements
         WPTextView version = (WPTextView) findViewById(R.id.nux_help_version);
-        version.setText(getString(R.string.version) + " " + WordPress.versionName);
+        //version.setText(getString(R.string.version) + " " + WordPress.versionName);
 
         WPTextView applogButton = (WPTextView) findViewById(R.id.applog_button);
         applogButton.setOnClickListener(new OnClickListener() {
@@ -46,12 +50,6 @@ public class HelpActivity extends ActionBarActivity {
                 startActivity(new Intent(v.getContext(), AppLogViewerActivity.class));
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        ActivityId.trackLastActivity(ActivityId.HELP_SCREEN);
     }
 
     @Override
@@ -73,7 +71,7 @@ public class HelpActivity extends ActionBarActivity {
         setContentView(R.layout.help_activity_with_helpshift);
 
         WPTextView version = (WPTextView) findViewById(R.id.nux_help_version);
-        version.setText(getString(R.string.version) + " " + WordPress.versionName);
+        //version.setText(getString(R.string.version) + " " + WordPress.versionName);
         WPTextView contactUsButton = (WPTextView) findViewById(R.id.contact_us_button);
         contactUsButton.setOnClickListener(new OnClickListener() {
             @Override

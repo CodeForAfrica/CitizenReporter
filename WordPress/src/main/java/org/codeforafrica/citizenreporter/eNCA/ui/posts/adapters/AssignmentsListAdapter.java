@@ -141,7 +141,7 @@ public class AssignmentsListAdapter extends BaseAdapter {
                 Date today = new Date();
 
                 if(today.after(deadlineDate)){
-                    wrapper.getDeadline().setTextColor(mContext.getResources().getColor(R.color.alert_orange));
+                    wrapper.getDeadline().setTextColor(mContext.getResources().getColor(R.color.alert_red));
                 }else if(today.before(deadlineDate)) {
                     wrapper.getDeadline().setTextColor(mContext.getResources().getColor(R.color.alert_green));
                 }else{

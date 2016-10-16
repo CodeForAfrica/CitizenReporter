@@ -40,7 +40,7 @@ public class CreateUserAndBlog {
     private ResponseHandler mResponseHandler;
 
     public CreateUserAndBlog(String email, String username, String password, String siteUrl, String siteName,
-                             String language, RestClientUtils restClient,
+                             String language, RestClientUtils restClient, Context context,
                              ErrorListener errorListener, Callback callback) {
         mEmail = email;
         mUsername = username;
@@ -55,14 +55,13 @@ public class CreateUserAndBlog {
         mResponseHandler = new ResponseHandler();
     }
 
-    public static String getDeviceLanguage(Context context) {
-        Resources resources = context.getResources();
+    public static String getDeviceLanguage(Resources resources) {
         XmlResourceParser parser = resources.getXml(R.xml.wpcom_languages);
         Hashtable<String, String> entries = new Hashtable<String, String>();
         String matchedDeviceLanguage = "en - English";
         try {
             int eventType = parser.getEventType();
-            String deviceLanguageCode = LanguageUtils.getPatchedCurrentDeviceLanguage(context);
+            String deviceLanguageCode = Locale.getDefault().getLanguage();
 
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 if (eventType == XmlPullParser.START_TAG) {

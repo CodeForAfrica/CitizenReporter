@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import org.codeforafrica.citizenreporter.eNCA.WordPress;
 import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.AppLog.T;
-import org.wordpress.android.ui.themes.ThemeUtils;
+import org.codeforafrica.citizenreporter.eNCA.ui.themes.ThemeUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

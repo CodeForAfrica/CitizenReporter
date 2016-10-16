@@ -1576,6 +1576,31 @@ public class StoryBoardActivity extends ActionBarActivity implements EditorFragm
     }
 
     @Override
+    public void onMediaRetryClicked(String mediaId) {
+
+    }
+
+    @Override
+    public void onMediaUploadCancelClicked(String mediaId, boolean delete) {
+
+    }
+
+    @Override
+    public void onFeaturedImageChanged(long mediaId) {
+
+    }
+
+    @Override
+    public void onVideoPressInfoRequested(String videoId) {
+
+    }
+
+    @Override
+    public String onAuthHeaderRequested(String url) {
+        return null;
+    }
+
+    @Override
     public void onEditorFragmentInitialized() {
         fillContentEditorFields();
     }
@@ -1583,5 +1608,10 @@ public class StoryBoardActivity extends ActionBarActivity implements EditorFragm
     @Override
     public void saveMediaFile(MediaFile mediaFile) {
         WordPress.wpDB.saveMediaFile(mediaFile);
+    }
+
+    @Override
+    public void onTrackableEvent(EditorFragmentAbstract.TrackableEvent event) {
+
     }
 }

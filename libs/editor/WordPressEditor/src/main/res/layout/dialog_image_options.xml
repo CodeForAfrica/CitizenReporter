@@ -123,7 +123,7 @@
                 android:id="@+id/image_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/media_icon_32dp"/>
+                app:srcCompat="@drawable/media_icon_32dp_editor"/>
 
             <SeekBar
                 android:id="@+id/image_width_seekbar"

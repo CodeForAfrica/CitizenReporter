@@ -34,7 +34,7 @@ public class ReaderBlogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public enum ReaderBlogType {RECOMMENDED, FOLLOWED}
 
     public interface BlogClickListener {
-        void onBlogClicked(Object blog);
+        public void onBlogClicked(Object blog);
     }
 
     private final ReaderBlogType mBlogType;
@@ -109,7 +109,7 @@ public class ReaderBlogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof BlogViewHolder) {
             final BlogViewHolder blogHolder = (BlogViewHolder) holder;
             switch (getBlogType()) {
@@ -123,18 +123,13 @@ public class ReaderBlogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                 case FOLLOWED:
                     final ReaderBlog blogInfo = mFollowedBlogs.get(position);
+                    String domain = UrlUtils.getHost(blogInfo.getUrl());
                     if (blogInfo.hasName()) {
                         blogHolder.txtTitle.setText(blogInfo.getName());
                     } else {
-                        blogHolder.txtTitle.setText(R.string.reader_untitled_post);
+                        blogHolder.txtTitle.setText(domain);
                     }
-                    if (blogInfo.hasUrl()) {
-                        blogHolder.txtUrl.setText(UrlUtils.getHost(blogInfo.getUrl()));
-                    } else if (blogInfo.hasFeedUrl()) {
-                        blogHolder.txtUrl.setText(UrlUtils.getHost(blogInfo.getFeedUrl()));
-                    } else {
-                        blogHolder.txtUrl.setText("");
-                    }
+                    blogHolder.txtUrl.setText(domain);
                     blogHolder.imgBlog.setImageUrl(blogInfo.getImageUrl(), WPNetworkImageView.ImageType.BLAVATAR);
                     break;
             }
@@ -143,13 +138,12 @@ public class ReaderBlogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 blogHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int clickedPosition = blogHolder.getAdapterPosition();
                         switch (getBlogType()) {
                             case RECOMMENDED:
-                                mClickListener.onBlogClicked(mRecommendedBlogs.get(clickedPosition));
+                                mClickListener.onBlogClicked(mRecommendedBlogs.get(position));
                                 break;
                             case FOLLOWED:
-                                mClickListener.onBlogClicked(mFollowedBlogs.get(clickedPosition));
+                                mClickListener.onBlogClicked(mFollowedBlogs.get(position));
                                 break;
                         }
                     }

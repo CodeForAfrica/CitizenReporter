@@ -1,6 +1,5 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.stats;
 
-import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
 import org.codeforafrica.citizenreporter.eNCA.R;
@@ -16,56 +15,19 @@ import java.util.List;
 public class StatsTopPostsAndPagesFragment extends StatsAbstractListFragment {
     public static final String TAG = StatsTopPostsAndPagesFragment.class.getSimpleName();
 
-    private TopPostsAndPagesModel mTopPostsAndPagesModel = null;
-
-    @Override
-    protected boolean hasDataAvailable() {
-        return mTopPostsAndPagesModel != null;
-    }
-    @Override
-    protected void saveStatsData(Bundle outState) {
-        if (hasDataAvailable()) {
-            outState.putSerializable(ARG_REST_RESPONSE, mTopPostsAndPagesModel);
-        }
-    }
-    @Override
-    protected void restoreStatsData(Bundle savedInstanceState) {
-        if (savedInstanceState.containsKey(ARG_REST_RESPONSE)) {
-            mTopPostsAndPagesModel = (TopPostsAndPagesModel) savedInstanceState.getSerializable(ARG_REST_RESPONSE);
-        }
-    }
-
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.TopPostsUpdated event) {
-        if (!shouldUpdateFragmentOnUpdateEvent(event)) {
-            return;
-        }
-
-        mGroupIdToExpandedMap.clear();
-        mTopPostsAndPagesModel = event.mTopPostsAndPagesModel;
-
-        updateUI();
-    }
-
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
-        if (!shouldUpdateFragmentOnErrorEvent(event)) {
-            return;
-        }
-
-        mTopPostsAndPagesModel = null;
-        mGroupIdToExpandedMap.clear();
-        showErrorUI(event.mError);
-    }
-
     @Override
     protected void updateUI() {
         if (!isAdded()) {
             return;
         }
 
+        if (isErrorResponse()) {
+            showErrorUI();
+            return;
+        }
+
         if (hasTopPostsAndPages()) {
-            List<PostModel> postViews = mTopPostsAndPagesModel.getTopPostsAndPages();
+            List<PostModel> postViews = ((TopPostsAndPagesModel) mDatamodels[0]).getTopPostsAndPages();
             ArrayAdapter adapter = new PostsAndPagesAdapter(getActivity(), postViews);
             StatsUIHelper.reloadLinearLayout(getActivity(), adapter, mList, getMaxNumberOfItemsToShowInList());
             showHideNoResultsUI(false);
@@ -75,14 +37,14 @@ public class StatsTopPostsAndPagesFragment extends StatsAbstractListFragment {
     }
 
     private boolean hasTopPostsAndPages() {
-        return mTopPostsAndPagesModel != null && mTopPostsAndPagesModel.hasTopPostsAndPages();
+        return !isDataEmpty() && ((TopPostsAndPagesModel) mDatamodels[0]).hasTopPostsAndPages();
     }
 
     private List<PostModel> getTopPostsAndPages() {
         if (!hasTopPostsAndPages()) {
             return new ArrayList<PostModel>(0);
         }
-        return mTopPostsAndPagesModel.getTopPostsAndPages();
+        return ((TopPostsAndPagesModel) mDatamodels[0]).getTopPostsAndPages();
     }
 
     @Override
@@ -116,7 +78,7 @@ public class StatsTopPostsAndPagesFragment extends StatsAbstractListFragment {
     }
 
     @Override
-    protected StatsService.StatsEndpointsEnum[] sectionsToUpdate() {
+    protected StatsService.StatsEndpointsEnum[] getSectionsToUpdate() {
         return new StatsService.StatsEndpointsEnum[]{
                 StatsService.StatsEndpointsEnum.TOP_POSTS
         };

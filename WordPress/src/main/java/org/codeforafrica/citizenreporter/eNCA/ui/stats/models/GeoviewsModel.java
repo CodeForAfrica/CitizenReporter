@@ -4,13 +4,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class GeoviewsModel extends BaseStatsModel {
+public class GeoviewsModel implements Serializable {
     private String mDate;
     private String mBlogID;
     private int otherViews;

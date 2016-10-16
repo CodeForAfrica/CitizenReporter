@@ -7,8 +7,7 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,15 +40,7 @@ import org.xmlrpc.android.XMLRPCFault;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.greenrobot.event.EventBus;
-
-public class CommentsListFragment extends Fragment implements CommentAdapter.OnDataLoadedListener,
-        CommentAdapter.OnLoadMoreListener, CommentAdapter.OnSelectedItemsChangeListener, CommentAdapter.OnCommentPressedListener {
-
-    interface OnCommentSelectedListener {
-        void onCommentSelected(long commentId);
-    }
-
+public class CommentsListFragment extends Fragment {
     private boolean mIsUpdatingComments = false;
     private boolean mCanLoadMoreComments = true;
     boolean mHasAutoRefreshedComments = false;

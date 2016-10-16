@@ -38,7 +38,7 @@ public class ReaderUpdateService extends Service {
      * on EventBus to notify of changes
      */
 
-    public enum UpdateTask {
+    public static enum UpdateTask {
         TAGS,
         FOLLOWED_BLOGS,
         RECOMMENDED_BLOGS
@@ -76,7 +76,6 @@ public class ReaderUpdateService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null && intent.hasExtra(ARG_UPDATE_TASKS)) {
-            //noinspection unchecked
             EnumSet<UpdateTask> tasks = (EnumSet<UpdateTask>) intent.getSerializableExtra(ARG_UPDATE_TASKS);
             performTasks(tasks);
         }
@@ -132,7 +131,7 @@ public class ReaderUpdateService extends Service {
             }
         };
         AppLog.d(AppLog.T.READER, "reader service > updating tags");
-        WordPress.getRestClientUtilsV1_2().get("read/menu", null, null, listener, errorListener);
+        WordPress.getRestClientUtilsV1_1().get("read/menu", null, null, listener, errorListener);
     }
 
     private void handleUpdateTagsResponse(final JSONObject jsonObject) {
@@ -153,7 +152,6 @@ public class ReaderUpdateService extends Service {
                 ReaderTagList localTopics = new ReaderTagList();
                 localTopics.addAll(ReaderTagTable.getDefaultTags());
                 localTopics.addAll(ReaderTagTable.getFollowedTags());
-                localTopics.addAll(ReaderTagTable.getCustomListTags());
 
                 if (!localTopics.isSameList(serverTopics)) {
                     AppLog.d(AppLog.T.READER, "reader service > followed topics changed");
@@ -185,7 +183,7 @@ public class ReaderUpdateService extends Service {
     /*
      * parse a specific topic section from the topic response
      */
-    private static ReaderTagList parseTags(JSONObject jsonObject, String name, ReaderTagType tagType) {
+    private static ReaderTagList parseTags(JSONObject jsonObject, String name, ReaderTagType topicType) {
         ReaderTagList topics = new ReaderTagList();
 
         if (jsonObject == null) {
@@ -202,18 +200,9 @@ public class ReaderUpdateService extends Service {
             String internalName = it.next();
             JSONObject jsonTopic = jsonTopics.optJSONObject(internalName);
             if (jsonTopic != null) {
-                String tagTitle = JSONUtils.getStringDecoded(jsonTopic, ReaderConstants.JSON_TAG_TITLE);
-                String tagDisplayName = JSONUtils.getStringDecoded(jsonTopic, ReaderConstants.JSON_TAG_DISPLAY_NAME);
-                String tagSlug = JSONUtils.getStringDecoded(jsonTopic, ReaderConstants.JSON_TAG_SLUG);
-                String endpoint = JSONUtils.getString(jsonTopic, ReaderConstants.JSON_TAG_URL);
-
-                // if the endpoint contains `read/list` then this is a custom list - these are
-                // included in the response as default tags
-                if (tagType == ReaderTagType.DEFAULT && endpoint.contains("/read/list/")) {
-                    topics.add(new ReaderTag(tagSlug, tagDisplayName, tagTitle, endpoint, ReaderTagType.CUSTOM_LIST));
-                } else {
-                    topics.add(new ReaderTag(tagSlug, tagDisplayName, tagTitle, endpoint, tagType));
-                }
+                String tagName = JSONUtils.getStringDecoded(jsonTopic, "title");
+                String endpoint = JSONUtils.getString(jsonTopic, "URL");
+                topics.add(new ReaderTag(tagName, endpoint, topicType));
             }
         }
 
@@ -242,7 +231,7 @@ public class ReaderUpdateService extends Service {
     /***
      * request the list of blogs the current user is following
      */
-    private void updateFollowedBlogs() {
+    void updateFollowedBlogs() {
         RestRequest.Listener listener = new RestRequest.Listener() {
             @Override
             public void onResponse(JSONObject jsonObject) {
@@ -261,7 +250,6 @@ public class ReaderUpdateService extends Service {
         // request using ?meta=site,feed to get extra info
         WordPress.getRestClientUtilsV1_1().get("read/following/mine?meta=site%2Cfeed", listener, errorListener);
     }
-
     private void handleFollowedBlogsResponse(final JSONObject jsonObject) {
         new Thread() {
             @Override
@@ -270,17 +258,9 @@ public class ReaderUpdateService extends Service {
                 ReaderBlogList localBlogs = ReaderBlogTable.getFollowedBlogs();
 
                 if (!localBlogs.isSameList(serverBlogs)) {
-                    // always update the list of followed blogs if there are *any* changes between
-                    // server and local (including subscription count, description, etc.)
                     ReaderBlogTable.setFollowedBlogs(serverBlogs);
-                    // ...but only update the follow status and alert that followed blogs have
-                    // changed if the server list doesn't have the same blogs as the local list
-                    // (ie: a blog has been followed/unfollowed since local was last updated)
-                    if (!localBlogs.hasSameBlogs(serverBlogs)) {
-                        ReaderPostTable.updateFollowedStatus();
-                        AppLog.i(AppLog.T.READER, "reader blogs service > followed blogs changed");
-                        EventBus.getDefault().post(new ReaderEvents.FollowedBlogsChanged());
-                    }
+                    AppLog.d(AppLog.T.READER, "reader blogs service > followed blogs changed");
+                    EventBus.getDefault().post(new ReaderEvents.FollowedBlogsChanged());
                 }
 
                 taskCompleted(UpdateTask.FOLLOWED_BLOGS);
@@ -291,7 +271,7 @@ public class ReaderUpdateService extends Service {
     /***
      * request the latest recommended blogs, replaces all local ones
      */
-    private void updateRecommendedBlogs() {
+    void updateRecommendedBlogs() {
         RestRequest.Listener listener = new RestRequest.Listener() {
             @Override
             public void onResponse(JSONObject jsonObject) {

@@ -3,7 +3,6 @@ package org.codeforafrica.citizenreporter.eNCA.ui.comments;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.text.Layout;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -48,10 +47,9 @@ public class CommentUtils {
         // now convert to HTML with an image getter that enforces a max image size
         final Spanned html;
         if (maxImageSize > 0 && content.contains("<img")) {
-            Drawable loading = ContextCompat.getDrawable(textView.getContext(),
-                    R.drawable.legacy_dashicon_format_image_big_grey);
-            Drawable failed = ContextCompat.getDrawable(textView.getContext(),
-                    R.drawable.noticon_warning_big_grey);
+            Drawable loading = textView.getContext().getResources().getDrawable(
+                org.wordpress.android.editor.R.drawable.legacy_dashicon_format_image_big_grey);
+            Drawable failed = textView.getContext().getResources().getDrawable(R.drawable.noticon_warning_big_grey);
             html = HtmlUtils.fromHtml(content, new WPImageGetter(textView, maxImageSize, WordPress.imageLoader, loading,
                     failed));
         } else {
@@ -59,16 +57,17 @@ public class CommentUtils {
         }
 
         // remove extra \n\n added by Html.convert()
+        CharSequence source = html;
         int start = 0;
-        int end = html.length();
-        while (start < end && Character.isWhitespace(html.charAt(start))) {
+        int end = source.length();
+        while (start < end && Character.isWhitespace(source.charAt(start))) {
             start++;
         }
-        while (end > start && Character.isWhitespace(html.charAt(end - 1))) {
+        while (end > start && Character.isWhitespace(source.charAt(end - 1))) {
             end--;
         }
 
-        textView.setText(html.subSequence(start, end));
+        textView.setText(source.subSequence(start, end));
     }
 
     // Assumes all lines after first line will not be indented
@@ -76,17 +75,17 @@ public class CommentUtils {
         if (textView == null || textOffsetX < 0) return;
 
         SpannableString text = new SpannableString(textView.getText());
-        text.setSpan(new TextWrappingLeadingMarginSpan(textOffsetX), 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        text.setSpan(new TextWrappingLeadingMarginSpan(1, textOffsetX), 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(text);
     }
 
     private static class TextWrappingLeadingMarginSpan implements LeadingMarginSpan.LeadingMarginSpan2 {
-        private final int margin;
-        private final int lines;
+        private int margin;
+        private int lines;
 
-        public TextWrappingLeadingMarginSpan(int margin) {
+        public TextWrappingLeadingMarginSpan(int lines, int margin) {
             this.margin = margin;
-            this.lines = 1;
+            this.lines = lines;
         }
 
         @Override

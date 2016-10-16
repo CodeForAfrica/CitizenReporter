@@ -25,6 +25,8 @@
                 android:paddingBottom="@dimen/margin_small"
                 style="@style/StatsModuleTitle" />
 
+            <include layout="@layout/stats_insights_header_line" />
+
             <include
                 android:id="@+id/stats_empty_module_placeholder"
                 layout="@layout/stats_empty_module_placeholder"
@@ -46,7 +48,7 @@
             android:id="@+id/stats_error_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/grey_dark"
+            android:textColor="@color/grey"
             android:textSize="@dimen/text_sz_small"
             android:padding="@dimen/margin_large"
             android:visibility="gone" />

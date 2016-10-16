@@ -27,8 +27,10 @@ public class ReaderIframeScanner {
             String tag = mContent.substring(matcher.start(), matcher.end());
             String src = ReaderHtmlUtils.getSrcAttrValue(tag);
             if (!TextUtils.isEmpty(src)) {
-                listener.onTagFound(tag, src);
+                listener.onTagFound(tag, src, matcher.start(), matcher.end());
             }
         }
+
+        listener.onScanCompleted();
     }
 }

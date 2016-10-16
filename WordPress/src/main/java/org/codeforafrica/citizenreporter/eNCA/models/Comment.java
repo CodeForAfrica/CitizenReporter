@@ -1,7 +1,6 @@
 package org.codeforafrica.citizenreporter.eNCA.models;
 
 import android.content.Context;
-import android.text.Spanned;
 import android.text.TextUtils;
 
 import org.json.JSONObject;
@@ -179,16 +178,15 @@ public class Comment {
     private transient java.util.Date dtPublished;
     public java.util.Date getDatePublished() {
         if (dtPublished == null)
-            dtPublished = DateTimeUtils.dateFromIso8601(published);
+            dtPublished = DateTimeUtils.iso8601ToJavaDate(published);
         return dtPublished;
     }
 
-    private transient Spanned unescapedCommentWithDrawables;
-    public void setUnescapedCommentWithDrawables(Spanned spanned){
-        unescapedCommentWithDrawables = spanned;
-    }
-    public Spanned getUnescapedCommentTextWithDrawables() {
-        return unescapedCommentWithDrawables;
+    private transient String unescapedCommentText;
+    public String getUnescapedCommentText() {
+        if (unescapedCommentText == null)
+            unescapedCommentText = StringUtils.unescapeHTML(getCommentText()).trim();
+        return unescapedCommentText;
     }
 
     private transient String unescapedPostTitle;
@@ -203,7 +201,7 @@ public class Comment {
      */
     private transient String avatarForDisplay;
     public String getAvatarForDisplay(int avatarSize) {
-        if (avatarForDisplay == null) {
+        if (avatarForDisplay==null) {
             if (hasProfileImageUrl()) {
                 avatarForDisplay = GravatarUtils.fixGravatarUrl(profileImageUrl, avatarSize);
             } else if (hasAuthorEmail()) {
@@ -235,10 +233,4 @@ public class Comment {
         }
         return formattedTitle;
     }
-
-    public boolean willTrashingPermanentlyDelete(){
-        CommentStatus status = getStatusEnum();
-        return CommentStatus.TRASH.equals(status) || CommentStatus.SPAM.equals(status);
-    }
-
 }

@@ -2,11 +2,7 @@
 
 package org.codeforafrica.citizenreporter.eNCA.models;
 
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,10 +11,8 @@ import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.AppLog.T;
 import org.wordpress.android.util.StringUtils;
 
-import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Map;
 
 public class Blog {
     private int localTableBlogId;
@@ -45,16 +39,13 @@ public class Blog {
     private String httppassword = "";
     private String postFormats;
     private String blogOptions = "{}";
-    private String capabilities;
     private boolean isAdmin;
     private boolean isHidden;
-    private long planID;
-    private String planShortName;
 
     public Blog() {
     }
 
-    public Blog(int localTableBlogId, String url, String homeURL, String blogName, String username, String password, String imagePlacement, boolean featuredImageCapable, boolean fullSizeImage, boolean scaledImage, int scaledImageWidth, String maxImageWidth, int maxImageWidthId, int remoteBlogId, String dotcom_username, String dotcom_password, String api_key, String api_blogid, boolean dotcomFlag, String wpVersion, String httpuser, String httppassword, String postFormats, String blogOptions, String capabilities, boolean isAdmin, boolean isHidden) {
+    public Blog(int localTableBlogId, String url, String homeURL, String blogName, String username, String password, String imagePlacement, boolean featuredImageCapable, boolean fullSizeImage, boolean scaledImage, int scaledImageWidth, String maxImageWidth, int maxImageWidthId, int remoteBlogId, String dotcom_username, String dotcom_password, String api_key, String api_blogid, boolean dotcomFlag, String wpVersion, String httpuser, String httppassword, String postFormats, String blogOptions, boolean isAdmin, boolean isHidden) {
         this.localTableBlogId = localTableBlogId;
         this.url = url;
         this.homeURL = homeURL;
@@ -79,7 +70,6 @@ public class Blog {
         this.httppassword = httppassword;
         this.postFormats = postFormats;
         this.blogOptions = blogOptions;
-        this.capabilities = capabilities;
         this.isAdmin = isAdmin;
         this.isHidden = isHidden;
     }
@@ -123,30 +113,6 @@ public class Blog {
             AppLog.e(T.UTILS, "Blog url is invalid: " + getUrl());
             return null;
         }
-    }
-
-    /**
-     * TODO: When we rewrite this in WPStores, make sure we only have one of this function.
-     * This is used to open the site in the browser. getHomeURL() was not used, probably due to a bug where
-     * it returns an empty or invalid url.
-     * @return site url
-     */
-    public @NonNull String getAlternativeHomeUrl() {
-        String siteURL = null;
-        Gson gson = new Gson();
-        Type type = new TypeToken<Map<?, ?>>() { }.getType();
-        Map<?, ?> blogOptions = gson.fromJson(this.getBlogOptions(), type);
-        if (blogOptions != null) {
-            Map<?, ?> homeURLMap = (Map<?, ?>) blogOptions.get("home_url");
-            if (homeURLMap != null) {
-                siteURL = homeURLMap.get("value").toString();
-            }
-        }
-        // Try to guess the URL of the site if blogOptions is null (blog not added to the app)
-        if (siteURL == null) {
-            siteURL = this.getUrl().replace("/xmlrpc.php", "");
-        }
-        return siteURL;
     }
 
     public String getHomeURL() {
@@ -449,9 +415,6 @@ public class Blog {
     }
 
     public boolean isPrivate() {
-        if (!isDotcomFlag()) {
-            return false; // only wpcom blogs can be marked private.
-        }
         JSONObject jsonOptions = getBlogOptionsJSONObject();
         if (jsonOptions != null && jsonOptions.has("blog_public")) {
             try {
@@ -474,24 +437,6 @@ public class Blog {
         return false;
     }
 
-    /**
-     * Return the Jetpack plugin version code
-     *
-     * @return The Jetpack version string, null for non Jetpack sites, or wpcom sites
-     */
-    public String getJetpackVersion() {
-        String jetpackVersion = null;
-        JSONObject jsonOptions = getBlogOptionsJSONObject();
-        if (jsonOptions != null && jsonOptions.has("jetpack_version")) {
-            try {
-                jetpackVersion = jsonOptions.getJSONObject("jetpack_version").getString("value");
-            } catch (JSONException e) {
-                AppLog.e(T.UTILS, "Cannot load jetpack_version from options: " + jsonOptions, e);
-            }
-        }
-        return jetpackVersion;
-    }
-
     public boolean isPhotonCapable() {
         return ((isDotcomFlag() && !isPrivate()) || (isJetpackPowered() && !hasValidHTTPAuthCredentials()));
     }
@@ -505,72 +450,15 @@ public class Blog {
     }
 
     /**
-     * Get the remote Blog ID stored on the wpcom backend.
-     *
-     * In the app db it's stored in blogId for WP.com, and in api_blogId for Jetpack.
-     *
-     * For WP.com sites this function returns the same value of getRemoteBlogId().
+     * Get the WordPress.com blog ID
+     * Stored in blogId for WP.com, api_blogId for Jetpack
      *
      * @return WP.com blogId string, potentially null for Jetpack sites
      */
     public String getDotComBlogId() {
-        if (isDotcomFlag()) {
+        if (isDotcomFlag())
             return String.valueOf(getRemoteBlogId());
-        } else {
-            String remoteID =  getApi_blogid();
-            // Self-hosted blogs edge cases.
-            if (TextUtils.isEmpty(remoteID)) {
-                return null;
-            }
-            try {
-                long parsedBlogID = Long.parseLong(remoteID);
-                // remote blogID is always > 1 for Jetpack blogs
-                if (parsedBlogID < 1) {
-                    return null;
-                }
-            } catch (NumberFormatException e) {
-                AppLog.e(T.UTILS, "The remote blog ID stored in options isn't valid: " + remoteID);
-                return null;
-            }
-            return remoteID;
-        }
-    }
-
-    public long getPlanID() {
-        return planID;
-    }
-
-    public void setPlanID(long planID) {
-        this.planID = planID;
-    }
-
-    public String getPlanShortName() {
-        return StringUtils.notNullStr(planShortName);
-    }
-
-    public void setPlanShortName(String name) {
-        this.planShortName = StringUtils.notNullStr(name);
-    }
-
-    public String getCapabilities() {
-        return StringUtils.notNullStr(capabilities);
-    }
-
-    public void setCapabilities(String capabilities) {
-        this.capabilities = capabilities;
-    }
-
-    public boolean hasCapability(Capability capability) {
-        // If a capability is missing it means the user don't have it.
-        if (capabilities.isEmpty() || capability == null) {
-            return false;
-        }
-        try {
-            JSONObject jsonObject = new JSONObject(capabilities);
-            return jsonObject.optBoolean(capability.getLabel());
-        } catch (JSONException e) {
-            AppLog.e(T.PEOPLE, "Capabilities is not a valid json: " + capabilities);
-            return false;
-        }
+        else
+            return getApi_blogid();
     }
 }

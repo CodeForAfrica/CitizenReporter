@@ -6,11 +6,9 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.SparseArray;
@@ -52,8 +50,9 @@ import de.greenrobot.event.EventBus;
  * posts with a specific tag or in a specific blog, but can also be used to show a single
  * post detail
  */
-public class ReaderPostPagerActivity extends AppCompatActivity
-        implements ReaderInterfaces.AutoHideToolbarListener {
+public class ReaderPostPagerActivity extends ActionBarActivity
+        implements ReaderInterfaces.OnPostPopupListener,
+                   ReaderInterfaces.AutoHideToolbarListener {
 
     private Toolbar mToolbar;
     private WPMainViewPager mViewPager;
@@ -76,14 +75,16 @@ public class ReaderPostPagerActivity extends AppCompatActivity
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-  
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mViewPager = (WPViewPager) findViewById(R.id.viewpager);
+        mViewPager = (WPMainViewPager) findViewById(R.id.viewpager);
         mProgress = (ProgressBar) findViewById(R.id.progress_loading);
 
         final String title;

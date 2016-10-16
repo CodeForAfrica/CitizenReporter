@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="?android:selectableItemBackground"
-        android:text="@string/previous_button"
+        android:text="&lt;"
         android:textColor="@color/stats_link_text_color" />
 
     <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="?android:selectableItemBackground"
-        android:text="@string/next_button"
+        android:text="&gt;"
         android:textColor="@color/stats_link_text_color" />
 
 </LinearLayout>

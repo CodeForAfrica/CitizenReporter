@@ -4,12 +4,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class VideoPlaysModel extends BaseStatsModel {
+public class VideoPlaysModel implements Serializable {
     private String mPeriod;
     private String mDate;
     private String mBlogID;

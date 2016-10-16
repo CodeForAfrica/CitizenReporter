@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:baselineAligned="false"
     android:padding="@dimen/margin_extra_large"
     android:orientation="vertical">
@@ -34,7 +32,7 @@
                     android:layout_height="12dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginEnd="3dp"
-                    app:srcCompat="@drawable/my_site_icon_posts" />
+                    android:src="@drawable/my_site_icon_posts" />
 
                 <org.codeforafrica.citizenreporter.eNCA.widgets.WPAutoResizeTextView
                     style="@style/StatsInsightsLabel"
@@ -54,11 +52,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@string/stats_default_number_zero" />
+                android:text="0" />
 
         </LinearLayout>
 
-        <include layout="@layout/stats_vertical_line" />
 
         <!-- Views Item -->
         <LinearLayout
@@ -79,7 +76,7 @@
                     android:layout_height="12dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginEnd="3dp"
-                    app:srcCompat="@drawable/stats_icon_views" />
+                    android:src="@drawable/stats_icon_views" />
 
                 <org.codeforafrica.citizenreporter.eNCA.widgets.WPAutoResizeTextView
                     style="@style/StatsInsightsLabel"
@@ -99,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@string/stats_default_number_zero" />
+                android:text="0" />
 
         </LinearLayout>
     </LinearLayout>
@@ -131,7 +128,7 @@
                     android:layout_height="12dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginEnd="3dp"
-                    app:srcCompat="@drawable/stats_icon_visitors" />
+                    android:src="@drawable/stats_icon_views" />
 
                 <org.codeforafrica.citizenreporter.eNCA.widgets.WPAutoResizeTextView
                     style="@style/StatsInsightsLabel"
@@ -151,11 +148,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@string/stats_default_number_zero" />
+                android:text="0" />
 
         </LinearLayout>
-
-        <include layout="@layout/stats_vertical_line" />
 
         <!-- Best Ever Item -->
         <LinearLayout
@@ -176,11 +171,11 @@
                     android:layout_height="12dp"
                     android:layout_marginRight="3dp"
                     android:layout_marginEnd="3dp"
-                    app:srcCompat="@drawable/stats_icon_trophy" />
+                    android:src="@drawable/ic_action_like_active" />
 
                 <org.codeforafrica.citizenreporter.eNCA.widgets.WPAutoResizeTextView
                     style="@style/StatsInsightsLabel"
-                    android:textColor="@color/alert_yellow"
+                    android:textColor="@color/orange_jazzy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
@@ -197,7 +192,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@string/stats_default_number_zero" />
+                android:text="0" />
 
             <org.codeforafrica.citizenreporter.eNCA.widgets.WPAutoResizeTextView
                 android:id="@+id/stats_all_time_bestever_date"
@@ -209,7 +204,7 @@
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:textAllCaps="true"
-                tools:text="August 11, 2012" />
+                android:text="..."/>
 
         </LinearLayout>
 

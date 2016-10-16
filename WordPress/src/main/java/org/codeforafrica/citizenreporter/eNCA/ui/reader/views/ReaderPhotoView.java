@@ -31,7 +31,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  */
 public class ReaderPhotoView extends RelativeLayout {
 
-    public interface PhotoViewListener {
+    public static interface PhotoViewListener {
         void onTapPhotoView();
     }
 
@@ -90,7 +90,6 @@ public class ReaderPhotoView extends RelativeLayout {
              && container.getRequestUrl().equals(url));
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     private boolean hasLayout() {
         // if the view's bounds aren't known yet, and this is not a wrap-content/wrap-content
         // view, hold off on loading the image.

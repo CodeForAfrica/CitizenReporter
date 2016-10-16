@@ -24,7 +24,7 @@ public class StatsInsightsTodayFragment extends StatsAbstractInsightsFragment {
 
     // Container Activity must implement this interface
     public interface OnInsightsTodayClickListener {
-        void onInsightsTodayClicked(StatsVisitorsAndViewsFragment.OverviewLabel item);
+        void onInsightsClicked(StatsVisitorsAndViewsFragment.OverviewLabel item);
     }
 
     private OnInsightsTodayClickListener mListener;
@@ -49,68 +49,29 @@ public class StatsInsightsTodayFragment extends StatsAbstractInsightsFragment {
         return view;
     }
 
+    void customizeUIWithResults() {
+        mResultContainer.removeAllViews();
 
-    private VisitsModel mVisitsModel;
-
-    @Override
-    protected boolean hasDataAvailable() {
-        return mVisitsModel != null;
-    }
-    @Override
-    protected void saveStatsData(Bundle outState) {
-        if (hasDataAvailable()) {
-            outState.putSerializable(ARG_REST_RESPONSE, mVisitsModel);
-        }
-    }
-    @Override
-    protected void restoreStatsData(Bundle savedInstanceState) {
-        if (savedInstanceState.containsKey(ARG_REST_RESPONSE)) {
-            mVisitsModel = (VisitsModel) savedInstanceState.getSerializable(ARG_REST_RESPONSE);
-        }
-    }
-
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.VisitorsAndViewsUpdated event) {
-        if (!shouldUpdateFragmentOnUpdateEvent(event)) {
+        // Another check that the data is available
+        if (isDataEmpty(0) || !(mDatamodels[0] instanceof VisitsModel)) {
+            showErrorUI(null);
             return;
         }
 
-        mVisitsModel = event.mVisitsAndViews;
-        updateUI();
-    }
-
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
-        if (!shouldUpdateFragmentOnErrorEvent(event)) {
+        VisitsModel visitsModel = (VisitsModel) mDatamodels[0];
+        if (visitsModel.getVisits() == null || visitsModel.getVisits().size() == 0) {
+            showErrorUI(null);
             return;
         }
 
-        mVisitsModel = null;
-        showErrorUI(event.mError);
-    }
-
-    protected void updateUI() {
-        super.updateUI();
-
-        if (!isAdded() || !hasDataAvailable()) {
-            return;
-        }
-
-        if (mVisitsModel.getVisits() == null || mVisitsModel.getVisits().size() == 0) {
-            showErrorUI();
-            return;
-        }
-
-        List<VisitModel> visits = mVisitsModel.getVisits();
-        VisitModel data = visits.get(visits.size() - 1);
+        List<VisitModel> visits = visitsModel.getVisits();
+        VisitModel data = visits.get(visits.size()-1);
 
         LinearLayout ll = (LinearLayout) getActivity().getLayoutInflater()
                 .inflate(R.layout.stats_insights_today_item, (ViewGroup) mResultContainer.getRootView(), false);
 
-        LinearLayout tabs = (LinearLayout) ll.findViewById(R.id.stats_post_tabs);
-
-        for (int i = 0; i < tabs.getChildCount(); i++) {
-            LinearLayout currentTab = (LinearLayout) tabs.getChildAt(i);
+        for (int i = 0; i < ll.getChildCount(); i++) {
+            LinearLayout currentTab = (LinearLayout) ll.getChildAt(i);
             switch (i) {
                 case 0:
                     setupTab(currentTab, FormatUtils.formatDecimal(data.getViews()), StatsVisitorsAndViewsFragment.OverviewLabel.VIEWS);
@@ -142,11 +103,8 @@ public class StatsInsightsTodayFragment extends StatsAbstractInsightsFragment {
         label.setText(itemType.getLabel());
         value = (TextView) currentTab.findViewById(R.id.stats_visitors_and_views_tab_value);
         value.setText(total);
-        if (total.equals("0")) {
-            value.setTextColor(getResources().getColor(R.color.grey));
-        } else {
-            value.setTextColor(getResources().getColor(R.color.blue_wordpress));
-        }
+        label.setTextColor(getResources().getColor(R.color.grey_darken_20));
+        value.setTextColor(getResources().getColor(R.color.blue_wordpress));
         icon = (ImageView) currentTab.findViewById(R.id.stats_visitors_and_views_tab_icon);
         icon.setImageDrawable(getTabIcon(itemType));
 
@@ -167,7 +125,7 @@ public class StatsInsightsTodayFragment extends StatsAbstractInsightsFragment {
                 return;
             }
             StatsVisitorsAndViewsFragment.OverviewLabel tag = (StatsVisitorsAndViewsFragment.OverviewLabel) v.getTag();
-            mListener.onInsightsTodayClicked(tag);
+            mListener.onInsightsClicked(tag);
         }
     };
 
@@ -186,7 +144,7 @@ public class StatsInsightsTodayFragment extends StatsAbstractInsightsFragment {
     }
 
     @Override
-    protected StatsService.StatsEndpointsEnum[] sectionsToUpdate() {
+    protected StatsService.StatsEndpointsEnum[] getSectionsToUpdate() {
         return new StatsService.StatsEndpointsEnum[]{
                 StatsService.StatsEndpointsEnum.VISITS
         };

@@ -87,7 +87,7 @@ public class ImageSettingsDialogFragment extends DialogFragment {
         if (getResources().getBoolean(R.bool.show_extra_side_padding)) {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_close_padded);
         } else {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_close_white_24dp_editor);
         }
 
         // Show custom view with padded Save button

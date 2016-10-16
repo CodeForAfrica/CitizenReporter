@@ -151,6 +151,7 @@ public class ReaderPostListFragment extends Fragment
     /*
      * show posts with a specific tag (either TAG_FOLLOWED or TAG_PREVIEW)
      */
+
     static ReaderPostListFragment newInstanceForTag(ReaderTag tag, ReaderPostListType listType) {
         AppLog.d(T.READER, "reader post list > newInstance (tag)");
 

@@ -11,18 +11,12 @@ import org.codeforafrica.citizenreporter.eNCA.datasets.AccountTable;
  */
 public class AccountHelper {
     private static Account sAccount;
-    private final static Object mLock = new Object();
 
     public static Account getDefaultAccount() {
         if (sAccount == null) {
-            // Singleton pattern in concurrent env.
-            synchronized(mLock) {
-                if (sAccount == null) {
-                    sAccount = AccountTable.getDefaultAccount();
-                    if (sAccount == null) {
-                        sAccount = new Account();
-                    }
-                }
+            sAccount = AccountTable.getDefaultAccount();
+            if (sAccount == null) {
+                sAccount = new Account();
             }
         }
         return sAccount;

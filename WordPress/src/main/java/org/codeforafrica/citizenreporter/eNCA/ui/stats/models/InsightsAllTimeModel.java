@@ -3,7 +3,9 @@ package org.codeforafrica.citizenreporter.eNCA.ui.stats.models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class InsightsAllTimeModel extends BaseStatsModel {
+import java.io.Serializable;
+
+public class InsightsAllTimeModel implements Serializable {
 
     private String mBlogID;
     private String mDate;

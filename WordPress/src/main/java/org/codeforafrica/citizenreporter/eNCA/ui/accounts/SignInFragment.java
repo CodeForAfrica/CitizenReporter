@@ -2,14 +2,13 @@ package org.codeforafrica.citizenreporter.eNCA.ui.accounts;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
@@ -21,14 +20,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.auth.api.credentials.Credential;
 import com.wordpress.rest.RestRequest;
 
 import org.json.JSONException;
@@ -160,6 +157,10 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
                 }
             }
         });
+
+        //Always force self hosted
+        mUrlButtonLayout.setVisibility(View.GONE);
+        mSelfHosted = true;
 
         mForgotPassword = (WPTextView) rootView.findViewById(R.id.forgot_password);
         mForgotPassword.setOnClickListener(mForgotPasswordListener);
@@ -345,10 +346,12 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
     private final View.OnClickListener mCreateAccountListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Activity activity = getActivity();
+            /*Activity activity = getActivity();
             if (activity != null) {
                 ActivityLauncher.newAccountForResult(activity);
-            }
+            }*/
+            Intent i = new Intent(getActivity(), RegisterActivity.class);
+            startActivity(i);
         }
     };
 
@@ -367,8 +370,12 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
     private final View.OnClickListener mForgotPasswordListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getForgotPasswordURL()));
-            startActivity(intent);
+            if (BuildConfig.IS_DEMO_APP.equals("1")) {
+                ToastUtils.showToast(getActivity(), R.string.demo_user_cant_forget_password);
+            }else {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getForgotPasswordURL()));
+                startActivity(intent);
+            }
         }
     };
 
@@ -446,6 +453,7 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
                 } else {
                     BlogUtils.addBlogs(userBlogList, mUsername, mPassword, mHttpUsername, mHttpPassword);
                 }
+
 
                 // refresh first blog
                 refreshFirstBlogContent();
@@ -782,20 +790,20 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
         SignInDialogFragment nuxAlert;
         if (ABTestingUtils.isFeatureEnabled(Feature.HELPSHIFT)) {
             // create a 3 buttons dialog ("Contact us", "Forget your password?" and "Cancel")
-            nuxAlert = SignInDialogFragment.newInstance(getString(org.wordpress.android.R.string.nux_cannot_log_in),
-                    getString(org.wordpress.android.R.string.username_or_password_incorrect),
-                    org.wordpress.android.R.drawable.noticon_alert_big, 3, getString(
-                            org.wordpress.android.R.string.cancel), getString(
-                            org.wordpress.android.R.string.forgot_password), getString(
-                            org.wordpress.android.R.string.contact_us), SignInDialogFragment.ACTION_OPEN_URL,
+            nuxAlert = SignInDialogFragment.newInstance(getString(org.codeforafrica.citizenreporter.eNCA.R.string.nux_cannot_log_in),
+                    getString(org.codeforafrica.citizenreporter.eNCA.R.string.username_or_password_incorrect),
+                    org.codeforafrica.citizenreporter.eNCA.R.drawable.noticon_alert_big, 3, getString(
+                            org.codeforafrica.citizenreporter.eNCA.R.string.cancel), getString(
+                            org.codeforafrica.citizenreporter.eNCA.R.string.forgot_password), getString(
+                            org.codeforafrica.citizenreporter.eNCA.R.string.contact_us), SignInDialogFragment.ACTION_OPEN_URL,
                     SignInDialogFragment.ACTION_OPEN_SUPPORT_CHAT);
         } else {
             // create a 2 buttons dialog ("Forget your password?" and "Cancel")
-            nuxAlert = SignInDialogFragment.newInstance(getString(org.wordpress.android.R.string.nux_cannot_log_in),
-                    getString(org.wordpress.android.R.string.username_or_password_incorrect),
-                    org.wordpress.android.R.drawable.noticon_alert_big, 2, getString(
-                            org.wordpress.android.R.string.cancel), getString(
-                            org.wordpress.android.R.string.forgot_password), null, SignInDialogFragment.ACTION_OPEN_URL,
+            nuxAlert = SignInDialogFragment.newInstance(getString(org.codeforafrica.citizenreporter.eNCA.R.string.nux_cannot_log_in),
+                    getString(org.codeforafrica.citizenreporter.eNCA.R.string.username_or_password_incorrect),
+                    org.codeforafrica.citizenreporter.eNCA.R.drawable.noticon_alert_big, 2, getString(
+                            org.codeforafrica.citizenreporter.eNCA.R.string.cancel), getString(
+                            org.codeforafrica.citizenreporter.eNCA.R.string.forgot_password), null, SignInDialogFragment.ACTION_OPEN_URL,
                     0);
         }
 
@@ -826,20 +834,20 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
     protected void signInError(int messageId, String clientResponse) {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         SignInDialogFragment nuxAlert;
-        if (messageId == org.wordpress.android.R.string.username_or_password_incorrect) {
+        if (messageId == org.codeforafrica.citizenreporter.eNCA.R.string.username_or_password_incorrect) {
             handleInvalidUsernameOrPassword(messageId);
             return;
         } else if (messageId == R.string.invalid_verification_code) {
             endProgress();
             showTwoStepCodeError(messageId);
             return;
-        } else if (messageId == org.wordpress.android.R.string.invalid_url_message) {
+        } else if (messageId == org.codeforafrica.citizenreporter.eNCA.R.string.invalid_url_message) {
             showUrlError(messageId);
             endProgress();
             return;
         } else {
             AppLog.e(T.NUX, "Server response: " + clientResponse);
-            nuxAlert = SignInDialogFragment.newInstance(getString(org.wordpress.android.R.string.nux_cannot_log_in),
+            nuxAlert = SignInDialogFragment.newInstance(getString(org.codeforafrica.citizenreporter.eNCA.R.string.nux_cannot_log_in),
                     getString(messageId), R.drawable.noticon_alert_big, 3,
                     getString(R.string.cancel), getString(R.string.contact_us), getString(R.string.reader_title_applog),
                     SignInDialogFragment.ACTION_OPEN_SUPPORT_CHAT,
@@ -876,4 +884,5 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
             refreshBlogContent(firstBlog);
         }
     }
+
 }

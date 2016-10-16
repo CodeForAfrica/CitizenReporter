@@ -45,10 +45,9 @@ public class NoteBlock {
     private int mBackgroundColor;
 
     public interface OnNoteBlockTextClickListener {
-        void onNoteBlockTextClicked(NoteBlockClickableSpan clickedSpan);
-        void showDetailForNoteIds();
-        void showReaderPostComments();
-        void showSitePreview(long siteId, String siteUrl);
+        public void onNoteBlockTextClicked(NoteBlockClickableSpan clickedSpan);
+        public void showDetailForNoteIds();
+        public void showSitePreview(long siteId, String siteUrl);
     }
 
     public NoteBlock(JSONObject noteObject, OnNoteBlockTextClickListener onNoteBlockTextClickListener) {

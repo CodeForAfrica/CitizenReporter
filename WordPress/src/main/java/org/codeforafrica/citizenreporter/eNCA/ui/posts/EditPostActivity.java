@@ -207,8 +207,8 @@ public class EditPostActivity extends ActionBarActivity implements EditorFragmen
                 long localTablePostId = extras.getLong(EXTRA_POSTID, -1);
                 mIsPage = extras.getBoolean(EXTRA_IS_PAGE);
                 mIsNewPost = extras.getBoolean(EXTRA_IS_NEW_POST);
-                mPost = WordPress.wpDB.getPostForLocalTablePostId(localTablePostId);
-                mOriginalPost = WordPress.wpDB.getPostForLocalTablePostId(localTablePostId);
+                mPost = WordPress.wpDB.getPostForLocalTablePostId(localTablePostId, false);
+                mOriginalPost = WordPress.wpDB.getPostForLocalTablePostId(localTablePostId, false);
             } else {
                 // A postId extra must be passed to this activity
                 showErrorAndFinish(R.string.post_not_found);
@@ -1574,6 +1574,31 @@ public class EditPostActivity extends ActionBarActivity implements EditorFragmen
     }
 
     @Override
+    public void onMediaRetryClicked(String mediaId) {
+
+    }
+
+    @Override
+    public void onMediaUploadCancelClicked(String mediaId, boolean delete) {
+
+    }
+
+    @Override
+    public void onFeaturedImageChanged(long mediaId) {
+
+    }
+
+    @Override
+    public void onVideoPressInfoRequested(String videoId) {
+
+    }
+
+    @Override
+    public String onAuthHeaderRequested(String url) {
+        return null;
+    }
+
+    @Override
     public void onEditorFragmentInitialized() {
         fillContentEditorFields();
     }
@@ -1581,5 +1606,10 @@ public class EditPostActivity extends ActionBarActivity implements EditorFragmen
     @Override
     public void saveMediaFile(MediaFile mediaFile) {
         WordPress.wpDB.saveMediaFile(mediaFile);
+    }
+
+    @Override
+    public void onTrackableEvent(EditorFragmentAbstract.TrackableEvent event) {
+
     }
 }

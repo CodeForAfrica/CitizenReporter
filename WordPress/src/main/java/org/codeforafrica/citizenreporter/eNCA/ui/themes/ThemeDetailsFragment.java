@@ -117,17 +117,17 @@ public class ThemeDetailsFragment extends DialogFragment {
     @Override
     public void onStart()
     {
-      super.onStart();
+        super.onStart();
 
-      // safety check
-      if (getDialog() == null)
-        return;
+        // safety check
+        if (getDialog() == null)
+            return;
 
-      int dialogWidth = (int) getActivity().getResources().getDimension(R.dimen.theme_details_fragment_width);
+        int dialogWidth = (int) getActivity().getResources().getDimension(R.dimen.theme_details_fragment_width);
 
-      int dialogHeight = (int) getActivity().getResources().getDimension(R.dimen.theme_details_fragment_height);
+        int dialogHeight = (int) getActivity().getResources().getDimension(R.dimen.theme_details_fragment_height);
 
-      getDialog().getWindow().setLayout(dialogWidth, dialogHeight);
+        getDialog().getWindow().setLayout(dialogWidth, dialogHeight);
 
     }
 
@@ -274,9 +274,9 @@ public class ThemeDetailsFragment extends DialogFragment {
         LayoutInflater inflater = LayoutInflater.from(getActivity());
 
         for (int i = 0; i < size; i++) {
-             TextView tv = (TextView) inflater.inflate(R.layout.theme_feature_text, mFeaturesContainer, false);
-             tv.setText(featuresArray.get(i));
-             views[i] = tv;
+            TextView tv = (TextView) inflater.inflate(R.layout.theme_feature_text, mFeaturesContainer, false);
+            tv.setText(featuresArray.get(i));
+            views[i] = tv;
         }
 
         // make the list of features appear in such a way that the text appear on the next line

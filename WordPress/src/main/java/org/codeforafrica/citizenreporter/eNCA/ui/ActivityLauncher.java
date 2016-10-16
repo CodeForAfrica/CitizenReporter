@@ -32,6 +32,7 @@ import org.codeforafrica.citizenreporter.eNCA.ui.stats.StatsSinglePostDetailsAct
 import org.codeforafrica.citizenreporter.eNCA.ui.stats.models.PostModel;
 import org.codeforafrica.citizenreporter.eNCA.ui.storyboard.StoryBoardActivity;
 import org.codeforafrica.citizenreporter.eNCA.ui.themes.ThemeBrowserActivity;
+import org.wordpress.android.ui.RequestCodes;
 import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.HelpshiftHelper;
 import org.wordpress.android.util.HelpshiftHelper.Tag;
@@ -68,29 +69,29 @@ public class ActivityLauncher {
 
     public static void viewCurrentBlogPosts(Context context) {
         Intent intent = new Intent(context, PostsActivity.class);
-        context.startActivity(intent)
+        context.startActivity(intent);
     }
 
     public static void viewCurrentBlogMedia(Context context) {
         Intent intent = new Intent(context, MediaBrowserActivity.class);
-        context.startActivity(intent)
+        context.startActivity(intent);
     }
 
     public static void viewCurrentBlogPages(Context context) {
         Intent intent = new Intent(context, PagesActivity.class);
         intent.putExtra(PostsActivity.EXTRA_VIEW_PAGES, true);
-        context.startActivity(intent)
+        context.startActivity(intent);
     }
 
     public static void viewCurrentBlogComments(Context context) {
         Intent intent = new Intent(context, CommentsActivity.class);
-        context.startActivity(intent)
+        context.startActivity(intent);
     }
 
     public static void viewCurrentBlogThemes(Context context) {
         if (ThemeBrowserActivity.isAccessible()) {
             Intent intent = new Intent(context, ThemeBrowserActivity.class);
-            context.startActivity(intent)
+            context.startActivity(intent);
         }
     }
 
@@ -113,7 +114,7 @@ public class ActivityLauncher {
         intent.putExtra(WPWebViewActivity.URL_TO_LOAD, blog.getAdminUrl());
         intent.putExtra(WPWebViewActivity.AUTHENTICATION_URL, WPWebViewActivity.getBlogLoginUrl(blog));
         intent.putExtra(WPWebViewActivity.LOCAL_BLOG_ID, blog.getLocalTableBlogId());
-        context.startActivity(intent);
+        context.startActivity(intent);}
 
     public static void addNewBlogPostOrPageForResult(Activity context, Blog blog, boolean isPage) {
         if (blog == null) return;
@@ -142,7 +143,7 @@ public class ActivityLauncher {
 
     public static void viewAccountSettings(Context context) {
         Intent intent = new Intent(context, SettingsActivity.class);
-        context.startActivity(intent);;
+        context.startActivity(intent);
     }
 
     public static void viewHelpAndSupport(Context context, Tag origin) {

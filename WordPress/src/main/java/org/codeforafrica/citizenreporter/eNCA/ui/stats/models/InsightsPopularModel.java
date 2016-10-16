@@ -1,15 +1,18 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.stats.models;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
-public class InsightsPopularModel extends BaseStatsModel {
-    private final int mHighestHour;
-    private final int mHighestDayOfWeek;
-    private final Double mHighestDayPercent;
-    private final Double mHighestHourPercent;
+import java.io.Serializable;
+
+public class InsightsPopularModel implements Serializable {
+    private int mHighestHour;
+    private int mHighestDayOfWeek;
+    private Double mHighestDayPercent;
+    private Double mHighestHourPercent;
     private String mBlogID;
 
-    public InsightsPopularModel(String blogID, JSONObject response) {
+    public InsightsPopularModel(String blogID, JSONObject response) throws JSONException {
         this.setBlogID(blogID);
         this.mHighestDayOfWeek = response.optInt("highest_day_of_week");
         this.mHighestHour = response.optInt("highest_hour");

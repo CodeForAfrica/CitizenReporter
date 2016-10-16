@@ -231,7 +231,7 @@ public class ViewAssignmentFragment extends Fragment {
                 Date today = new Date();
 
                 if(today.after(deadlineDate)){
-                    mDeadline.setTextColor(mParentActivity.getResources().getColor(R.color.alert_orange));
+                    mDeadline.setTextColor(mParentActivity.getResources().getColor(R.color.alert_red));
                 }else if(today.before(deadlineDate)) {
                     mDeadline.setTextColor(mParentActivity.getResources().getColor(R.color.alert_green));
                 }else{

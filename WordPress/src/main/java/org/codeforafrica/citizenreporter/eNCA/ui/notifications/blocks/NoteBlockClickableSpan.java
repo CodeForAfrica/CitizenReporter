@@ -3,7 +3,6 @@ package org.codeforafrica.citizenreporter.eNCA.ui.notifications.blocks;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.style.ClickableSpan;
@@ -80,7 +79,7 @@ public class NoteBlockClickableSpan extends ClickableSpan {
     }
 
     @Override
-    public void updateDrawState(@NonNull TextPaint textPaint) {
+    public void updateDrawState(@Nonnull TextPaint textPaint) {
         // Set background color
         textPaint.bgColor = mShouldLink && mPressed && !isBlockquoteType() ?
                 mBackgroundColor : Color.TRANSPARENT;

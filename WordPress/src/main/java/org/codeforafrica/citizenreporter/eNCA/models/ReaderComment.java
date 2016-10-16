@@ -49,7 +49,7 @@ public class ReaderComment {
         comment.text = HtmlUtils.stripScript(JSONUtils.getString(json, "content"));
 
         comment.published = JSONUtils.getString(json, "date");
-        comment.timestamp = DateTimeUtils.timestampFromIso8601(comment.published);
+        comment.timestamp = DateTimeUtils.iso8601ToTimestamp(comment.published);
 
         JSONObject jsonPost = json.optJSONObject("post");
         if (jsonPost != null) {
@@ -130,9 +130,5 @@ public class ReaderComment {
 
     public boolean hasAuthorBlogId() {
         return (authorBlogId != 0);
-    }
-
-    public boolean hasAuthorAvatar() {
-        return !TextUtils.isEmpty(authorAvatar);
     }
 }

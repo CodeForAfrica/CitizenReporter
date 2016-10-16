@@ -75,7 +75,7 @@ public class NotificationsListFragment extends Fragment
         mEmptyView = (ViewGroup) view.findViewById(R.id.empty_view);
 
         RecyclerView.ItemAnimator animator = new DefaultItemAnimator();
-        animator.setSupportsChangeAnimations(true);
+//        animator.setSupportsChangeAnimation(true);
         mRecyclerView.setItemAnimator(animator);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);

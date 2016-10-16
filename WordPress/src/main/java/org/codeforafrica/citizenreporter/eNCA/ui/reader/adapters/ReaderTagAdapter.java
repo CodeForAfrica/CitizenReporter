@@ -186,7 +186,7 @@ public class ReaderTagAdapter extends RecyclerView.Adapter<ReaderTagAdapter.TagV
         public TagViewHolder(View view) {
             super(view);
             txtTagName = (TextView) view.findViewById(R.id.text_topic);
-            btnAddRemove = (ImageButton) view.findViewById(R.id.btn_add_remove);
+            btnAddRemove = (ImageButton) view.findViewById(R.id.btn_add);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 btnAddRemove.setBackgroundResource(R.drawable.ripple_oval);
             }

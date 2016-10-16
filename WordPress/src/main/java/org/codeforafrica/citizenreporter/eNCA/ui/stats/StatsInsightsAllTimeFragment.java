@@ -1,6 +1,5 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.stats;
 
-import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,52 +13,17 @@ import org.wordpress.android.util.FormatUtils;
 public class StatsInsightsAllTimeFragment extends StatsAbstractInsightsFragment {
     public static final String TAG = StatsInsightsAllTimeFragment.class.getSimpleName();
 
-    private InsightsAllTimeModel mInsightsAllTimeModel;
 
-    @Override
-    protected boolean hasDataAvailable() {
-        return mInsightsAllTimeModel != null;
-    }
-    @Override
-    protected void saveStatsData(Bundle outState) {
-        if (hasDataAvailable()) {
-            outState.putSerializable(ARG_REST_RESPONSE, mInsightsAllTimeModel);
-        }
-    }
-    @Override
-    protected void restoreStatsData(Bundle savedInstanceState) {
-        if (savedInstanceState.containsKey(ARG_REST_RESPONSE)) {
-            mInsightsAllTimeModel = (InsightsAllTimeModel) savedInstanceState.getSerializable(ARG_REST_RESPONSE);
-        }
-    }
-
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.InsightsAllTimeUpdated event) {
-        if (!shouldUpdateFragmentOnUpdateEvent(event)) {
+    void customizeUIWithResults() {
+        // Another check that the data is available
+        if (isDataEmpty(0) || !(mDatamodels[0] instanceof InsightsAllTimeModel)) {
+            showErrorUI(null);
             return;
         }
 
-        mInsightsAllTimeModel = event.mInsightsAllTimeModel;
-        updateUI();
-    }
+        InsightsAllTimeModel data = (InsightsAllTimeModel) mDatamodels[0];
 
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
-        if (!shouldUpdateFragmentOnErrorEvent(event)) {
-            return;
-        }
-
-        mInsightsAllTimeModel = null;
-        showErrorUI(event.mError);
-    }
-
-
-    protected void updateUI() {
-        super.updateUI();
-
-        if (!isAdded() || !hasDataAvailable()) {
-            return;
-        }
+        mResultContainer.removeAllViews();
 
         LinearLayout ll = (LinearLayout) getActivity().getLayoutInflater()
                 .inflate(R.layout.stats_insights_all_time_item, (ViewGroup) mResultContainer.getRootView(), false);
@@ -71,13 +35,13 @@ public class StatsInsightsAllTimeFragment extends StatsAbstractInsightsFragment 
         TextView besteverDateTextView = (TextView) ll.findViewById(R.id.stats_all_time_bestever_date);
 
 
-        postsTextView.setText(FormatUtils.formatDecimal(mInsightsAllTimeModel.getPosts()));
-        viewsTextView.setText(FormatUtils.formatDecimal(mInsightsAllTimeModel.getViews()));
-        visitorsTextView.setText(FormatUtils.formatDecimal(mInsightsAllTimeModel.getVisitors()));
+        postsTextView.setText(FormatUtils.formatDecimal(data.getPosts()));
+        viewsTextView.setText(FormatUtils.formatDecimal(data.getViews()));
+        visitorsTextView.setText(FormatUtils.formatDecimal(data.getVisitors()));
 
-        besteverTextView.setText(FormatUtils.formatDecimal(mInsightsAllTimeModel.getViewsBestDayTotal()));
+        besteverTextView.setText(FormatUtils.formatDecimal(data.getViewsBestDayTotal()));
         besteverDateTextView.setText(
-                StatsUtils.parseDate(mInsightsAllTimeModel.getViewsBestDay(), StatsConstants.STATS_INPUT_DATE_FORMAT, "MMMM dd, yyyy")
+                StatsUtils.parseDate(data.getViewsBestDay(), StatsConstants.STATS_INPUT_DATE_FORMAT, "MMMM dd, yyyy")
         );
 
         mResultContainer.addView(ll);
@@ -85,7 +49,7 @@ public class StatsInsightsAllTimeFragment extends StatsAbstractInsightsFragment 
 
 
     @Override
-    protected StatsService.StatsEndpointsEnum[] sectionsToUpdate() {
+    protected StatsService.StatsEndpointsEnum[] getSectionsToUpdate() {
         return new StatsService.StatsEndpointsEnum[]{
                 StatsService.StatsEndpointsEnum.INSIGHTS_ALL_TIME
         };

@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
-            android:layout_height="@dimen/toolbar_subtitle_height"
+            android:layout_height="@dimen/subtile_height"
             android:layout_width="match_parent">
 
             <android.support.v7.widget.Toolbar

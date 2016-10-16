@@ -1,21 +1,15 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.comments;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -28,7 +22,6 @@ import com.android.volley.VolleyError;
 import com.simperium.client.BucketObjectMissingException;
 import com.wordpress.rest.RestRequest;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.json.JSONObject;
 import org.codeforafrica.citizenreporter.eNCA.Constants;
 import org.codeforafrica.citizenreporter.eNCA.R;
@@ -84,9 +77,6 @@ import de.greenrobot.event.EventBus;
  * prior to this there were separate comment detail screens for each list
  */
 public class CommentDetailFragment extends Fragment implements NotificationFragment {
-    private static final String KEY_LOCAL_BLOG_ID = "local_blog_id";
-    private static final String KEY_COMMENT_ID = "comment_id";
-    private static final String KEY_NOTE_ID = "note_id";
     private int mLocalBlogId;
     private int mRemoteBlogId;
 
@@ -218,6 +208,7 @@ public class CommentDetailFragment extends Fragment implements NotificationFragm
 
         mLayoutButtons = (ViewGroup) inflater.inflate(R.layout.comment_action_footer, null, false);
         mBtnLikeComment = mLayoutButtons.findViewById(R.id.btn_like);
+        mLayoutButtons.setVisibility(View.GONE);
         mBtnLikeIcon = (ImageView)mLayoutButtons.findViewById(R.id.btn_like_icon);
         mBtnLikeTextView = (TextView)mLayoutButtons.findViewById(R.id.btn_like_text);
         mBtnModerateComment = mLayoutButtons.findViewById(R.id.btn_moderate);
@@ -419,7 +410,7 @@ public class CommentDetailFragment extends Fragment implements NotificationFragm
                 mOnCommentChangeListener.onCommentChanged(ChangedFrom.COMMENT_DETAIL, ChangeType.EDITED);
         }
     }
-
+/*
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -439,6 +430,7 @@ public class CommentDetailFragment extends Fragment implements NotificationFragm
 
         return super.onOptionsItemSelected(item);
     }
+    */
 
     private boolean hasComment() {
         return (mComment != null);
@@ -836,20 +828,20 @@ public class CommentDetailFragment extends Fragment implements NotificationFragm
         switch (mComment.getStatusEnum()) {
             case APPROVED:
                 statusTextResId = R.string.comment_status_approved;
-                statusColor = ContextCompat.getColor(getActivity(), R.color.notification_status_unapproved_dark);
+                statusColor = getActivity().getResources().getColor(R.color.notification_status_unapproved_dark);
                 break;
             case UNAPPROVED:
                 statusTextResId = R.string.comment_status_unapproved;
-                statusColor = ContextCompat.getColor(getActivity(), R.color.notification_status_unapproved_dark);
+                statusColor = getActivity().getResources().getColor(R.color.notification_status_unapproved_dark);
                 break;
             case SPAM:
                 statusTextResId = R.string.comment_status_spam;
-                statusColor = ContextCompat.getColor(getActivity(), R.color.comment_status_spam);
+                statusColor = getActivity().getResources().getColor(R.color.comment_status_spam);
                 break;
             case TRASH:
             default:
                 statusTextResId = R.string.comment_status_trash;
-                statusColor = ContextCompat.getColor(getActivity(), R.color.comment_status_spam);
+                statusColor = getActivity().getResources().getColor(R.color.comment_status_spam);
                 break;
         }
 
@@ -917,22 +909,6 @@ public class CommentDetailFragment extends Fragment implements NotificationFragm
         }
 
         mLayoutButtons.setVisibility(View.VISIBLE);
-    }
-
-    private void performModerateAction(){
-        if (!hasComment() || !isAdded() || !NetworkUtils.checkConnection(getActivity())) {
-            return;
-        }
-
-        CommentStatus newStatus = CommentStatus.APPROVED;
-        if (mComment.getStatusEnum() == CommentStatus.APPROVED) {
-            newStatus = CommentStatus.UNAPPROVED;
-        }
-
-        mComment.setStatus(newStatus.toString());
-        setModerateButtonForStatus(newStatus);
-        AniUtils.startAnimation(mBtnModerateIcon, R.anim.notifications_button_scale);
-        moderateComment(newStatus);
     }
 
     private void setModerateButtonForStatus(CommentStatus status) {

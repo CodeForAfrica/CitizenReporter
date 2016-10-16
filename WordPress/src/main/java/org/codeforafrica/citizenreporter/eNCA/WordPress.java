@@ -246,7 +246,7 @@ public class WordPress extends Application {
         mDialog.findViewById(R.id.submit_feedback).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    submitFeedback(mActivity, mDialog, accounts_spinner.getSelectedItem().toString(), feedbackDesc.getText().toString(), os_version, device_model);
+                submitFeedback(mActivity, mDialog, accounts_spinner.getSelectedItem().toString(), feedbackDesc.getText().toString(), os_version, device_model);
             }
         });
     }
@@ -291,9 +291,9 @@ public class WordPress extends Application {
 
 
             String username = "";
-                    if(WordPress.getCurrentBlog()!=null){
-                        WordPress.getCurrentBlog().getUsername();
-                    }
+            if(WordPress.getCurrentBlog()!=null){
+                WordPress.getCurrentBlog().getUsername();
+            }
 
             APIFunctions userFunction = new APIFunctions();
             JSONObject json = userFunction.submitFeedback(username, mEmail, mFeedback, mVersion, mModel);
@@ -456,37 +456,37 @@ public class WordPress extends Application {
     }
 
     public void capturePic(Activity activity, Context context){
-            boolean mShouldFinish = false;
-            Intent intent = new Intent(activity, StoryBoard.class);
-            intent.putExtra("quick-media", DeviceUtils.getInstance().hasCamera(context)
-                    ? Constants.QUICK_POST_PHOTO_CAMERA
-                    : Constants.QUICK_POST_PHOTO_LIBRARY);
-            intent.putExtra("isNew", true);
-            intent.putExtra("shouldFinish", mShouldFinish);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            activity.startActivity(intent);
+        boolean mShouldFinish = false;
+        Intent intent = new Intent(activity, StoryBoard.class);
+        intent.putExtra("quick-media", DeviceUtils.getInstance().hasCamera(context)
+                ? Constants.QUICK_POST_PHOTO_CAMERA
+                : Constants.QUICK_POST_PHOTO_LIBRARY);
+        intent.putExtra("isNew", true);
+        intent.putExtra("shouldFinish", mShouldFinish);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
     }
 
     public void captureVid(Activity activity, Context context){
-            boolean mShouldFinish = false;
-            Intent intent = new Intent(activity, StoryBoard.class);
-            intent.putExtra("quick-media", DeviceUtils.getInstance().hasCamera(context)
-                    ? Constants.QUICK_POST_VIDEO_CAMERA
-                    : Constants.QUICK_POST_PHOTO_LIBRARY);
-            intent.putExtra("isNew", true);
-            intent.putExtra("shouldFinish", mShouldFinish);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        boolean mShouldFinish = false;
+        Intent intent = new Intent(activity, StoryBoard.class);
+        intent.putExtra("quick-media", DeviceUtils.getInstance().hasCamera(context)
+                ? Constants.QUICK_POST_VIDEO_CAMERA
+                : Constants.QUICK_POST_PHOTO_LIBRARY);
+        intent.putExtra("isNew", true);
+        intent.putExtra("shouldFinish", mShouldFinish);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
     }
 
     public void captureAudio(Activity activity, Context context){
 
-            boolean mShouldFinish = false;
-            Intent intent = new Intent(activity, StoryBoard.class);
-            intent.putExtra("quick-media", Constants.QUICK_POST_AUDIO_MIC);
-            intent.putExtra("isNew", true);
-            intent.putExtra("shouldFinish", mShouldFinish);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        boolean mShouldFinish = false;
+        Intent intent = new Intent(activity, StoryBoard.class);
+        intent.putExtra("quick-media", Constants.QUICK_POST_AUDIO_MIC);
+        intent.putExtra("isNew", true);
+        intent.putExtra("shouldFinish", mShouldFinish);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
 
     }
@@ -942,9 +942,9 @@ public class WordPress extends Application {
     public static String getUserAgent() {
         if (mUserAgent == null) {
             mUserAgent = USER_AGENT_APPNAME + "/" + PackageUtils.getVersionName(getContext())
-                       + " (Android " + Build.VERSION.RELEASE + "; "
-                       + Locale.getDefault().toString() + "; "
-                       + Build.MANUFACTURER + " " + Build.MODEL + "/" + Build.PRODUCT + ")";
+                    + " (Android " + Build.VERSION.RELEASE + "; "
+                    + Locale.getDefault().toString() + "; "
+                    + Build.MANUFACTURER + " " + Build.MODEL + "/" + Build.PRODUCT + ")";
         }
         return mUserAgent;
     }

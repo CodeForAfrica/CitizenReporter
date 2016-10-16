@@ -1,8 +1,6 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.stats;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,56 +20,19 @@ import java.util.List;
 public class StatsClicksFragment extends StatsAbstractListFragment {
     public static final String TAG = StatsClicksFragment.class.getSimpleName();
 
-    private ClicksModel mClicks;
-
-    @Override
-    protected boolean hasDataAvailable() {
-        return mClicks != null;
-    }
-    @Override
-    protected void saveStatsData(Bundle outState) {
-        if (hasDataAvailable()) {
-            outState.putSerializable(ARG_REST_RESPONSE, mClicks);
-        }
-    }
-    @Override
-    protected void restoreStatsData(Bundle savedInstanceState) {
-        if (savedInstanceState.containsKey(ARG_REST_RESPONSE)) {
-            mClicks = (ClicksModel) savedInstanceState.getSerializable(ARG_REST_RESPONSE);
-        }
-    }
-
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.ClicksUpdated event) {
-        if (!shouldUpdateFragmentOnUpdateEvent(event)) {
-            return;
-        }
-
-        mGroupIdToExpandedMap.clear();
-        mClicks = event.mClicks;
-
-        updateUI();
-    }
-
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
-        if (!shouldUpdateFragmentOnErrorEvent(event)) {
-            return;
-        }
-
-        mClicks = null;
-        mGroupIdToExpandedMap.clear();
-        showErrorUI(event.mError);
-    }
-
     @Override
     protected void updateUI() {
         if (!isAdded()) {
             return;
         }
 
-        if (hasClicks()) {
-            BaseExpandableListAdapter adapter = new MyExpandableListAdapter(getActivity(), mClicks.getClickGroups());
+        if (isErrorResponse()) {
+            showErrorUI();
+            return;
+        }
+
+        if (!isDataEmpty() && ((ClicksModel) mDatamodels[0]).getClickGroups().size() > 0) {
+            BaseExpandableListAdapter adapter = new MyExpandableListAdapter(getActivity(), ((ClicksModel) mDatamodels[0]).getClickGroups());
             StatsUIHelper.reloadGroupViews(getActivity(), adapter, mGroupIdToExpandedMap, mList, getMaxNumberOfItemsToShowInList());
             showHideNoResultsUI(false);
         } else {
@@ -79,15 +40,11 @@ public class StatsClicksFragment extends StatsAbstractListFragment {
         }
     }
 
-    private boolean hasClicks() {
-        return mClicks != null
-                && mClicks.getClickGroups() != null
-                && mClicks.getClickGroups().size() > 0;
-    }
-
     @Override
     protected boolean isViewAllOptionAvailable() {
-        return (hasClicks() && mClicks.getClickGroups().size() > MAX_NUM_OF_ITEMS_DISPLAYED_IN_LIST);
+        return (!isDataEmpty(0)
+                && ((ClicksModel) mDatamodels[0]).getClickGroups() != null
+                && ((ClicksModel) mDatamodels[0]).getClickGroups().size() > MAX_NUM_OF_ITEMS_DISPLAYED_IN_LIST);
     }
 
     @Override
@@ -96,7 +53,7 @@ public class StatsClicksFragment extends StatsAbstractListFragment {
     }
 
     @Override
-    protected StatsService.StatsEndpointsEnum[] sectionsToUpdate() {
+    protected StatsService.StatsEndpointsEnum[] getSectionsToUpdate() {
         return new StatsService.StatsEndpointsEnum[]{
                 StatsService.StatsEndpointsEnum.CLICKS
         };
@@ -207,6 +164,8 @@ public class StatsClicksFragment extends StatsAbstractListFragment {
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.stats_list_cell, parent, false);
                 holder = new StatsViewHolder(convertView);
+                holder.networkImageView.setErrorImageResId(R.drawable.stats_icon_default_site_avatar);
+                holder.networkImageView.setDefaultImageResId(R.drawable.stats_icon_default_site_avatar);
                 convertView.setTag(holder);
             } else {
                 holder = (StatsViewHolder) convertView.getTag();
@@ -229,14 +188,8 @@ public class StatsClicksFragment extends StatsAbstractListFragment {
             // totals
             holder.totalsTextView.setText(FormatUtils.formatDecimal(total));
 
-            // Site icon
-            holder.networkImageView.setVisibility(View.GONE);
-            if (!TextUtils.isEmpty(icon)) {
-                holder.networkImageView.setImageUrl(
-                        GravatarUtils.fixGravatarUrl(icon, mResourceVars.headerAvatarSizePx),
-                        WPNetworkImageView.ImageType.GONE_UNTIL_AVAILABLE
-                );
-            }
+            holder.networkImageView.setImageUrl(GravatarUtils.fixGravatarUrl(icon, mResourceVars.headerAvatarSizePx), WPNetworkImageView.ImageType.BLAVATAR);
+            holder.networkImageView.setVisibility(View.VISIBLE);
 
             if (children == 0) {
                 holder.showLinkIcon();

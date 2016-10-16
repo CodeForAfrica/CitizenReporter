@@ -204,42 +204,42 @@ public class GCMIntentService extends GCMBaseIntentService {
     }
 
     private Bitmap iconFromUrl(String strURL){
-            try {
-                URL url = new URL(strURL);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(input);
-                return myBitmap;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
+        try {
+            URL url = new URL(strURL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
+    }
 
 
     private void generateAdvancedAssignmentNotification(){
-            PendingIntent imageIntent = PendingIntent.getActivity(this, 0, imageIntent(), 0);
-            PendingIntent videoIntent = PendingIntent.getActivity(this, 0, videoIntent(), 0);
-            PendingIntent audioIntent = PendingIntent.getActivity(this, 0, audioIntent(), 0);
+        PendingIntent imageIntent = PendingIntent.getActivity(this, 0, imageIntent(), 0);
+        PendingIntent videoIntent = PendingIntent.getActivity(this, 0, videoIntent(), 0);
+        PendingIntent audioIntent = PendingIntent.getActivity(this, 0, audioIntent(), 0);
 
-            Notification notif = new Notification.Builder(getApplicationContext())
-                    .setContentTitle("New Assignment" )
-                    .setContentText(getResources().getString(R.string.expand_to_view))
-                    .setSmallIcon(R.drawable.noticon_alert_big)
-                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ab_icon_edit))
-                    .setStyle(new Notification.InboxStyle()
-                            .addLine(message)
-                            .setBigContentTitle("New Assignment")
-                            .setSummaryText(assignmentDeadline))
-                    .setPriority(2)
-                    .addAction(R.mipmap.ic_camera_white, "", imageIntent)
-                    .addAction(R.mipmap.ic_video_white, "", videoIntent)
-                    .addAction(R.mipmap.ic_audio_white, "", audioIntent)
-                    .build();
-            NotificationManager notificationManager = (NotificationManager)getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(55, notif);
+        Notification notif = new Notification.Builder(getApplicationContext())
+                .setContentTitle("New Assignment" )
+                .setContentText(getResources().getString(R.string.expand_to_view))
+                .setSmallIcon(R.drawable.noticon_alert_big)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ab_icon_edit))
+                .setStyle(new Notification.InboxStyle()
+                        .addLine(message)
+                        .setBigContentTitle("New Assignment")
+                        .setSummaryText(assignmentDeadline))
+                .setPriority(Notification.PRIORITY_MAX)
+                .addAction(R.mipmap.ic_camera_white, "", imageIntent)
+                .addAction(R.mipmap.ic_video_white, "", videoIntent)
+                .addAction(R.mipmap.ic_audio_white, "", audioIntent)
+                .build();
+        NotificationManager notificationManager = (NotificationManager)getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(55, notif);
     }
     private void generatePaymentNotification() {
         if(iconFromUrl==null){
@@ -277,7 +277,7 @@ public class GCMIntentService extends GCMBaseIntentService {
                         .addLine(message)
                         .setBigContentTitle(getApplicationContext().getResources().getString(R.string.payment_notification))/*
                         .setSummaryText(assignmentDeadline)*/)
-                .setPriority(2)
+                .setPriority(Notification.PRIORITY_MAX)
                 .addAction(R.drawable.ic_check_white_24dp, "Confirm", confirmIntent)
                 .addAction(R.drawable.hs__action_cancel, "Dispute", disputeIntent)
                 .build();
@@ -308,7 +308,7 @@ public class GCMIntentService extends GCMBaseIntentService {
                         .addLine(message)
                         .setBigContentTitle(user)/*
                         .setSummaryText(assignmentDeadline)*/)
-                .setPriority(2)
+                .setPriority(Notification.PRIORITY_MAX)
                 .addAction(R.mipmap.ic_reply, "Reply", chatIntent)
                 .build();
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
@@ -327,12 +327,12 @@ public class GCMIntentService extends GCMBaseIntentService {
         Notification notif = new Notification.Builder(getApplicationContext())
                 .setContentTitle(user)
                 .setContentText(message)
-                        .setSmallIcon(R.drawable.my_site_icon_comments)
+                .setSmallIcon(R.drawable.my_site_icon_comments)
                 .setLargeIcon(iconFromUrl)
                 .setStyle(new Notification.InboxStyle()
                         .addLine(message)
                         .setBigContentTitle(user))
-                .setPriority(2)
+                .setPriority(Notification.PRIORITY_MAX)
                 .addAction(R.mipmap.ic_reply, "Reply", feedbackIntent)
                 .build();
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);

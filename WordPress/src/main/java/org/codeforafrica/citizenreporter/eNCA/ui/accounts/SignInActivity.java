@@ -38,7 +38,6 @@ public class SignInActivity extends Activity {
 
     private void actionMode(Bundle extras) {
         int actionMode = SIGN_IN_REQUEST;
-        String prefillUrl = "";
         if (extras != null) {
             actionMode = extras.getInt(START_FRAGMENT_KEY, -1);
 
@@ -51,7 +50,6 @@ public class SignInActivity extends Activity {
             } else if (extras.containsKey(ARG_IS_AUTH_ERROR)) {
                 mSignInFragment.showAuthErrorMessage();
             }
-            prefillUrl = extras.getString(EXTRA_PREFILL_URL, "");
         }
         switch (actionMode) {
             case ADD_SELF_HOSTED_BLOG:

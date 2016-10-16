@@ -111,7 +111,7 @@ public class PostsListAdapter extends BaseAdapter {
             } else {
                 switch (post.getStatusEnum()) {
                     case DRAFT:
-                        formattedStatus = mContext.getResources().getString(R.string.draft);
+                        formattedStatus = mContext.getResources().getString(R.string.uploaded);
                         break;
                     case PRIVATE:
                         formattedStatus = mContext.getResources().getString(R.string.post_private);
@@ -142,7 +142,7 @@ public class PostsListAdapter extends BaseAdapter {
 
         // load more posts when we near the end
         if (mOnLoadMoreListener != null && position >= getCount() - 1
-                && position >= PostsListFragment.POSTS_REQUEST_COUNT - 1) {
+                && position >= RipotiPostsListFragment.POSTS_REQUEST_COUNT - 1) {
             mOnLoadMoreListener.onLoadMore();
         }
 

@@ -1,6 +1,5 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.stats;
 
-import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,56 +16,22 @@ import java.util.Calendar;
 public class StatsInsightsMostPopularFragment extends StatsAbstractInsightsFragment {
     public static final String TAG = StatsInsightsMostPopularFragment.class.getSimpleName();
 
-    private InsightsPopularModel mInsightsPopularModel;
 
-    @Override
-    protected boolean hasDataAvailable() {
-        return mInsightsPopularModel != null;
-    }
-    @Override
-    protected void saveStatsData(Bundle outState) {
-        if (hasDataAvailable()) {
-            outState.putSerializable(ARG_REST_RESPONSE, mInsightsPopularModel);
-        }
-    }
-    @Override
-    protected void restoreStatsData(Bundle savedInstanceState) {
-        if (savedInstanceState.containsKey(ARG_REST_RESPONSE)) {
-            mInsightsPopularModel = (InsightsPopularModel) savedInstanceState.getSerializable(ARG_REST_RESPONSE);
-        }
-    }
+    void customizeUIWithResults() {
+        mResultContainer.removeAllViews();
 
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.InsightsPopularUpdated event) {
-        if (!shouldUpdateFragmentOnUpdateEvent(event)) {
+        // Another check that the data is available
+        if (isDataEmpty(0) || !(mDatamodels[0] instanceof InsightsPopularModel)) {
+            showErrorUI(null);
             return;
         }
 
-        mInsightsPopularModel = event.mInsightsPopularModel;
-        updateUI();
-    }
-
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
-        if (!shouldUpdateFragmentOnErrorEvent(event)) {
-            return;
-        }
-
-        mInsightsPopularModel = null;
-        showErrorUI(event.mError);
-    }
-
-    protected void updateUI() {
-        super.updateUI();
-
-        if (!isAdded() || !hasDataAvailable()) {
-            return;
-        }
+        InsightsPopularModel data = (InsightsPopularModel) mDatamodels[0];
 
         LinearLayout ll = (LinearLayout) getActivity().getLayoutInflater()
                 .inflate(R.layout.stats_insights_most_popular_item, (ViewGroup) mResultContainer.getRootView(), false);
 
-        int dayOfTheWeek = mInsightsPopularModel.getHighestDayOfWeek();
+        int dayOfTheWeek = data.getHighestDayOfWeek();
 
         Calendar c = Calendar.getInstance();
         c.setFirstDayOfWeek(Calendar.MONDAY);
@@ -101,21 +66,21 @@ public class StatsInsightsMostPopularFragment extends StatsAbstractInsightsFragm
         final TextView mostPopularDayPercentTextView = (TextView) ll.findViewById(R.id.stats_most_popular_day_percent);
         mostPopularDayPercentTextView.setText(
                 String.format(
-                        getString(R.string.stats_insights_most_popular_percent_views),
-                        roundToInteger(mInsightsPopularModel.getHighestDayPercent())
+                        getString(R.string.stats_insights_most_popular_percent_weekly_views),
+                        roundToInteger(data.getHighestDayPercent())
                 )
         );
 
         TextView mostPopularHourTextView = (TextView) ll.findViewById(R.id.stats_most_popular_hour);
         DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(getActivity());
-        c.set(Calendar.HOUR_OF_DAY, mInsightsPopularModel.getHighestHour());
+        c.set(Calendar.HOUR_OF_DAY, data.getHighestHour());
         c.set(Calendar.MINUTE, 0);
         mostPopularHourTextView.setText(timeFormat.format(c.getTime()));
         final TextView mostPopularHourPercentTextView = (TextView) ll.findViewById(R.id.stats_most_popular_hour_percent);
         mostPopularHourPercentTextView.setText(
                 String.format(
-                        getString(R.string.stats_insights_most_popular_percent_views),
-                        roundToInteger(mInsightsPopularModel.getHighestHourPercent())
+                        getString(R.string.stats_insights_most_popular_percent_daily_views),
+                        roundToInteger(data.getHighestHourPercent())
                 )
         );
 
@@ -136,7 +101,7 @@ public class StatsInsightsMostPopularFragment extends StatsAbstractInsightsFragm
     }
 
     @Override
-    protected StatsService.StatsEndpointsEnum[] sectionsToUpdate() {
+    protected StatsService.StatsEndpointsEnum[] getSectionsToUpdate() {
         return new StatsService.StatsEndpointsEnum[]{
                 StatsService.StatsEndpointsEnum.INSIGHTS_POPULAR
         };

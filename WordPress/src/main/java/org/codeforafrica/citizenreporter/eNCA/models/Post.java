@@ -18,8 +18,6 @@ public class Post implements Serializable {
 
     public static String QUICK_MEDIA_TYPE_PHOTO = "QuickPhoto";
 
-    private static long FEATURED_IMAGE_INIT_VALUE = -2;
-
     private long localTablePostId;
     private int localTableBlogId;
     private String categories;
@@ -155,7 +153,10 @@ public class Post implements Serializable {
     }
 
     public JSONArray getJSONCategories() {
+        return null;
+/*
         JSONArray jArray = null;
+
         if (categories == null) {
             categories = "[]";
         }
@@ -169,11 +170,11 @@ public class Post implements Serializable {
         } catch (JSONException e) {
             AppLog.e(T.POSTS, e);
         }
-        return jArray;
+        return jArray;*/
     }
 
     public void setJSONCategories(JSONArray categories) {
-        this.categories = categories.toString();
+//        this.categories = categories.toString();
     }
 
     public JSONArray getCustomFields() {

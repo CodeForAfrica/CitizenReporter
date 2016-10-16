@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 /**
  * views the activity log (see utils/AppLog.java)
  */
-public class AppLogViewerActivity extends AppCompatActivity {
+public class AppLogViewerActivity extends ActionBarActivity {
     private static final int ID_SHARE = 1;
     private static final int ID_COPY_TO_CLIPBOARD = 2;
 
@@ -38,6 +38,7 @@ public class AppLogViewerActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
+            actionBar.setElevation(0.0f);
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -137,7 +138,7 @@ public class AppLogViewerActivity extends AppCompatActivity {
         // Copy to clipboard button
         MenuItem item = menu.add(Menu.NONE, ID_COPY_TO_CLIPBOARD, Menu.NONE, android.R.string.copy);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        item.setIcon(R.drawable.ic_content_copy_white_24dp);
+        item.setIcon(R.drawable.ic_add_white_24dp);
         // Share button
         item = menu.add(Menu.NONE, ID_SHARE, Menu.NONE, R.string.reader_btn_share);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);

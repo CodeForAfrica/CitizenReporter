@@ -17,7 +17,7 @@
         android:layout_weight="1"
         android:layout_height="match_parent"/>
     <ImageView
-        android:src="@mipmap/ic_camera"
+        android:src="@mipmap/ic_camera_lib"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <View
@@ -38,7 +38,7 @@
         android:layout_weight="1"
         android:layout_height="match_parent"/>
     <ImageView
-        android:src="@mipmap/ic_video"
+        android:src="@mipmap/ic_video_lib"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <View
@@ -59,7 +59,7 @@
         android:layout_weight="1"
         android:layout_height="match_parent"/>
     <ImageView
-        android:src="@mipmap/ic_mic"
+        android:src="@mipmap/ic_mic_lib"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
     <View

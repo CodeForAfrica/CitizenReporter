@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="0px"
+    android:orientation="vertical">
 
     <org.wordpress.android.util.widgets.CustomSwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/ptr_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -13,24 +16,11 @@
             android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:cacheColorHint="#00000000"
+            android:textColor="#444444"
             android:divider="@drawable/list_divider"
             android:dividerHeight="1px"
-            android:textColor="#444444" />
+            android:cacheColorHint="#00000000">
+        </ListView>
 
     </org.wordpress.android.util.widgets.CustomSwipeRefreshLayout>
-
-    <org.wordpress.android.widgets.WPTextView
-        android:id="@+id/empty_view"
-        style="@style/WordPress.EmptyList.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/empty_list_title_bottom_margin"
-        android:layout_marginLeft="@dimen/empty_list_title_side_margin"
-        android:layout_marginRight="@dimen/empty_list_title_side_margin"
-        android:text="@string/empty_list_default"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
-</FrameLayout>
+</LinearLayout>

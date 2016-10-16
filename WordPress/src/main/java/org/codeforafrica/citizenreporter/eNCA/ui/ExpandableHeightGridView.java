@@ -22,7 +22,7 @@ public class ExpandableHeightGridView extends GridView
     }
 
     public ExpandableHeightGridView(Context context, AttributeSet attrs,
-            int defStyle)
+                                    int defStyle)
     {
         super(context, attrs, defStyle);
     }

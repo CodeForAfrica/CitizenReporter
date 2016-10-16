@@ -311,19 +311,19 @@ public class SlidingTabLayout extends HorizontalScrollView {
         for (int i = 0; i < adapter.getCount(); i++) {
             View tabView = null;
             //if (showIcons) {
-                tabView = LayoutInflater.from(getContext()).inflate(mTabViewLayoutId, mTabStrip, false);
-                ImageView imgIcon = (ImageView) tabView.findViewById(mTabViewIconViewId);
-                imgIcon.setImageDrawable(getContext().getResources().getDrawable(mIcons[i]));
-                TextView tabTitleView = (TextView) tabView.findViewById(mTabViewTextViewId);
-                tabTitleView.setText(getContext().getResources().getString(mTitles[i]));
+            tabView = LayoutInflater.from(getContext()).inflate(mTabViewLayoutId, mTabStrip, false);
+            ImageView imgIcon = (ImageView) tabView.findViewById(mTabViewIconViewId);
+            imgIcon.setImageDrawable(getContext().getResources().getDrawable(mIcons[i]));
+            TextView tabTitleView = (TextView) tabView.findViewById(mTabViewTextViewId);
+            tabTitleView.setText(getContext().getResources().getString(mTitles[i]));
 
             // tag the badge for this tab so it can be found by setBadge()
-                //if (mTabBadgeViewId != 0) {
-                //    View badgeView = tabView.findViewById(mTabBadgeViewId);
-                //    if (badgeView != null) {
-                //        badgeView.setTag(makeBadgeTag(i));
-                //    }
-               // }
+            //if (mTabBadgeViewId != 0) {
+            //    View badgeView = tabView.findViewById(mTabBadgeViewId);
+            //    if (badgeView != null) {
+            //        badgeView.setTag(makeBadgeTag(i));
+            //    }
+            // }
             //}
             /*else {
                 TextView tabTitleView = null;

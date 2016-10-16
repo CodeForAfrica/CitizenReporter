@@ -1,7 +1,6 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.stats;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,48 +21,14 @@ import java.util.List;
 public class StatsPublicizeFragment extends StatsAbstractListFragment {
     public static final String TAG = StatsPublicizeFragment.class.getSimpleName();
 
-    private PublicizeModel mPublicizeData;
-
-    @Override
-    protected boolean hasDataAvailable() {
-        return mPublicizeData != null;
-    }
-    @Override
-    protected void saveStatsData(Bundle outState) {
-        if (mPublicizeData != null) {
-            outState.putSerializable(ARG_REST_RESPONSE, mPublicizeData);
-        }
-    }
-    @Override
-    protected void restoreStatsData(Bundle savedInstanceState) {
-        if (savedInstanceState.containsKey(ARG_REST_RESPONSE)) {
-            mPublicizeData = (PublicizeModel) savedInstanceState.getSerializable(ARG_REST_RESPONSE);
-        }
-    }
-
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.PublicizeUpdated event) {
-        if (!shouldUpdateFragmentOnUpdateEvent(event)) {
-            return;
-        }
-
-        mPublicizeData = event.mPublicizeModel;
-        updateUI();
-    }
-
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
-        if (!shouldUpdateFragmentOnErrorEvent(event)) {
-            return;
-        }
-
-        mPublicizeData = null;
-        showErrorUI(event.mError);
-    }
-
     @Override
     protected void updateUI() {
         if (!isAdded()) {
+            return;
+        }
+
+        if (isErrorResponse()) {
+            showErrorUI();
             return;
         }
 
@@ -77,16 +42,16 @@ public class StatsPublicizeFragment extends StatsAbstractListFragment {
     }
 
     private boolean hasPublicize() {
-        return mPublicizeData != null
-                && mPublicizeData.getServices() != null
-                && mPublicizeData.getServices().size() > 0;
+        return !isDataEmpty()
+                && ((PublicizeModel) mDatamodels[0]).getServices() != null
+                && ((PublicizeModel) mDatamodels[0]).getServices().size() > 0;
     }
 
     private List<SingleItemModel> getPublicize() {
         if (!hasPublicize()) {
             return null;
         }
-        return mPublicizeData.getServices();
+        return ((PublicizeModel) mDatamodels[0]).getServices();
     }
 
     @Override
@@ -225,7 +190,7 @@ public class StatsPublicizeFragment extends StatsAbstractListFragment {
     }
 
     @Override
-    protected StatsService.StatsEndpointsEnum[] sectionsToUpdate() {
+    protected StatsService.StatsEndpointsEnum[] getSectionsToUpdate() {
         return new StatsService.StatsEndpointsEnum[]{
                 StatsService.StatsEndpointsEnum.PUBLICIZE
         };

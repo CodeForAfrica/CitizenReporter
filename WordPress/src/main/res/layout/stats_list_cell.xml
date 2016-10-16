@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -25,7 +24,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp"
             android:visibility="gone"
-            app:srcCompat="@drawable/stats_link" />
+            android:src="@drawable/stats_link" />
 
         <ImageView
             android:id="@+id/stats_list_cell_chevron"
@@ -34,7 +33,7 @@
             android:layout_marginRight="@dimen/margin_large"
             android:layout_marginEnd="@dimen/margin_large"
             android:visibility="gone"
-            app:srcCompat="@drawable/stats_chevron_right" />
+            android:src="@drawable/stats_chevron_right" />
 
         <org.codeforafrica.citizenreporter.eNCA.widgets.WPNetworkImageView
             android:id="@+id/stats_list_cell_image"
@@ -73,8 +72,7 @@
             android:background="?android:selectableItemBackground"
             android:paddingLeft="@dimen/margin_small"
             android:paddingRight="@dimen/margin_small"
-            android:contentDescription="@string/more"
-            app:srcCompat="@drawable/ic_action_more" />
+            android:src="@drawable/ic_action_more" />
 
         <LinearLayout
             android:id="@+id/stats_list_cell_total_container"

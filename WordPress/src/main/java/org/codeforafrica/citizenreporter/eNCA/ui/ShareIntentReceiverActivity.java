@@ -5,8 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -58,7 +57,7 @@ public class ShareIntentReceiverActivity extends ActionBarActivity implements On
 
         mBlogSpinnerTitle = (TextView) findViewById(R.id.blog_spinner_title);
         mBlogSpinner = (Spinner) findViewById(R.id.blog_spinner);
-        mAlwaysUseCheckBox = (CheckBox) findViewById(R.id.always_use_checkbox);
+        mAlwaysUseCheckBox = (CheckBox) findViewById(R.id.checkbox);
         String[] blogNames = getBlogNames();
         if (blogNames == null) {
             finishIfNoVisibleBlogs();
@@ -159,7 +158,7 @@ public class ShareIntentReceiverActivity extends ActionBarActivity implements On
             Blog blog;
             for (int i = 0; i < accounts.size(); i++) {
                 Map<String, Object> account = accounts.get(i);
-                blogNames[i] = BlogUtils.getBlogNameOrHostNameFromAccountMap(account);
+                blogNames[i] = BlogUtils.getBlogNameFromAccountMap(account);
                 mAccountIDs[i] = (Integer) account.get("id");
                 blog = WordPress.wpDB.instantiateBlogByLocalId(mAccountIDs[i]);
                 if (blog == null) {

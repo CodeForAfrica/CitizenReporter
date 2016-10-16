@@ -47,8 +47,7 @@ public class ReaderImageList extends ArrayList<String> {
         }
     }
 
-    public void addImageUrl(@SuppressWarnings("SameParameterValue") int index,
-                            String imageUrl) {
+    public void addImageUrl(int index, String imageUrl) {
         if (imageUrl != null && imageUrl.startsWith("http")) {
             this.add(index, fixImageUrl(imageUrl));
         }

@@ -478,7 +478,7 @@ public class StoryBoardEditorFragment extends EditorFragmentAbstract implements 
         Uri imageUri = Uri.parse(mediaFile.getFilePath());
         Bitmap thumbnailBitmap;
         if (MediaUtils.isVideo(imageUri.toString())) {
-            thumbnailBitmap = BitmapFactory.decodeResource(context.getResources(), org.wordpress.android.editor.R.drawable.media_movieclip);
+            thumbnailBitmap = BitmapFactory.decodeResource(context.getResources(), org.wordpress.android.editor.R.drawable.media_movieclip_editor);
         } else {
             thumbnailBitmap = ImageUtils.getWPImageSpanThumbnailFromFilePath(context, imageUri.getEncodedPath(),
                     ImageUtils.getMaximumThumbnailWidthForEditor(context));
@@ -494,7 +494,7 @@ public class StoryBoardEditorFragment extends EditorFragmentAbstract implements 
     }
 
     private WPEditImageSpan createWPEditImageSpanRemote(Context context, MediaFile mediaFile) {
-        int drawable = mediaFile.isVideo() ? org.wordpress.android.editor.R.drawable.media_movieclip : org.wordpress.android.editor.R.drawable.legacy_dashicon_format_image_big_grey;
+        int drawable = mediaFile.isVideo() ? org.wordpress.android.editor.R.drawable.media_movieclip_editor : org.wordpress.android.editor.R.drawable.legacy_dashicon_format_image_big_grey;
         Uri uri = Uri.parse(mediaFile.getFileURL());
         WPEditImageSpan imageSpan = new WPEditImageSpan(context, drawable, uri);
         imageSpan.setMediaFile(mediaFile);

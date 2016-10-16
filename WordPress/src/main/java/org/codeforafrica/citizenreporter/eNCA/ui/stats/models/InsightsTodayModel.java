@@ -3,11 +3,13 @@ package org.codeforafrica.citizenreporter.eNCA.ui.stats.models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class InsightsTodayModel extends BaseStatsModel {
+import java.io.Serializable;
+
+public class InsightsTodayModel implements Serializable {
 
     private String mBlogID;
     private String mDate;
-    private String mPeriod;
+    private String period;
     private int mVisitors;
     private int mViews;
     private int mLikes;
@@ -18,7 +20,7 @@ public class InsightsTodayModel extends BaseStatsModel {
     public InsightsTodayModel(String blogID, JSONObject response) throws JSONException {
         this.setBlogID(blogID);
         this.mDate = response.getString("date");
-        this.mPeriod = response.getString("period");
+        this.period = response.getString("period");
         this.mViews = response.optInt("views");
         this.mVisitors = response.optInt("visitors");
         this.mLikes = response.optInt("likes");

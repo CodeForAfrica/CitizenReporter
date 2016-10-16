@@ -94,7 +94,7 @@ public class ReaderBlogInfoView extends FrameLayout {
         if (blogInfo.hasName()) {
             txtBlogName.setText(blogInfo.getName());
         } else if (blogInfo.hasUrl()) {
-            txtBlogName.setText(UrlUtils.getDomainFromUrl(blogInfo.getUrl()));
+            txtBlogName.setText(UrlUtils.getHost(blogInfo.getUrl()));
         } else {
             txtBlogName.setText(getContext().getString(R.string.reader_untitled_post));
         }
@@ -103,7 +103,7 @@ public class ReaderBlogInfoView extends FrameLayout {
             txtDescription.setText(blogInfo.getDescription());
             txtDescription.setVisibility(View.VISIBLE);
         } else if (blogInfo.hasUrl()) {
-            txtDescription.setText(UrlUtils.getDomainFromUrl(blogInfo.getUrl()));
+            txtDescription.setText(UrlUtils.getHost(blogInfo.getUrl()));
             txtDescription.setVisibility(View.VISIBLE);
         } else {
             txtDescription.setVisibility(View.GONE);

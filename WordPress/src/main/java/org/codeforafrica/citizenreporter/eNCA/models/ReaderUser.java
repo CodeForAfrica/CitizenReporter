@@ -16,6 +16,9 @@ public class ReaderUser {
     private String profileUrl;
     private String avatarUrl;
 
+    // isFollowed isn't read from json or stored in db - used by ReaderUserAdapter to mark followed users
+    public transient boolean isFollowed;
+
     public static ReaderUser fromJson(JSONObject json) {
         ReaderUser user = new ReaderUser();
         if (json==null)
@@ -78,14 +81,9 @@ public class ReaderUser {
         return !TextUtils.isEmpty(url);
     }
 
-    public boolean hasAvatarUrl() {
-        return !TextUtils.isEmpty(avatarUrl);
-    }
-
     public boolean hasBlogId() {
         return (blogId != 0);
     }
-
     /*
      * not stored - used by ReaderUserAdapter for performance
      */
@@ -102,7 +100,7 @@ public class ReaderUser {
     }
 
     public boolean isSameUser(ReaderUser user) {
-        if (user == null)
+        if (user==null)
             return false;
         if (this.userId != user.userId)
             return false;

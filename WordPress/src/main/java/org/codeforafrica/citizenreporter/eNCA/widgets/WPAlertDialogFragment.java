@@ -15,8 +15,8 @@ import org.wordpress.android.util.StringUtils;
 
 public class WPAlertDialogFragment extends DialogFragment implements DialogInterface.OnClickListener {
     private static enum WPAlertDialogType {ALERT,    // simple ok dialog with error message
-                                           CONFIRM,  // dialog with yes/no and callback when positive button clicked
-                                           URL_INFO} // info dialog that shows url when positive button clicked
+        CONFIRM,  // dialog with yes/no and callback when positive button clicked
+        URL_INFO} // info dialog that shows url when positive button clicked
 
     private static final String ARG_TITLE      = "title";
     private static final String ARG_MESSAGE    = "message";
@@ -121,11 +121,11 @@ public class WPAlertDialogFragment extends DialogFragment implements DialogInter
                 final String infoTitle = StringUtils.notNullStr(bundle.getString(ARG_INFO_TITLE));
                 final String infoURL = StringUtils.notNullStr(bundle.getString(ARG_INFO_URL));
                 builder.setPositiveButton(infoTitle, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (!TextUtils.isEmpty(infoURL))
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(infoURL)));
-                        }
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (!TextUtils.isEmpty(infoURL))
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(infoURL)));
+                    }
                 });
                 break;
         }

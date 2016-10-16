@@ -27,34 +27,17 @@ public class ReaderActions {
     }
 
     /*
-     * listener when a specific action is performed (liking a post, etc.)
+     * result when a specific action is performed (liking a post, etc.)
      */
     public interface ActionListener {
-        void onActionResult(boolean succeeded);
+        public void onActionResult(boolean succeeded);
     }
 
     /*
-     * helper routine for telling an action listener the call succeeded or failed w/o having to null check
-     */
-    public static void callActionListener(ActionListener actionListener, boolean succeeded) {
-        if (actionListener != null) {
-            actionListener.onActionResult(succeeded);
-        }
-    }
-
-    /*
-     * listener when the failure status code is required
-     */
-    public interface OnRequestListener {
-        void onSuccess();
-        void onFailure(int statusCode);
-    }
-
-    /*
-     * listener when submitting a comment
+     * result when submitting a comment
      */
     public interface CommentActionListener {
-        void onActionResult(boolean succeeded, ReaderComment newComment);
+        public void onActionResult(boolean succeeded, ReaderComment newComment);
     }
 
     /*
@@ -70,21 +53,20 @@ public class ReaderActions {
         }
     }
     public interface UpdateResultListener {
-        void onUpdateResult(UpdateResult result);
+        public void onUpdateResult(UpdateResult result);
     }
 
     /*
      * used by adapters to notify when more data should be loaded
      */
     public interface DataRequestedListener {
-        void onRequestData();
+        public void onRequestData();
     }
 
     /*
      * used by blog preview when requesting latest info about a blog
      */
     public interface UpdateBlogInfoListener {
-        void onResult(ReaderBlog blogInfo);
+        public void onResult(ReaderBlog blogInfo);
     }
-
 }

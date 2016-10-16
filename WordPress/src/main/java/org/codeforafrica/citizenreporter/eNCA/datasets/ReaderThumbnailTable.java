@@ -45,13 +45,15 @@ public class ReaderThumbnailTable {
     }
 
     public static String getThumbnailUrl(String fullUrl) {
-        if (TextUtils.isEmpty(fullUrl)) {
+        if (TextUtils.isEmpty(fullUrl))
             return null;
-        }
-        return SqlUtils.stringForQuery(
-                ReaderDatabase.getReadableDb(),
-                "SELECT thumbnail_url FROM tbl_thumbnails WHERE full_url=?",
-                new String[]{fullUrl});
+
+        // if this is a YouTube video we can determine the thumbnail url from the passed url, so we
+        // don't need to store the full url nor query for it
+        if (ReaderVideoUtils.isYouTubeVideoLink(fullUrl))
+            return ReaderVideoUtils.getYouTubeThumbnailUrl(fullUrl);
+
+        return SqlUtils.stringForQuery(ReaderDatabase.getReadableDb(), "SELECT thumbnail_url FROM tbl_thumbnails WHERE full_url=?", new String[]{fullUrl});
     }
 
 }

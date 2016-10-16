@@ -77,7 +77,7 @@ public class ReaderPost {
         }
 
         // remove HTML from the excerpt
-        post.excerpt = HtmlUtils.fastStripHtml(JSONUtils.getString(json, "excerpt")).trim();
+        post.excerpt = HtmlUtils.fastStripHtml(JSONUtils.getString(json, "excerpt"));
 
         post.text = JSONUtils.getString(json, "content");
         post.title = JSONUtils.getStringDecoded(json, "title");
@@ -201,7 +201,9 @@ public class ReaderPost {
       * assigns author-related info to the passed post from the passed JSON "author" object
       */
     private static void assignAuthorFromJson(ReaderPost post, JSONObject jsonAuthor) {
-        if (jsonAuthor == null) return;
+        if (jsonAuthor == null) {
+            return;
+        }
 
         post.authorName = JSONUtils.getString(jsonAuthor, "name");
         post.postAvatar = JSONUtils.getString(jsonAuthor, "avatar_URL");
@@ -240,12 +242,13 @@ public class ReaderPost {
             int postCount = jsonThisTag.optInt("post_count");
             if (postCount > popularCount) {
                 nextMostPopularTag = mostPopularTag;
-                mostPopularTag = JSONUtils.getStringDecoded(jsonThisTag, "slug");
+                mostPopularTag = JSONUtils.getString(jsonThisTag, "name");
                 popularCount = postCount;
             }
         }
 
-        // don't set primary tag if one is already set
+        // don't set primary tag if one is already set (may have been set from the editorial
+        // section if this is a Freshly Pressed post)
         if (!post.hasPrimaryTag()) {
             post.setPrimaryTag(mostPopularTag);
         }
@@ -312,19 +315,6 @@ public class ReaderPost {
     public void setExcerpt(String excerpt) {
         this.excerpt = StringUtils.notNullStr(excerpt);
     }
-
-    // https://codex.wordpress.org/Post_Formats
-    public String getFormat() {
-        return StringUtils.notNullStr(format);
-    }
-    public void setFormat(String format) {
-        this.format = StringUtils.notNullStr(format);
-    }
-
-    public boolean isGallery() {
-        return format != null && format.equals("gallery");
-    }
-
 
     public String getUrl() {
         return StringUtils.notNullStr(url);

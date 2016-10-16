@@ -1,8 +1,7 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.reader;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,12 +15,11 @@ import org.codeforafrica.citizenreporter.eNCA.ui.reader.adapters.ReaderUserAdapt
 import org.codeforafrica.citizenreporter.eNCA.ui.reader.utils.ReaderUtils;
 import org.codeforafrica.citizenreporter.eNCA.ui.reader.views.ReaderRecyclerView;
 import org.wordpress.android.util.DisplayUtils;
-import org.wordpress.android.widgets.RecyclerItemDecoration;
 
 /*
  * displays a list of users who like a specific reader post
  */
-public class ReaderUserListActivity extends AppCompatActivity {
+public class ReaderUserListActivity extends ActionBarActivity {
 
     private ReaderRecyclerView mRecyclerView;
     private ReaderUserAdapter mAdapter;
@@ -35,21 +33,15 @@ public class ReaderUserListActivity extends AppCompatActivity {
         setTitle(null);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBackPressed();
-                }
-            });
-        }
-
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            getSupportActionBar().setDisplayShowTitleEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState != null) {
             mRestorePosition = savedInstanceState.getInt(ReaderConstants.KEY_RESTORE_POSITION);
@@ -58,7 +50,7 @@ public class ReaderUserListActivity extends AppCompatActivity {
         int spacingHorizontal = 0;
         int spacingVertical = DisplayUtils.dpToPx(this, 1);
         mRecyclerView = (ReaderRecyclerView) findViewById(R.id.recycler_view);
-        mRecyclerView.addItemDecoration(new RecyclerItemDecoration(spacingHorizontal, spacingVertical));
+        mRecyclerView.addItemDecoration(new ReaderRecyclerView.ReaderItemDecoration(spacingHorizontal, spacingVertical));
 
         long blogId = getIntent().getLongExtra(ReaderConstants.ARG_BLOG_ID, 0);
         long postId = getIntent().getLongExtra(ReaderConstants.ARG_POST_ID, 0);

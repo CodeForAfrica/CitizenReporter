@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/tools">
 
     <string name="app_name" translatable="false">eNCA</string>
     <string name="site_description_1">Fighting Misinformation and</string>
@@ -137,7 +137,6 @@
     <string name="pick_photo">Select photo</string>
     <string name="pick_video">Select video</string>
     <string name="capture_or_pick_photo">Capture or select photo</string>
-    <string name="reader_toast_err_get_post">Unable to retrieve this post</string>
     <string name="media_error_no_permission">You don\'t have permission to view the media library</string>
     <string name="media_error_no_permission_upload">You don\'t have permission to upload media to the site</string>
     <string name="access_media_permission_required">Permissions required in order to access media</string>
@@ -290,6 +289,7 @@
     <string name="posts_fetching">Fetching …</string>
     <string name="pages_fetching">Fetching pages…</string>
     <string name="toast_err_post_uploading">Unable to open post while it\'s uploading</string>
+    <string name="reader_page_popular_tags">Popular tags</string>
 
     <!-- reload drop down -->
     <string name="loading">Loading…</string>
@@ -444,19 +444,19 @@
     <string name="pref_key_post_sig_section" translatable="false">wp_post_signature</string>
     <string name="pref_key_post_sig_enabled" translatable="false">wp_pref_signature_enabled</string>
     <string name="pref_key_post_sig" translatable="false">wp_pref_post_signature</string>
-    <string name="pref_key_passlock_section" translatable="false">wp_passcode_lock_category</string>
-    <string name="pref_key_passlock" translatable="false">wp_pref_passlock_enabled</string>
+    <!--<string name="pref_key_passlock_section" translatable="false">wp_passcode_lock_category</string>-->
+    <!--<string name="pref_key_passlock" translatable="false">wp_pref_passlock_enabled</string>-->
     <string name="pref_key_shared_pref_section" translatable="false">wp_share_pref</string>
     <string name="pref_key_reset_shared_pref" translatable="false">wp_reset_share_pref</string>
     <string name="pref_key_privacy_section" translatable="false">wp_privacy</string>
-    <string name="pref_key_send_usage" translatable="false">wp_pref_send_usage_stats</string>
-    <string name="pref_key_about_section" translatable="false">wp_pref_app_about_section</string>
-    <string name="pref_key_language" translatable="false">wp_pref_language</string>
-    <string name="pref_key_app_about" translatable="false">wp_pref_app_about</string>
-    <string name="pref_key_oss_licenses" translatable="false">wp_pref_open_source_licenses</string>
-    <string name="pref_notification_blogs" translatable="false">wp_pref_notification_blogs</string>
-    <string name="pref_notifications_enabled" translatable="false">wp_pref_notifications_enabled</string>
-    <string name="pref_notification_types" translatable="false">wp_pref_notification_types</string>
+    <!--<string name="pref_key_send_usage" translatable="false">wp_pref_send_usage_stats</string>-->
+    <!--<string name="pref_key_about_section" translatable="false">wp_pref_app_about_section</string>-->
+    <!--<string name="pref_key_language" translatable="false">wp_pref_language</string>-->
+    <!--<string name="pref_key_app_about" translatable="false">wp_pref_app_about</string>-->
+    <!--<string name="pref_key_oss_licenses" translatable="false">wp_pref_open_source_licenses</string>-->
+    <!--<string name="pref_notification_blogs" translatable="false">wp_pref_notification_blogs</string>-->
+    <!--<string name="pref_notifications_enabled" translatable="false">wp_pref_notifications_enabled</string>-->
+    <!--<string name="pref_notification_types" translatable="false">wp_pref_notification_types</string>-->
     <!--     Begin     -->
     <!-- Site Settings -->
     <!--               -->
@@ -466,7 +466,6 @@
     <string name="privacy">Privacy</string>
     <string name="related_posts">Related Posts</string>
     <string name="more">More</string>
-    <string name="none">None</string>
     <string name="disabled">Disabled</string>
     <string name="comments">Comments</string>
     <string name="close_after">Close after</string>
@@ -1188,10 +1187,10 @@
     <string name="reader_empty_posts_in_blog">This blog is empty</string>
 
     <!-- layout tags - do not translate -->
-    <string name="fragment_tag_comment_list" translatable="false">fragment_comment_list</string>
-    <string name="fragment_tag_comment_detail" translatable="false">fragment_comment_detail</string>
-    <string name="fragment_tag_reader_post_list" translatable="false">fragment_reader_post_list</string>
-    <string name="fragment_tag_reader_post_detail" translatable="false">fragment_reader_post_detail</string>
+    <!--<string name="fragment_tag_comment_list" translatable="false">fragment_comment_list</string>-->
+    <!--<string name="fragment_tag_comment_detail" translatable="false">fragment_comment_detail</string>-->
+    <!--<string name="fragment_tag_reader_post_list" translatable="false">fragment_reader_post_list</string>-->
+    <!--<string name="fragment_tag_reader_post_detail" translatable="false">fragment_reader_post_detail</string>-->
 
     <!-- NUX strings -->
     <string name="create_account_wpcom">Create an account on WordPress.com</string>
@@ -1540,5 +1539,19 @@
     </string-array>
 
     <string name="use_datepicker">Use DatePicker</string>
+
+    <!-- Special characters -->
+    <string name="bullet" translatable="false">\u2022</string>
+    <string name="previous_button" translatable="false">&lt;</string>
+    <string name="next_button" translatable="false">&gt;</string>
+    <string name="vertical_line" translatable="false">\u007C</string>
+
+    <!-- Noticons -->
+    <string name="noticon_clock" translatable="false">\uf303</string>
+    <string name="noticon_note" translatable="false">\uf814</string>
+    <string name="button_invite">Invite</string>
+    <string name="pref_key_passcode_toggle">Pin lock</string>
+    <string name="pref_key_change_passcode">Change pin</string>
+    <string name="reader_title_reblog">Reblog</string>
 
 </resources>

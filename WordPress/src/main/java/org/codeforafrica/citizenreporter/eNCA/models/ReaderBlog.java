@@ -121,11 +121,6 @@ public class ReaderBlog {
     public boolean hasUrl() {
         return !TextUtils.isEmpty(url);
     }
-
-    public boolean hasFeedUrl() {
-        return !TextUtils.isEmpty(feedUrl);
-    }
-
     public boolean hasImageUrl() {
         return !TextUtils.isEmpty(imageUrl);
     }

@@ -1,7 +1,6 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.stats;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,50 +20,14 @@ import java.util.List;
 public class StatsTagsAndCategoriesFragment extends StatsAbstractListFragment {
     public static final String TAG = StatsTagsAndCategoriesFragment.class.getSimpleName();
 
-    private TagsContainerModel mTagsContainer;
-
-    @Override
-    protected boolean hasDataAvailable() {
-        return mTagsContainer != null;
-    }
-    @Override
-    protected void saveStatsData(Bundle outState) {
-        if (mTagsContainer != null) {
-            outState.putSerializable(ARG_REST_RESPONSE, mTagsContainer);
-        }
-    }
-    @Override
-    protected void restoreStatsData(Bundle savedInstanceState) {
-        if (savedInstanceState.containsKey(ARG_REST_RESPONSE)) {
-            mTagsContainer = (TagsContainerModel) savedInstanceState.getSerializable(ARG_REST_RESPONSE);
-        }
-    }
-
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.TagsUpdated event) {
-        if (!shouldUpdateFragmentOnUpdateEvent(event)) {
-            return;
-        }
-
-        mTagsContainer = event.mTagsContainer;
-        mGroupIdToExpandedMap.clear();
-        updateUI();
-    }
-
-    @SuppressWarnings("unused")
-    public void onEventMainThread(StatsEvents.SectionUpdateError event) {
-        if (!shouldUpdateFragmentOnErrorEvent(event)) {
-            return;
-        }
-
-        mTagsContainer = null;
-        mGroupIdToExpandedMap.clear();
-        showErrorUI(event.mError);
-    }
-
     @Override
     protected void updateUI() {
         if (!isAdded()) {
+            return;
+        }
+
+        if (isErrorResponse()) {
+            showErrorUI();
             return;
         }
 
@@ -78,16 +41,16 @@ public class StatsTagsAndCategoriesFragment extends StatsAbstractListFragment {
     }
 
     private boolean hasTags() {
-        return mTagsContainer != null
-                && mTagsContainer.getTags() != null
-                && mTagsContainer.getTags().size() > 0;
+        return !isDataEmpty()
+                && ((TagsContainerModel) mDatamodels[0]).getTags() != null
+                && (((TagsContainerModel) mDatamodels[0]).getTags()).size() > 0;
     }
 
     private List<TagsModel> getTags() {
         if (!hasTags()) {
             return new ArrayList<TagsModel>(0);
         }
-        return mTagsContainer.getTags();
+        return ((TagsContainerModel) mDatamodels[0]).getTags();
     }
 
     @Override
@@ -101,7 +64,7 @@ public class StatsTagsAndCategoriesFragment extends StatsAbstractListFragment {
     }
 
     @Override
-    protected StatsService.StatsEndpointsEnum[] sectionsToUpdate() {
+    protected StatsService.StatsEndpointsEnum[] getSectionsToUpdate() {
         return new StatsService.StatsEndpointsEnum[]{
                 StatsService.StatsEndpointsEnum.TAGS_AND_CATEGORIES
         };

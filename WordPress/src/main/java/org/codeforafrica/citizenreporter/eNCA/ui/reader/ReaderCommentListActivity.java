@@ -187,7 +187,7 @@ public class ReaderCommentListActivity extends ActionBarActivity {
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
+    public void onSaveInstanceState(@Nonnull Bundle outState) {
         outState.putLong(ReaderConstants.ARG_BLOG_ID, mBlogId);
         outState.putLong(ReaderConstants.ARG_POST_ID, mPostId);
         outState.putInt(ReaderConstants.KEY_RESTORE_POSITION, getCurrentPosition());

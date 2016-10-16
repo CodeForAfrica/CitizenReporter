@@ -195,6 +195,7 @@ public class WordPressMediaUtils {
         }
     }
     public static void launchCamera(Activity activity, LaunchCameraCallback callback) {
+        //showOverlayCamera(activity, 1);
         Intent intent = preparelaunchCamera(activity, callback);
         if (intent != null) {
             AppLockManager.getInstance().setExtendedTimeout();
@@ -229,6 +230,7 @@ public class WordPressMediaUtils {
     }
 
     private static Intent getLaunchCameraIntent(LaunchCameraCallback callback) {
+
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
 
         String mediaCapturePath = path + File.separator + "Camera" + File.separator + "wp-" + System.currentTimeMillis() + ".jpg";
@@ -238,7 +240,6 @@ public class WordPressMediaUtils {
         if (callback != null) {
             callback.onMediaCapturePathReady(mediaCapturePath);
         }
-
         // make sure the directory we plan to store the recording in exists
         File directory = new File(mediaCapturePath).getParentFile();
         if (!directory.exists() && !directory.mkdirs()) {
@@ -261,7 +262,7 @@ public class WordPressMediaUtils {
         } else if (MediaUtils.isSpreadsheet(url)) {
             return R.drawable.media_spreadsheet;
         } else if (MediaUtils.isVideo(url)) {
-            return org.wordpress.android.editor.R.drawable.media_movieclip;
+            return org.wordpress.android.editor.R.drawable.video_thumbnail;
         } else if (MediaUtils.isAudio(url)) {
             return R.drawable.media_audio;
         } else {

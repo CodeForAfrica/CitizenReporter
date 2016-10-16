@@ -1,7 +1,6 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.reader.utils;
 
 import android.content.ActivityNotFoundException;
-import android.support.annotation.NonNull;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
@@ -55,9 +54,9 @@ public class ReaderLinkMovementMethod extends LinkMovementMethod {
     }
 
     @Override
-    public boolean onTouchEvent(@NonNull TextView textView,
-                                @NonNull Spannable buffer,
-                                @NonNull MotionEvent event) {
+    public boolean onTouchEvent(@Nonnull TextView textView,
+                                @Nonnull Spannable buffer,
+                                @Nonnull MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
             int x = (int) event.getX();
             int y = (int) event.getY();

@@ -474,7 +474,7 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
         Uri imageUri = Uri.parse(mediaFile.getFilePath());
         Bitmap thumbnailBitmap;
         if (MediaUtils.isVideo(imageUri.toString())) {
-            thumbnailBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.media_movieclip);
+            thumbnailBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.media_movieclip_editor);
         } else {
             thumbnailBitmap = ImageUtils.getWPImageSpanThumbnailFromFilePath(context, imageUri.getEncodedPath(),
                     ImageUtils.getMaximumThumbnailWidthForEditor(context));
@@ -494,7 +494,7 @@ public class LegacyEditorFragment extends EditorFragmentAbstract implements Text
         if (context == null || mediaFile == null || mediaFile.getFileURL() == null) {
             return null;
         }
-        int drawable = mediaFile.isVideo() ? R.drawable.media_movieclip : R.drawable.legacy_dashicon_format_image_big_grey;
+        int drawable = mediaFile.isVideo() ? R.drawable.media_movieclip_editor : R.drawable.legacy_dashicon_format_image_big_grey;
         Uri uri = Uri.parse(mediaFile.getFileURL());
         WPEditImageSpan imageSpan = new WPEditImageSpan(context, drawable, uri);
         imageSpan.setMediaFile(mediaFile);

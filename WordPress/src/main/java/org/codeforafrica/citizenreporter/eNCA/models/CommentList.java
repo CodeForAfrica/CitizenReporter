@@ -1,9 +1,5 @@
 package org.codeforafrica.citizenreporter.eNCA.models;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class CommentList extends ArrayList<Comment> {
@@ -89,19 +85,5 @@ public class CommentList extends ArrayList<Comment> {
         }
 
         return true;
-    }
-
-    public static CommentList fromJSONV1_1(JSONObject object) throws JSONException {
-        CommentList commentList = new CommentList();
-        if (object == null) {
-            return null;
-        } else {
-            JSONArray comments = object.getJSONArray("comments");
-            for (int i=0; i < comments.length(); i++){
-                JSONObject commentJson = comments.getJSONObject(i);
-                commentList.add(Comment.fromJSON(commentJson));
-            }
-            return commentList;
-        }
     }
 }

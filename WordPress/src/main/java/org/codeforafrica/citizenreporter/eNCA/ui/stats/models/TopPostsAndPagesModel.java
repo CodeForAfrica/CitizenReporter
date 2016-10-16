@@ -5,12 +5,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.wordpress.android.util.AppLog;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class TopPostsAndPagesModel extends BaseStatsModel {
+public class TopPostsAndPagesModel implements Serializable {
     private String mPeriod;
     private String mDate;
     private String mBlogID;
@@ -47,12 +48,11 @@ public class TopPostsAndPagesModel extends BaseStatsModel {
                 int itemTotal = postObject.getInt("views");
                 String itemURL = postObject.getString("href");
                 String itemType = postObject.getString("type");
-                String itemDate = postObject.getString("date");
-                PostModel currentModel = new PostModel(blogID, itemDate, itemID, itemTitle,
+                PostModel currentModel = new PostModel(blogID, mDate, itemID, itemTitle,
                         itemTotal, itemURL, itemType);
                 list.add(currentModel);
             } catch (JSONException e) {
-                AppLog.e(AppLog.T.STATS, "Unexpected PostModel object in top posts and pages array " +
+                AppLog.e(AppLog.T.STATS, "Unexpected PostModel object in top posts and pages array" +
                         "at position " + i + " Response: " + response.toString(), e);
             }
         }

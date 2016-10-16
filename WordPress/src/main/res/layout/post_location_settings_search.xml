@@ -13,11 +13,11 @@
         android:id="@+id/searchLocationText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:textSize="@dimen/text_sz_large"
         android:hint="@string/current_location"
-        android:imeOptions="actionSearch"
+        android:layout_weight="1"
         android:inputType="text"
-        android:textSize="@dimen/text_sz_large" />
+        android:imeOptions="actionSearch" />
 
     <info.hoang8f.widget.FButton
         fbutton:buttonColor="@color/translucent_grey_lighten_10"
@@ -30,8 +30,8 @@
         android:id="@+id/searchLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/text_sz_large"
         android:ellipsize="end"
         android:lines="1"
-        android:text="@string/search_current_location"
-        android:textSize="@dimen/text_sz_large" />
+        android:text="@string/search_current_location" />
 </LinearLayout>
