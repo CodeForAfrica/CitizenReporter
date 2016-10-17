@@ -31,7 +31,8 @@
                     style="@style/WordPress.NUXTitle"
                     android:text="@string/help"
                     android:id="@+id/help_title"
-                    app:fontVariation="light"/>
+                    />
+                <!--app:fontVariation="light"-->
 
                 <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     style="@style/WordPress.NUXGreyButtonNoBg"

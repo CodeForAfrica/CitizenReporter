@@ -82,6 +82,8 @@ public class RecorderService extends Service implements MediaRecorder.OnErrorLis
 
     private NotificationManager mNotifiManager;
 
+    private Notification.Builder mBuilder = new Notification.Builder(this);
+
     private Notification mLowStorageNotification;
 
     private WakeLock mWakeLock;
@@ -263,20 +265,24 @@ public class RecorderService extends Service implements MediaRecorder.OnErrorLis
     }
 
     private void showRecordingNotification() {
-        Notification notification = new Notification(R.drawable.stat_sys_call_record,
-                getString(R.string.notification_recording), System.currentTimeMillis());
-        notification.flags = Notification.FLAG_ONGOING_EVENT;
         PendingIntent pendingIntent;
         pendingIntent = PendingIntent
                 .getActivity(this, 0, new Intent(this, SoundRecorder.class), 0);
+//        Notification notification = new Notification(R.drawable.stat_sys_call_record,
+//                getString(R.string.notification_recording), System.currentTimeMillis());
 
-        notification.setLatestEventInfo(this, getString(R.string.app_name),
-                getString(R.string.notification_recording), pendingIntent);
+        Notification notification = mBuilder.setContentIntent(pendingIntent).setContentText(getString(R.string.app_name))
+                .setSmallIcon(R.drawable.stat_sys_call_record).setTicker("recording...").build();
+
+        notification.flags = Notification.FLAG_ONGOING_EVENT;
 
         startForeground(NOTIFICATION_ID, notification);
     }
 
     private void showLowStorageNotification(int minutes) {
+        PendingIntent pendingIntent;
+        pendingIntent = PendingIntent
+                .getActivity(this, 0, new Intent(this, SoundRecorder.class), 0);
         if (mKeyguardManager.inKeyguardRestrictedInputMode()) {
             // it's not necessary to show this notification in lock-screen
             return;
@@ -286,14 +292,11 @@ public class RecorderService extends Service implements MediaRecorder.OnErrorLis
             mLowStorageNotification = new Notification(R.drawable.stat_sys_call_record_full,
                     getString(R.string.notification_recording), System.currentTimeMillis());
             mLowStorageNotification.flags = Notification.FLAG_ONGOING_EVENT;
+
+            mLowStorageNotification = mBuilder.setContentIntent(pendingIntent)
+                    .setTicker("Recording...").setSmallIcon(R.drawable.stat_sys_call_record).build();
         }
 
-        PendingIntent pendingIntent;
-        pendingIntent = PendingIntent
-                .getActivity(this, 0, new Intent(this, SoundRecorder.class), 0);
-
-        mLowStorageNotification.setLatestEventInfo(this, getString(R.string.app_name),
-                getString(R.string.notification_warning, minutes), pendingIntent);
         startForeground(NOTIFICATION_ID, mLowStorageNotification);
     }
 
@@ -301,9 +304,7 @@ public class RecorderService extends Service implements MediaRecorder.OnErrorLis
         stopForeground(true);
         mLowStorageNotification = null;
 
-        Notification notification = new Notification(R.drawable.stat_sys_call_record,
-                getString(R.string.notification_stopped), System.currentTimeMillis());
-        notification.flags = Notification.FLAG_AUTO_CANCEL;
+
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setType("audio/*");
@@ -313,8 +314,11 @@ public class RecorderService extends Service implements MediaRecorder.OnErrorLis
         pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-        notification.setLatestEventInfo(this, getString(R.string.app_name),
-                getString(R.string.notification_stopped), pendingIntent);
+        Notification notification = mBuilder.setContentIntent(pendingIntent)
+                .setSmallIcon(R.drawable.stat_sys_call_record)
+                .setContentText(getString(R.string.notification_stopped)).build();
+        notification.flags = Notification.FLAG_AUTO_CANCEL;
+
         mNotifiManager.notify(NOTIFICATION_ID, notification);
     }
 

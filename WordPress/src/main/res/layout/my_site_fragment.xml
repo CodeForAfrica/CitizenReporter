@@ -49,7 +49,8 @@
                         android:textColor="@color/grey_dark"
                         android:textSize="@dimen/text_sz_large"
                         android:textStyle="bold"
-                        app:fontVariation="light" />
+                        />
+                    <!-- app:fontVariation="light"-->
 
                     <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                         android:id="@+id/my_site_subtitle_label"

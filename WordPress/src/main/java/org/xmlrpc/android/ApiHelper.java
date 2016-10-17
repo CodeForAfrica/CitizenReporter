@@ -229,9 +229,9 @@ public class ApiHelper {
                 Map<String, String> hPost = ApiHelper.blogOptionsXMLRPCParameters;
 
                 Object[] vParams = {mBlog.getRemoteBlogId(),
-                        mBlog.getUsername(),
-                        mBlog.getPassword(),
-                        hPost};
+                                    mBlog.getUsername(),
+                                    mBlog.getPassword(),
+                                    hPost};
                 Object versionResult = null;
                 try {
                     versionResult = client.call("wp.getOptions", vParams);
@@ -1573,26 +1573,26 @@ public class ApiHelper {
                     String type = "";
                     String href = "";
                     switch (eventType) {
-                        case XmlPullParser.START_TAG:
-                            name = parser.getName();
-                            if (name.equalsIgnoreCase("link")) {
-                                for (int i = 0; i < parser.getAttributeCount(); i++) {
-                                    String attrName = parser.getAttributeName(i);
-                                    String attrValue = parser.getAttributeValue(i);
-                                    if (attrName.equals("rel")) {
-                                        rel = attrValue;
-                                    } else if (attrName.equals("type"))
-                                        type = attrValue;
-                                    else if (attrName.equals("href"))
-                                        href = attrValue;
-                                }
-
-                                if (rel.equals("EditURI") && type.equals("application/rsd+xml")) {
-                                    return href;
-                                }
-                                // currentMessage.setLink(parser.nextText());
+                    case XmlPullParser.START_TAG:
+                        name = parser.getName();
+                        if (name.equalsIgnoreCase("link")) {
+                            for (int i = 0; i < parser.getAttributeCount(); i++) {
+                                String attrName = parser.getAttributeName(i);
+                                String attrValue = parser.getAttributeValue(i);
+                                if (attrName.equals("rel")) {
+                                    rel = attrValue;
+                                } else if (attrName.equals("type"))
+                                    type = attrValue;
+                                else if (attrName.equals("href"))
+                                    href = attrValue;
                             }
-                            break;
+
+                            if (rel.equals("EditURI") && type.equals("application/rsd+xml")) {
+                                return href;
+                            }
+                            // currentMessage.setLink(parser.nextText());
+                        }
+                        break;
                     }
                     eventType = parser.next();
                 }

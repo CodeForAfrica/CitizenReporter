@@ -3,7 +3,6 @@ package org.codeforafrica.citizenreporter.eNCA.ui.accounts.helpers;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;

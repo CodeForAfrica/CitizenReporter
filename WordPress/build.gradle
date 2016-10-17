@@ -28,6 +28,7 @@ apply plugin: 'android-cq'
 apply plugin: 'io.fabric'
 
 android {
+
     packagingOptions {
         exclude "META-INF/LICENSE.txt"
         exclude "META-INF/NOTICE.txt"
@@ -35,6 +36,7 @@ android {
 
     compileSdkVersion 24
     buildToolsVersion '24.0.3'
+    useLibrary  'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "org.codeforafrica.citizenreporter.starreports"

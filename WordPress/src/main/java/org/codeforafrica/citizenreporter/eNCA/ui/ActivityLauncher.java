@@ -24,7 +24,6 @@ import org.codeforafrica.citizenreporter.eNCA.ui.media.WordPressMediaUtils;
 import org.codeforafrica.citizenreporter.eNCA.ui.posts.EditPostActivity;
 import org.codeforafrica.citizenreporter.eNCA.ui.posts.PagesActivity;
 import org.codeforafrica.citizenreporter.eNCA.ui.posts.PostsActivity;
-import org.codeforafrica.citizenreporter.eNCA.ui.posts.StoryBoard;
 import org.codeforafrica.citizenreporter.eNCA.ui.prefs.BlogPreferencesActivity;
 import org.codeforafrica.citizenreporter.eNCA.ui.prefs.SettingsActivity;
 import org.codeforafrica.citizenreporter.eNCA.ui.stats.StatsActivity;
@@ -32,7 +31,6 @@ import org.codeforafrica.citizenreporter.eNCA.ui.stats.StatsSinglePostDetailsAct
 import org.codeforafrica.citizenreporter.eNCA.ui.stats.models.PostModel;
 import org.codeforafrica.citizenreporter.eNCA.ui.storyboard.StoryBoardActivity;
 import org.codeforafrica.citizenreporter.eNCA.ui.themes.ThemeBrowserActivity;
-import org.wordpress.android.ui.RequestCodes;
 import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.HelpshiftHelper;
 import org.wordpress.android.util.HelpshiftHelper.Tag;

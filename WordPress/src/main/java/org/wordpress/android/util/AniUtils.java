@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Handler;
 import android.view.View;
@@ -88,7 +87,7 @@ public class AniUtils {
         float toY   = (show ? 0f : max);
 
         ObjectAnimator anim = ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, fromY, toY);
-//        anim.setInterpolator(show ? new DecelerateInterpolator() : new AccelerateInterpolator());
+        anim.setInterpolator(show ? new DecelerateInterpolator() : new AccelerateInterpolator());
         anim.setDuration(show ? Duration.LONG.toMillis(context) : Duration.SHORT.toMillis(context));
 
         anim.addListener(new AnimatorListenerAdapter() {

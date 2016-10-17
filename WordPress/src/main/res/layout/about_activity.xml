@@ -33,9 +33,10 @@
                 style="@style/WordPress.NUXTitle"
                 android:id="@+id/about_first_line"
                 android:text="@string/app_title"
-                app:fontVariation="light"
+
                 android:layout_marginTop="@dimen/margin_extra_large"
                 android:layout_marginBottom="@dimen/margin_small"/>
+            <!--app:fontVariation="light"-->
 
             <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 style="@style/WordPress.NUXGreyButtonNoBg"
@@ -76,7 +77,7 @@
             <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 style="@style/WordPress.NUXGreyButtonNoBg"
                 android:id="@+id/about_url"
-                android:text="automattic.com"
+                android:text="@string/automattic_com"
                 android:clickable="true"
                 android:onClick="onClick"
                 android:layout_width="wrap_content"

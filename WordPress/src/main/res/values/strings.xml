@@ -1553,5 +1553,9 @@
     <string name="pref_key_passcode_toggle">Pin lock</string>
     <string name="pref_key_change_passcode">Change pin</string>
     <string name="reader_title_reblog">Reblog</string>
+    <string name="automattic_com">automattic.com</string>
+    <string name="wordpress_com">.wordpress.com</string>
+
+    <string name="reader_timespan_now">now</string>
 
 </resources>

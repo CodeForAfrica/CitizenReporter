@@ -23,26 +23,25 @@ public class WPMeShortlinks {
      * @param num base-10 number
      * @return String base-62 number
      */
-    public static String wpme_dec2sixtwo(double num) {
-        if (num == 0) {
+    public static String wpme_dec2sixtwo( double num ) {
+        if (num==0)
             return "0";
-        }
 
         StringBuilder out;
         try {
             String index = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
             out = new StringBuilder();
 
-            if (num < 0) {
+            if (num<0) {
                 out.append('-');
-                num = Math.abs(num);
+                num = Math.abs( num );
             }
 
-            double t = Math.floor(Math.log10(num) / Math.log10(62));
-            for (; t >= 0; t--) {
-                int a = (int) Math.floor(num / Math.pow(62, t));
-                out.append(index.substring(a, a + 1));
-                num = num - (a * Math.pow(62, t));
+            double t = Math.floor( Math.log10( num ) / Math.log10( 62 )  );
+            for ( ;t>=0;t--) {
+                int a = (int) Math.floor( num / Math.pow( 62, t ) );
+                out.append( index.substring( a, a+1 ) );
+                num = num - ( a * Math.pow( 62, t ) );
             }
             return out.toString();
         } catch (IndexOutOfBoundsException e) {
@@ -59,25 +58,21 @@ public class WPMeShortlinks {
      * @return String The blog shortlink or null (null is returned if the blog object is empty, or it's not a wpcom/jetpack blog, or in case of errors).
      */
     public static String getPostShortlink(Blog blog, Post post) {
-        if (post == null || blog == null) {
+        if (post==null || blog==null)
             return null;
-        }
 
-        if (!blog.isDotcomFlag() && !blog.isJetpackPowered()) {
+        if (!blog.isDotcomFlag() && !blog.isJetpackPowered())
             return null;
-        }
 
         String postID = post.getRemotePostId();
-        if (postID == null) {
+        if (postID==null)
             return null;
-        }
 
         String id = null;
         String type = null;
 
         String postName = StringUtils.notNullStr(post.getSlug());
-        if (post.getStatusEnum() == PostStatus.PUBLISHED && postName.length() > 0 && postName.length() <= 8 &&
-                !postName.contains("%") && !postName.contains("-")) {
+        if (post.getStatusEnum()==PostStatus.PUBLISHED && postName.length() > 0 && postName.length() <= 8 && !postName.contains("%") && !postName.contains("-")) {
             id = postName;
             type = "s";
         } else {
@@ -95,7 +90,7 @@ public class WPMeShortlinks {
             }
         }
 
-        // Calculate the blog shortlink
+        //Calculate the blog shortlink
         String blogShortlink = null;
         try {
             double blogID = blog.isDotcomFlag() ? blog.getRemoteBlogId() : Double.parseDouble(blog.getApi_blogid());
@@ -105,17 +100,12 @@ public class WPMeShortlinks {
             return null;
         }
 
-        if (TextUtils.isEmpty(type) || TextUtils.isEmpty(id) || TextUtils.isEmpty(blogShortlink)) {
+        if (TextUtils.isEmpty(type) || TextUtils.isEmpty(id) || TextUtils.isEmpty(blogShortlink))
             return null;
-        }
 
         return "http://wp.me/" + type + blogShortlink + "-" + id;
     }
 
-    public static String getPostShortlink(Post post) {
-        Blog blog = WordPress.wpDB.instantiateBlogByLocalId(post.getLocalTableBlogId());
-        return getPostShortlink(blog, post);
-    }
 
     /**
      * Returns The blog shortlink
@@ -124,13 +114,11 @@ public class WPMeShortlinks {
      * @return String The blog shortlink or null (null is returned if the blog object is empty, or it's not a wpcom/jetpack blog, or in case of errors).
      */
     public static String getBlogShortlink(Blog blog) {
-        if (blog == null) {
+        if (blog==null)
             return null;
-        }
 
-        if (!blog.isDotcomFlag() && !blog.isJetpackPowered()) {
+        if (!blog.isDotcomFlag() && !blog.isJetpackPowered())
             return null;
-        }
 
         try {
             double blogID = blog.isDotcomFlag() ? blog.getRemoteBlogId() : Double.parseDouble(blog.getApi_blogid());

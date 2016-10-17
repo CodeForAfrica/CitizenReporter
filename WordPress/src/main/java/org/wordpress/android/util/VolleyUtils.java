@@ -17,7 +17,7 @@ import java.io.UnsupportedEncodingException;
 
 public class VolleyUtils {
     /*
-     * Returns REST API 'error' string code from the response in the passed VolleyError
+     * returns REST API error string from the response in the passed VolleyError
      * for example, returns "already_subscribed" from this response:
      *  {
 	 *      "error": "already_subscribed",
@@ -39,22 +39,7 @@ public class VolleyUtils {
     }
 
     /*
-     * Returns REST API 'message' string field from the response in the passed VolleyError
-     * for example, returns "You are already subscribed to the specified topic." from this response:
-     *  {
-     *      "error": "already_subscribed",
-     *      "message": "You are already subscribed to the specified topic."
-     *  }
-     */
-    public static String messageStringFromVolleyError(VolleyError volleyError) {
-        JSONObject json = volleyErrorToJSON(volleyError);
-        if (json==null)
-            return "";
-        return JSONUtils.getString(json, "message");
-    }
-
-    /*
-     * Attempts to return JSON from a volleyError - useful for WP REST API failures, which often
+     * attempts to return JSON from a volleyError - useful for WP REST API failures, which often
      * contain JSON in the response
      */
     public static JSONObject volleyErrorToJSON(VolleyError volleyError) {
@@ -80,7 +65,7 @@ public class VolleyUtils {
     }
 
     /*
-     * Cancel all Volley requests that aren't for images
+     * cancel all Volley requests that aren't for images
      */
     public static void cancelAllNonImageRequests(RequestQueue requestQueue) {
         if (requestQueue==null)
@@ -97,7 +82,7 @@ public class VolleyUtils {
     }
 
     /*
-     * Cancel all Volley requests
+     * cancel all Volley requests
      */
     public static void cancelAllRequests(RequestQueue requestQueue) {
         if (requestQueue==null)

@@ -37,9 +37,10 @@
             android:shadowDx="0"
             android:shadowDy="1"
             android:shadowRadius="2"
-            app:fontVariation="light"
+
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"/>
+        <!--app:fontVariation="light"-->
 
         <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/nux_dialog_description"

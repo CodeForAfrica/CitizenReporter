@@ -61,9 +61,10 @@
                 android:id="@+id/edit_account_label"
                 android:text="@string/edit_account"
                 style="@style/WordPress.NUXTitle"
-                app:fontVariation="light"
+
                 app:fixWidowWords="true"
                 android:textColor="@color/grey_dark"/>
+            <!--app:fontVariation="light"-->
 
             <RelativeLayout
                 android:layout_width="wrap_content"

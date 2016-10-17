@@ -38,8 +38,9 @@
             android:textColor="@color/grey_dark"
             android:textSize="@dimen/text_sz_large"
             android:textStyle="bold"
-            app:fontVariation="light"
+
             tools:text="Full Name" />
+        <!--app:fontVariation="light"-->
 
         <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/me_username"
@@ -61,7 +62,7 @@
                 android:id="@+id/me_settings_icon"
                 style="@style/MeListRowIcon"
                 android:contentDescription="@string/me_btn_settings"
-                android:src="@drawable/me_icon_settings" />
+                android:src="@drawable/me_icon_app_settings" />
 
             <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 android:id="@+id/me_settings_text_view"

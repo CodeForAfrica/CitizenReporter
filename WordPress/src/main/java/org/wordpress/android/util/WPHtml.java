@@ -35,7 +35,6 @@ import android.text.style.AbsoluteSizeSpan;
 import android.text.style.AlignmentSpan;
 import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.ImageSpan;
 import android.text.style.ParagraphStyle;
 import android.text.style.QuoteSpan;
 import android.text.style.RelativeSizeSpan;
@@ -69,7 +68,6 @@ import org.xml.sax.XMLReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
-import java.util.Locale;
 
 /**
  * This class processes HTML strings into displayable styled text. Not all HTML
@@ -450,21 +448,23 @@ public class WPHtml {
             String localBlogID = imageSpan.getMediaFile().getBlogId();
             Blog currentBlog = WordPress.wpDB.instantiateBlogByLocalId(Integer.parseInt(localBlogID));
             // If it's not a gif and blog don't keep original size, there is a chance we need to resize
-            if (currentBlog != null && !mediaFile.getMimeType().equals("image/gif")
-                    && MediaUtils.getImageWidthSettingFromString(currentBlog.getMaxImageWidth()) != Integer.MAX_VALUE) {
-                width = MediaUtils.getMaximumImageWidth(width, currentBlog.getMaxImageWidth());
+            if (currentBlog != null && !mediaFile.getMimeType().equals("image/gif") &&
+                !currentBlog.getMaxImageWidth().equals("Original Size")) {
+                int maxImageWidth = Integer.parseInt(currentBlog.getMaxImageWidth());
+                // use the correct resize settings.
+                width = Math.min(width, maxImageWidth);
                 // Use inline CSS on self-hosted blogs to enforce picture resize settings
                 if (!currentBlog.isDotcomFlag()) {
-                    inlineCSS = String.format(Locale.US, " style=\"width:%dpx;max-width:%dpx;\" ", width, width);
+                    inlineCSS = String.format(" style=\"width:%dpx;max-width:%dpx;\" ", width, width);
                 }
             }
+
             content = content + "<a href=\"" + url + "\"><img" + inlineCSS + "title=\"" + title + "\" "
                     + alignmentCSS + "alt=\"image\" src=\"" + url + "?w=" + width +"\" /></a>";
 
             if (!caption.equals("")) {
-                content = String.format(Locale.US,
-                        "[caption id=\"\" align=\"%s\" width=\"%d\"]%s%s[/caption]",
-                        alignment, width, content, TextUtils.htmlEncode(caption));
+                content = String.format("[caption id=\"\" align=\"%s\" width=\"%d\" caption=\"%s\"]%s[/caption]",
+                        alignment, width, TextUtils.htmlEncode(caption), content);
             }
         }
 
@@ -852,26 +852,6 @@ class HtmlToSpannedConverter implements ContentHandler {
                     text.append(" />\n");
                 }
             }
-        } else if (src == null) {
-
-            //get regular src value from <img/> tag's src attribute
-            src = attributes.getValue("", "src");
-            Drawable d = null;
-
-            if (img != null) {
-                d = img.getDrawable(src);
-            }
-
-            if (d != null) {
-                int len = text.length();
-                text.append("\uFFFC");
-
-                text.setSpan(new ImageSpan(d, src), len, text.length(),
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            } else {
-                // noop - we're not showing a default image here
-            }
-
         }
     }
 
