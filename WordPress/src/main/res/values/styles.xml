@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="WordPress" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="WordPress" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Material theme -->
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
@@ -39,6 +39,7 @@
     <style name="SignInTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorControlActivated">@color/color_control_activated</item>
         <item name="colorControlHighlight">@color/color_control_highlight</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="TabBarStyle.WordPress" parent="@android:style/Widget.Holo.ActionBar.TabBar">
@@ -229,10 +230,10 @@
     </style>
 
     <!-- Dialog -->
-    <style name="WordPress.Dialog" parent="Theme.AppCompat.Light.Dialog">
+    <style name="WordPress.Dialog" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- work around a bug that causes weird styling of the dialog title on Android 5 -->
-        <item name="android:windowNoTitle">false</item>
-        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">true</item>
     </style>
 
     <style name="WordPress.SwipeToRefresh">

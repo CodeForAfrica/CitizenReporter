@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -76,7 +77,7 @@ import de.greenrobot.event.EventBus;
  * Main activity which hosts sites, reader, me and notifications tabs
  */
 
-public class RipotiMainActivity extends ActionBarActivity
+public class RipotiMainActivity extends AppCompatActivity
         implements ViewPager.OnPageChangeListener,
         SlidingTabLayout.SingleTabClickListener,
         MediaAddFragment.MediaAddFragmentCallback,
