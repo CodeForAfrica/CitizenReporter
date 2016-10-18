@@ -168,7 +168,7 @@ public class RestClientUtils {
      * Edit the content of a comment
      */
     public void editCommentContent(long siteId, long commentId, String content, Listener listener,
-                                   ErrorListener errorListener) {
+                                ErrorListener errorListener) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("content", content);
         String path = String.format("sites/%d/comments/%d/", siteId, commentId);
@@ -179,7 +179,7 @@ public class RestClientUtils {
      * Like or unlike a comment.
      */
     public void likeComment(String siteId, String commentId, boolean isLiked, Listener listener,
-                            ErrorListener errorListener) {
+                                ErrorListener errorListener) {
         Map<String, String> params = new HashMap<String, String>();
         String path = String.format("sites/%s/comments/%s/likes/", siteId, commentId);
 
@@ -229,11 +229,11 @@ public class RestClientUtils {
      * Make GET request with params
      */
     public Request<JSONObject> get(String path, Map<String, String> params, RetryPolicy retryPolicy, Listener listener,
-                                   ErrorListener errorListener) {
+                    ErrorListener errorListener) {
         // turn params into querystring
 
         RestRequest request = mRestClient.makeRequest(Method.GET, mRestClient.getAbsoluteURL(path, params), null,
-                listener, errorListener);
+                                                      listener, errorListener);
         if (retryPolicy == null) {
             retryPolicy = new DefaultRetryPolicy(REST_TIMEOUT_MS, REST_MAX_RETRIES_GET, REST_BACKOFF_MULT);
         }
@@ -290,10 +290,10 @@ public class RestClientUtils {
     public void post(final String path, Map<String, String> params, RetryPolicy retryPolicy, Listener listener,
                      ErrorListener errorListener) {
         final RestRequest request = mRestClient.makeRequest(Method.POST, mRestClient.getAbsoluteURL(path), params,
-                listener, errorListener);
+                                                            listener, errorListener);
         if (retryPolicy == null) {
             retryPolicy = new DefaultRetryPolicy(REST_TIMEOUT_MS, REST_MAX_RETRIES_POST,
-                    REST_BACKOFF_MULT); //Do not retry on failure
+                                                 REST_BACKOFF_MULT); //Do not retry on failure
         }
         request.setRetryPolicy(retryPolicy);
         AuthenticatorRequest authCheck = new AuthenticatorRequest(request, errorListener, mRestClient, mAuthenticator);

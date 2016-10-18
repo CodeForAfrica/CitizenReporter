@@ -21,7 +21,7 @@ public class ThemeUtils {
         } else {
             return WordUtils.capitalizeFully(feature_tag.replace("-", " "));
         }
-    }
+   }
 
     private static void initMap() {
         mTagToLabelMap = new HashMap<String, String>();

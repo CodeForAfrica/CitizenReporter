@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.1'
@@ -12,25 +12,25 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    compile 'com.automattic:tracks:1.1.0'
-    compile 'com.mixpanel.android:mixpanel-android:4.6.4'
-    compile 'org.wordpress:utils:1.11.0'
+    compile 'com.automattic:tracks:1.0.3'
+    compile 'com.mixpanel.android:mixpanel-android:4.3.0@aar'
+    compile 'org.wordpress:utils:1.3.0'
 }
 
 android {
     publishNonDefault true
 
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 19
+    buildToolsVersion "21.1.1"
 
     defaultConfig {
-        versionName "1.2.0"
-        minSdkVersion 16
-        targetSdkVersion 24
+        versionName "1.0.0"
+        minSdkVersion 14
+        targetSdkVersion 19
     }
 }
 
@@ -40,7 +40,7 @@ archivesBaseName = "analytics"
 
 signing {
     required {
-        project.properties.containsKey("signing.keyId") && project.properties.containsKey("signing.secretKeyRingFile")
+        has("release") && project.properties.containsKey("signing.keyId") && project.properties.containsKey("signing.secretKeyRingFile")
     }
     sign configurations.archives
 }

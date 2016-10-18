@@ -709,18 +709,18 @@ public class ReaderPostDetailFragment extends Fragment
                 return false;
             }
 
-//            mReaderWebView.setIsPrivatePost(mPost.isPrivate);
-//
-//            txtTitle = (TextView) container.findViewById(R.id.text_title);
-//            txtBlogName = (TextView) container.findViewById(R.id.text_blog_name);
-//            txtDateAndAuthor = (TextView) container.findViewById(R.id.text_date_and_author);
-//
-//            imgAvatar = (WPNetworkImageView) container.findViewById(R.id.image_avatar);
-//            imgMore = (ImageView) container.findViewById(R.id.image_more);
-//            imgBtnReblog = (ImageView) mLayoutIcons.findViewById(R.id.image_reblog_btn);
-//
-//            layoutDetailHeader = (ViewGroup) container.findViewById(R.id.layout_detail_header);
-//            followButton = (ReaderFollowButton) container.findViewById(R.id.follow_button);
+            mReaderWebView.setIsPrivatePost(mPost.isPrivate);
+
+            txtTitle = (TextView) container.findViewById(R.id.text_title);
+            txtBlogName = (TextView) container.findViewById(R.id.text_blog_name);
+            txtDateAndAuthor = (TextView) container.findViewById(R.id.text_date_and_author);
+
+            imgAvatar = (WPNetworkImageView) container.findViewById(R.id.image_avatar);
+            imgMore = (ImageView) container.findViewById(R.id.image_more);
+            imgBtnReblog = (ImageView) mLayoutIcons.findViewById(R.id.image_reblog_btn);
+
+            layoutDetailHeader = (ViewGroup) container.findViewById(R.id.layout_detail_header);
+            followButton = (ReaderFollowButton) container.findViewById(R.id.follow_button);
 
             return true;
         }
@@ -769,7 +769,7 @@ public class ReaderPostDetailFragment extends Fragment
                 txtBlogName.setText(mPost.getBlogName());
                 txtBlogName.setVisibility(View.VISIBLE);
             } else if (mPost.hasBlogUrl()) {
-                txtBlogName.setText(UrlUtils.getHost(mPost.getBlogUrl()));
+                txtBlogName.setText(UrlUtils.getDomainFromUrl(mPost.getBlogUrl()));
                 txtBlogName.setVisibility(View.VISIBLE);
             } else {
                 txtBlogName.setVisibility(View.GONE);

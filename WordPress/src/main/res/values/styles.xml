@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="WordPress" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Material theme -->
@@ -24,11 +24,7 @@
         <item name="android:actionBarWidgetTheme">@style/Theme.WordPress.Widget</item>
 
         <item name="swipeToRefreshStyle">@style/WordPress.SwipeToRefresh</item>
-        <item name="searchViewStyle">@style/WordPress.SearchViewStyle</item>
     </style>
-
-    <!-- http://android-developers.blogspot.com/2014/10/appcompat-v21-material-design-for-pre.html -->
-    <style name="WordPress.SearchViewStyle" parent="Widget.AppCompat.SearchView.ActionBar" />
 
     <style name="WordPress.DropDownListView.Light" parent="WordPress">
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Light.WordPress</item>
@@ -43,7 +39,6 @@
     <style name="SignInTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorControlActivated">@color/color_control_activated</item>
         <item name="colorControlHighlight">@color/color_control_highlight</item>
-        <item name="android:statusBarColor">@color/status_bar_tint</item>
     </style>
 
     <style name="TabBarStyle.WordPress" parent="@android:style/Widget.Holo.ActionBar.TabBar">
@@ -64,7 +59,6 @@
     <style name="DropDownListView.Light.WordPress" parent="android:Widget.Holo.ListView.DropDown">
         <item name="android:listSelector">@drawable/selectable_background_wordpress</item>
         <item name="android:fadeScrollbars">false</item>
-        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_transparent_black</item>
     </style>
 
     <style name="TabTextStyle.WordPress" parent="android:Widget.Holo.ActionBar.TabText">
@@ -74,27 +68,6 @@
     <style name="DropDownNav.WordPress" parent="android:Widget.Holo.Light.Spinner">
         <item name="android:background">@drawable/spinner_background_ab_wordpress</item>
         <item name="android:dropDownSelector">@drawable/selectable_background_wordpress</item>
-    </style>
-
-    <style name="FilteredRecyclerViewSpinner.WordPress" parent="DropDownNav.WordPress">
-        <item name="android:background">@color/transparent</item>
-    </style>
-
-    <style name="FilteredRecyclerViewFilterTextView.WordPress" parent="android:TextAppearance.Widget.TextView">
-        <item name="android:padding">@dimen/margin_medium</item>
-        <item name="android:layout_marginLeft">@dimen/margin_extra_large</item>
-        <item name="android:paddingRight">@dimen/margin_large</item>
-        <item name="android:textSize">@dimen/text_sz_large</item>
-    </style>
-
-    <style name="FilteredRecyclerViewToolbar" parent="Widget.AppCompat.Toolbar">
-        <item name="android:paddingLeft">@dimen/margin_filter_spinner</item>
-        <item name="android:elevation">@dimen/filter_subbar_elevation</item>
-        <item name="android:theme">@style/FilteredRecyclerViewToolbar.Theme</item>
-    </style>
-
-    <style name="FilteredRecyclerViewToolbar.Theme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:listDivider">@null</item>
     </style>
 
     <style name="ProgressBar.WordPress" parent="android:Widget.Holo.ProgressBar.Horizontal">
@@ -164,13 +137,10 @@
         <item name="android:textColor">@color/grey_darken_10</item>
     </style>
 
-    <style name="WhiteButton" parent="Widget.AppCompat.Button">
-        <item name="colorButtonNormal">@color/white</item>
-    </style>
-
     <!-- NUX Styles -->
     <style name="WordPress.NUXPrimaryButton">
         <item name="android:textColor">@color/nux_primary_button</item>
+        <item name="android:layout_height">@dimen/nux_button_height</item>
         <item name="android:layout_marginLeft">4dp</item>
         <item name="android:layout_marginRight">4dp</item>
         <item name="android:layout_marginBottom">8dp</item>
@@ -179,24 +149,8 @@
         <item name="android:stateListAnimator">@anim/raise</item>
     </style>
 
-    <style name="WordPress.NUXDesc">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">24dp</item>
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/nux_title_font_size</item>
-    </style>
-
-    <style name="WordPress.NUXFlatButton">
-        <item name="android:textColor">@drawable/nux_flat_button_text_selector</item>
-        <item name="android:background">@drawable/nux_flat_button_selector</item>
-        <item name="android:padding">8dp</item>
-        <item name="android:clickable">true</item>
-    </style>
-
     <style name="WordPress.NUXWhiteButtonNoBg">
-        <item name="android:textColor">@drawable/nux_flat_button_selector</item>
+        <item name="android:textColor">@drawable/nux_white_button_nobg_selector</item>
         <item name="android:padding">8dp</item>
         <item name="android:clickable">true</item>
     </style>
@@ -204,7 +158,7 @@
     <style name="WordPress.NUXGreyButtonNoBg">
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@drawable/nux_flat_button_grey_text_selector</item>
+        <item name="android:textColor">@drawable/nux_grey_button_nobg_selector</item>
     </style>
 
     <style name="WordPress.NUXEditText">
@@ -222,8 +176,17 @@
         <item name="android:layout_marginBottom">24dp</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/nux_title_font_size</item>
+        <item name="android:textSize">@dimen/nux_desc_font_size</item>
         <item name="android:lineSpacingExtra">-4sp</item>
+    </style>
+
+    <style name="WordPress.NUXDesc">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/nux_desc_font_size</item>
     </style>
 
     <style name="WordPress.EmptyList">
@@ -235,7 +198,7 @@
 
     <style name="WordPress.EmptyList.Title" parent="WordPress.EmptyList">
         <item name="android:textSize">@dimen/empty_list_title_text_size</item>
-        <item name="android:fontFamily" tools:ignore="NewApi">sans-serif-light</item>
+        <item name="fontVariation">light</item>
     </style>
 
     <style name="WordPress.EmptyList.Description" parent="WordPress.EmptyList">
@@ -292,24 +255,21 @@
         <item name="android:layout_height">@dimen/my_site_list_row_icon_size</item>
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_marginTop">@dimen/margin_large</item>
-        <item name="android:layout_marginBottom">@dimen/margin_large</item>
         <item name="android:layout_marginRight">@dimen/margin_extra_large</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:tint">@color/grey_darken_10</item>
     </style>
 
     <style name="MySiteListRowTextView">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_marginRight">@dimen/margin_medium</item>
         <item name="android:ellipsize">end</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:maxLines">1</item>
-        <item name="android:textColor">@color/grey_dark</item>
+        <item name="android:textColor">@color/grey_darken_20</item>
         <item name="android:textSize">@dimen/text_sz_large</item>
-        <item name="android:paddingTop">@dimen/margin_large</item>
-        <item name="android:paddingBottom">@dimen/margin_large</item>
         <item name="android:paddingLeft">@dimen/margin_extra_large</item>
         <item name="android:fontFamily">"sans-serif-light"</item>
     </style>
@@ -358,8 +318,6 @@
         <item name="android:layout_width">@dimen/me_list_row_icon_size</item>
         <item name="android:layout_height">@dimen/me_list_row_icon_size</item>
         <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:layout_marginTop">@dimen/margin_large</item>
-        <item name="android:layout_marginBottom">@dimen/margin_large</item>
         <item name="android:layout_marginLeft">@dimen/margin_medium</item>
         <item name="android:layout_marginRight">@dimen/margin_extra_large</item>
     </style>
@@ -399,53 +357,4 @@
     <style name="SubmitButton" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/color_primary</item>
     </style>
-
-    <style name="MyProfileRow">
-        <item name="android:background">?android:attr/selectableItemBackground</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:padding">@dimen/margin_extra_large</item>
-    </style>
-
-    <style name="MyProfileLabel">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/grey_dark</item>
-        <item name="android:textSize">@dimen/text_sz_large</item>
-    </style>
-
-    <style name="MyProfileText">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/grey_darken_10</item>
-        <item name="android:textSize">@dimen/text_sz_medium</item>
-    </style>
-
-    <style name="MyProfileDividerView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/me_divider</item>
-    </style>
-
-    <!--People Management Styles-->
-    <style name="PersonAvatar">
-        <item name="android:layout_width">@dimen/people_avatar_sz</item>
-        <item name="android:layout_height">@dimen/people_avatar_sz</item>
-        <item name="android:layout_margin">@dimen/margin_extra_large</item>
-    </style>
-
-    <style name="PersonTextView">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">1</item>
-    </style>
-
-    <!-- Plans Styles -->
-    <style name="PlansProgressBar" parent="@android:style/Widget.Holo.ProgressBar" />
-
-    <string name="missing_required_fields">Missing required fields!</string>
-
-
 </resources>

@@ -144,7 +144,7 @@ public class TextDrawable extends Drawable {
 
 
     public void setText(int text) {
-        this.setText(String.valueOf(text));
+       this.setText(String.valueOf(text));
     }
 
     /**

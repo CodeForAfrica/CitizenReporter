@@ -138,7 +138,7 @@ public class AppLogViewerActivity extends ActionBarActivity {
         // Copy to clipboard button
         MenuItem item = menu.add(Menu.NONE, ID_COPY_TO_CLIPBOARD, Menu.NONE, android.R.string.copy);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        item.setIcon(R.drawable.ic_add_white_24dp);
+        item.setIcon(R.drawable.ic_action_copy_white_24dp);
         // Share button
         item = menu.add(Menu.NONE, ID_SHARE, Menu.NONE, R.string.reader_btn_share);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);

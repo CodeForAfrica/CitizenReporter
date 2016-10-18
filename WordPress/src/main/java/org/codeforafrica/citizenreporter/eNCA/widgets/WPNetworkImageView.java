@@ -198,7 +198,7 @@ public class WPNetworkImageView extends ImageView {
 
     private static boolean canFadeInImageType(ImageType imageType) {
         return imageType == ImageType.PHOTO
-                || imageType == ImageType.VIDEO;
+            || imageType == ImageType.VIDEO;
     }
 
     private void handleResponse(ImageLoader.ImageContainer response,

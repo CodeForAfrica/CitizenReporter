@@ -27,9 +27,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 style="@style/WordPress.NUXTitle"
-
+                app:fontVariation="light"
                 app:fixWidowWords="true"/>
-            <!--app:fontVariation="light"-->
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -84,7 +83,7 @@
                 <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/wordpress_com"
+                    android:text=".wordpress.com"
                     android:id="@+id/textView"
                     android:layout_alignParentEnd="false"
                     android:layout_marginTop="4dp"

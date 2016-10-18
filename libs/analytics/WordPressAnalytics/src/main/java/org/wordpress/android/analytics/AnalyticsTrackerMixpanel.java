@@ -86,12 +86,12 @@ public class AnalyticsTrackerMixpanel implements AnalyticsTracker.Tracker {
 
     private void trackMixpanelPropertiesForInstructions(AnalyticsTrackerMixpanelInstructionsForStat instructions) {
         if (instructions.getPeoplePropertyToIncrement() != null && !instructions.getPeoplePropertyToIncrement()
-                .isEmpty()) {
+                                                                                .isEmpty()) {
             incrementPeopleProperty(instructions.getPeoplePropertyToIncrement());
         }
 
         if (instructions.getSuperPropertyToIncrement() != null && !instructions.getSuperPropertyToIncrement()
-                .isEmpty()) {
+                                                                               .isEmpty()) {
             incrementSuperProperty(instructions.getSuperPropertyToIncrement());
         }
 
@@ -392,7 +392,7 @@ public class AnalyticsTrackerMixpanel implements AnalyticsTracker.Tracker {
                         mixpanelInstructionsWithSuperPropertyAndPeoplePropertyIncrementor(
                                 "number_of_posts_published_with_videos");
                 instructions.setCurrentDateForPeopleProperty("last_time_published_post_with_video");
-                break;
+              break;
             case EDITOR_PUBLISHED_POST_WITH_CATEGORIES:
                 instructions = AnalyticsTrackerMixpanelInstructionsForStat.
                         mixpanelInstructionsWithSuperPropertyAndPeoplePropertyIncrementor(
@@ -401,8 +401,8 @@ public class AnalyticsTrackerMixpanel implements AnalyticsTracker.Tracker {
                 break;
             case EDITOR_PUBLISHED_POST_WITH_TAGS:
                 instructions = AnalyticsTrackerMixpanelInstructionsForStat.
-                        mixpanelInstructionsWithSuperPropertyAndPeoplePropertyIncrementor(
-                                "number_of_posts_published_with_tags");
+                      mixpanelInstructionsWithSuperPropertyAndPeoplePropertyIncrementor(
+                              "number_of_posts_published_with_tags");
                 instructions.setCurrentDateForPeopleProperty("last_time_published_post_with_tags");
                 break;
             case EDITOR_TAPPED_BLOCKQUOTE:
@@ -726,3 +726,4 @@ public class AnalyticsTrackerMixpanel implements AnalyticsTracker.Tracker {
         editor.apply();
     }
 }
+

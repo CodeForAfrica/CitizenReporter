@@ -478,7 +478,7 @@ public class StoryBoardEditorFragment extends EditorFragmentAbstract implements 
         Uri imageUri = Uri.parse(mediaFile.getFilePath());
         Bitmap thumbnailBitmap;
         if (MediaUtils.isVideo(imageUri.toString())) {
-            thumbnailBitmap = BitmapFactory.decodeResource(context.getResources(), org.wordpress.android.editor.R.drawable.media_movieclip_editor);
+            thumbnailBitmap = BitmapFactory.decodeResource(context.getResources(), org.wordpress.android.editor.R.drawable.media_movieclip);
         } else {
             thumbnailBitmap = ImageUtils.getWPImageSpanThumbnailFromFilePath(context, imageUri.getEncodedPath(),
                     ImageUtils.getMaximumThumbnailWidthForEditor(context));
@@ -489,12 +489,12 @@ public class StoryBoardEditorFragment extends EditorFragmentAbstract implements 
             }
         }
         WPEditImageSpan imageSpan = new WPEditImageSpan(context, thumbnailBitmap, imageUri);
-        mediaFile.setWidth(MediaUtils.getMaximumImageWidth(context, imageUri, mBlogSettingMaxImageWidth));
+        mediaFile.setWidth(MediaUtils.getMinimumImageWidth(context, imageUri, mBlogSettingMaxImageWidth));
         return imageSpan;
     }
 
     private WPEditImageSpan createWPEditImageSpanRemote(Context context, MediaFile mediaFile) {
-        int drawable = mediaFile.isVideo() ? org.wordpress.android.editor.R.drawable.media_movieclip_editor : org.wordpress.android.editor.R.drawable.legacy_dashicon_format_image_big_grey;
+        int drawable = mediaFile.isVideo() ? org.wordpress.android.editor.R.drawable.media_movieclip : org.wordpress.android.editor.R.drawable.legacy_dashicon_format_image_big_grey;
         Uri uri = Uri.parse(mediaFile.getFileURL());
         WPEditImageSpan imageSpan = new WPEditImageSpan(context, drawable, uri);
         imageSpan.setMediaFile(mediaFile);
@@ -759,7 +759,7 @@ public class StoryBoardEditorFragment extends EditorFragmentAbstract implements 
 
                         alignmentSpinner.setSelection(mediaFile.getHorizontalAlignment(), true);
 
-                        final int maxWidth = MediaUtils.getMaximumImageWidth(getActivity(),
+                        final int maxWidth = MediaUtils.getMinimumImageWidth(getActivity(),
                                 imageSpan.getImageSource(), mBlogSettingMaxImageWidth);
                         seekBar.setMax(maxWidth / 10);
                         if (mediaFile.getWidth() != 0) {
@@ -1135,40 +1135,5 @@ public class StoryBoardEditorFragment extends EditorFragmentAbstract implements 
         AlignmentSpan.Standard as = new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER);
         editableText.setSpan(as, selectionStart, selectionEnd + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         editableText.insert(selectionEnd + 1, "\n\n");
-    }
-
-    @Override
-    public void setUrlForVideoPressId(String videoPressId, String url, String posterUrl) {
-
-    }
-
-    @Override
-    public boolean isUploadingMedia() {
-        return false;
-    }
-
-    @Override
-    public boolean isActionInProgress() {
-        return false;
-    }
-
-    @Override
-    public boolean hasFailedMediaUploads() {
-        return false;
-    }
-
-    @Override
-    public void removeAllFailedMediaUploads() {
-
-    }
-
-    @Override
-    public void setTitlePlaceholder(CharSequence text) {
-
-    }
-
-    @Override
-    public void setContentPlaceholder(CharSequence text) {
-
     }
 }

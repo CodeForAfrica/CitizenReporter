@@ -24,15 +24,15 @@ Here's a quick guide to create a pull request for your WordPress-Android patch:
 
 [build-instructions]: https://github.com/wordpress-mobile/WordPress-Android#build-instructions
 [pr]: https://github.com/wordpress-mobile/WordPress-Android/compare/
-[style]: https://github.com/wordpress-mobile/WordPress-Android/blob/develop/CODESTYLE.md
+[style]: https://github.com/wordpress-mobile/WordPress-Android/CODESTYLE.md
 
-# Versioning
+# Notes about versioning
 
 * Version `x.y` (2.8 or 4.0 for instance) are major releases. There is no distinction between a 2.9 version or a 3.0 version, we want to avoid naming like 2.142 so the version after `x.9` (2.9) is simply `x+1.0` (3.0). A new major version is released every ~4 weeks.
 
 * Version `x.y.z` (2.8.1 or 4.0.2 for instance) are hotfix releases. We release them only when a blocking or major bug is found in the currently released version.
 
-# Branching
+# Notes about branching
 
 We use the [git flow branching model][git-flow].
 
@@ -56,57 +56,6 @@ We use the [git flow branching model][git-flow].
 Note: `release/x.y` or `hotfix/x.y.z` will be merged back in `master` after a new version is released. A new tag will be created and pushed at the same time.
 
 [git-flow]: http://nvie.com/posts/a-successful-git-branching-model/
-
-# Subtree'd library projects
-
-A number of library dependencies are managed as separate open source projects and are git-subtree'd into the WordPress Android app source tree. Use the following command to updated (pull latest) from their respective repos:
-
-        $ git subtree pull --squash --prefix libs/library_name https://github.com/wordpress-mobile/WordPress-Library_Name-Android.git develop
-
-and substitute the `library_name` and `Library_Name` to match the library project. As an example, for the Analytics library use 'analytics' and 'Analytics' respectively.
-
-Similarly, issue a `subtree push` to push changes committed to the main app repo, upstream to the library repo:
-
-        $ git subtree push --prefix libs/library_name https://github.com/wordpress-mobile/WordPress-Library_Name-Android.git develop
-
-Here are the libraries currently maintained and subtree'd:
-
-* Analytics
-* Editor
-* Networking
-* Stores
-* Utils
-
-# String Resources
-
-We use `values/strings.xml` file for *ALL* translatable strings including string arrays. Each element in a string array should be defined as separate string resource first and then the string array should be defined with `translatable="false"` flag. This is due to a GlotPress limitation where translating arrays directly could generate smaller arrays if some elements are not translated. Here is a basic example:
-
-```
-<string name="element1">Element 1</string>
-<string name="element2">Element 2</string>
-<string-array name="elements_array" translatable="false">
-    <item>@string/element1</item>
-    <item>@string/element2</item>
-</string-array>
-```
-
-We also have string resources outside of `strings.xml` such as `key_strings`. These strings are not user-facing and should be used as static strings such as preference keys.
-
-To help ease the translation process we ask that you mark alias string resources - as well as other strings where appropriate - as not translatable. For example `<string name="foo" translatable="false">@string/bar</string>'
-
-# Drawable Resources
-
-The Android support library [v23.2.1](http://android-developers.blogspot.com/2016/02/android-support-library-232.html) added support for drawable resources to be provided exclusively in vector format. Adding a vector drawable (to `WordPress/src/main/res/drawable/`) should be the first option when adding assets. Only if a vector drawable is not available should pngs be added to the project. Also make sure to use `app:srcCompat` in place of `android:src` in XML files.
-
-Since Vector Drawable are not the easiest file type to edit, they're chances the Vector Drawable you'll add comes from a SVG file. If the SVG file is specific to the WPAndroid project (like a banner image or unlike a gridicon), then add the SVG source in `WordPress/src/future/svg/`. The argument behind this: make sure we can find and edit the SVG file and then export it in Vector Drawable format.
-
-# Subtree'd projects
-
-The [WordPress-HealthCheck-Common][healthcheck] project is used in the tests and loaded from `assets` on tests run. Use the following command to pull in newer commits from the external project:
-
-        $ git subtree pull --prefix=WordPress/src/androidTest/assets/health-check/ https://github.com/wordpress-mobile/WordPress-HealthCheck-Common.git develop
-
-[healthcheck]: https://github.com/wordpress-mobile/WordPress-HealthCheck-Common
 
 # Contribute to translations
 

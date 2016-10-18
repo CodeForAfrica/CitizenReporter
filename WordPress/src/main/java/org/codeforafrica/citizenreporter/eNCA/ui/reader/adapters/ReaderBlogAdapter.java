@@ -117,13 +117,13 @@ public class ReaderBlogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     final ReaderRecommendedBlog blog = mRecommendedBlogs.get(position);
                     blogHolder.txtTitle.setText(blog.getTitle());
                     blogHolder.txtDescription.setText(blog.getReason());
-                    blogHolder.txtUrl.setText(UrlUtils.getHost(blog.getBlogUrl()));
+                    blogHolder.txtUrl.setText(UrlUtils.getDomainFromUrl(blog.getBlogUrl()));
                     blogHolder.imgBlog.setImageUrl(blog.getImageUrl(), WPNetworkImageView.ImageType.BLAVATAR);
                     break;
 
                 case FOLLOWED:
                     final ReaderBlog blogInfo = mFollowedBlogs.get(position);
-                    String domain = UrlUtils.getHost(blogInfo.getUrl());
+                    String domain = UrlUtils.getDomainFromUrl(blogInfo.getUrl());
                     if (blogInfo.hasName()) {
                         blogHolder.txtTitle.setText(blogInfo.getName());
                     } else {
@@ -248,7 +248,7 @@ public class ReaderBlogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             } else if (blog.hasName()) {
                 return blog.getName();
             } else if (blog.hasUrl()) {
-                return StringUtils.notNullStr(UrlUtils.getHost(blog.getUrl()));
+                return StringUtils.notNullStr(UrlUtils.getDomainFromUrl(blog.getUrl()));
             } else {
                 return "";
             }

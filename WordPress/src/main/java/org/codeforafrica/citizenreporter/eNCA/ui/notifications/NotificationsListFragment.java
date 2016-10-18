@@ -9,6 +9,7 @@ import android.support.annotation.StringRes;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,8 +75,10 @@ public class NotificationsListFragment extends Fragment
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_notes);
         mEmptyView = (ViewGroup) view.findViewById(R.id.empty_view);
 
-        RecyclerView.ItemAnimator animator = new DefaultItemAnimator();
-//        animator.setSupportsChangeAnimation(true);
+//        RecyclerView.ItemAnimator animator = new DefaultItemAnimator();
+//        animator.setSupportsChangeAnimations(true);
+        SimpleItemAnimator animator = new DefaultItemAnimator();
+        animator.setSupportsChangeAnimations(true);
         mRecyclerView.setItemAnimator(animator);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);

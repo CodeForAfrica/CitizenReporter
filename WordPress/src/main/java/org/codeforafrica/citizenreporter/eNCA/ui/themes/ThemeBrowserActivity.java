@@ -358,7 +358,7 @@ public class ThemeBrowserActivity extends ActionBarActivity implements
                     mFetchingThemes = false;
                     if (result == null) {
                         Toast.makeText(ThemeBrowserActivity.this, R.string.theme_fetch_failed, Toast.LENGTH_SHORT)
-                                .show();
+                             .show();
                     }
                     setRefreshing(false, mFetchPage);
                 }

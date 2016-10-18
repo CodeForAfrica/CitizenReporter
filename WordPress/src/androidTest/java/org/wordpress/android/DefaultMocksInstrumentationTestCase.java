@@ -33,10 +33,4 @@ public class DefaultMocksInstrumentationTestCase extends InstrumentationTestCase
         RestClientFactoryTest.setPrefixAllInstances("default");
         XMLRPCFactoryTest.setPrefixAllInstances("default");
     }
-
-    @Override
-    protected void tearDown() throws Exception {
-        FactoryUtils.clearFactories();
-        super.tearDown();
-    }
 }

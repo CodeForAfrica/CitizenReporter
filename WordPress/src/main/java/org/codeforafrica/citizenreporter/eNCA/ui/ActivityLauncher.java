@@ -24,6 +24,7 @@ import org.codeforafrica.citizenreporter.eNCA.ui.media.WordPressMediaUtils;
 import org.codeforafrica.citizenreporter.eNCA.ui.posts.EditPostActivity;
 import org.codeforafrica.citizenreporter.eNCA.ui.posts.PagesActivity;
 import org.codeforafrica.citizenreporter.eNCA.ui.posts.PostsActivity;
+import org.codeforafrica.citizenreporter.eNCA.ui.posts.StoryBoard;
 import org.codeforafrica.citizenreporter.eNCA.ui.prefs.BlogPreferencesActivity;
 import org.codeforafrica.citizenreporter.eNCA.ui.prefs.SettingsActivity;
 import org.codeforafrica.citizenreporter.eNCA.ui.stats.StatsActivity;
@@ -56,40 +57,39 @@ public class ActivityLauncher {
         Intent intent = new Intent(context, ViewSiteActivity.class);
         slideInFromRight(context, intent);
     }
-
     public static void viewBlogStats(Context context, int blogLocalTableId) {
         if (blogLocalTableId == 0) return;
 
         Intent intent = new Intent(context, StatsActivity.class);
         intent.putExtra(StatsActivity.ARG_LOCAL_TABLE_BLOG_ID, blogLocalTableId);
-        context.startActivity(intent);
+        slideInFromRight(context, intent);
     }
 
     public static void viewCurrentBlogPosts(Context context) {
         Intent intent = new Intent(context, PostsActivity.class);
-        context.startActivity(intent);
+        slideInFromRight(context, intent);
     }
 
     public static void viewCurrentBlogMedia(Context context) {
         Intent intent = new Intent(context, MediaBrowserActivity.class);
-        context.startActivity(intent);
+        slideInFromRight(context, intent);
     }
 
     public static void viewCurrentBlogPages(Context context) {
         Intent intent = new Intent(context, PagesActivity.class);
         intent.putExtra(PostsActivity.EXTRA_VIEW_PAGES, true);
-        context.startActivity(intent);
+        slideInFromRight(context, intent);
     }
 
     public static void viewCurrentBlogComments(Context context) {
         Intent intent = new Intent(context, CommentsActivity.class);
-        context.startActivity(intent);
+        slideInFromRight(context, intent);
     }
 
     public static void viewCurrentBlogThemes(Context context) {
         if (ThemeBrowserActivity.isAccessible()) {
             Intent intent = new Intent(context, ThemeBrowserActivity.class);
-            context.startActivity(intent);
+            slideInFromRight(context, intent);
         }
     }
 
@@ -98,7 +98,7 @@ public class ActivityLauncher {
 
         Intent intent = new Intent(activity, BlogPreferencesActivity.class);
         intent.putExtra(BlogPreferencesActivity.ARG_LOCAL_BLOG_ID, blog.getLocalTableBlogId());
-        activity.startActivityForResult(intent, RequestCodes.BLOG_SETTINGS);
+        slideInFromRightForResult(activity, intent, RequestCodes.BLOG_SETTINGS);
     }
 
     public static void viewBlogAdmin(Context context, Blog blog) {
@@ -112,7 +112,8 @@ public class ActivityLauncher {
         intent.putExtra(WPWebViewActivity.URL_TO_LOAD, blog.getAdminUrl());
         intent.putExtra(WPWebViewActivity.AUTHENTICATION_URL, WPWebViewActivity.getBlogLoginUrl(blog));
         intent.putExtra(WPWebViewActivity.LOCAL_BLOG_ID, blog.getLocalTableBlogId());
-        context.startActivity(intent);}
+        slideInFromRight(context, intent);
+    }
 
     public static void addNewBlogPostOrPageForResult(Activity context, Blog blog, boolean isPage) {
         if (blog == null) return;
@@ -121,7 +122,7 @@ public class ActivityLauncher {
         Post newPost = new Post(blog.getLocalTableBlogId(), isPage);
         WordPress.wpDB.savePost(newPost);
 
-        Intent intent = new Intent(context, EditPostActivity.class);
+        Intent intent = new Intent(context, StoryBoard.class);
         intent.putExtra(EditPostActivity.EXTRA_POSTID, newPost.getLocalTablePostId());
         intent.putExtra(EditPostActivity.EXTRA_IS_PAGE, isPage);
         intent.putExtra(EditPostActivity.EXTRA_IS_NEW_POST, true);
@@ -129,7 +130,7 @@ public class ActivityLauncher {
     }
 
     public static void editBlogPostOrPageForResult(Activity activity, long postOrPageId, boolean isPage) {
-        Intent intent = new Intent(activity.getApplicationContext(), EditPostActivity.class);
+        Intent intent = new Intent(activity.getApplicationContext(), StoryBoardActivity.class);
         intent.putExtra(EditPostActivity.EXTRA_POSTID, postOrPageId);
         intent.putExtra(EditPostActivity.EXTRA_IS_PAGE, isPage);
         activity.startActivityForResult(intent, RequestCodes.EDIT_POST);
@@ -141,13 +142,13 @@ public class ActivityLauncher {
 
     public static void viewAccountSettings(Context context) {
         Intent intent = new Intent(context, SettingsActivity.class);
-        context.startActivity(intent);
+        slideInFromRight(context, intent);
     }
 
     public static void viewHelpAndSupport(Context context, Tag origin) {
         Intent intent = new Intent(context, HelpActivity.class);
         intent.putExtra(HelpshiftHelper.ORIGIN_KEY, origin);
-        context.startActivity(intent);
+        slideInFromRight(context, intent);
     }
 
     public static void viewSSLCerts(Context context) {

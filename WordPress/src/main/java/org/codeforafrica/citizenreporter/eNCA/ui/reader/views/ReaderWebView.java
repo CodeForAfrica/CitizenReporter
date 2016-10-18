@@ -162,7 +162,7 @@ public class ReaderWebView extends WebView {
         if (event.getAction() == MotionEvent.ACTION_UP && mUrlClickListener != null) {
             HitTestResult hr = getHitTestResult();
             if (hr != null && (hr.getType() == HitTestResult.IMAGE_TYPE
-                    || hr.getType() == HitTestResult.SRC_IMAGE_ANCHOR_TYPE)) {
+                            || hr.getType() == HitTestResult.SRC_IMAGE_ANCHOR_TYPE)) {
                 String imageUrl = hr.getExtra();
                 if (isValidClickedUrl(imageUrl) ) {
                     return mUrlClickListener.onImageUrlClick(

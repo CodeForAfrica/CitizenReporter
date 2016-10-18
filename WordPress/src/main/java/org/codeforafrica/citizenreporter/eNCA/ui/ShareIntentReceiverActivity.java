@@ -57,7 +57,7 @@ public class ShareIntentReceiverActivity extends ActionBarActivity implements On
 
         mBlogSpinnerTitle = (TextView) findViewById(R.id.blog_spinner_title);
         mBlogSpinner = (Spinner) findViewById(R.id.blog_spinner);
-        mAlwaysUseCheckBox = (CheckBox) findViewById(R.id.checkbox);
+        mAlwaysUseCheckBox = (CheckBox) findViewById(R.id.always_use_checkbox);
         String[] blogNames = getBlogNames();
         if (blogNames == null) {
             finishIfNoVisibleBlogs();
@@ -158,7 +158,7 @@ public class ShareIntentReceiverActivity extends ActionBarActivity implements On
             Blog blog;
             for (int i = 0; i < accounts.size(); i++) {
                 Map<String, Object> account = accounts.get(i);
-                blogNames[i] = BlogUtils.getBlogNameFromAccountMap(account);
+                blogNames[i] = BlogUtils.getBlogNameOrHostNameFromAccountMap(account);
                 mAccountIDs[i] = (Integer) account.get("id");
                 blog = WordPress.wpDB.instantiateBlogByLocalId(mAccountIDs[i]);
                 if (blog == null) {

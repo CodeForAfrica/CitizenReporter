@@ -44,10 +44,8 @@ public class EditPostPreviewFragment extends Fragment {
             }
         });
 
-
         return rootView;
     }
-    private int minim = getMin(mTextView.getWidth(), mTextView.getHeight());
 
     @Override
     public void onResume() {
@@ -75,10 +73,6 @@ public class EditPostPreviewFragment extends Fragment {
         }
     }
 
-    private int getMin(int a, int b){
-        return Math.min(a, b);
-    }
-
     // Load post content in the background
     private class LoadPostPreviewTask extends AsyncTask<Void, Void, Spanned> {
         @Override
@@ -99,8 +93,7 @@ public class EditPostPreviewFragment extends Fragment {
                         postContent.replaceAll("\uFFFC", ""),
                         mActivity,
                         post,
-                        minim
-
+                        Math.min(mTextView.getWidth(), mTextView.getHeight())
                 );
             } else {
                 String htmlText = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"webview.css\" /></head><body><div id=\"container\">%s</div></body></html>";

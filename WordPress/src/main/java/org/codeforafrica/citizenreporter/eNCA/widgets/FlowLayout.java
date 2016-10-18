@@ -112,7 +112,7 @@ public class FlowLayout extends ViewGroup {
 		return new LayoutParams(p.width, p.height);
 	}
 
-	public static class LayoutParams extends ViewGroup.MarginLayoutParams {
+	public static class LayoutParams extends ViewGroup.LayoutParams {
 		int x;
 		int y;
 

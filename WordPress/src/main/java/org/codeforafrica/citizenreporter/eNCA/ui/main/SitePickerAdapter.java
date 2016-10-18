@@ -387,7 +387,7 @@ class SitePickerAdapter extends RecyclerView.Adapter<SitePickerAdapter.SiteViewH
             localId = MapUtils.getMapInt(account, "id");
             blogId = MapUtils.getMapStr(account, "blogId");
             blogName = BlogUtils.getBlogNameFromAccountMap(account);
-            hostName = BlogUtils.getBlogNameFromAccountMap(account);
+            hostName = BlogUtils.getHostNameFromAccountMap(account);
             url = MapUtils.getMapStr(account, "url");
             blavatarUrl = GravatarUtils.blavatarFromUrl(url, mBlavatarSz);
             isDotCom = MapUtils.getMapBool(account, "dotcomFlag");

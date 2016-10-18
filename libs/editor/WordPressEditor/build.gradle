@@ -49,6 +49,8 @@ dependencies {
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'org.wordpress:utils:1.11.0'
+    releaseCompile project(path: ':libs:analytics:WordPressAnalytics', configuration: 'release')
+    debugCompile project(path: ':libs:analytics:WordPressAnalytics', configuration: 'debug')
 }
 
 signing {

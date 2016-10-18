@@ -77,7 +77,7 @@ public class GravatarUtils {
     }
     public static String blavatarFromUrl(final String url, int size, DefaultImage defaultImage) {
         return "http://gravatar.com/blavatar/"
-                + StringUtils.getMd5Hash(UrlUtils.getHost(url))
+                + StringUtils.getMd5Hash(UrlUtils.getDomainFromUrl(url))
                 + "?d=" + defaultImage.toString()
                 + "&size=" + Integer.toString(size);
     }

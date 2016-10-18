@@ -23,7 +23,7 @@ public class PhotonUtils {
      * returns a photon url for the passed image with the resize query set to the passed
      * dimensions - note that the passed quality parameter will only affect JPEGs
      */
-    public enum Quality {
+    public static enum Quality {
         HIGH,
         MEDIUM,
         LOW
@@ -42,15 +42,15 @@ public class PhotonUtils {
             return imageUrl;
         }
 
-        // we have encountered some image urls that incorrectly have a # fragment part, which
-        // must be removed before removing the query string
-        int fragmentPos = imageUrl.indexOf("#");
-        if (fragmentPos > 0) {
-            imageUrl = imageUrl.substring(0, fragmentPos);
-        }
-
         // remove existing query string since it may contain params that conflict with the passed ones
         imageUrl = UrlUtils.removeQuery(imageUrl);
+
+        // don't use with GIFs - photon breaks animated GIFs, and sometimes returns a GIF that
+        // can't be read by BitmapFactory.decodeByteArray (used by Volley in ImageRequest.java
+        // to decode the downloaded image)
+        if (imageUrl.endsWith(".gif")) {
+            return imageUrl;
+        }
 
         // if this is an "mshots" url, skip photon and return it with a query that sets the width/height
         if (isMshotsUrl(imageUrl)) {
@@ -86,12 +86,6 @@ public class PhotonUtils {
         if (imageUrl.contains(".wp.com")) {
             if (imageUrl.contains("i0.wp.com") || imageUrl.contains("i1.wp.com") || imageUrl.contains("i2.wp.com"))
                 return imageUrl + query;
-        }
-
-        // use wordpress.com as the host if image is on wordpress.com since it supports the same
-        // query params and, more importantly, can handle images in private blogs
-        if (imageUrl.contains("wordpress.com")) {
-            return imageUrl + query;
         }
 
         // must use https for https image urls

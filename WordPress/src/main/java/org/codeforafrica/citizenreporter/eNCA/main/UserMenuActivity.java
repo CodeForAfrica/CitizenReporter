@@ -42,7 +42,6 @@ import org.codeforafrica.citizenreporter.eNCA.wallet.PaymentsListActivity;
 import org.codeforafrica.citizenreporter.eNCA.wallet.Stats;
 import org.codeforafrica.citizenreporter.eNCA.widgets.WPNetworkImageView;
 import org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView;
-import org.wordpress.android.util.UrlUtils;
 
 import de.greenrobot.event.EventBus;
 
@@ -324,7 +323,7 @@ public class UserMenuActivity extends ActionBarActivity{
         // mBlavatarImageView.setImageUrl(GravatarUtils.gravatarFromEmail(WordPress.get, mBlavatarSz), WPNetworkImageView.ImageType.BLAVATAR);
 
         String blogName = StringUtils.unescapeHTML(mBlog.getBlogName());
-        String hostName = UrlUtils.getHost(mBlog.getUrl());
+        String hostName = StringUtils.getHost(mBlog.getUrl());
         String blogTitle = TextUtils.isEmpty(blogName) ? hostName : blogName;
 
         mBlogTitleTextView.setText(blogTitle);

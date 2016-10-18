@@ -26,14 +26,12 @@ import org.codeforafrica.citizenreporter.eNCA.ui.posts.EditPostActivity;
 import org.codeforafrica.citizenreporter.eNCA.ui.stats.service.StatsService;
 import org.codeforafrica.citizenreporter.eNCA.ui.themes.ThemeBrowserActivity;
 import org.wordpress.android.util.AniUtils;
-import org.wordpress.android.util.BlogUtils;
 import org.wordpress.android.util.CoreEvents;
 import org.wordpress.android.util.GravatarUtils;
 import org.wordpress.android.util.ServiceUtils;
 import org.wordpress.android.util.StringUtils;
 import org.codeforafrica.citizenreporter.eNCA.widgets.WPNetworkImageView;
 import org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView;
-import org.wordpress.android.util.UrlUtils;
 
 import de.greenrobot.event.EventBus;
 
@@ -264,7 +262,7 @@ public class MySiteFragment extends Fragment
         mBlavatarImageView.setImageUrl(GravatarUtils.blavatarFromUrl(mBlog.getUrl(), mBlavatarSz), WPNetworkImageView.ImageType.BLAVATAR);
 
         String blogName = StringUtils.unescapeHTML(mBlog.getBlogName());
-        String hostName = UrlUtils.getHost(mBlog.getUrl());
+        String hostName = StringUtils.getHost(mBlog.getUrl());
         String blogTitle = TextUtils.isEmpty(blogName) ? hostName : blogName;
 
         mBlogTitleTextView.setText(blogTitle);

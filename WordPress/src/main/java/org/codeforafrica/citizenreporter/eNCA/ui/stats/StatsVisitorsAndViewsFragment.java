@@ -169,17 +169,17 @@ public class StatsVisitorsAndViewsFragment extends StatsAbstractFragment
         private Drawable getTabIcon() {
             switch (labelItem) {
                 case VISITORS:
-                    return isChecked ? getResources().getDrawable(R.drawable.stats_icon_visitors) :
+                    return isChecked ? getResources().getDrawable(R.drawable.stats_icon_visitors_active) :
                             getResources().getDrawable(R.drawable.stats_icon_visitors);
                 case COMMENTS:
                     return isChecked ? getResources().getDrawable(R.drawable.stats_icon_comments_active) :
                             getResources().getDrawable(R.drawable.stats_icon_comments);
                 case LIKES:
-                    return isChecked ? getResources().getDrawable(R.drawable.stats_icon_likes) :
+                    return isChecked ? getResources().getDrawable(R.drawable.stats_icon_likes_active) :
                             getResources().getDrawable(R.drawable.stats_icon_likes);
                 default:
                     // Views and when no prev match
-                    return isChecked ? getResources().getDrawable(R.drawable.stats_icon_views) :
+                    return isChecked ? getResources().getDrawable(R.drawable.stats_icon_views_active) :
                             getResources().getDrawable(R.drawable.stats_icon_views);
             }
         }

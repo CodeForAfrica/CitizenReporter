@@ -69,25 +69,19 @@ function checkNewLanguages() {
 	fi
 }
 
-function printVersion() {
+function checkVersions() {
 	gradle_version=$(grep -E 'versionName' $BUILDFILE | sed s/versionName// | grep -Eo "[a-zA-Z0-9.-]+" )
-	echo "$BUILDFILE version $gradle_version"
-}
-
-function checkGradleProperties() {
-	/bin/echo -n "Check WordPress/gradle.properties..."
-	checksum=`cat WordPress/gradle.properties | grep -v "^wp.debug." | grep "^wp."|tr "[A-Z]" "[a-z]" | sed "s/ //g" | sort | sha1sum | cut -d- -f1 | sed "s/ //g"`
-	known_checksum="4058cdf3d784e4b79f63514d4780e92c28b5ab78"
-	if [ x$checksum != x$known_checksum ]; then
+	tag=$(git for-each-ref --sort=taggerdate --format '%(tag)' refs/tags|tail -1)
+	if [[ $gradle_version != $tag ]]; then
+		/bin/echo -n "$BUILDFILE version and git tag version mismatch..."
 		pFail
-		exit 5
 	fi
-	pOk
+	echo "$BUILDFILE version $gradle_version"
+	echo "last git tag version is $tag"
 }
 
 checkNewLanguages
-# checkENStrings
-checkGradleProperties
-printVersion
+checkENStrings
+checkVersions
 # checkDeviceToTest
 # runConnectedTests

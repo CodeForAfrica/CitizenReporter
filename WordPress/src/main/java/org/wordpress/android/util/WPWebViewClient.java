@@ -60,8 +60,8 @@ public class WPWebViewClient extends WebViewClient {
             // NOTE: There is still a small security hole here, since the realm is not considered when getting
             // the password. Unfortunately the real is not stored when setting up the blog, and we cannot compare it
             // at this point.
-            String domainFromHttpAuthRequest = UrlUtils.getHost(UrlUtils.addUrlSchemeIfNeeded(host, false));
-            String currentBlogDomain = UrlUtils.getHost(mBlog.getUrl());
+            String domainFromHttpAuthRequest = UrlUtils.getDomainFromUrl(UrlUtils.addUrlSchemeIfNeeded(host, false));
+            String currentBlogDomain = UrlUtils.getDomainFromUrl(mBlog.getUrl());
             if (domainFromHttpAuthRequest.equals(currentBlogDomain)) {
                 handler.proceed(mBlog.getHttpuser(), mBlog.getHttppassword());
                 return;

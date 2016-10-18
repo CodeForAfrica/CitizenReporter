@@ -1574,31 +1574,6 @@ public class EditPostActivity extends ActionBarActivity implements EditorFragmen
     }
 
     @Override
-    public void onMediaRetryClicked(String mediaId) {
-
-    }
-
-    @Override
-    public void onMediaUploadCancelClicked(String mediaId, boolean delete) {
-
-    }
-
-    @Override
-    public void onFeaturedImageChanged(long mediaId) {
-
-    }
-
-    @Override
-    public void onVideoPressInfoRequested(String videoId) {
-
-    }
-
-    @Override
-    public String onAuthHeaderRequested(String url) {
-        return null;
-    }
-
-    @Override
     public void onEditorFragmentInitialized() {
         fillContentEditorFields();
     }
@@ -1606,10 +1581,5 @@ public class EditPostActivity extends ActionBarActivity implements EditorFragmen
     @Override
     public void saveMediaFile(MediaFile mediaFile) {
         WordPress.wpDB.saveMediaFile(mediaFile);
-    }
-
-    @Override
-    public void onTrackableEvent(EditorFragmentAbstract.TrackableEvent event) {
-
     }
 }
