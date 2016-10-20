@@ -25,4 +25,20 @@ public class RequestCodes {
 
     // Location
     public static final int START_LOCATION_SERVICE = 2600;
+
+    // permissions request codes
+    private int GCM_PERMS_REQUESTCODE = 12356;
+
+    public static final int INTERNET_PERMISSIONS = 3100;
+    public static final int CAMERA_PERMISSIONS = 3200;
+    public static final int WRITE_EXTERNAL_STORAGE_PERMISSIONS = 3300;
+    public static final int VIBRATE_PERMISSIONS = 3400;
+    public static final int ACCESS_FINE_LOCATION_PERMISSIONS = 3500;
+    public static final int ACCESS_COARSE_LOCATION_PERMISSIONS = 3600;
+    public static final int ACCESS_NETWORK_STATE = 3700;
+    public static final int GET_ACCCOUNTS_PERMISSIONS = 3800;
+    public static final int WAKE_LOCK_PERMISSION = 3900;
+    public static final int RECORD_AUDIO_PERMISSION = 4000;
+    public static final int READ_PHONE_STATE_PERMISSION = 4100;
+
 }

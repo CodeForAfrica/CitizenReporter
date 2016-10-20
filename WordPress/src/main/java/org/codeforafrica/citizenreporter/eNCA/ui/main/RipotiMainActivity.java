@@ -1,5 +1,6 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.main;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -10,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.os.AsyncTask;
@@ -101,6 +104,7 @@ public class RipotiMainActivity extends AppCompatActivity
     Assignments list variables
      */
 
+
     public static final String EXTRA_VIEW_PAGES = "viewPages";
     public static final String EXTRA_ERROR_MSG = "errorMessage";
     public static final String EXTRA_ERROR_INFO_TITLE = "errorInfoTitle";
@@ -128,6 +132,10 @@ public class RipotiMainActivity extends AppCompatActivity
     private LinearLayout button_video;
     private LinearLayout button_mic;
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
     @Override
     public void onDetailAssignmentAction(int action, Post post) {
@@ -883,6 +891,12 @@ public class RipotiMainActivity extends AppCompatActivity
     WordPress aController;
     AsyncTask<Void, Void, Void> mRegisterTask;
     public void registerDevice(){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            //TODO add permission check and request
+
+
+        }
         //Get Global Controller Class object (see application tag in AndroidManifest.xml)
         aController = (WordPress)getApplicationContext();
 
