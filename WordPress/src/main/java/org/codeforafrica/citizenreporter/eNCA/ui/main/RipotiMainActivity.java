@@ -11,8 +11,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.os.AsyncTask;
@@ -73,6 +76,9 @@ import org.wordpress.android.util.ToastUtils;
 import org.codeforafrica.citizenreporter.eNCA.widgets.SlidingTabLayout;
 import org.codeforafrica.citizenreporter.eNCA.widgets.WPAlertDialogFragment;
 import org.codeforafrica.citizenreporter.eNCA.widgets.WPMainViewPager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
@@ -135,6 +141,33 @@ public class RipotiMainActivity extends AppCompatActivity
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case RequestCodes.C2D_RECEIVE_PERMISSIONS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    registerDevice();
+
+                } else {
+                    // since the user doesn't want to allow the app to use this permission,
+                    // exit the app
+                    // TODO exit app if the user doesn't accept this permission
+                }
+
+            }
+            case RequestCodes.CAMERA_PERMISSIONS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
+                } else {
+                    // TODO exit app if the user doesn't accept this permission
+                }
+            }
+            case RequestCodes.RECORD_AUDIO_PERMISSIONS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
+                } else {
+                    // TODO exit app if the user doesn't accept this permission
+                }
+            }
+        }
     }
 
     @Override
@@ -210,7 +243,7 @@ public class RipotiMainActivity extends AppCompatActivity
             } else {
                 viewAssignmentFragment.loadPost(post);
             }
-            
+
             toggleToolbar(true);
         }
     }
@@ -253,7 +286,20 @@ public class RipotiMainActivity extends AppCompatActivity
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String rD = settings.getString("rD", "0");
         if(rD.equals("0"))
-            registerDevice();
+            if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                    "com.google.android.c2dm.permission.RECEIVE") != PackageManager.PERMISSION_GRANTED){
+                if (ActivityCompat.shouldShowRequestPermissionRationale(RipotiMainActivity.this,
+                        "com.google.android.c2dm.permission.RECEIVE" )){
+
+                } else {
+                    ActivityCompat.requestPermissions(RipotiMainActivity.this,new String[]
+                            {"com.google.android.c2dm.permission.RECEIVE"}, RequestCodes.C2D_RECEIVE_PERMISSIONS);
+                }
+
+            } else {
+                registerDevice();
+            }
+
     }
 
     @Override
@@ -355,6 +401,13 @@ public class RipotiMainActivity extends AppCompatActivity
         }
 
 
+        // testing to check if it can even get permissions
+
+//        int camera_permission = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+//        Toast.makeText(this, " " + camera_permission, Toast.LENGTH_SHORT).show();
+//        Log.i("Permissions", "camera permission " + camera_permission);
+
+
         mViewPager = (WPMainViewPager) findViewById(R.id.viewpager_main);
         mTabAdapter = new RipotiMainTabAdapter(getFragmentManager(), RipotiMainActivity.this);
         mViewPager.setAdapter(mTabAdapter);
@@ -400,6 +453,9 @@ public class RipotiMainActivity extends AppCompatActivity
             }
         }
 
+        checkAndRequestAllPermissions();
+
+
         //quick capture icons
         button_camera = (LinearLayout)findViewById(R.id.button_camera);
         button_video = (LinearLayout)findViewById(R.id.button_video);
@@ -408,13 +464,17 @@ public class RipotiMainActivity extends AppCompatActivity
         button_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                checkAndRequestSpecificPermissions(new String[] {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE});
                 (new WordPress()).capturePic(RipotiMainActivity.this, getApplicationContext());
+
             }
+
         });
 
         button_video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                checkAndRequestSpecificPermissions(new String[] {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE});
                 (new WordPress()).captureVid(RipotiMainActivity.this, getApplicationContext());
             }
         });
@@ -422,6 +482,7 @@ public class RipotiMainActivity extends AppCompatActivity
         button_mic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                checkAndRequestSpecificPermissions(new String[] {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE});
                 (new WordPress()).captureAudio(RipotiMainActivity.this, getApplicationContext());
             }
         });
@@ -440,7 +501,23 @@ public class RipotiMainActivity extends AppCompatActivity
 
         WordPress.currentPost = null;
 
-        checkIfRegistered();
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                "org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE") != PackageManager.PERMISSION_GRANTED){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(RipotiMainActivity.this,
+                    "org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE")){
+                //TODO add snackbar to show rationale
+            } else {
+                ActivityCompat.requestPermissions(RipotiMainActivity.this,
+                        new String[] {"org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE"},
+                        RequestCodes.C2D_MESSAGE_PERMISSIONS);
+            }
+        }
+        else {
+            checkIfRegistered();
+        }
+
+
         //attemptToSelectPost();
     }
 
@@ -659,6 +736,7 @@ public class RipotiMainActivity extends AppCompatActivity
         }
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -725,6 +803,38 @@ public class RipotiMainActivity extends AppCompatActivity
                     }
                 }
                 break;
+        }
+    }
+
+    private  void checkAndRequestSpecificPermissions(String[] permissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            List<String> listPermissionsNeeded = new ArrayList<>();
+            for (String permission : permissions) {
+                if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    listPermissionsNeeded.add(permission);
+                }
+            }
+            if (!listPermissionsNeeded.isEmpty()) {
+                ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                        RequestCodes.WRITE_EXTERNAL_STORAGE_PERMISSIONS);
+            }
+        }
+    }
+
+    private  void checkAndRequestAllPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            String[] permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_COARSE_LOCATION};
+            List<String> listPermissionsNeeded = new ArrayList<>();
+            for (String permission : permissions) {
+                if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    listPermissionsNeeded.add(permission);
+                }
+            }
+            if (!listPermissionsNeeded.isEmpty()) {
+                ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+                        RequestCodes.CAMERA_PERMISSIONS);
+            }
         }
     }
 
@@ -891,12 +1001,20 @@ public class RipotiMainActivity extends AppCompatActivity
     WordPress aController;
     AsyncTask<Void, Void, Void> mRegisterTask;
     public void registerDevice(){
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            //TODO add permission check and request
-
-
-        }
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+//            //TODO add permission check and request
+//
+//            if(ContextCompat.checkSelfPermission(getApplicationContext(), "org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE")
+//                    != PackageManager.PERMISSION_GRANTED){
+//                //TODO add explanation to why the user needs to accept this permission
+//            } else {
+//                ActivityCompat.requestPermissions(RipotiMainActivity.this,
+//                        new String[] {"org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE"},
+//                        RequestCodes.C2D_MESSAGE_PERMISSIONS);
+//
+//            }
+//        }
         //Get Global Controller Class object (see application tag in AndroidManifest.xml)
         aController = (WordPress)getApplicationContext();
 

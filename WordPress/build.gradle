@@ -43,7 +43,7 @@ android {
         versionName "4.2.4"
         versionCode 194
         minSdkVersion 16
-        targetSdkVersion 21
+        targetSdkVersion 23
         multiDexEnabled = true
 
         buildConfigField "String", "APP_PN_KEY", "\"org.wordpress.android.playstore\""
@@ -58,7 +58,7 @@ android {
         eNCA {
             minSdkVersion 16
             applicationId 'org.codeforafrica.citizenreporter.eNCA'
-            targetSdkVersion 21
+            targetSdkVersion 23
             versionName '1.0.0'
         }
     }

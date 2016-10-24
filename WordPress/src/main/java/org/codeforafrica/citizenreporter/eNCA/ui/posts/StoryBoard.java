@@ -1,10 +1,12 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.posts;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +21,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -234,6 +239,18 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         if (quickMediaType >= 0) {
             // User selected 'Quick Photo' in the menu drawer
             if (quickMediaType == Constants.QUICK_POST_PHOTO_CAMERA) {
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED){
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(StoryBoard.this,
+                            Manifest.permission.CAMERA)){
+                        //TODO explain why this thing is important
+                    } else {
+                        ActivityCompat.requestPermissions(StoryBoard.this, new String[]
+                                {Manifest.permission.CAMERA}, RequestCodes.CAMERA_PERMISSIONS);
+                    }
+                } else {
+                    launchCamera();
+                }
                 launchCamera();
             } else if (quickMediaType == Constants.QUICK_POST_VIDEO_CAMERA) {
                 launchVideoCamera();
@@ -430,6 +447,20 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
         getAndSetThumbnails();
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch(requestCode){
+            case RequestCodes.CAMERA_PERMISSIONS:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    launchCamera();
+                }
+                else {
+                    Toast.makeText(StoryBoard.this, "You can not use the camera", Toast.LENGTH_SHORT).show();
+                }
+        }
     }
 
     public void showCameraDialog() {

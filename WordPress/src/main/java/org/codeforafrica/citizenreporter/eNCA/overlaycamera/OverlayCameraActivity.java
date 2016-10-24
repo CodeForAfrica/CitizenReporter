@@ -1,7 +1,9 @@
 package org.codeforafrica.citizenreporter.eNCA.overlaycamera;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -13,6 +15,8 @@ import android.hardware.Camera.ShutterCallback;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -23,6 +27,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.larvalabs.svgandroid.SVG;
 import com.larvalabs.svgandroid.SVGParser;
@@ -75,6 +80,8 @@ public class OverlayCameraActivity extends ActionBarActivity implements Callback
 
         overlayGroup = getIntent().getIntExtra("group", 0);
         overlayIdx = getIntent().getIntExtra("overlay", 0);
+
+
 
         showOverlayCam();
     }

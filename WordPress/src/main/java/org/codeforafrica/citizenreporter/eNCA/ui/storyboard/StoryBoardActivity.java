@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -66,6 +67,7 @@ import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.AppLog.T;
 import org.wordpress.android.util.AutolinkUtils;
 import org.wordpress.android.util.DeviceUtils;
+import org.wordpress.android.util.DisplayUtils;
 import org.wordpress.android.util.ImageUtils;
 import org.wordpress.android.util.MediaUtils;
 import org.wordpress.android.util.NetworkUtils;
@@ -706,9 +708,21 @@ public class StoryBoardActivity extends ActionBarActivity implements EditorFragm
 
     private int getMaximumThumbnailWidthForEditor() {
         if (mMaxThumbWidth == 0) {
-            mMaxThumbWidth = ImageUtils.getMaximumThumbnailWidthForEditor(this);
+            mMaxThumbWidth = getMaximumThumbnailWidthForEditor(this);
         }
         return mMaxThumbWidth;
+    }
+
+    public static int getMaximumThumbnailWidthForEditor(Context context) {
+        int maximumThumbnailWidthForEditor;
+        Point size = DisplayUtils.getDisplayPixelSize(context);
+        int screenWidth = size.x;
+        int screenHeight = size.y;
+        maximumThumbnailWidthForEditor = (screenWidth > screenHeight) ? screenHeight : screenWidth;
+        // 48dp of padding on each side so you can still place the cursor next to the image.
+        int padding = DisplayUtils.dpToPx(context, 48) * 2;
+        maximumThumbnailWidthForEditor -= padding;
+        return maximumThumbnailWidthForEditor;
     }
 
     private MediaFile createMediaFile(String blogId, final String mediaId) {

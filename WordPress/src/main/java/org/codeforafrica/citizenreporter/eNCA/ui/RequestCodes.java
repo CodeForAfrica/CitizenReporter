@@ -35,10 +35,13 @@ public class RequestCodes {
     public static final int VIBRATE_PERMISSIONS = 3400;
     public static final int ACCESS_FINE_LOCATION_PERMISSIONS = 3500;
     public static final int ACCESS_COARSE_LOCATION_PERMISSIONS = 3600;
-    public static final int ACCESS_NETWORK_STATE = 3700;
+    public static final int ACCESS_NETWORK_STATE_PERMISSIONS = 3700;
     public static final int GET_ACCCOUNTS_PERMISSIONS = 3800;
-    public static final int WAKE_LOCK_PERMISSION = 3900;
-    public static final int RECORD_AUDIO_PERMISSION = 4000;
-    public static final int READ_PHONE_STATE_PERMISSION = 4100;
+    public static final int WAKE_LOCK_PERMISSIONS = 3900;
+    public static final int RECORD_AUDIO_PERMISSIONS = 4000;
+    public static final int READ_PHONE_STATE_PERMISSIONS = 4100;
+    public static final int C2D_MESSAGE_PERMISSIONS = 4200;
+    public static final int C2D_RECEIVE_PERMISSIONS = 4300;
+    public static final int ALL_PERMISSIONS = 4400;
 
 }
