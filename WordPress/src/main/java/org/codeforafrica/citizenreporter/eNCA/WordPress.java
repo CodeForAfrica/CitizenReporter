@@ -293,6 +293,7 @@ public class WordPress extends Application {
             String username = "";
                     if(WordPress.getCurrentBlog()!=null){
                         WordPress.getCurrentBlog().getUsername();
+
                     }
 
             APIFunctions userFunction = new APIFunctions();

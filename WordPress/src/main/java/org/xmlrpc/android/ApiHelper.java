@@ -559,8 +559,16 @@ public class ApiHelper {
 
                     for (int ctr = startPosition; ctr < result.length; ctr++) {
                         Map<?, ?> postMap = (Map<?, ?>) result[ctr];
-                        postsList.add(postMap);
+                        Log.d("CITIZEN", postMap.get("wp_author_display_name").toString());
+
+                        if (postMap.get("wp_author_display_name").toString().equals(WordPress.getCurrentBlog().getUsername())){
+                            Log.d("CITIZEN", "True");
+                            postsList.add(postMap);
+                        }
                     }
+
+//                    Log.d("Citizen", postsList.toString());
+                    Log.d("CITIZEN", " " + WordPress.getCurrentBlog().getUsername() );
 
                     WordPress.wpDB.savePosts(postsList, blog.getLocalTableBlogId(), isPage, false, !loadMore, false);
                 }
