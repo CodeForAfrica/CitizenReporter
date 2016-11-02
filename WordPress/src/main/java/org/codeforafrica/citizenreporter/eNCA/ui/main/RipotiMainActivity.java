@@ -15,7 +15,6 @@ import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.os.AsyncTask;
@@ -23,7 +22,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -500,22 +498,23 @@ public class RipotiMainActivity extends AppCompatActivity
         }
 
         WordPress.currentPost = null;
+        checkIfRegistered();
 
 
-        if (ContextCompat.checkSelfPermission(getApplicationContext(),
-                "org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE") != PackageManager.PERMISSION_GRANTED){
-            if (ActivityCompat.shouldShowRequestPermissionRationale(RipotiMainActivity.this,
-                    "org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE")){
-                //TODO add snackbar to show rationale
-            } else {
-                ActivityCompat.requestPermissions(RipotiMainActivity.this,
-                        new String[] {"org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE"},
-                        RequestCodes.C2D_MESSAGE_PERMISSIONS);
-            }
-        }
-        else {
-            checkIfRegistered();
-        }
+//        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+//                "org.codeforafrica.citizenreporter.creporter.permission.C2D_MESSAGE") != PackageManager.PERMISSION_GRANTED){
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(RipotiMainActivity.this,
+//                    "org.codeforafrica.citizenreporter.creporter.permission.C2D_MESSAGE")){
+//                //TODO add snackbar to show rationale
+//            } else {
+//                ActivityCompat.requestPermissions(RipotiMainActivity.this,
+//                        new String[] {"org.codeforafrica.citizenreporter.creporter.permission.C2D_MESSAGE"},
+//                        RequestCodes.C2D_MESSAGE_PERMISSIONS);
+//            }
+//        }
+//        else {
+//            checkIfRegistered();
+//        }
 
 
         //attemptToSelectPost();
@@ -824,7 +823,8 @@ public class RipotiMainActivity extends AppCompatActivity
     private  void checkAndRequestAllPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             String[] permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_COARSE_LOCATION};
+                    Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.GET_ACCOUNTS,
+            Manifest.permission.READ_PHONE_STATE};
             List<String> listPermissionsNeeded = new ArrayList<>();
             for (String permission : permissions) {
                 if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
