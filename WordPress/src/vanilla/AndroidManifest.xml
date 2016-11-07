@@ -6,7 +6,7 @@
 
     <!-- GCM configuration -->
     <permission
-        android:name="org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE"
+        android:name="org.codeforafrica.citizenreporter.starreports.permission.C2D_MESSAGE"
         android:protectionLevel="signature"/>
 
     <uses-permission android:name="org.codeforafrica.citizenreporter.starreports.permission.C2D_MESSAGE" />

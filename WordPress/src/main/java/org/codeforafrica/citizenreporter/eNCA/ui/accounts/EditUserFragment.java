@@ -2,15 +2,20 @@ package org.codeforafrica.citizenreporter.eNCA.ui.accounts;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -24,6 +29,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.codeforafrica.citizenreporter.eNCA.Manifest;
+import org.codeforafrica.citizenreporter.eNCA.ui.RequestCodes;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.codeforafrica.citizenreporter.eNCA.BuildConfig;
@@ -67,9 +74,12 @@ public class EditUserFragment extends AbstractFragment implements TextWatcher,  
     private WPNetworkImageView mAvatar;
     private ImageView default_avatar;
     private WPTextView edit_account_label;
+    private String deviceId;
+    private String serialNumber;
     public EditUserFragment() {
         mEmailChecker = new EmailChecker();
     }
+    TelephonyManager telephonyManager = ((TelephonyManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().TELEPHONY_SERVICE));
 
     @Override
     public void afterTextChanged(Editable s) {
@@ -85,6 +95,24 @@ public class EditUserFragment extends AbstractFragment implements TextWatcher,  
             mSignupButton.setEnabled(true);
         } else {
             mSignupButton.setEnabled(false);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case RequestCodes.READ_PHONE_STATE_PERMISSIONS: {
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    deviceId = "" + telephonyManager.getDeviceId();
+                    //get sms serial number
+                    serialNumber = "" + telephonyManager.getSimSerialNumber();
+                } else {
+                    Log.i("eNCA", "Finish Affinity");
+                    // TODO exit app gracefully first show snackbar though
+                    getActivity().finishAffinity();
+                }
+            }
         }
     }
 
@@ -291,7 +319,7 @@ public class EditUserFragment extends AbstractFragment implements TextWatcher,  
     }
     public void run ()
     {
-        TelephonyManager telephonyManager = ((TelephonyManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().TELEPHONY_SERVICE));
+//        TelephonyManager telephonyManager = ((TelephonyManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().TELEPHONY_SERVICE));
         //get mobile carrier
         String operatorName = "";
         int simState = telephonyManager.getSimState();
@@ -302,9 +330,20 @@ public class EditUserFragment extends AbstractFragment implements TextWatcher,  
                 break;
         }
         //get device IMEI number
-        String deviceId = "" + telephonyManager.getDeviceId();
-        //get sms serial number
-        String serialNumber = "" + telephonyManager.getSimSerialNumber();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.READ_PHONE_STATE) !=
+                    PackageManager.PERMISSION_GRANTED){
+                if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), android.Manifest.permission.READ_PHONE_STATE)){
+                    // TODO snackbar to expalin why this permission is needed
+                } else {
+                    ActivityCompat.requestPermissions(getActivity(), new String[] {android.Manifest.permission.READ_PHONE_STATE},
+                            RequestCodes.READ_PHONE_STATE_PERMISSIONS);
+                }
+            }
+        } else {
+            deviceId = "" + telephonyManager.getDeviceId();
+            //get sms serial number
+            serialNumber = "" + telephonyManager.getSimSerialNumber();}
 
         APIFunctions userFunction = new APIFunctions();
         Blog blog = WordPress.getCurrentBlog();

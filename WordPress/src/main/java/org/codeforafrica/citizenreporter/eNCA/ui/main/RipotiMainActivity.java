@@ -451,7 +451,7 @@ public class RipotiMainActivity extends AppCompatActivity
             }
         }
 
-        checkAndRequestAllPermissions();
+//        checkAndRequestAllPermissions();
 
 
         //quick capture icons
@@ -820,23 +820,23 @@ public class RipotiMainActivity extends AppCompatActivity
         }
     }
 
-    private  void checkAndRequestAllPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            String[] permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.GET_ACCOUNTS,
-            Manifest.permission.READ_PHONE_STATE};
-            List<String> listPermissionsNeeded = new ArrayList<>();
-            for (String permission : permissions) {
-                if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-                    listPermissionsNeeded.add(permission);
-                }
-            }
-            if (!listPermissionsNeeded.isEmpty()) {
-                ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
-                        RequestCodes.CAMERA_PERMISSIONS);
-            }
-        }
-    }
+//    private  void checkAndRequestAllPermissions() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            String[] permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                    Manifest.permission.RECORD_AUDIO, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.GET_ACCOUNTS,
+//            Manifest.permission.READ_PHONE_STATE};
+//            List<String> listPermissionsNeeded = new ArrayList<>();
+//            for (String permission : permissions) {
+//                if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+//                    listPermissionsNeeded.add(permission);
+//                }
+//            }
+//            if (!listPermissionsNeeded.isEmpty()) {
+//                ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
+//                        RequestCodes.CAMERA_PERMISSIONS);
+//            }
+//        }
+//    }
 
     /*
      * returns the reader list fragment from the reader tab

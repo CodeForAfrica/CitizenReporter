@@ -3,18 +3,23 @@ package org.codeforafrica.citizenreporter.eNCA.ui.accounts;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -79,9 +84,12 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
     private String phone;
     private String address="";
     private String address_gps="";
+    private String deviceId;
+    private String serialNumber;
     public NewUserFragment_Org() {
         mEmailChecker = new EmailChecker();
     }
+    TelephonyManager telephonyManager;
 
     private EditText mLocationETDialog;
     @Override
@@ -98,6 +106,25 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
             mSignupButton.setEnabled(true);
         } else {
             mSignupButton.setEnabled(false);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        telephonyManager = ((TelephonyManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().TELEPHONY_SERVICE));
+        switch (requestCode){
+            case RequestCodes.READ_PHONE_STATE_PERMISSIONS: {
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    deviceId = "" + telephonyManager.getDeviceId();
+                    //get sms serial number
+                    serialNumber = "" + telephonyManager.getSimSerialNumber();
+                } else {
+                    Log.i("eNCA", "Finish Affinity");
+                    // TODO exit app gracefully first show snackbar though
+                    getActivity().finishAffinity();
+                }
+            }
         }
     }
 
@@ -325,7 +352,7 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
     }
     public void run ()
     {
-        TelephonyManager telephonyManager = ((TelephonyManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().TELEPHONY_SERVICE));
+        telephonyManager = ((TelephonyManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().TELEPHONY_SERVICE));
         //get mobile carrier
         String operatorName = "";
         int simState = telephonyManager.getSimState();
@@ -335,10 +362,21 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
                 operatorName = "" + telephonyManager.getNetworkOperatorName();
                 break;
         }
-        //get device IMEI number
-        String deviceId = "" + telephonyManager.getDeviceId();
-        //get sms serial number
-        String serialNumber = "" + telephonyManager.getSimSerialNumber();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.READ_PHONE_STATE) !=
+                    PackageManager.PERMISSION_GRANTED){
+                if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), android.Manifest.permission.READ_PHONE_STATE)){
+                    // TODO snackbar to expalin why this permission is needed
+                } else {
+                    ActivityCompat.requestPermissions(getActivity(), new String[] {android.Manifest.permission.READ_PHONE_STATE},
+                            RequestCodes.READ_PHONE_STATE_PERMISSIONS);
+
+                }
+            }
+        } else {
+            deviceId = "" + telephonyManager.getDeviceId();
+            //get sms serial number
+            serialNumber = "" + telephonyManager.getSimSerialNumber();}
 
         APIFunctions userFunction = new APIFunctions();
         JSONObject json = userFunction.newUser(username, "", password, email, operatorName, deviceId, serialNumber, address_gps, address, phone, true);
