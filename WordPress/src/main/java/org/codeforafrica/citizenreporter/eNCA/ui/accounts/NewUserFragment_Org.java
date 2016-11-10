@@ -1,9 +1,12 @@
 package org.codeforafrica.citizenreporter.eNCA.ui.accounts;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Location;
 import android.location.LocationManager;
@@ -13,6 +16,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
@@ -56,6 +63,7 @@ import org.wordpress.android.util.ToastUtils;
 import org.wordpress.android.util.UserEmailUtils;
 import org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView;
 import org.wordpress.android.util.helpers.LocationHelper;
+import org.wordpress.android.util.helpers.Version;
 import org.wordpress.emailchecker.EmailChecker;
 import org.wordpress.persistentedittext.PersistentEditTextHelper;
 
@@ -78,14 +86,14 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
     private EmailChecker mEmailChecker;
     private boolean mEmailAutoCorrected;
     private boolean mAutoCompleteUrl;
-    private String email;
-    private String password;
-    private String username;
-    private String phone;
-    private String address="";
-    private String address_gps="";
-    private String deviceId;
-    private String serialNumber;
+    public static String email;
+    public static String password;
+    public static String username;
+    public static String phone;
+    public static String address="";
+    public static String address_gps="";
+    private CoordinatorLayout mcoordinatorlayout;
+    private ViewGroup rootView;
     public NewUserFragment_Org() {
         mEmailChecker = new EmailChecker();
     }
@@ -109,30 +117,19 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        telephonyManager = ((TelephonyManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().TELEPHONY_SERVICE));
-        switch (requestCode){
-            case RequestCodes.READ_PHONE_STATE_PERMISSIONS: {
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    deviceId = "" + telephonyManager.getDeviceId();
-                    //get sms serial number
-                    serialNumber = "" + telephonyManager.getSimSerialNumber();
-                } else {
-                    Log.i("eNCA", "Finish Affinity");
-                    // TODO exit app gracefully first show snackbar though
-                    getActivity().finishAffinity();
-                }
-            }
-        }
-    }
-
     private boolean fieldsFilled() {
         return EditTextUtils.getText(mEmailTextField).trim().length() > 0
                 && EditTextUtils.getText(mPasswordTextField).trim().length() > 0
                 && EditTextUtils.getText(mUsernameTextField).trim().length() > 0
                 && EditTextUtils.getText(mSiteUrlTextField).trim().length() > 0;
+    }
+
+    private String _getPackageName(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            return getContext().getPackageName();
+        } else {
+            return getContext().getPackageName();
+        }
     }
 
     protected void startProgress(String message) {
@@ -352,7 +349,48 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
     }
     public void run ()
     {
-        telephonyManager = ((TelephonyManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().TELEPHONY_SERVICE));
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            Log.i("Permissions", "OS Version = M");
+            if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_PHONE_STATE)!=
+                    PackageManager.PERMISSION_GRANTED){
+                Log.i("Permissions", "Permissions not granted");
+                if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_PHONE_STATE)){
+                    Log.i("Permissions", "Show context");
+                    Snackbar.make(getView(),
+                            "Please Grant Permissions",
+                            Snackbar.LENGTH_INDEFINITE).setAction("ENABLE",
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ActivityCompat.requestPermissions(getActivity(),
+                                            new String[]{Manifest.permission
+                                                    .READ_PHONE_STATE},
+                                            RequestCodes.READ_PHONE_STATE_PERMISSIONS);
+                                }
+                            }).show();
+
+                } else {
+                    Log.i("Permissions", "request permissions");
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE},
+                            RequestCodes.READ_PHONE_STATE_PERMISSIONS);
+                }
+            } else{
+                Log.i("Permissions", "Permission was granted");
+                registerNewUser();
+            }
+        } else{
+            Log.i("Permissions", "OS less than M");
+            registerNewUser();
+        }
+
+    }
+
+    public void registerNewUser(){
+        Log.i("Permissions", "Register new user");
+        /*
+        * FUnction to register new user, made it modular to ease requesting for permissions*/
+
+        TelephonyManager telephonyManager = ((TelephonyManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().TELEPHONY_SERVICE));
         //get mobile carrier
         String operatorName = "";
         int simState = telephonyManager.getSimState();
@@ -362,21 +400,10 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
                 operatorName = "" + telephonyManager.getNetworkOperatorName();
                 break;
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.READ_PHONE_STATE) !=
-                    PackageManager.PERMISSION_GRANTED){
-                if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), android.Manifest.permission.READ_PHONE_STATE)){
-                    // TODO snackbar to expalin why this permission is needed
-                } else {
-                    ActivityCompat.requestPermissions(getActivity(), new String[] {android.Manifest.permission.READ_PHONE_STATE},
-                            RequestCodes.READ_PHONE_STATE_PERMISSIONS);
 
-                }
-            }
-        } else {
-            deviceId = "" + telephonyManager.getDeviceId();
-            //get sms serial number
-            serialNumber = "" + telephonyManager.getSimSerialNumber();}
+        String deviceId = "" + telephonyManager.getDeviceId();
+        //get sms serial number
+        String serialNumber = "" + telephonyManager.getSimSerialNumber();
 
         APIFunctions userFunction = new APIFunctions();
         JSONObject json = userFunction.newUser(username, "", password, email, operatorName, deviceId, serialNumber, address_gps, address, phone, true);
@@ -395,6 +422,7 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
                 e.printStackTrace();
             }
         }
+
     }
     private Handler mHandler = new Handler ()
     {
@@ -453,7 +481,7 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout containing a title and body text.
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.new_account_user_fragment_screen, container, false);
+        rootView = (ViewGroup) inflater.inflate(R.layout.new_account_user_fragment_screen, container, false);
 
         WPTextView termsOfServiceTextView = (WPTextView) rootView.findViewById(R.id.l_agree_terms_of_service);
         termsOfServiceTextView.setText(Html.fromHtml(String.format(getString(R.string.agree_terms_of_service), "<u>",
@@ -913,8 +941,8 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
 
         if(!locationName.equals(getActivity().getApplicationContext().getResources().getText(R.string.location_not_found)) && !(locationName.equals(getActivity().getApplicationContext().getResources().getText(R.string.loading)))) {
             //mUser.setStringLocation(locationName);
-           mLocation.setText(locationName);
-           mLocationETDialog.setText(locationName);
+            mLocation.setText(locationName);
+            mLocationETDialog.setText(locationName);
         }
     }
 
