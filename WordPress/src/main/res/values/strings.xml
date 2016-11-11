@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources  xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name" translatable="false">eNCA</string>
     <string name="site_description_1">Fighting Misinformation and</string>
@@ -1020,7 +1020,7 @@
         <item>amr</item>
         <item>3gpp</item>
     </string-array>
-    <string-array translatable="false" name="prefValues_recordType">
+    <string-array name="prefValues_recordType" translatable="false">
         <item>audio/amr</item>
         <item>audio/3gpp</item>
     </string-array>
@@ -1133,5 +1133,8 @@
     </string-array>
 
     <string name="use_datepicker">Use DatePicker</string>
+
+    <!--Permissions-->
+    <string name="runtime_permissions_txt">Please enable ALL permissions from app settings.</string>
 
 </resources>

@@ -39,6 +39,7 @@ import com.simperium.client.BucketObjectMissingException;
 import org.codeforafrica.citizenreporter.eNCA.BuildConfig;
 import org.codeforafrica.citizenreporter.eNCA.GCMConfigORG;
 import org.codeforafrica.citizenreporter.eNCA.R;
+import org.codeforafrica.citizenreporter.eNCA.RuntimePermissionsActivity;
 import org.codeforafrica.citizenreporter.eNCA.WordPress;
 import org.codeforafrica.citizenreporter.eNCA.models.AccountHelper;
 import org.codeforafrica.citizenreporter.eNCA.models.CommentStatus;
@@ -84,7 +85,7 @@ import de.greenrobot.event.EventBus;
  * Main activity which hosts sites, reader, me and notifications tabs
  */
 
-public class RipotiMainActivity extends AppCompatActivity
+public class RipotiMainActivity extends RuntimePermissionsActivity
         implements ViewPager.OnPageChangeListener,
         SlidingTabLayout.SingleTabClickListener,
         MediaAddFragment.MediaAddFragmentCallback,
@@ -136,37 +137,6 @@ public class RipotiMainActivity extends AppCompatActivity
     private LinearLayout button_video;
     private LinearLayout button_mic;
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
-            case RequestCodes.C2D_RECEIVE_PERMISSIONS: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    registerDevice();
-
-                } else {
-                    // since the user doesn't want to allow the app to use this permission,
-                    // exit the app
-                    // TODO exit app if the user doesn't accept this permission
-                }
-
-            }
-            case RequestCodes.CAMERA_PERMISSIONS: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-
-                } else {
-                    // TODO exit app if the user doesn't accept this permission
-                }
-            }
-            case RequestCodes.RECORD_AUDIO_PERMISSIONS: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-
-                } else {
-                    // TODO exit app if the user doesn't accept this permission
-                }
-            }
-        }
-    }
 
     @Override
     public void onDetailAssignmentAction(int action, Post post) {
@@ -283,20 +253,12 @@ public class RipotiMainActivity extends AppCompatActivity
     public void checkIfRegistered(){
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String rD = settings.getString("rD", "0");
-        if(rD.equals("0"))
-            if (ContextCompat.checkSelfPermission(getApplicationContext(),
-                    "com.google.android.c2dm.permission.RECEIVE") != PackageManager.PERMISSION_GRANTED){
-                if (ActivityCompat.shouldShowRequestPermissionRationale(RipotiMainActivity.this,
-                        "com.google.android.c2dm.permission.RECEIVE" )){
 
-                } else {
-                    ActivityCompat.requestPermissions(RipotiMainActivity.this,new String[]
-                            {"com.google.android.c2dm.permission.RECEIVE"}, RequestCodes.C2D_RECEIVE_PERMISSIONS);
-                }
+        if(rD.equals("0")){
+            RipotiMainActivity.super.requestAppPermissions(new String[] {"com.google.android.c2dm.permission.RECEIVE"},
+                    R.string.runtime_permissions_txt, RequestCodes.C2D_RECEIVE_PERMISSIONS);
 
-            } else {
-                registerDevice();
-            }
+            registerDevice();}
 
     }
 
@@ -462,7 +424,10 @@ public class RipotiMainActivity extends AppCompatActivity
         button_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkAndRequestSpecificPermissions(new String[] {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE});
+                RipotiMainActivity.super.requestAppPermissions(new String[]
+                        {Manifest.permission.CAMERA,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE},R.string.runtime_permissions_txt,
+                        RequestCodes.ALL_PERMISSIONS);
                 (new WordPress()).capturePic(RipotiMainActivity.this, getApplicationContext());
 
             }
@@ -472,7 +437,10 @@ public class RipotiMainActivity extends AppCompatActivity
         button_video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkAndRequestSpecificPermissions(new String[] {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE});
+                RipotiMainActivity.super.requestAppPermissions(new String[]
+                                {Manifest.permission.CAMERA,
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE},R.string.runtime_permissions_txt,
+                        RequestCodes.ALL_PERMISSIONS);
                 (new WordPress()).captureVid(RipotiMainActivity.this, getApplicationContext());
             }
         });
@@ -480,7 +448,10 @@ public class RipotiMainActivity extends AppCompatActivity
         button_mic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkAndRequestSpecificPermissions(new String[] {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE});
+                RipotiMainActivity.super.requestAppPermissions(new String[]
+                                {Manifest.permission.RECORD_AUDIO,
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE},R.string.runtime_permissions_txt,
+                        RequestCodes.ALL_PERMISSIONS);
                 (new WordPress()).captureAudio(RipotiMainActivity.this, getApplicationContext());
             }
         });
@@ -498,26 +469,14 @@ public class RipotiMainActivity extends AppCompatActivity
         }
 
         WordPress.currentPost = null;
+
         checkIfRegistered();
 
+    }
 
-//        if (ContextCompat.checkSelfPermission(getApplicationContext(),
-//                "org.codeforafrica.citizenreporter.creporter.permission.C2D_MESSAGE") != PackageManager.PERMISSION_GRANTED){
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(RipotiMainActivity.this,
-//                    "org.codeforafrica.citizenreporter.creporter.permission.C2D_MESSAGE")){
-//                //TODO add snackbar to show rationale
-//            } else {
-//                ActivityCompat.requestPermissions(RipotiMainActivity.this,
-//                        new String[] {"org.codeforafrica.citizenreporter.creporter.permission.C2D_MESSAGE"},
-//                        RequestCodes.C2D_MESSAGE_PERMISSIONS);
-//            }
-//        }
-//        else {
-//            checkIfRegistered();
-//        }
+    @Override
+    public void onPermissionsGranted(int requestCode) {
 
-
-        //attemptToSelectPost();
     }
 
     @Override
