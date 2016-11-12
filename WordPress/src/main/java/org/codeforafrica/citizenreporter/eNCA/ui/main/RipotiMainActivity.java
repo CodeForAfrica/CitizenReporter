@@ -469,6 +469,10 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
         }
 
         WordPress.currentPost = null;
+        RipotiMainActivity.super.requestAppPermissions(new String[] {"com.google.android.c2dm.permission.RECEIVE",
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.RECORD_AUDIO,
+                        Manifest.permission.CAMERA, Manifest.permission.ACCESS_COARSE_LOCATION},
+                R.string.runtime_permissions_txt, RequestCodes.C2D_RECEIVE_PERMISSIONS);
 
         checkIfRegistered();
 
