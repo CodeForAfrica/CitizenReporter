@@ -7,6 +7,7 @@ import android.util.Xml;
 
 import com.google.gson.Gson;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.codeforafrica.citizenreporter.eNCA.WordPress;
 import org.codeforafrica.citizenreporter.eNCA.chat.Message;
 import org.codeforafrica.citizenreporter.eNCA.datasets.CommentTable;
@@ -518,12 +519,11 @@ public class ApiHelper {
 
         @Override
         protected Boolean doInBackground(List<?>... params) {
-            Log.d("CITIZEN", "doInBackground");
             List<?> arguments = params[0];
 
             Blog blog = (Blog) arguments.get(0);
             if (blog == null)
-                return Boolean.valueOf(false);
+                return false;
 
             boolean isPage = (Boolean) arguments.get(1);
             int recordCount = (Integer) arguments.get(2);
@@ -532,13 +532,22 @@ public class ApiHelper {
                     blog.getHttppassword());
 
             Object[] result;
-            Object[] xmlrpcParams = { WordPress.getCurrentBlog().getLocalTableBlogId(),
+            Object[] xmlrpcParams = { blog.getRemoteBlogId(),
                     blog.getUsername(),
                     blog.getPassword(), recordCount };
-
             try {
                 result = (Object[]) client.call((isPage) ? "wp.getPages"
                         : "metaWeblog.getRecentPosts", xmlrpcParams);
+
+                for (int pst=0; pst<result.length; pst++){
+                    Log.d("CITIZEN", "for");
+                    Map<?, ?> sample = (Map<?, ?>) result[pst];
+                    Log.d("CITIZEN", " "+sample.get("wp_author_display_name").toString()+" - "+ WordPress.getCurrentBlog().getUsername());
+                    if (!sample.get("wp_author_display_name").toString().equals(WordPress.getCurrentBlog().getUsername())){
+                        Log.d("CITIZEN", "True");
+                        result = ArrayUtils.remove(result, pst);
+                    }
+                }
 
                 if (result != null && result.length > 0) {
                     mPostCount = result.length;
@@ -559,16 +568,8 @@ public class ApiHelper {
 
                     for (int ctr = startPosition; ctr < result.length; ctr++) {
                         Map<?, ?> postMap = (Map<?, ?>) result[ctr];
-                        Log.d("CITIZEN", postMap.get("wp_author_display_name").toString());
-
-                        if (postMap.get("wp_author_display_name").toString().equals(WordPress.getCurrentBlog().getUsername())){
-                            Log.d("CITIZEN", "True");
-                            postsList.add(postMap);
-                        }
+                        postsList.add(postMap);
                     }
-
-//                    Log.d("Citizen", postsList.toString());
-                    Log.d("CITIZEN", " " + WordPress.getCurrentBlog().getUsername() );
 
                     WordPress.wpDB.savePosts(postsList, blog.getLocalTableBlogId(), isPage, false, !loadMore, false);
                 }
@@ -592,6 +593,7 @@ public class ApiHelper {
 
             return false;
         }
+
 
         @Override
         protected void onCancelled() {
