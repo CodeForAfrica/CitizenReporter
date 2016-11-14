@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -482,6 +483,7 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
             }
         }
 
+
         @Override
         public void onError(final int messageId, final boolean twoStepCodeRequired, final boolean httpAuthRequired,
                             final boolean erroneousSslCertificate, final String clientResponse) {
@@ -506,6 +508,7 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
                         return;
                     }
                     if (messageId != 0) {
+                        Log.d("CLIENT RESPONSE"," "+ getString(messageId));
                         signInError(messageId, clientResponse);
                         return;
                     }
@@ -613,6 +616,7 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
         } else {
             startProgress(getString(R.string.signing_in));
             signInAndFetchBlogListWPOrg();
+            Log.d("SIGNIN","signIn() ---> signInAndFetchBlogListWPOrg()");
         }
     }
 
@@ -832,10 +836,12 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
     }
 
     protected void signInError(int messageId, String clientResponse) {
+        Log.d("SIGNIN", " "+getString(messageId));
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         SignInDialogFragment nuxAlert;
-        if (messageId == org.codeforafrica.citizenreporter.eNCA.R.string.username_or_password_incorrect) {
-            handleInvalidUsernameOrPassword(messageId);
+        if (messageId == R.string.no_site_error){
+//        if (messageId == org.codeforafrica.citizenreporter.eNCA.R.string.username_or_password_incorrect) {
+            handleInvalidUsernameOrPassword(org.codeforafrica.citizenreporter.eNCA.R.string.username_or_password_incorrect);
             return;
         } else if (messageId == R.string.invalid_verification_code) {
             endProgress();
