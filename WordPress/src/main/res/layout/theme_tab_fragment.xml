@@ -33,7 +33,7 @@
         </GridView>
     </org.wordpress.android.util.widgets.CustomSwipeRefreshLayout>
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
         android:id="@+id/text_empty"
         style="@style/WordPress.EmptyList.Title"
         android:layout_width="match_parent"

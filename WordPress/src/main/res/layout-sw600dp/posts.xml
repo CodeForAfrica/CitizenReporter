@@ -24,7 +24,7 @@
             android:layout_height="match_parent">
 
             <fragment
-                android:name="org.codeforafrica.citizenreporter.eNCA.ui.posts.PostsListFragment"
+                android:name="org.codeforafrica.citizenreporter.starreports.ui.posts.PostsListFragment"
                 android:id="@+id/postList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -37,7 +37,7 @@
         </FrameLayout>
 
         <fragment
-            android:name="org.codeforafrica.citizenreporter.eNCA.ui.posts.ViewPostFragment"
+            android:name="org.codeforafrica.citizenreporter.starreports.ui.posts.ViewPostFragment"
             android:id="@+id/postDetail"
             android:layout_weight="3"
             android:layout_width="0dp"

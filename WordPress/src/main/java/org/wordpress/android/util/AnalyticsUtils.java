@@ -9,11 +9,11 @@ import com.wordpress.rest.RestRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.codeforafrica.citizenreporter.eNCA.WordPress;
+import org.codeforafrica.citizenreporter.starreports.WordPress;
 import org.wordpress.android.analytics.AnalyticsTracker;
 import org.wordpress.android.analytics.AnalyticsTrackerMixpanel;
-import org.codeforafrica.citizenreporter.eNCA.models.AccountHelper;
-import org.codeforafrica.citizenreporter.eNCA.ui.prefs.AppPrefs;
+import org.codeforafrica.citizenreporter.starreports.models.AccountHelper;
+import org.codeforafrica.citizenreporter.starreports.ui.prefs.AppPrefs;
 import org.wordpress.android.util.AppLog.T;
 
 public class AnalyticsUtils {

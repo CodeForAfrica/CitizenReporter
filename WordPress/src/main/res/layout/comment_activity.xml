@@ -19,6 +19,6 @@
             android:tag="@string/fragment_tag_comment_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="org.codeforafrica.citizenreporter.eNCA.ui.comments.CommentsListFragment" />
+            android:name="org.codeforafrica.citizenreporter.starreports.ui.comments.CommentsListFragment" />
     </FrameLayout>
 </LinearLayout>

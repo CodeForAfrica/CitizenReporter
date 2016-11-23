@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/margin_medium"
     android:paddingTop="@dimen/margin_extra_small">
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
         android:id="@+id/text_line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:textSize="@dimen/text_sz_medium"
         tools:text="01" />
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
         android:id="@+id/text_log"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -15,7 +15,7 @@
 
         <!-- We've used a custom receiver here. The one that is bundled in GCM API wasn't able to start the service. -->
         <receiver
-            android:name="org.codeforafrica.citizenreporter.eNCA.GCMReceiver"
+            android:name="org.codeforafrica.citizenreporter.starreports.GCMReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE"/>

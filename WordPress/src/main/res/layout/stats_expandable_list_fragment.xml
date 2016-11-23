@@ -17,7 +17,7 @@
             android:orientation="vertical"
             android:paddingTop="@dimen/margin_small">
 
-            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                 android:id="@+id/stats_module_title"
                 android:layout_marginLeft="@dimen/margin_large"
                 android:layout_marginRight="@dimen/margin_large"
@@ -46,7 +46,7 @@
                 android:layout_marginRight="@dimen/margin_large"
                 android:visibility="gone"/>
 
-            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                 android:id="@+id/stats_module_totals_label"
                 android:textColor="@color/stats_module_content_list_header"
                 android:textSize="@dimen/text_sz_small"
@@ -81,7 +81,7 @@
                     android:paddingTop="@dimen/margin_small"
                     android:paddingBottom="@dimen/margin_small">
 
-                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                         android:id="@+id/stats_list_entry_label"
                         style="@style/StatsHeader"
                         android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="TITLE" />
 
-                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                         android:id="@+id/stats_list_totals_label"
                         style="@style/StatsHeader"
                         android:layout_width="wrap_content"
@@ -115,7 +115,7 @@
 
         </LinearLayout>
 
-        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
             android:id="@+id/stats_list_empty_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

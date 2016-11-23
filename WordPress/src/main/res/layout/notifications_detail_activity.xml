@@ -2,5 +2,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/notifications_detail_container"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    tools:context="org.codeforafrica.citizenreporter.eNCA.ui.notifications.NotificationsDetailActivity"
+    tools:context="org.codeforafrica.citizenreporter.starreports.ui.notifications.NotificationsDetailActivity"
     tools:ignore="MergeRootFrame" />

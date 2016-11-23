@@ -6,7 +6,7 @@ import com.android.volley.RequestQueue;
 import com.wordpress.rest.RestClient;
 import com.wordpress.rest.RestClient.REST_CLIENT_VERSIONS;
 
-import org.codeforafrica.citizenreporter.eNCA.networking.RestClientFactoryAbstract;
+import org.codeforafrica.citizenreporter.starreports.networking.RestClientFactoryAbstract;
 import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.AppLog.T;
 

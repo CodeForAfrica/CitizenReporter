@@ -32,13 +32,13 @@
                 android:paddingTop="@dimen/margin_large"
                 android:background="@color/white">
 
-                <org.codeforafrica.citizenreporter.eNCA.widgets.WPNetworkImageView
+                <org.codeforafrica.citizenreporter.starreports.widgets.WPNetworkImageView
                     android:id="@+id/image_avatar"
                     style="@style/ReaderImageView.Avatar"
                     android:layout_marginRight="@dimen/margin_large"
                     android:layout_marginTop="@dimen/margin_small" />
 
-                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                     android:id="@+id/text_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                     android:textSize="@dimen/text_sz_extra_large"
                     tools:text="text_name" />
 
-                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                     android:id="@+id/text_post_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                     android:textSize="@dimen/text_sz_large"
                     tools:text="text_post_title" />
 
-                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                     android:id="@+id/text_date"
                     style="@style/ReaderTextView.Date"
                     android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
                     android:maxLines="1"
                     tools:text="date" />
 
-                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                     android:id="@+id/text_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                 textIsSelectable is set to false here to avoid
                 https://code.google.com/p/android/issues/detail?id=30961
             -->
-            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                 android:id="@+id/text_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

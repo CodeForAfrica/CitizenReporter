@@ -10,7 +10,7 @@
     <include
         layout="@layout/toolbar"/>
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.SlidingTabLayout
+    <org.codeforafrica.citizenreporter.starreports.widgets.SlidingTabLayout
 
         android:layout_below="@+id/toolbar"
         android:id="@+id/sliding_tabs"
@@ -28,24 +28,24 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
 
-        <org.codeforafrica.citizenreporter.eNCA.widgets.WPMainViewPager
+        <org.codeforafrica.citizenreporter.starreports.widgets.WPMainViewPager
         android:id="@+id/viewpager_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
             android:layout_above="@+id/view2">
 
         <fragment
-            android:name="org.codeforafrica.citizenreporter.eNCA.ui.main.RipotiPostsListFragment"
+            android:name="org.codeforafrica.citizenreporter.starreports.ui.main.RipotiPostsListFragment"
             android:id="@+id/postList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <fragment
-            android:name="org.codeforafrica.citizenreporter.eNCA.ui.main.AssignmentsListFragment"
+            android:name="org.codeforafrica.citizenreporter.starreports.ui.main.AssignmentsListFragment"
             android:id="@+id/assignmentList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    </org.codeforafrica.citizenreporter.eNCA.widgets.WPMainViewPager>
+    </org.codeforafrica.citizenreporter.starreports.widgets.WPMainViewPager>
 
         <View
             android:layout_above="@+id/bottom_action_buttons"

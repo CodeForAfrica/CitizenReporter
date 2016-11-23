@@ -10,11 +10,11 @@ import com.helpshift.Helpshift;
 import com.helpshift.Helpshift.HelpshiftDelegate;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.codeforafrica.citizenreporter.eNCA.BuildConfig;
-import org.codeforafrica.citizenreporter.eNCA.WordPress;
+import org.codeforafrica.citizenreporter.starreports.BuildConfig;
+import org.codeforafrica.citizenreporter.starreports.WordPress;
 import org.wordpress.android.analytics.AnalyticsTracker;
 import org.wordpress.android.analytics.AnalyticsTracker.Stat;
-import org.codeforafrica.citizenreporter.eNCA.models.AccountHelper;
+import org.codeforafrica.citizenreporter.starreports.models.AccountHelper;
 
 import java.io.File;
 import java.util.HashMap;

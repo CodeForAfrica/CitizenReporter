@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_below="@+id/toolbar">
-        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
             android:id="@+id/payment_history_text"
             android:text="@string/payment_history"
             style="@style/MySiteListRowTextView"
@@ -49,7 +49,7 @@
                     android:visibility="gone"/>
             </RelativeLayout>
         </android.support.v7.widget.CardView>
-        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
             android:id="@+id/accepted_rejected_text"
             android:text="@string/accepted_rejected"
             style="@style/MySiteListRowTextView"
@@ -88,7 +88,7 @@
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
-        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
             android:id="@+id/media_types_text"
             android:text="@string/media_types"
             style="@style/MySiteListRowTextView"

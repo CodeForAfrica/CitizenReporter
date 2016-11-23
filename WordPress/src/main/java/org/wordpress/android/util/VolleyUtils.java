@@ -10,8 +10,8 @@ import com.android.volley.toolbox.ImageRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.codeforafrica.citizenreporter.eNCA.models.Blog;
-import org.codeforafrica.citizenreporter.eNCA.networking.WPDelayedHurlStack;
+import org.codeforafrica.citizenreporter.starreports.models.Blog;
+import org.codeforafrica.citizenreporter.starreports.networking.WPDelayedHurlStack;
 
 import java.io.UnsupportedEncodingException;
 

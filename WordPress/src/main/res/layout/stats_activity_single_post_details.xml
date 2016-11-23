@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <org.codeforafrica.citizenreporter.eNCA.ui.stats.ScrollViewExt
+    <org.codeforafrica.citizenreporter.starreports.ui.stats.ScrollViewExt
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -15,7 +15,7 @@
             android:orientation="vertical">
 
             <!-- The title "Stats for XXX" -->
-            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                 android:id="@+id/stats_summary_title"
                 android:background="?android:selectableItemBackground"
                 android:textAppearance="?android:attr/textAppearance"
@@ -51,7 +51,7 @@
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginBottom="@dimen/margin_small">
 
-                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                         android:id="@+id/stats_views_label"
                         style="@style/StatsInsightsLabel"
                         android:layout_width="wrap_content"
@@ -60,7 +60,7 @@
                         android:textColor="@color/grey_dark"
                         android:layout_alignParentLeft="true" />
 
-                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                         android:id="@+id/stats_views_totals"
                         style="@style/StatsInsightsLabel"
                         android:layout_width="wrap_content"
@@ -82,7 +82,7 @@
                 android:paddingTop="@dimen/margin_small"
                 android:layout_margin="@dimen/margin_medium">
 
-                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                     android:layout_marginLeft="@dimen/margin_large"
                     style="@style/StatsModuleTitle"
                     android:text="@string/stats_months_and_years" />
@@ -105,14 +105,14 @@
                     android:paddingBottom="@dimen/margin_small"
                     android:paddingTop="@dimen/margin_small">
 
-                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                         style="@style/StatsHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:text="@string/stats_period" />
 
-                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                         style="@style/StatsHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
                 android:paddingTop="@dimen/margin_small"
                 android:layout_margin="@dimen/margin_medium">
 
-                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                     android:layout_marginLeft="@dimen/margin_large"
                     style="@style/StatsModuleTitle"
                     android:text="@string/stats_average_per_day" />
@@ -163,14 +163,14 @@
                     android:paddingBottom="@dimen/margin_small"
                     android:paddingTop="@dimen/margin_small">
 
-                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                         style="@style/StatsHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:text="@string/stats_period" />
 
-                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                         style="@style/StatsHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -198,7 +198,7 @@
                 android:paddingTop="@dimen/margin_small"
                 android:layout_margin="@dimen/margin_medium">
 
-                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                     android:layout_marginLeft="@dimen/margin_large"
                     style="@style/StatsModuleTitle"
                     android:text="@string/stats_recent_weeks" />
@@ -221,14 +221,14 @@
                     android:paddingBottom="@dimen/margin_small"
                     android:paddingTop="@dimen/margin_small">
 
-                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                         style="@style/StatsHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:text="@string/stats_period" />
 
-                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                         style="@style/StatsHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -248,5 +248,5 @@
 
 
         </LinearLayout>
-    </org.codeforafrica.citizenreporter.eNCA.ui.stats.ScrollViewExt>
+    </org.codeforafrica.citizenreporter.starreports.ui.stats.ScrollViewExt>
 </org.wordpress.android.util.widgets.CustomSwipeRefreshLayout>

@@ -10,7 +10,7 @@
               android:paddingBottom="@dimen/margin_medium"
               android:orientation="vertical">
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
         android:id="@+id/note_text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

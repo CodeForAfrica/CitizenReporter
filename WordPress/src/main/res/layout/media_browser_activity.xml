@@ -16,13 +16,13 @@
 
         <fragment
             android:id="@+id/mediaGridFragment"
-            android:name="org.codeforafrica.citizenreporter.eNCA.ui.media.MediaGridFragment"
+            android:name="org.codeforafrica.citizenreporter.starreports.ui.media.MediaGridFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
         <fragment
             android:id="@+id/mediaAddFragment"
-            android:name="org.codeforafrica.citizenreporter.eNCA.ui.media.MediaAddFragment"
+            android:name="org.codeforafrica.citizenreporter.starreports.ui.media.MediaAddFragment"
             android:layout_width="0dp"
             android:layout_height="0dp" />
     </RelativeLayout>

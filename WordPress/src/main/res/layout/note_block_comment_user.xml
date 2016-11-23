@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <org.codeforafrica.citizenreporter.eNCA.widgets.WPNetworkImageView
+        <org.codeforafrica.citizenreporter.starreports.widgets.WPNetworkImageView
             android:id="@+id/user_avatar"
             android:layout_width="@dimen/avatar_sz_small"
             android:layout_height="@dimen/avatar_sz_small"
@@ -28,7 +28,7 @@
             android:layout_marginStart="@dimen/notifications_adjusted_font_margin"
             android:orientation="vertical">
 
-            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                 android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="-2dp">
 
-                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                     android:id="@+id/user_comment_ago"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                     tools:text="5h"
                     tools:visibility="visible" />
 
-                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                     android:id="@+id/user_comment_bullet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                     android:textSize="@dimen/text_sz_large"
                     android:textStyle="bold" />
 
-                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                     android:id="@+id/user_comment_site"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
         android:id="@+id/user_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

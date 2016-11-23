@@ -52,7 +52,7 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-        <org.codeforafrica.citizenreporter.eNCA.ui.FadeInNetworkImageView
+        <org.codeforafrica.citizenreporter.starreports.ui.FadeInNetworkImageView
             android:id="@+id/theme_details_fragment_image"
             android:layout_width="300dp"
             android:layout_height="225dp"

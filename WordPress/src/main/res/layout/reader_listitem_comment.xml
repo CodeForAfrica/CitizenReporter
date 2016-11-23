@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.WPNetworkImageView
+    <org.codeforafrica.citizenreporter.starreports.widgets.WPNetworkImageView
         android:id="@+id/image_comment_avatar"
         style="@style/ReaderImageView.Avatar.Small"
         android:layout_marginRight="@dimen/margin_small"
@@ -25,7 +25,7 @@
         android:layout_toRightOf="@+id/spacer_comment_indent"
         tools:src="@drawable/gravatar_placeholder" />
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
         android:id="@+id/text_comment_author"
         style="@style/ReaderTextView.Comment.Author"
         android:layout_marginBottom="@dimen/margin_extra_small"
@@ -35,7 +35,7 @@
         android:background="?android:selectableItemBackground"
         tools:text="text_comment_author" />
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
         android:id="@+id/text_comment_date"
         style="@style/ReaderTextView.Date"
         android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
         android:layout_marginRight="@dimen/margin_small"
         tools:text="date" />
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
         android:id="@+id/text_comment_text"
         style="@style/ReaderTextView.Comment.Text"
         android:layout_alignLeft="@+id/text_comment_author"
@@ -71,7 +71,7 @@
             android:layout_marginLeft="@dimen/margin_medium"
             android:src="@drawable/note_icon_reply" />
 
-        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
             android:id="@+id/text_comment_reply"
             style="@style/ReaderTextView.Comment.Action"
             android:text="@string/reader_label_reply"
@@ -91,14 +91,14 @@
                 android:layout_marginLeft="@dimen/margin_large"
                 android:src="@drawable/reader_button_comment_like" />
 
-            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                 android:id="@+id/text_comment_like"
                 style="@style/ReaderTextView.Comment.Action"
                 android:textColor="@color/reader_like_text"
                 tools:text="@string/reader_label_like" />
         </LinearLayout>
 
-        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
             android:id="@+id/text_comment_like_count"
             style="@style/ReaderTextView.Comment.Action"
             android:textColor="@color/reader_like_text"

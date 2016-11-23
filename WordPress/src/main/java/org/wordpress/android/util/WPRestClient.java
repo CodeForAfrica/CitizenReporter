@@ -18,8 +18,8 @@ import com.wordpress.rest.RestRequest.Listener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.codeforafrica.citizenreporter.eNCA.WordPress;
-import org.codeforafrica.citizenreporter.eNCA.models.Note;
+import org.codeforafrica.citizenreporter.starreports.WordPress;
+import org.codeforafrica.citizenreporter.starreports.models.Note;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -29,13 +29,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WPRestClient {
-    
+
     private static final String NOTIFICATION_FIELDS="id,type,unread,body,subject,timestamp";
     private static final String COMMENT_REPLY_CONTENT_FIELD="content";
-    
+
     private RestClient mRestClient;
     private Authenticator mAuthenticator;
-    
+
     /** Socket timeout in milliseconds for rest requests */
     public static final int REST_TIMEOUT_MS = 30000;
 
@@ -44,10 +44,10 @@ public class WPRestClient {
 
     /** Default number of retries for GET rest requests */
     public static final int REST_MAX_RETRIES_GET = 3;
-    
+
     /** Default backoff multiplier for rest requests */
     public static final float REST_BACKOFF_MULT = 2f;
-    
+
     public WPRestClient(RequestQueue queue, Authenticator authenticator){
         this(queue, authenticator, RestClient.REST_CLIENT_VERSIONS.V1);
     }
@@ -60,7 +60,7 @@ public class WPRestClient {
 
     /**
      * Reply to a comment using a Note.Reply object.
-     * 
+     *
      * https://developer.wordpress.com/docs/api/1/post/sites/%24site/posts/%24post_ID/replies/new/
      */
     public void replyToComment(Note.Reply reply, Listener listener, ErrorListener errorListener){
@@ -70,7 +70,7 @@ public class WPRestClient {
     }
     /**
      * Reply to a comment.
-     * 
+     *
      * https://developer.wordpress.com/docs/api/1/post/sites/%24site/posts/%24post_ID/replies/new/
      */
     public void replyToComment(String siteId, String commentId, String content, Listener listener, ErrorListener errorListener){
@@ -81,7 +81,7 @@ public class WPRestClient {
     }
     /**
      * Follow a site given an ID or domain
-     * 
+     *
      * https://developer.wordpress.com/docs/api/1/post/sites/%24site/follows/new/
      */
     public void followSite(String siteId, Listener listener, ErrorListener errorListener){
@@ -90,7 +90,7 @@ public class WPRestClient {
     }
     /**
      * Unfollow a site given an ID or domain
-     * 
+     *
      * https://developer.wordpress.com/docs/api/1/post/sites/%24site/follows/mine/delete/
      */
     public void unfollowSite(String siteId, Listener listener, ErrorListener errorListener){
@@ -100,7 +100,7 @@ public class WPRestClient {
 
     /**
      * Update the seen timestamp.
-     * 
+     *
      * https://developer.wordpress.com/docs/api/1/post/notifications/seen
      */
     public void markNotificationsSeen(String timestamp, Listener listener, ErrorListener errorListener){
@@ -110,7 +110,7 @@ public class WPRestClient {
     }
     /**
      * Moderate a comment.
-     * 
+     *
      * http://developer.wordpress.com/docs/api/1/sites/%24site/comments/%24comment_ID/
      */
     public void moderateComment(String siteId, String commentId, String status, Listener listener, ErrorListener errorListener){
@@ -119,7 +119,7 @@ public class WPRestClient {
         String path = String.format("sites/%s/comments/%s/", siteId, commentId);
         post(path, params, null, listener, errorListener);
     }
-    
+
     /**
      * Get all a site's themes
      */
@@ -127,7 +127,7 @@ public class WPRestClient {
         String path = String.format("sites/%s/themes?limit=%d&offset=%d", siteId, limit, offset);
         get(path, listener, errorListener);
     }
-    
+
     /**
      * Set a site's theme
      */
@@ -137,7 +137,7 @@ public class WPRestClient {
         String path = String.format("sites/%s/themes/mine", siteId);
         post(path, params, null, listener, errorListener);
     }
-    
+
     /**
      * Get a site's current theme
      */
@@ -145,7 +145,7 @@ public class WPRestClient {
         String path = String.format("sites/%s/themes/mine", siteId);
         get(path, listener, errorListener);
     }
-    
+
     /**
      * Get a site's stats for clicks
      */
@@ -235,7 +235,7 @@ public class WPRestClient {
         params.put("blog", siteId);
         getXL(path, params, listener, errorListener);
     }
-    
+
     /**
      * Get a site's stats summary
      */
@@ -255,14 +255,14 @@ public class WPRestClient {
     }
 
     /**
-     * This method is for simulating stats APIs using the XL Studio API simulator. It should be removed once the other APIs are implemented. 
+     * This method is for simulating stats APIs using the XL Studio API simulator. It should be removed once the other APIs are implemented.
      **/
     public void getXL(String path, Map<String, String> params, final Listener listener, final ErrorListener errorListener) {
-        
+
         path = "https://simulator.xlstudio.com/apis/32/" + path;
 
         final String url_path = path;
-        
+
         new AsyncTask<Void, Void, JSONObject>() {
 
             @Override
@@ -273,7 +273,7 @@ public class WPRestClient {
                 BufferedReader rd;
                 String line;
                 String result = "";
-                
+
                 try {
                     url = new URL(url_path);
                     conn = (HttpURLConnection) url.openConnection();
@@ -284,7 +284,7 @@ public class WPRestClient {
                        result += line;
                     }
                     rd.close();
-                    
+
                     return new JSONObject(result);
                  } catch (JSONException e) {
                      e.printStackTrace();
@@ -293,20 +293,20 @@ public class WPRestClient {
                  }
                 return null;
             }
-            
+
             protected void onPostExecute(JSONObject result) {
                 if (result != null)
                     listener.onResponse(result);
                 else
                     errorListener.onErrorResponse(new VolleyError("JSONObject null"));
             };
-            
+
         }.execute();
-        
+
     }
-    
+
     /**
-     * 
+     *
      * Make GET request
      */
     public void get(String path, Listener listener, ErrorListener errorListener){
@@ -317,11 +317,11 @@ public class WPRestClient {
      */
     public void get(String path, Map<String, String> params, RetryPolicy retryPolicy, Listener listener, ErrorListener errorListener){
         // turn params into querystring
-        
+
         RestRequest request = mRestClient.makeRequest(Method.GET, mRestClient.getAbsoluteURL(path, params), null, listener, errorListener);
         if(retryPolicy == null) {
             retryPolicy = new DefaultRetryPolicy(REST_TIMEOUT_MS, REST_MAX_RETRIES_GET, REST_BACKOFF_MULT);
-        } 
+        }
         request.setRetryPolicy(retryPolicy);
         Request authCheck = new Request(request, errorListener);
         authCheck.send();
@@ -339,7 +339,7 @@ public class WPRestClient {
         final RestRequest request = mRestClient.makeRequest(Method.POST, mRestClient.getAbsoluteURL(path), params, listener, errorListener);
         if(retryPolicy == null) {
             retryPolicy = new DefaultRetryPolicy(REST_TIMEOUT_MS, REST_MAX_RETRIES_POST, REST_BACKOFF_MULT); //Do not retry on failure
-        } 
+        }
         request.setRetryPolicy(retryPolicy);
         Request authCheck = new Request(request, errorListener);
         authCheck.send();
@@ -347,7 +347,7 @@ public class WPRestClient {
     /**
      * Interface that provides a method that should perform the necessary task to make sure
      * the provided Request will be authenticated.
-     * 
+     *
      * The Authenticator must call Request.send() when it has completed its operations. For
      * convenience the Request class provides Request.setAccessToken so the Authenticator can
      * easily update the access token.
@@ -388,7 +388,7 @@ public class WPRestClient {
         /**
          * Attempt to send the request, checks to see if we have an access token and if not
          * asks the Authenticator to authenticate the request.
-         * 
+         *
          * If no Authenticator is provided the request is always sent.
          */
         protected void send(){

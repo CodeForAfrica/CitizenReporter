@@ -59,7 +59,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.codeforafrica.citizenreporter.eNCA.R;
+import org.codeforafrica.citizenreporter.starreports.R;
 
 
 public class SoundRecorder extends Activity implements Button.OnClickListener,
@@ -73,9 +73,9 @@ public class SoundRecorder extends Activity implements Button.OnClickListener,
     private static final String MAX_FILE_SIZE_KEY = "max_file_size";
 
     private static final String AUDIO_3GPP = "audio/3gpp";
-    
+
     private static final String AUDIO_MP3 = "audio/mpeg";
-    
+
     private static final String AUDIO_AMR = "audio/amr";
 
     private static final String AUDIO_ANY = "audio/*";
@@ -83,7 +83,7 @@ public class SoundRecorder extends Activity implements Button.OnClickListener,
     private static final String ANY_ANY = "*/*";
 
     private static final String FILE_EXTENSION_AMR = ".amr";
-    
+
     private static final String FILE_EXTENSION_MP3 = ".mp3";
 
     private static final String FILE_EXTENSION_3GPP = ".3gpp";
@@ -91,9 +91,9 @@ public class SoundRecorder extends Activity implements Button.OnClickListener,
     public static final int BITRATE_AMR = 16 * 1024; // bits/sec
 
     public static final int BITRATE_3GPP = 160 * 1024; // bits/sec
-    
+
     public static final int BITRATE_MP3 = 320 * 1024; // bits/sec
-    
+
     private static final int SEEK_BAR_MAX = 10000;
 
     private static final long WHEEL_SPEED_NORMAL = 1800;
@@ -144,7 +144,7 @@ public class SoundRecorder extends Activity implements Button.OnClickListener,
     private int mLastButtonId;
 
     private final Handler mHandler = new Handler();
-    
+
     private String mFileName;
 
     private Runnable mUpdateTimer = new Runnable() {
@@ -216,9 +216,9 @@ public class SoundRecorder extends Activity implements Button.OnClickListener,
     @Override
     public void onCreate(Bundle icycle) {
         super.onCreate(icycle);
-        
+
         getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        
+
         initInternalState(getIntent());
         setContentView(R.layout.activity_audio_recorder);
 
@@ -233,7 +233,7 @@ public class SoundRecorder extends Activity implements Button.OnClickListener,
         	                  + "sound_recorder");
         	mRecorder = new Recorder(this, sampleDir, getIntent().getExtras().getString("filename"));
         }
-        
+
         mRecorder.setOnStateChangedListener(this);
         mReceiver = new RecorderReceiver();
         mRemainingTimeCalculator = new RemainingTimeCalculator();
@@ -355,7 +355,7 @@ public class SoundRecorder extends Activity implements Button.OnClickListener,
         mSmallWheelRight = (WheelImageView) findViewById(R.id.wheel_small_right);
 
         resetFileNameEditText();
-        
+
         mTimerLayout = (LinearLayout) findViewById(R.id.time_calculator);
         mVUMeterLayout = (LinearLayout) findViewById(R.id.vumeter_layout);
         mSeekBarLayout = (LinearLayout) findViewById(R.id.play_seek_bar_layout);
@@ -603,24 +603,24 @@ public class SoundRecorder extends Activity implements Button.OnClickListener,
 
         if (mRecorder.state() == Recorder.RECORDING_STATE) {
             String preExtension = "";
-            
+
             if(AUDIO_AMR.equals(mRequestedType)){
-            	
+
             	preExtension = FILE_EXTENSION_AMR;
-            	
+
             }else if(AUDIO_MP3.equals(mRequestedType)){
-            	
+
             	preExtension = FILE_EXTENSION_AMR;
-            	
+
             }else{
-            	
+
             	preExtension = FILE_EXTENSION_3GPP;
-            	
+
             }
-            
-            
-            
-            
+
+
+
+
             if (!mRecorder.sampleFile().getName().endsWith(preExtension)) {
                 // the extension is changed need to stop current recording
                 mRecorder.reset();
@@ -1197,7 +1197,7 @@ public class SoundRecorder extends Activity implements Button.OnClickListener,
 
                 mVUMeterLayout.setVisibility(View.GONE);
                 mSeekBarLayout.setVisibility(View.VISIBLE);
-                
+
                 if (SoundRecorderPreferenceActivity.isEnabledSoundEffect(this)) {
                     mSoundPool.play(mPlaySound, 1.0f, 1.0f, 0, 0, 1);
                 }

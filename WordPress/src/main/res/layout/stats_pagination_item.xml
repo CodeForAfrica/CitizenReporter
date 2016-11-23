@@ -17,7 +17,7 @@
         android:text="&lt;"
         android:textColor="@color/stats_link_text_color" />
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
         android:id="@+id/stats_pagination_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

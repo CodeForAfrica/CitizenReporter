@@ -11,7 +11,7 @@ import android.text.style.URLSpan;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-import org.codeforafrica.citizenreporter.eNCA.R;
+import org.codeforafrica.citizenreporter.starreports.R;
 
 /**
  * Android's LinkMovementMethod crashes on malformed links, including links that have no

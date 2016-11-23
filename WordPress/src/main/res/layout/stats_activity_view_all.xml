@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/grey_lighten_30">
 
-    <org.codeforafrica.citizenreporter.eNCA.ui.stats.ScrollViewExt xmlns:android="http://schemas.android.com/apk/res/android"
+    <org.codeforafrica.citizenreporter.starreports.ui.stats.ScrollViewExt xmlns:android="http://schemas.android.com/apk/res/android"
                                                                    android:layout_width="match_parent"
                                                                    android:layout_height="match_parent"
                                                                    android:id="@+id/scroll_view_stats"
@@ -19,7 +19,7 @@
             android:paddingBottom="@dimen/margin_medium"
             android:orientation="vertical">
 
-            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                 android:id="@+id/stats_summary_date"
                 android:textAppearance="?android:attr/textAppearance"
                 android:layout_width="match_parent"
@@ -38,5 +38,5 @@
                 android:layout_marginRight="@dimen/margin_medium"/>
 
         </LinearLayout>
-    </org.codeforafrica.citizenreporter.eNCA.ui.stats.ScrollViewExt>
+    </org.codeforafrica.citizenreporter.starreports.ui.stats.ScrollViewExt>
 </org.wordpress.android.util.widgets.CustomSwipeRefreshLayout>

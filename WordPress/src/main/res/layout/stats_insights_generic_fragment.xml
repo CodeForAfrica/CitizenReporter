@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                 android:id="@+id/stats_module_title"
                 android:background="?android:selectableItemBackground"
                 android:paddingTop="@dimen/margin_small"
@@ -44,7 +44,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
             android:id="@+id/stats_error_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

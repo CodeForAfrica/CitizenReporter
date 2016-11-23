@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:background="@color/grey_lighten_30">
 
-        <org.codeforafrica.citizenreporter.eNCA.ui.stats.ScrollViewExt
+        <org.codeforafrica.citizenreporter.starreports.ui.stats.ScrollViewExt
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/scroll_view_stats"
@@ -59,7 +59,7 @@
                         android:layout_marginLeft="@dimen/margin_medium"
                         android:layout_marginRight="@dimen/margin_medium" />
 
-                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                         android:textAppearance="?android:attr/textAppearance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
                         android:layout_marginRight="@dimen/margin_medium" />
 
 
-                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                         android:textAppearance="?android:attr/textAppearance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -188,7 +188,7 @@
                         android:gravity="start"
                         android:text="@string/stats_other_recent_stats_label" />
 
-                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                         android:id="@+id/stats_other_recent_stats_moved"
                         android:textAppearance="?android:attr/textAppearance"
                         android:background="?android:selectableItemBackground"
@@ -204,6 +204,6 @@
 
                 </LinearLayout>
             </LinearLayout>
-        </org.codeforafrica.citizenreporter.eNCA.ui.stats.ScrollViewExt>
+        </org.codeforafrica.citizenreporter.starreports.ui.stats.ScrollViewExt>
     </org.wordpress.android.util.widgets.CustomSwipeRefreshLayout>
 </LinearLayout>

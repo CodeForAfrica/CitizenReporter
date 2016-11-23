@@ -31,7 +31,7 @@
         android:background="?android:selectableItemBackground"
         android:orientation="horizontal">
 
-        <org.codeforafrica.citizenreporter.eNCA.widgets.WPNetworkImageView
+        <org.codeforafrica.citizenreporter.starreports.widgets.WPNetworkImageView
             android:id="@+id/image_avatar"
             style="@style/ReaderImageView.Avatar"
             android:layout_marginRight="@dimen/margin_large"
@@ -43,7 +43,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
                 android:id="@+id/text_blog_name"
                 style="@style/ReaderTextView"
                 android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
                 android:textSize="@dimen/text_sz_medium"
                 tools:text="text_blog_name" />
 
-            <org.codeforafrica.citizenreporter.eNCA.ui.reader.views.ReaderFollowButton
+            <org.codeforafrica.citizenreporter.starreports.ui.reader.views.ReaderFollowButton
                 android:id="@+id/follow_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -83,12 +83,12 @@
         android:layout_marginRight="@dimen/reader_detail_margin"
         android:orientation="vertical">
 
-        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
             android:id="@+id/text_title"
             style="@style/ReaderTextView.Post.Title.Detail"
             tools:text="text_title" />
 
-        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
             android:id="@+id/text_date_and_author"
             style="@style/ReaderTextView.Date.Large"
             android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
 
     </LinearLayout>
 
-    <org.codeforafrica.citizenreporter.eNCA.ui.reader.views.ReaderWebView
+    <org.codeforafrica.citizenreporter.starreports.ui.reader.views.ReaderWebView
         android:id="@+id/reader_webview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
         android:visibility="gone"
         tools:visibility="visible">
 
-        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
             android:id="@+id/text_like_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
             tools:text="text_like_count" />
 
         <!-- liking avatars are inserted into this LinearLayout at runtime -->
-        <org.codeforafrica.citizenreporter.eNCA.ui.reader.views.ReaderLikingUsersView
+        <org.codeforafrica.citizenreporter.starreports.ui.reader.views.ReaderLikingUsersView
             android:id="@+id/layout_liking_users_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/avatar_sz_small"
@@ -137,7 +137,7 @@
 
     </RelativeLayout>
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansButton
+    <org.codeforafrica.citizenreporter.starreports.widgets.OpenSansButton
         android:id="@+id/button_comment_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

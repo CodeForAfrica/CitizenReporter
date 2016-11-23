@@ -17,7 +17,7 @@
 
             <fragment
                 android:id="@+id/mediaGalleryEditFragment"
-                android:name="org.codeforafrica.citizenreporter.eNCA.ui.media.MediaGalleryEditFragment"
+                android:name="org.codeforafrica.citizenreporter.starreports.ui.media.MediaGalleryEditFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
@@ -30,7 +30,7 @@
 
         <fragment
             android:id="@+id/mediaGallerySettingsFragment"
-            android:name="org.codeforafrica.citizenreporter.eNCA.ui.media.MediaGallerySettingsFragment"
+            android:name="org.codeforafrica.citizenreporter.starreports.ui.media.MediaGallerySettingsFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.4" />

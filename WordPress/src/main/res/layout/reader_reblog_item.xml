@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/reader_label_reblog_to"
@@ -15,7 +15,7 @@
         android:layout_marginRight="@dimen/margin_medium"
         android:textStyle="bold" />
 
-    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
+    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
