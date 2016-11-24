@@ -41,6 +41,7 @@ public class Blog {
     private String blogOptions = "{}";
     private boolean isAdmin;
     private boolean isHidden;
+    private AccountModel accountModel;
 
     public Blog() {
     }
@@ -80,6 +81,7 @@ public class Blog {
         this.password = password;
         this.localTableBlogId = -1;
     }
+
 
     public int getLocalTableBlogId() {
         return localTableBlogId;

@@ -78,7 +78,7 @@ public class EditUserFragment extends AbstractFragment implements TextWatcher,  
     public EditUserFragment() {
         mEmailChecker = new EmailChecker();
     }
-    TelephonyManager telephonyManager = ((TelephonyManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().TELEPHONY_SERVICE));
+    TelephonyManager telephonyManager;
 
     @Override
     public void afterTextChanged(Editable s) {
@@ -318,9 +318,9 @@ public class EditUserFragment extends AbstractFragment implements TextWatcher,  
     }
     public void run ()
     {
-//        TelephonyManager telephonyManager = ((TelephonyManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().TELEPHONY_SERVICE));
         //get mobile carrier
         String operatorName = "";
+        telephonyManager = ((TelephonyManager) getActivity().getApplicationContext().getSystemService(getActivity().getApplicationContext().TELEPHONY_SERVICE));
         int simState = telephonyManager.getSimState();
         switch (simState) {
             case TelephonyManager.SIM_STATE_READY:

@@ -11,6 +11,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.codeforafrica.citizenreporter.starreports.WordPress;
 import org.codeforafrica.citizenreporter.starreports.chat.Message;
 import org.codeforafrica.citizenreporter.starreports.datasets.CommentTable;
+import org.codeforafrica.citizenreporter.starreports.models.AccountHelper;
 import org.codeforafrica.citizenreporter.starreports.models.Blog;
 import org.codeforafrica.citizenreporter.starreports.models.BlogIdentifier;
 import org.codeforafrica.citizenreporter.starreports.models.Comment;
@@ -539,12 +540,11 @@ public class ApiHelper {
                 result = (Object[]) client.call((isPage) ? "wp.getPages"
                         : "metaWeblog.getRecentPosts", xmlrpcParams);
 
+                Log.d("CITIZEN", "current blog : " + WordPress.getCurrentBlog().getBlogName());
                 for (int pst=0; pst<result.length; pst++){
-                    Log.d("CITIZEN", "for");
                     Map<?, ?> sample = (Map<?, ?>) result[pst];
                     Log.d("CITIZEN", " "+sample.get("wp_author_display_name").toString()+" - "+ WordPress.getCurrentBlog().getUsername());
                     if (!sample.get("wp_author_display_name").toString().equals(WordPress.getCurrentBlog().getUsername())){
-                        Log.d("CITIZEN", "True");
                         result = ArrayUtils.remove(result, pst);
                     }
                 }
