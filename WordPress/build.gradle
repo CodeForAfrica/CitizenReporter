@@ -88,7 +88,7 @@ android {
 
 dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
-    compile 'com.crashlytics.sdk.android:crashlytics:2.6.0'
+    compile 'com.crashlytics.sdk.android:crashlytics:2.6.5'
     // Provided by maven central
     compile('org.wordpress:mediapicker:1.2.3') {
         exclude group: 'com.android.support'
@@ -153,6 +153,9 @@ dependencies {
     compile 'com.github.Hitta:RippleEffect:82cf00e551'
     compile 'com.github.citux:datetimepicker:0.2.0'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.5@aar') {
+        transitive = true;
+    }
 }
 
 configurations.all {
@@ -217,4 +220,9 @@ if (["storeFile", "storePassword", "keyAlias", "keyPassword"].count {
         }
     }
     android.buildTypes.release.signingConfig = android.signingConfigs.release
+}
+crashlytics {
+    enableNdk true
+    androidNdkOut 'src/main/obj'
+    androidNdkLibsOut 'src/main/libs'
 }

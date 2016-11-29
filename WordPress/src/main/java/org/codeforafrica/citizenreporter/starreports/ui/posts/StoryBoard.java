@@ -1577,7 +1577,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         String month = String.format("%02d", month_int);
 
         //compose file url
-        String file_url = BuildConfig.DEFAULT_URL + "/wp-content/uploads/" + year + "/" + month + "/" + filename;
+        String file_url = BuildConfig.DEFAULT_URL + "/wp-content/uploads/sites/4/" + year + "/" + month + "/" + filename;
 
         if (mimeType.startsWith("image")) {
             attachURL = "<a href=\"" + file_url + "\"><img class=\"alignnone size-medium wp-image-400\" src=\"" + file_url + "\" alt=\"" + filename + "\" width=\"300\" height=\"225\" /></a>";

@@ -27,7 +27,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <permission
-        android:name="org.codeforafrica.citizenreporter.starreports.permission.C2D_MESSAGE"
+        android:name="org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE" />
@@ -440,10 +440,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="5bf264306faf0b1acc698b4363212fd306850a46" />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -453,6 +449,9 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name="org.codeforafrica.citizenreporter.starreports.RuntimePermissionsActivity"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="c99a6a9a2e47604595017b4d8c8e7db46db93b9e" />
     </application>
 
 </manifest>

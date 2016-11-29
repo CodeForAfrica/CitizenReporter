@@ -543,6 +543,7 @@ public class ApiHelper {
                 Log.d("CITIZEN", "current blog : " + WordPress.getCurrentBlog().getBlogName());
                 for (int pst=0; pst<result.length; pst++){
                     Map<?, ?> sample = (Map<?, ?>) result[pst];
+                    Log.d("CITIZEN", " " + result[pst].toString());
                     Log.d("CITIZEN", " "+sample.get("wp_author_display_name").toString()+" - "+ WordPress.getCurrentBlog().getUsername());
                     if (!sample.get("wp_author_display_name").toString().equals(WordPress.getCurrentBlog().getUsername())){
                         result = ArrayUtils.remove(result, pst);
