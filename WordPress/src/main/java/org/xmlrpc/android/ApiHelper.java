@@ -532,23 +532,31 @@ public class ApiHelper {
             XMLRPCClientInterface client = XMLRPCFactory.instantiate(blog.getUri(), blog.getHttpuser(),
                     blog.getHttppassword());
 
-            Object[] result;
+            Object[] result_from_server;
             Object[] xmlrpcParams = { blog.getRemoteBlogId(),
                     blog.getUsername(),
                     blog.getPassword(), recordCount };
+
+            List<Object> sorted_result = new ArrayList<Object>();
             try {
-                result = (Object[]) client.call((isPage) ? "wp.getPages"
+                result_from_server = (Object[]) client.call((isPage) ? "wp.getPages"
                         : "metaWeblog.getRecentPosts", xmlrpcParams);
 
-                Log.d("CITIZEN", "current blog : " + WordPress.getCurrentBlog().getBlogName());
-                for (int pst=0; pst<result.length; pst++){
-                    Map<?, ?> sample = (Map<?, ?>) result[pst];
-                    Log.d("CITIZEN", " " + result[pst].toString());
-                    Log.d("CITIZEN", " "+sample.get("wp_author_display_name").toString()+" - "+ WordPress.getCurrentBlog().getUsername());
-                    if (!sample.get("wp_author_display_name").toString().equals(WordPress.getCurrentBlog().getUsername())){
-                        result = ArrayUtils.remove(result, pst);
+//                Log.d("CITIZEN", "current blog : " + WordPress.getCurrentBlog().getBlogName());
+//                Log.d("CITIZEN", "Size of result from wordpress " + result.length);
+//                Log.d("CITIZEN", "Stuff from server " + result);
+
+                for (int pst=0; pst<result_from_server.length; pst++){
+                    Log.d("CITIZEN", "Size of result from wordpress " + result_from_server.length);
+                    Map<?, ?> sample = (Map<?, ?>) result_from_server[pst];
+                    Log.d("CITIZEN", "what is there(loop): " + pst);
+                    Log.d("CITIZEN", " " + result_from_server[pst]);
+                    if (sample.get("wp_author_display_name").toString().equals(WordPress.getCurrentBlog().getUsername())){
+                        sorted_result.add(result_from_server[pst]);
                     }
                 }
+                Object[] result = new Object[sorted_result.size()];
+                sorted_result.toArray(result);
 
                 if (result != null && result.length > 0) {
                     mPostCount = result.length;
@@ -571,6 +579,7 @@ public class ApiHelper {
                         Map<?, ?> postMap = (Map<?, ?>) result[ctr];
                         postsList.add(postMap);
                     }
+                    Log.d("CITIZEN", "this is what is saved to db: " + postsList.size());
 
                     WordPress.wpDB.savePosts(postsList, blog.getLocalTableBlogId(), isPage, false, !loadMore, false);
                 }
