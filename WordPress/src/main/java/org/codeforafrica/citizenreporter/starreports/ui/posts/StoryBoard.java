@@ -100,6 +100,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import static org.codeforafrica.citizenreporter.starreports.WordPress.getContext;
+
 public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSliderClickListener,
         ViewPagerEx.OnPageChangeListener, View.OnClickListener, TextView.OnEditorActionListener,
         DatePickerDialog.OnDateSetListener {
@@ -1284,7 +1286,19 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
     public void loadPost(Post p) {
         //setTitle(p.getTitle());
+        Random randomGenerator = new Random();
         if (p != null) {
+            if(p.getRemoteMediaPaths() != "" && p.getRemoteMediaPaths() != null){
+                String mediapaths = p.getRemoteMediaPaths();
+                String[] mediapath_parts = mediapaths.split("-:-");
+                for(String path: mediapath_parts){
+                    if(!path.isEmpty()){
+                        media_map_remote.put(String.valueOf(randomGenerator.nextInt(10000)), path);
+                        Log.d("CITIZEN", "Media path remote:  " + media_map_remote.toString());
+                        setUpSlider();
+                    }
+                }
+            }
             if (!p.getTitle().equals(""))
                 displaySummary.setText("" + p.getTitle());
 
@@ -1309,7 +1323,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
                 }
             }
-            addImageToSlider(p);
+//            addImageToSlider(p);
 
         }
     }
@@ -1379,49 +1393,63 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             text_template.setBackgroundColor(getResources().getColor(R.color.grey_lighten_20));
         }
     }
+    public boolean isFilePresent(String fileName) {
+        String path = getContext().getFilesDir().getAbsolutePath() + "/" + fileName;
+        File file = new File(path);
+        return file.exists();
+    }
 
     public void addImageToSlider(Post p) {
         Log.d("CITIZEN", "addImageToSlider");
         mDemoSlider.removeAllSliders();
         String mediapaths=null;
+        String remote_mediaPaths = null;
         String[] mediapaths_parts = null;
 
         if (!p.getMediaPaths().isEmpty()) {
             mediapaths = p.getMediaPaths();
             mediapaths_parts = mediapaths.split("-:-");
         } else if (!p.getRemoteMediaPaths().isEmpty()) {
-            mediapaths = p.getMediaPaths();
+            mediapaths = p.getRemoteMediaPaths();
             mediapaths_parts = mediapaths.split("-:-");
         }
-        Log.d("CITIZEN", "Print the media paths recovered: " + mediapaths);
-        for (String mediaPath : mediapaths_parts) {
-            if (!mediaPath.trim().equals("") && !mediaPath.trim().equals("null")) {
-                //TODO: set caption
-                Random randomGenerator = new Random();
-                File thumb = new File(mediaPath);
-                if (thumb.exists()) {
-                    Log.d("CITIZEN", "thumb: " + thumb.toString());
-                    media_map.put(String.valueOf(randomGenerator.nextInt(10000)), thumb);
-                    for (String name : media_map.keySet()) {
-                        TextSliderView textSliderView = new TextSliderView(this);
-                        // initialize a SliderLayout
-                        textSliderView
-                                .description("")
-                                .image(media_map.get(name))
-                                .setScaleType(BaseSliderView.ScaleType.CenterCrop)
-                                .setOnSliderClickListener(this);
+        try{
+            Log.d("CITIZEN", "Print the media paths recovered: " + mediapaths);
+            for (String mediaPath : mediapaths_parts) {
+                if (!mediaPath.trim().equals("") && !mediaPath.trim().equals("null")) {
+                    //TODO: set caption
+                    Random randomGenerator = new Random();
+                    Log.d("CITIZEN", "is file present: " + isFilePresent(mediaPath));
+                    File thumb = new File(mediaPath);
+//                File thumb = new File(mediaPath);
+                    if (thumb.exists()) {
+                        ;
+                        media_map.put(String.valueOf(randomGenerator.nextInt(10000)), thumb);
+                        for (String name : media_map.keySet()) {
+                            TextSliderView textSliderView = new TextSliderView(this);
+                            // initialize a SliderLayout
+                            textSliderView
+                                    .description("")
+                                    .image(media_map.get(name))
+                                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
+                                    .setOnSliderClickListener(this);
 
-                        //add your extra information
-                        textSliderView.bundle(new Bundle());
-                        textSliderView.getBundle()
-                                .putString("extra", name);
+                            //add your extra information
+                            textSliderView.bundle(new Bundle());
+                            textSliderView.getBundle()
+                                    .putString("extra", name);
 
-                        mDemoSlider.addSlider(textSliderView);
+                            mDemoSlider.addSlider(textSliderView);
+                        }
+
                     }
-
                 }
             }
+
+        } catch (NullPointerException n){
+            Log.d("CITIZEN", "no mediapaths");
         }
+
     }
 
 
@@ -1639,7 +1667,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
 
         String old_description = mPost.getDescription() + "";
-        mPost.setDescription(old_description + "\n" + attachURL);
+        mPost.setDescription(old_description + "<br><p>" + mPost.getQwhy() +"</p><br>" + "\n" + attachURL + "<br><p> Location: " + mPost.getStringLocation() + "</p>");
         WordPress.wpDB.updatePost(mPost);
     }
 
