@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 
 import org.codeforafrica.citizenreporter.starreports.R;
 import org.codeforafrica.citizenreporter.starreports.WordPress;
@@ -123,6 +124,7 @@ public class MediaUploadService extends Service {
                 WordPress.wpDB.deleteMediaFile(blogIdStr, mediaId);
                 EventBus.getDefault().post(new MediaUploadEvents.MediaUploadSucceed(mediaId, id));
                 fetchMediaFile(id);
+                Log.d("CITIZEN", "file uploaded");
             }
 
             @Override

@@ -1221,6 +1221,13 @@ public class WordPressDB {
                                             values.put("qhow", customField.get("value").toString());
                                         if (customField.get("key").equals("remote_mediapaths"))
                                             values.put("remote_mediapaths", customField.get("value").toString());
+                                        if (customField.get("key").equals("string_location")){
+                                            values.put("string_location", customField.get("value").toString());
+                                        }
+                                        if (customField.get("key").equals("mediaPaths")){
+                                            values.put("mediaPaths", customField.get("value").toString());
+                                        }
+
                                     }
 
                                 //assignments custom fields
@@ -2240,6 +2247,7 @@ public class WordPressDB {
     public void deleteMediaFilesForPost(Post post) {
         db.delete(MEDIA_TABLE, "blogId='" + post.getLocalTableBlogId() + "' AND postID=" + post.getLocalTablePostId(), null);
     }
+
 
     /** Get the queued media files for upload for a given blogId **/
     public Cursor getMediaUploadQueue(String blogId) {

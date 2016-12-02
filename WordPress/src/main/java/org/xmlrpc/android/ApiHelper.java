@@ -2,6 +2,7 @@ package org.xmlrpc.android;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 import android.util.Xml;
 
@@ -17,10 +18,13 @@ import org.codeforafrica.citizenreporter.starreports.models.BlogIdentifier;
 import org.codeforafrica.citizenreporter.starreports.models.Comment;
 import org.codeforafrica.citizenreporter.starreports.models.CommentList;
 import org.codeforafrica.citizenreporter.starreports.models.FeatureSet;
+import org.codeforafrica.citizenreporter.starreports.ui.accounts.helpers.JSONParser;
 import org.codeforafrica.citizenreporter.starreports.ui.main.AssignmentsListFragment;
 import org.codeforafrica.citizenreporter.starreports.ui.media.MediaGridFragment.Filter;
 import org.codeforafrica.citizenreporter.starreports.ui.posts.LessonsListFragment;
 import org.codeforafrica.citizenreporter.starreports.ui.posts.PostsListFragment;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.AppLog.T;
 import org.wordpress.android.util.DateTimeUtils;
@@ -547,10 +551,22 @@ public class ApiHelper {
 //                Log.d("CITIZEN", "Stuff from server " + result);
 
                 for (int pst=0; pst<result_from_server.length; pst++){
-                    Log.d("CITIZEN", "Size of result from wordpress " + result_from_server.length);
+//                    Log.d("CITIZEN", "Size of result from wordpress " + result_from_server.length);
                     Map<?, ?> sample = (Map<?, ?>) result_from_server[pst];
-                    Log.d("CITIZEN", "what is there(loop): " + pst);
-                    Log.d("CITIZEN", " " + result_from_server[pst]);
+//                    Log.d("CITIZEN", "what is there(loop): " + pst);
+//                    Log.d("CITIZEN", " " + result_from_server[pst]);
+                    Object custom_fields = sample.get("custom_fields");
+                    JSONArray cus = null;
+                    if (Build.VERSION.SDK_INT >= 19){
+                        try{
+                            cus = new JSONArray(custom_fields);
+                        } catch (JSONException e){
+                            AppLog.e(T.POSTS, "No custom fields found for post.");
+                        }
+                    }
+
+
+                    Log.d("CITIZEN"," " + cus.toString());
                     if (sample.get("wp_author_display_name").toString().equals(WordPress.getCurrentBlog().getUsername())){
                         sorted_result.add(result_from_server[pst]);
                     }

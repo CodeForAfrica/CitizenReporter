@@ -59,7 +59,7 @@ android {
             minSdkVersion 16
             applicationId 'org.codeforafrica.citizenreporter.eNCA'
             targetSdkVersion 23
-            versionName '1.0.0'
+            versionName '1.0.1-beta'
         }
     }
 

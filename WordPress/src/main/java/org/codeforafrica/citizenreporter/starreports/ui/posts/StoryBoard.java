@@ -240,9 +240,9 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             // User selected 'Quick Photo' in the menu drawer
             if (quickMediaType == Constants.QUICK_POST_PHOTO_CAMERA) {
                 if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED){
+                        != PackageManager.PERMISSION_GRANTED) {
                     if (ActivityCompat.shouldShowRequestPermissionRationale(StoryBoard.this,
-                            Manifest.permission.CAMERA)){
+                            Manifest.permission.CAMERA)) {
                         //TODO explain why this thing is important
                     } else {
                         ActivityCompat.requestPermissions(StoryBoard.this, new String[]
@@ -342,7 +342,6 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             }
         });
         */
-
 
 
         //quick capture icons
@@ -452,12 +451,11 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch(requestCode){
+        switch (requestCode) {
             case RequestCodes.CAMERA_PERMISSIONS:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     launchCamera();
-                }
-                else {
+                } else {
                     Toast.makeText(StoryBoard.this, "You can not use the camera", Toast.LENGTH_SHORT).show();
                 }
         }
@@ -594,6 +592,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
         if (mPost.isLocalDraft()) {
             mediaPaths = StringUtils.notNullStr(mPost.getMediaPaths());
+            Log.d("CITIZEN", "Media_p: " + mediaPaths);
         } else {
             String[] paths = WordPress.wpDB.getLocalMediaPaths(mPost);
 
@@ -611,20 +610,20 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
                     if (mPost.isLocalDraft()) {
                         File thumb = new File(mediaPath);
                         if (thumb.exists()) {
+                            Log.d("CITIZEN", "Media map local: " + media_map.toString());
                             media_map.put(String.valueOf(randomGenerator.nextInt(10000)), thumb);
                             setUpSlider();
                         }
                     } else {
                         Log.d("CITIZEN", "setup slider remote");
-                        if (mediaPath.endsWith(".jpg")){
+                        if (mediaPath.endsWith(".jpg")) {
                             mediaPath = mediaPath.substring(0, mediaPath.length() - 4);
                             mediaPath = mediaPath + "-150x150.jpg";
-                        }
-                        else if(mediaPath.endsWith(".png")){
+                        } else if (mediaPath.endsWith(".png")) {
                             mediaPath = mediaPath.substring(0, mediaPath.length() - 4);
                             mediaPath = mediaPath + "-150x150.png";
                         }
-                        Log.d("CITIZEN","remote: "+mediaPath);
+                        Log.d("CITIZEN", "remote: " + mediaPath);
                         media_map_remote.put(String.valueOf(randomGenerator.nextInt(10000)), mediaPath);
                         setUpSlider();
                     }
@@ -1310,6 +1309,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
                 }
             }
+            addImageToSlider(p);
 
         }
     }
@@ -1379,6 +1379,51 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
             text_template.setBackgroundColor(getResources().getColor(R.color.grey_lighten_20));
         }
     }
+
+    public void addImageToSlider(Post p) {
+        Log.d("CITIZEN", "addImageToSlider");
+        mDemoSlider.removeAllSliders();
+        String mediapaths=null;
+        String[] mediapaths_parts = null;
+
+        if (!p.getMediaPaths().isEmpty()) {
+            mediapaths = p.getMediaPaths();
+            mediapaths_parts = mediapaths.split("-:-");
+        } else if (!p.getRemoteMediaPaths().isEmpty()) {
+            mediapaths = p.getMediaPaths();
+            mediapaths_parts = mediapaths.split("-:-");
+        }
+        Log.d("CITIZEN", "Print the media paths recovered: " + mediapaths);
+        for (String mediaPath : mediapaths_parts) {
+            if (!mediaPath.trim().equals("") && !mediaPath.trim().equals("null")) {
+                //TODO: set caption
+                Random randomGenerator = new Random();
+                File thumb = new File(mediaPath);
+                if (thumb.exists()) {
+                    Log.d("CITIZEN", "thumb: " + thumb.toString());
+                    media_map.put(String.valueOf(randomGenerator.nextInt(10000)), thumb);
+                    for (String name : media_map.keySet()) {
+                        TextSliderView textSliderView = new TextSliderView(this);
+                        // initialize a SliderLayout
+                        textSliderView
+                                .description("")
+                                .image(media_map.get(name))
+                                .setScaleType(BaseSliderView.ScaleType.CenterCrop)
+                                .setOnSliderClickListener(this);
+
+                        //add your extra information
+                        textSliderView.bundle(new Bundle());
+                        textSliderView.getBundle()
+                                .putString("extra", name);
+
+                        mDemoSlider.addSlider(textSliderView);
+                    }
+
+                }
+            }
+        }
+    }
+
 
     public void setUpSlider() {
         mDemoSlider.removeAllSliders();

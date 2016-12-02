@@ -57,6 +57,7 @@ public class Post implements Serializable {
     private String quickPostType;
     private int assignment_id;
     private PostLocation mPostLocation;
+    private String remoteMediaPaths;
 
     private String assignmentLocation;
     private String assignmnetBounty;
@@ -96,7 +97,6 @@ public class Post implements Serializable {
         this.remoteMediaPaths = remoteMediaPaths;
     }
 
-    private String remoteMediaPaths;
 
     public Post() {
     }
