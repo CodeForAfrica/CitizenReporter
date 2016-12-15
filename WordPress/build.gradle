@@ -6,6 +6,7 @@ buildscript {
         maven {
             url "https://jitpack.io"
         }
+        jcenter()
 
     }
     dependencies {
@@ -152,10 +153,12 @@ dependencies {
 //    fix for ripple crash android 6.0
     compile 'com.github.Hitta:RippleEffect:82cf00e551'
     compile 'com.github.citux:datetimepicker:0.2.0'
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+//    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.5@aar') {
         transitive = true;
     }
+    compile 'com.google.firebase:firebase-core:10.0.1'
+    compile 'com.google.firebase:firebase-messaging:10.0.1'
 }
 
 configurations.all {
@@ -226,3 +229,5 @@ crashlytics {
     androidNdkOut 'src/main/obj'
     androidNdkLibsOut 'src/main/libs'
 }
+
+apply plugin: 'com.google.gms.google-services'

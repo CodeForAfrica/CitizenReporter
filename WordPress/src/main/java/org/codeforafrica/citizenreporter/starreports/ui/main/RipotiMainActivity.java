@@ -31,6 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gcm.GCMRegistrar;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.simperium.client.Bucket;
 import com.simperium.client.BucketObjectMissingException;
 
@@ -357,6 +358,8 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
         } else if (display.getRotation() == Surface.ROTATION_270){
             getSupportActionBar().hide();
         }
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.d("FIREBASE TOKEN: ", " " + token);
 
 
         // testing to check if it can even get permissions

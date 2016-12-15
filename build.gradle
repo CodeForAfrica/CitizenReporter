@@ -9,8 +9,12 @@ subprojects {
         }
     }
 }
-//buildscript {
-//    dependencies {
-//        classpath 'com.android.tools.build:gradle:2.2.1'
-//    }
-//}
+buildscript {
+    repositories{
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.1'
+        classpath 'com.google.gms:google-services:3.0.0'
+    }
+}
