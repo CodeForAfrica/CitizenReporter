@@ -4,6 +4,7 @@
     android:layout_height="50dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:rv_color="@color/grey_darken_30"
+    android:visibility="invisible"
     app:rv_zoom="true"
     app:rv_framerate="30">
     <LinearLayout

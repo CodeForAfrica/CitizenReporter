@@ -50,15 +50,16 @@
         <View
             android:layout_above="@+id/bottom_action_buttons"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="0dp"
             android:layout_gravity="bottom"
             android:background="@color/white"
             android:id="@+id/view2" />
         <include
+            android:visibility="invisible"
             layout="@layout/capture_buttons"
             android:id="@+id/bottom_action_buttons"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
             android:layout_alignWithParentIfMissing="true"
             android:layout_alignParentBottom="true" />
 

@@ -30,6 +30,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gcm.GCMRegistrar;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.simperium.client.Bucket;
@@ -79,6 +80,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Main activity which hosts sites, reader, me and notifications tabs
@@ -135,6 +137,7 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
     private LinearLayout button_camera;
     private LinearLayout button_video;
     private LinearLayout button_mic;
+
 
 
     @Override
@@ -345,6 +348,7 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ripoti_main_screen);
 
+        // TODO: Move this to where you establish a user session
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -897,6 +901,8 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
     public void onEventMainThread(CoreEvents.RestApiUnauthorized event) {
         AuthenticationDialogUtils.showAuthErrorView(this);
     }
+
+
 
     @SuppressWarnings("unused")
     public void onEventMainThread(CoreEvents.TwoFactorAuthenticationDetected event) {

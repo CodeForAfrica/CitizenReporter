@@ -24,6 +24,7 @@ public class CRFirebaseMessagingService extends FirebaseMessagingService{
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         FirebaseMessaging.getInstance().subscribeToTopic("assignments");
+        FirebaseMessaging.getInstance().subscribeToTopic("testing");
 
         Log.d("FIREBASE", "From: " + remoteMessage.getFrom());
 
