@@ -1018,11 +1018,11 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
         // Get GCM registration id
         final String regId = GCMRegistrar.getRegistrationId(getApplicationContext());
 
-        Log.d("simple1", "s");
+        Log.d("GCM", "Registration ID " + regId);
 
         // Check if regid already presents
         if (regId.equals("")) {
-            Log.d("simple1", "2");
+            Log.d("GCM", "registration ID is empty");
             // Register with GCM
             GCMRegistrar.register(getApplicationContext(), BuildConfig.GCM_ID);
 
@@ -1030,10 +1030,10 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
             Log.d("simple1", "3");
             // Device is already registered on GCM Server
             if (GCMRegistrar.isRegisteredOnServer(getApplicationContext())) {
-                Log.d("simple1", "4");
+                Log.d("GCM", "already registered in server");
                 // Skips registration.
                 //Toast.makeText(getApplicationContext(), "Already registered with GCM Server", Toast.LENGTH_LONG).show();
-                Log.d("already registered", "sdfd");
+                Log.d("GCM", "already registered");
             } else {
                 Log.d("simple1", "5");
                 // Try to register again, but not in the UI thread.
@@ -1049,6 +1049,7 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
                         // Register on our server
                         // On server creates a new user
                         aController.register(context, regId);
+                        Log.d("GCM", "registering on server " + regId);
 
                         return null;
                     }
@@ -1078,7 +1079,7 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
             // Waking up mobile if it is sleeping
             aController.acquireWakeLock(getApplicationContext());
 
-            //Toast.makeText(getApplicationContext(), "Got Message: " + newMessage, Toast.LENGTH_LONG).show();
+            // Toast.makeText(getApplicationContext(), "Got Message: " + newMessage, Toast.LENGTH_LONG).show();
 
             // Releasing wake lock
             aController.releaseWakeLock();

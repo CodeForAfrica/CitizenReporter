@@ -39,12 +39,14 @@
         <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
             android:id="@+id/text_location"
             style="@style/ReaderTextView.Post.Address"
+            android:textSize="@dimen/text_sz_large"
             tools:text="text_tag"
             android:layout_marginBottom="10dp"/>
 
         <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
             android:id="@+id/assignment_post_author"
             style="@style/ReaderTextView.Post.Author"
+            android:textSize="@dimen/text_sz_large"
             tools:text="text_author"
             android:layout_marginBottom="10dp"/>
 
@@ -52,11 +54,14 @@
             android:id="@+id/text_bounty"
             style="@style/ReaderTextView.Post.Bounty"
             tools:text="text_tag"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="@dimen/text_sz_large"
+            android:visibility="invisible"
+            android:height="0dp"/>
 
         <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
             android:id="@+id/assignment_list_deadline"
             style="@style/ReaderTextView.Post.Deadline_2"
+            android:textSize="@dimen/text_sz_large"
             tools:text="text_tag"/>
     </LinearLayout>
     <ScrollView

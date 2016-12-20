@@ -157,7 +157,7 @@
                     android:id="@+id/assignment_list_deadline"
                     style="@style/ReaderTextView.Post.Deadline_2"
                     tools:text="text_tag"
-                    android:layout_weight="1.04" />
+                    android:layout_weight="0.96" />
 
                 <ImageView
                     android:id="@+id/media_type_audio"
@@ -185,7 +185,6 @@
                     android:layout_width="30dp"
                     android:padding="2dp"
                     android:tint="@color/assignment_media_type_not_required" />
-
             </LinearLayout>
 
         </RelativeLayout>

@@ -39,6 +39,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
@@ -1173,7 +1174,13 @@ public class WordPress extends Application {
             //displayMessageOnScreen(context, context.getString( R.string.server_registering, i, MAX_ATTEMPTS));
 
             // Post registration values to web server
-            //post(serverUrl, params);
+
+            try{
+                post(serverUrl, params);
+            } catch (IOException e){
+                Toast.makeText(getApplicationContext(), "Device registered", Toast.LENGTH_SHORT);
+            }
+            // post(serverUrl, params);
 
             //update user profile with device id
             if(WordPress.currentBlog!=null) {
@@ -1181,6 +1188,7 @@ public class WordPress extends Application {
 
                 APIFunctions userFunction = new APIFunctions();
                 JSONObject json = userFunction.updateUserDevice(regId, username);
+                Log.d("GCM", "update user device id " + json.toString());
                 String responseMessage = "";
                 if(json!=null) {
                     try {
@@ -1201,6 +1209,7 @@ public class WordPress extends Application {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
 
                     GCMRegistrar.setRegisteredOnServer(context, true);
 
