@@ -1175,11 +1175,11 @@ public class WordPress extends Application {
 
             // Post registration values to web server
 
-            try{
-                post(serverUrl, params);
-            } catch (IOException e){
-                Toast.makeText(getApplicationContext(), "Device registered", Toast.LENGTH_SHORT);
-            }
+//            try{
+//                post(serverUrl, params);
+//            } catch (IOException e){
+//                Toast.makeText(getApplicationContext(), "Device registered", Toast.LENGTH_SHORT);
+//            }
             // post(serverUrl, params);
 
             //update user profile with device id
@@ -1188,7 +1188,6 @@ public class WordPress extends Application {
 
                 APIFunctions userFunction = new APIFunctions();
                 JSONObject json = userFunction.updateUserDevice(regId, username);
-                Log.d("GCM", "update user device id " + json.toString());
                 String responseMessage = "";
                 if(json!=null) {
                     try {
