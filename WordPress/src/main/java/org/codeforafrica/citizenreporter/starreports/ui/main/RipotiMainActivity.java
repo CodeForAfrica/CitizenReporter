@@ -49,6 +49,7 @@ import org.codeforafrica.citizenreporter.starreports.networking.SelfSignedSSLCer
 import org.codeforafrica.citizenreporter.starreports.main.UserMenuActivity;
 import org.codeforafrica.citizenreporter.starreports.ui.ActivityLauncher;
 import org.codeforafrica.citizenreporter.starreports.ui.RequestCodes;
+import org.codeforafrica.citizenreporter.starreports.ui.accounts.helpers.APIFunctions;
 import org.codeforafrica.citizenreporter.starreports.ui.media.MediaAddFragment;
 import org.codeforafrica.citizenreporter.starreports.ui.notifications.NotificationEvents;
 import org.codeforafrica.citizenreporter.starreports.ui.notifications.NotificationsListFragment;
@@ -62,6 +63,7 @@ import org.codeforafrica.citizenreporter.starreports.ui.prefs.AppPrefs;
 import org.codeforafrica.citizenreporter.starreports.ui.prefs.BlogPreferencesActivity;
 import org.codeforafrica.citizenreporter.starreports.ui.reader.ReaderEvents;
 import org.codeforafrica.citizenreporter.starreports.ui.reader.ReaderPostListFragment;
+import org.json.JSONObject;
 import org.wordpress.android.util.AppLog;
 import org.wordpress.android.util.AppLog.T;
 import org.wordpress.android.util.AuthenticationDialogUtils;
@@ -665,6 +667,7 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
 
         //check if taking picture
         (new WordPress()).checkQuickCapture(this, getApplicationContext());
+        checkIfRegistered();
     }
 
     /*
@@ -971,20 +974,6 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
     WordPress aController;
     AsyncTask<Void, Void, Void> mRegisterTask;
     public void registerDevice(){
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-//            //TODO add permission check and request
-//
-//            if(ContextCompat.checkSelfPermission(getApplicationContext(), "org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE")
-//                    != PackageManager.PERMISSION_GRANTED){
-//                //TODO add explanation to why the user needs to accept this permission
-//            } else {
-//                ActivityCompat.requestPermissions(RipotiMainActivity.this,
-//                        new String[] {"org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE"},
-//                        RequestCodes.C2D_MESSAGE_PERMISSIONS);
-//
-//            }
-//        }
         //Get Global Controller Class object (see application tag in AndroidManifest.xml)
         aController = (WordPress)getApplicationContext();
 
@@ -1027,7 +1016,7 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
             GCMRegistrar.register(getApplicationContext(), BuildConfig.GCM_ID);
 
         } else {
-            Log.d("simple1", "3");
+            Log.d("simple1", "regID is not empty");
             // Device is already registered on GCM Server
             if (GCMRegistrar.isRegisteredOnServer(getApplicationContext())) {
                 Log.d("GCM", "already registered in server");
@@ -1035,7 +1024,7 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
                 //Toast.makeText(getApplicationContext(), "Already registered with GCM Server", Toast.LENGTH_LONG).show();
                 Log.d("GCM", "already registered");
             } else {
-                Log.d("simple1", "5");
+                Log.d("GCM", "register on the server");
                 // Try to register again, but not in the UI thread.
                 // It's also necessary to cancel the thread onDestroy(),
                 // hence the use of AsyncTask instead of a raw thread.

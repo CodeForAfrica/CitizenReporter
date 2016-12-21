@@ -547,7 +547,7 @@ public class WordPress extends Application {
         AnalyticsUtils.refreshMetadata();
         AnalyticsTracker.track(Stat.APPLICATION_STARTED);
 
-        registerForCloudMessaging(this);
+//        registerForCloudMessaging(this);
 
         ApplicationLifecycleMonitor pnBackendMonitor = new ApplicationLifecycleMonitor();
         registerComponentCallbacks(pnBackendMonitor);
@@ -1170,18 +1170,6 @@ public class WordPress extends Application {
 
             Log.d(GCMConfigORG.TAG, "Attempt #" + i + " to register");
 
-            //Send Broadcast to Show message on screen
-            //displayMessageOnScreen(context, context.getString( R.string.server_registering, i, MAX_ATTEMPTS));
-
-            // Post registration values to web server
-
-//            try{
-//                post(serverUrl, params);
-//            } catch (IOException e){
-//                Toast.makeText(getApplicationContext(), "Device registered", Toast.LENGTH_SHORT);
-//            }
-            // post(serverUrl, params);
-
             //update user profile with device id
             if(WordPress.currentBlog!=null) {
                 String username = WordPress.getCurrentBlog().getUsername();
@@ -1189,9 +1177,12 @@ public class WordPress extends Application {
                 APIFunctions userFunction = new APIFunctions();
                 JSONObject json = userFunction.updateUserDevice(regId, username);
                 String responseMessage = "";
+                Log.d("checking json: ", "is json null");
                 if(json!=null) {
                     try {
                         String res = json.getString("result");
+                        String result = json.getString("return_result");
+                        Log.d("GCM Reg result: ", " " + result);
                         if (res.equals("OK")) {
                             responseMessage = json.getString("message");
 

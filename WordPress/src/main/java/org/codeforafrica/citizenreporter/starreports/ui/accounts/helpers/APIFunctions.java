@@ -17,8 +17,8 @@ public class APIFunctions {
     private static final String registerURL = BuildConfig.API_URL + "/register/";
     private static final String updateURL = BuildConfig.API_URL + "/editprofile/";
     private static final String userURL = BuildConfig.API_URL + "/user/";
-    private static final String updateDeviceURL = BuildConfig.API_URL + "/edit_user_device/";
-    private static final String sendMessageUrl = BuildConfig.API_URL + "/send_message/";
+    private static final String updateDeviceURL = BuildConfig.DEFAULT_URL + "/api/gcm/edit_user_device/";
+    private static final String sendMessageUrl = BuildConfig.DEFAULT_URL + "/api/gcm/send_message/";
     private static final String confirmPaymentUrl = BuildConfig.API_URL + "/confirm_payment/";
     private static final String submitFeedback = BuildConfig.API_URL + "/submit_feedback/";
 
