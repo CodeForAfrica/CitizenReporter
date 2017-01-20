@@ -400,6 +400,9 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
         //get sms serial number
         String serialNumber = "" + telephonyManager.getSimSerialNumber();
 
+        Log.d("Create account issues", "username: " + username);
+        Log.d("Create account issues", "password: " + password);
+
         APIFunctions userFunction = new APIFunctions();
         JSONObject json = userFunction.newUser(username, "", password, email, operatorName, deviceId, serialNumber, address_gps, address, phone, true);
         if(json !=null) {

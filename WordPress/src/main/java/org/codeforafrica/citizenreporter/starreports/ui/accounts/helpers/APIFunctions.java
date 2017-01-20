@@ -9,6 +9,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 import org.codeforafrica.citizenreporter.starreports.BuildConfig;
 
+import android.content.ContentValues;
 import android.util.Log;
 
 public class APIFunctions {
@@ -29,6 +30,23 @@ public class APIFunctions {
 
     public JSONObject newUser(String username, String full_name, String password, String email, String operatorName, String deviceId, String serialNumber, String location, String address, String phone_number, boolean newUser){
         // Building Parameters
+        Log.d("new User json", "PASSWORD: " + password);
+
+//        ContentValues values=new ContentValues();
+//        values.put("username",name);
+//        values.put("password",password);
+//        ContentValues params = new ContentValues();
+//        params.put("username", username);
+//        params.put("password", password);
+//        params.put("email", email);
+//        params.put("tag", "register");
+//        params.put("operatorName", operatorName);
+//        params.put("deviceId", deviceId);
+//        params.put("serialNumber", serialNumber);
+//        params.put("location", location);
+//        params.put("phone_number", phone_number);
+//        params.put("address", address);
+
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("username", username));
         params.add(new BasicNameValuePair("password", password));
@@ -48,6 +66,7 @@ public class APIFunctions {
             url = updateURL;
             params.add(new BasicNameValuePair("full_name", full_name));
         }
+        Log.d("register"," params: " + params.toString());
 
         JSONObject json = jsonParser.getJSONFromUrl(url, params);
         // return json
