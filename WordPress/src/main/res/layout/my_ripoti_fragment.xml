@@ -120,6 +120,7 @@
 
             <RelativeLayout
                 android:id="@+id/row_payments"
+                android:visibility="gone"
                 style="@style/MySiteListRowLayout">
 
                 <ImageView
