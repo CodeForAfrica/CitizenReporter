@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import com.wordpress.rest.RestRequest;
 
+import org.codeforafrica.citizenreporter.starreports.models.Account;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.codeforafrica.citizenreporter.starreports.BuildConfig;
@@ -416,6 +417,15 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
         }
     }
 
+    private void getAccountDetails(){
+        Log.d("CITIZEN", "get account details");
+        Account account = new Account();
+        account.fetchAccountDetails();
+
+        account.save();
+        Log.d("CITIZEN", "username " + account.getUserName());
+    }
+
     private void trackAnalyticsSignIn() {
         Map<String, Boolean> properties = new HashMap<String, Boolean>();
         properties.put("dotcom_user", isWPComLogin());
@@ -461,6 +471,9 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
             }
 
             trackAnalyticsSignIn();
+//            getAccountDetails();
+            Log.d("CITIZEN", "Before get user ID");
+            new UserDetails().execute();
 
             // get reader tags so they're available as soon as the Reader is accessed - done for
             // both wp.com and self-hosted (self-hosted = "logged out" reader) - note that this

@@ -11,7 +11,9 @@ import com.google.gson.Gson;
 import org.apache.commons.lang.ArrayUtils;
 import org.codeforafrica.citizenreporter.starreports.WordPress;
 import org.codeforafrica.citizenreporter.starreports.chat.Message;
+import org.codeforafrica.citizenreporter.starreports.datasets.AccountTable;
 import org.codeforafrica.citizenreporter.starreports.datasets.CommentTable;
+import org.codeforafrica.citizenreporter.starreports.models.Account;
 import org.codeforafrica.citizenreporter.starreports.models.AccountHelper;
 import org.codeforafrica.citizenreporter.starreports.models.Blog;
 import org.codeforafrica.citizenreporter.starreports.models.BlogIdentifier;
@@ -553,8 +555,8 @@ public class ApiHelper {
                 for (int pst=0; pst<result_from_server.length; pst++){
 //                    Log.d("CITIZEN", "Size of result from wordpress " + result_from_server.length);
                     Map<?, ?> sample = (Map<?, ?>) result_from_server[pst];
-//                    Log.d("CITIZEN", "what is there(loop): " + pst);
-//                    Log.d("CITIZEN", " " + result_from_server[pst]);
+                    Log.d("CITIZEN", " " + result_from_server[pst]);
+
                     Object custom_fields = sample.get("custom_fields");
                     JSONArray cus = null;
                     if (Build.VERSION.SDK_INT >= 19){
@@ -565,9 +567,14 @@ public class ApiHelper {
                         }
                     }
 
+                    Account account = AccountTable.getDefaultAccount();
+                    Long user_id = account.getUserId();
 
-                    Log.d("CITIZEN"," " + cus.toString());
-                    if (sample.get("wp_author_display_name").toString().equals(WordPress.getCurrentBlog().getUsername())){
+                    String wp_user_id = sample.get("userid").toString().trim();
+                    Log.d("CITIZEN", " " + WordPress.getCurrentBlog().getUsername());
+                    if (user_id == Long.valueOf(wp_user_id)){
+
+                        Log.d("CITIZEN", " " + result_from_server[pst]);
                         sorted_result.add(result_from_server[pst]);
                     }
                 }

@@ -114,7 +114,8 @@ public class ReaderUserTable {
             if (c.moveToFirst()) {
                 do {
                     long userId = c.getLong(0);
-                    String url = GravatarUtils.fixGravatarUrl(c.getString(1), avatarSz);
+//                    String url = GravatarUtils.fixGravatarUrl(c.getString(1), avatarSz);
+                    String url = "";
                     // add current user to the top
                     if (userId==currentUserId) {
                         avatars.add(0, url);
