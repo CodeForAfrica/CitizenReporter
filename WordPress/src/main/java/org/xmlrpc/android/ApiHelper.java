@@ -555,7 +555,6 @@ public class ApiHelper {
                 for (int pst=0; pst<result_from_server.length; pst++){
 //                    Log.d("CITIZEN", "Size of result from wordpress " + result_from_server.length);
                     Map<?, ?> sample = (Map<?, ?>) result_from_server[pst];
-                    Log.d("CITIZEN", " " + result_from_server[pst]);
 
                     Object custom_fields = sample.get("custom_fields");
                     JSONArray cus = null;
@@ -571,10 +570,8 @@ public class ApiHelper {
                     Long user_id = account.getUserId();
 
                     String wp_user_id = sample.get("userid").toString().trim();
-                    Log.d("CITIZEN", " " + WordPress.getCurrentBlog().getUsername());
                     if (user_id == Long.valueOf(wp_user_id)){
 
-                        Log.d("CITIZEN", " " + result_from_server[pst]);
                         sorted_result.add(result_from_server[pst]);
                     }
                 }

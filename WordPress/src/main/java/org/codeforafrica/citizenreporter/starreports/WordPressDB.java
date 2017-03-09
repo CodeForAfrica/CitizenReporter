@@ -1078,7 +1078,7 @@ public class WordPressDB {
         return returnVector;
     }
     public String[] getLocalMediaPaths(Post post){
-        Cursor result = db.rawQuery("select mediaPaths,remote_mediapaths from posts where title=? and localDraft=1",
+        Cursor result = db.rawQuery("select mediaPaths,remote_mediapaths from posts where title=?",
                 new String[] {post.getTitle()});
         result.moveToFirst();
         try{

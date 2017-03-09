@@ -58,6 +58,7 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.android.datetimepicker.date.DatePickerDialog;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.codeforafrica.citizenreporter.starreports.BuildConfig;
 import org.codeforafrica.citizenreporter.starreports.Constants;
 import org.codeforafrica.citizenreporter.starreports.R;
@@ -590,49 +591,55 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     }
 
     public void getAndSetThumbnails() {
-        String mediaPaths;
+        Random randomGenerator = new Random();
 
-        if (mPost.isLocalDraft()) {
-            mediaPaths = StringUtils.notNullStr(mPost.getMediaPaths());
-            Log.d("CITIZEN", "Media_p: " + mediaPaths);
+        if (mPost.isLocalDraft()){
+            String mediaPaths = StringUtils.notNullStr(mPost.getMediaPaths()).replace("null","");
+            String[] mediaPathTemp = mediaPaths.split("-:-");
+            String[] mediaPathParts = Arrays.copyOfRange(mediaPathTemp, 1, mediaPathTemp.length);
+
+            for(String path: mediaPathParts){
+                File thumb = new File(path);
+                if (thumb.exists()){
+                    media_map.put(String.valueOf(randomGenerator.nextInt(10000)), thumb);
+                }
+            }
+
         } else {
             String[] paths = WordPress.wpDB.getLocalMediaPaths(mPost);
+            String local_paths = paths[0].replace("null", "");
+            String remote_paths = paths[1].replace("null", "");
 
-            mediaPaths = StringUtils.notNullStr(paths[1]);
-        }
+            String[] local_media = local_paths.split("-:-");
+            String[] remote_media = remote_paths.split("-:-");
 
-        if (mediaPaths != "") {
-            String[] mediaPaths_parts = mediaPaths.split("-:-");
-            //for(int i = 0; i<mediaPaths_parts.length; i++){
-            for (String mediaPath : mediaPaths_parts)
-                if (!mediaPath.trim().equals("") && !mediaPath.trim().equals("null")) {
-                    //TODO: set caption
-                    Random randomGenerator = new Random();
+            String[] local_media_path = Arrays.copyOfRange(local_media, 1, local_media.length);
+            String[] remote_media_path = Arrays.copyOfRange(remote_media, 1, remote_media.length);
 
-                    if (mPost.isLocalDraft()) {
-                        File thumb = new File(mediaPath);
-                        if (thumb.exists()) {
-                            Log.d("CITIZEN", "Media map local: " + media_map.toString());
-                            media_map.put(String.valueOf(randomGenerator.nextInt(10000)), thumb);
-                            setUpSlider();
-                        }
-                    } else {
-                        Log.d("CITIZEN", "setup slider remote");
-                        if (mediaPath.endsWith(".jpg")) {
-                            mediaPath = mediaPath.substring(0, mediaPath.length() - 4);
-                            mediaPath = mediaPath + "-150x150.jpg";
-                        } else if (mediaPath.endsWith(".png")) {
-                            mediaPath = mediaPath.substring(0, mediaPath.length() - 4);
-                            mediaPath = mediaPath + "-150x150.png";
-                        }
-                        Log.d("CITIZEN", "remote: " + mediaPath);
-                        media_map_remote.put(String.valueOf(randomGenerator.nextInt(10000)), mediaPath);
-                        setUpSlider();
-                    }
+            Log.d("MEDIA_MAP", Arrays.toString(local_media_path));
+            Log.d("REMOTE_MEDIA_MAP", Arrays.toString(remote_media_path));
 
+
+            for(String path: local_media_path){
+                File thumb = new File(path);
+                if (thumb.exists()){
+                    media_map.put(String.valueOf(randomGenerator.nextInt(10000)), thumb);
                 }
+            }
+            Log.d("local path from get set", media_map.toString());
+            Log.d("local path fro get init", media_map_remote.toString());
+            media_map_remote.clear();
+            for(String path: remote_media_path){
+                media_map_remote.put(String.valueOf(randomGenerator.nextInt(10000)), path);
+
+            }
+
+            Log.d("local path from get set", media_map_remote.toString());
+
         }
+        setUpSlider();
         WordPress.wpDB.updatePost(mPost);
+
     }
 
 
@@ -1456,8 +1463,12 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     public void setUpSlider() {
         mDemoSlider.removeAllSliders();
 
-        if (mPost.isLocalDraft()) {
+        Log.d("Remote MEDIA MAP", media_map_remote.toString());
+        Log.d("MEDIA MAP", " " + media_map.toString());
+
+        if (!media_map.isEmpty()) {
             for (String name : media_map.keySet()) {
+                Log.d("MEDIA MAP", " " + media_map.get(name).getAbsolutePath());
                 TextSliderView textSliderView = new TextSliderView(this);
                 // initialize a SliderLayout
                 textSliderView
