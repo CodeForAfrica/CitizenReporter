@@ -16,18 +16,18 @@ Once enabled a four-digit passcode needs to be entered any time your mobile app 
 - Open the file `android.manifest` and declare the following activities:
 
         <activity
-            android:name="org.codeforafrica.citizenreporter.starreports.PasscodeUnlockActivity"
+            android:name="eNCA.PasscodeUnlockActivity"
             android:theme="@style/Theme.Sherlock.Light.NoActionBar"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="org.codeforafrica.citizenreporter.starreports.PasscodePreferencesActivity"
+            android:name="eNCA.PasscodePreferencesActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.Sherlock.Light"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="org.codeforafrica.citizenreporter.starreports.PasscodeManagePasswordActivity"
+            android:name="eNCA.PasscodeManagePasswordActivity"
             android:theme="@style/Theme.Sherlock.Light.NoActionBar"
             android:windowSoftInputMode="stateHidden" >
         </activity>

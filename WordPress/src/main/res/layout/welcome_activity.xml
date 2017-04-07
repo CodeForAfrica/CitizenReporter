@@ -7,7 +7,7 @@
     android:baselineAligned="true">
 
     <fragment
-        android:name="org.codeforafrica.citizenreporter.starreports.ui.accounts.SignInFragment"
+        android:name="org.codeforafrica.citizenreporter.eNCA.ui.accounts.SignInFragment"
         android:id="@+id/sign_in_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

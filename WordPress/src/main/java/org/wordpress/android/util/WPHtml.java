@@ -48,12 +48,12 @@ import android.text.style.URLSpan;
 
 import org.ccil.cowan.tagsoup.HTMLSchema;
 import org.ccil.cowan.tagsoup.Parser;
-import org.codeforafrica.citizenreporter.starreports.R;
-import org.codeforafrica.citizenreporter.starreports.WordPress;
-import org.codeforafrica.citizenreporter.starreports.models.Blog;
+import org.codeforafrica.citizenreporter.eNCA.R;
+import org.codeforafrica.citizenreporter.eNCA.WordPress;
+import org.codeforafrica.citizenreporter.eNCA.models.Blog;
 import org.wordpress.android.util.helpers.MediaFile;
 import org.wordpress.android.util.helpers.MediaGallery;
-import org.codeforafrica.citizenreporter.starreports.models.Post;
+import org.codeforafrica.citizenreporter.eNCA.models.Post;
 import org.wordpress.android.util.AppLog.T;
 import org.wordpress.android.util.helpers.MediaGalleryImageSpan;
 import org.wordpress.android.util.helpers.WPImageSpan;

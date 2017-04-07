@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.codeforafrica.citizenreporter.starreports"
+    package="org.codeforafrica.citizenreporter.eNCA"
     android:installLocation="auto" >
 
     <!-- GCM configuration -->
     <permission
-        android:name="org.codeforafrica.citizenreporter.starreports.permission.C2D_MESSAGE"
+        android:name="org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE"
         android:protectionLevel="signature"/>
 
-    <uses-permission android:name="org.codeforafrica.citizenreporter.starreports.permission.C2D_MESSAGE" />
+    <uses-permission android:name="org.codeforafrica.citizenreporter.eNCA.permission.C2D_MESSAGE" />
 
   <application>
 
@@ -20,7 +20,7 @@
               <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
               <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
 
-              <category android:name="org.codeforafrica.citizenreporter.starreports"/>
+              <category android:name="org.codeforafrica.citizenreporter.eNCA"/>
           </intent-filter>
       </receiver>
   </application>

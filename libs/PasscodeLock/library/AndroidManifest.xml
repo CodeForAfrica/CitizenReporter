@@ -8,22 +8,22 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
-<!-- Define the following activities in your project 
+<!-- Define the following activities in your project
     <activity
-        android:name="org.codeforafrica.citizenreporter.starreports.PasscodeUnlockActivity"
+        android:name="eNCAdeUnlockActivity"
         android:screenOrientation="portrait"
         android:theme="@style/Theme.Sherlock.Light.NoActionBar"
         android:windowSoftInputMode="stateHidden" >
     </activity>
     <activity
-        android:name="org.codeforafrica.citizenreporter.starreports.PasscodePreferencesActivity"
+        android:name="eNCAdePreferencesActivity"
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:screenOrientation="portrait"
         android:theme="@style/Theme.Sherlock.Light"
         android:windowSoftInputMode="stateHidden" >
     </activity>
     <activity
-        android:name="org.codeforafrica.citizenreporter.starreports.PasscodeManagePasswordActivity"
+        android:name="eNCAdeManagePasswordActivity"
         android:screenOrientation="portrait"
         android:theme="@style/Theme.Sherlock.Light.NoActionBar"
         android:windowSoftInputMode="stateHidden" >

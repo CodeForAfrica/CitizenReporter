@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
-    <org.codeforafrica.citizenreporter.starreports.ui.reader.views.ReaderRecyclerView
+    <org.codeforafrica.citizenreporter.eNCA.ui.reader.views.ReaderRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

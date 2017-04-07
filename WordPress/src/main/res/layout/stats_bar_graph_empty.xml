@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<org.codeforafrica.citizenreporter.starreports.widgets.WPTextView xmlns:android="http://schemas.android.com/apk/res/android"
+<org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView xmlns:android="http://schemas.android.com/apk/res/android"
                                                            android:layout_width="match_parent"
                                                            android:layout_height="match_parent"
                                                            android:gravity="center"
                                                            android:text="@string/stats_bar_graph_empty"
                                                            android:id="@+id/stats_bar_graph_empty_label">
-</org.codeforafrica.citizenreporter.starreports.widgets.WPTextView>
+</org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView>

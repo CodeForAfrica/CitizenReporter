@@ -30,7 +30,7 @@
                 android:layout_marginEnd="3dp"
                 android:src="@drawable/ic_like" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPAutoResizeTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPAutoResizeTextView
                 android:id="@+id/stats_visitors_and_views_tab_label"
                 android:textColor="@color/grey_darken_20"
                 android:textSize="@dimen/text_sz_extra_small"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/stats_visitors_and_views_tab_value"
             android:textColor="@color/blue_wordpress"
             android:textSize="@dimen/text_sz_small"

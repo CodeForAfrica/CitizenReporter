@@ -156,7 +156,7 @@ def back(device):
 def run_tests_for_device_and_lang(device, serialno, filename, lang, packagename, apk):
     reinstall_apk(serialno, packagename, apk)
     change_lang_settings(serialno, lang)
-    launch_activity(device, packagename, "org.codeforafrica.citizenreporter.starreports.ui.WPLaunchActivity")
+    launch_activity(device, packagename, "eNCA.ui.WPLaunchActivity")
     take_screenshot(serialno, lang + "-login-screen-" + filename)
     action_login(device, serialno)
     take_screenshot(serialno, lang + "-post-login-" + filename)

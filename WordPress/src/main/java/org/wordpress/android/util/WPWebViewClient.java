@@ -9,9 +9,9 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import org.codeforafrica.citizenreporter.starreports.models.AccountHelper;
-import org.codeforafrica.citizenreporter.starreports.models.Blog;
-import org.codeforafrica.citizenreporter.starreports.networking.SelfSignedSSLCertsManager;
+import org.codeforafrica.citizenreporter.eNCA.models.AccountHelper;
+import org.codeforafrica.citizenreporter.eNCA.models.Blog;
+import org.codeforafrica.citizenreporter.eNCA.networking.SelfSignedSSLCertsManager;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

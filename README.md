@@ -1,10 +1,10 @@
 # CitizenReporter #
 
-CitizenReporter is an open source mobile app for citizen journalists, to help them record video / photo / audio reports from the field. 
+CitizenReporter is an open source mobile app for citizen journalists, to help them record video / photo / audio reports from the field.
 
 The app is a project of Code for Africa, and is built on Wordpress Android.
 
-If you're simply looking to download and install CitizenReporter on your phone, go to [Google Play][1]. 
+If you're simply looking to download and install CitizenReporter on your phone, go to [Google Play][1].
 
 If you're a developer wanting to contribute, or if you're a media organisation who wants to deploy their own customised and branded version of the app, read on.
 
@@ -112,7 +112,7 @@ WordPress for Android is an Open Source project covered by the
 in the `libs/` directory comes from external libraries, which might
 be covered by a different license compatible with the GPLv2.
 
-[1]: https://play.google.com/store/apps/details?id=org.codeforafrica.citizenreporter.starreports
+[1]: https://play.google.com/store/apps/details?id=eNCA
 [2]: http://tools.android.com/tech-docs/new-build-system/user-guide
 [3]: http://developer.android.com/sdk/installing/studio.html
 [5]: https://developer.wordpress.com/apps/

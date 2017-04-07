@@ -809,7 +809,7 @@ ADDED from AndroidManifest.xml:431:9
 		ADDED from AndroidManifest.xml:433:13
 	android:name
 		ADDED from AndroidManifest.xml:432:13
-intent-filter#com.google.android.c2dm.intent.RECEIVE+com.google.android.c2dm.intent.REGISTRATION+org.codeforafrica.citizenreporter.starreports
+intent-filter#com.google.android.c2dm.intent.RECEIVE+com.google.android.c2dm.intent.REGISTRATION+eNCA
 ADDED from AndroidManifest.xml:434:13
 action#com.google.android.c2dm.intent.RECEIVE
 ADDED from AndroidManifest.xml:437:17
@@ -819,7 +819,7 @@ action#com.google.android.c2dm.intent.REGISTRATION
 ADDED from AndroidManifest.xml:439:17
 	android:name
 		ADDED from AndroidManifest.xml:439:25
-category#org.codeforafrica.citizenreporter.starreports
+category#eNCA
 ADDED from AndroidManifest.xml:441:17
 	android:name
 		ADDED from AndroidManifest.xml:441:27

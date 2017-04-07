@@ -25,7 +25,7 @@
             android:paddingBottom="@dimen/margin_small"
             android:paddingTop="@dimen/margin_small">
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.NoticonTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.NoticonTextView
                 android:id="@+id/header_date_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
                 android:textSize="18sp"
                 tools:text="\uf303" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 android:id="@+id/header_date_text"
                 style="@style/Calypso.Text.Header"
                 android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp">
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPNetworkImageView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPNetworkImageView
                     android:id="@+id/note_avatar"
                     android:layout_width="@dimen/avatar_sz_medium"
                     android:layout_height="@dimen/avatar_sz_medium"
@@ -102,7 +102,7 @@
                         android:indeterminate="true" />
                 </LinearLayout>
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.NoticonTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.NoticonTextView
                     android:id="@+id/note_icon"
                     android:layout_width="@dimen/note_icon_sz"
                     android:layout_height="@dimen/note_icon_sz"
@@ -127,7 +127,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <org.codeforafrica.citizenreporter.starreports.widgets.NoticonTextView
+                    <org.codeforafrica.citizenreporter.eNCA.widgets.NoticonTextView
                         android:id="@+id/note_subject_noticon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
                         android:textColor="@color/grey_lighten_10"
                         android:textSize="18sp" />
 
-                    <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                    <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                         android:id="@+id/note_subject"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
 
                 </FrameLayout>
 
-                <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+                <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                     android:id="@+id/note_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

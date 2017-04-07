@@ -20,21 +20,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 android:id="@+id/l_section1"
                 style="@style/WordPressSettingsSectionHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/account_details" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.OpenSansEditText
+            <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/username"
                 android:singleLine="true" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.OpenSansEditText
+            <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,21 +42,21 @@
                 android:inputType="textPassword"
                 android:singleLine="true" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 android:id="@+id/l_httpuser"
                 style="@style/WordPressSubHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/http_credentials" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.OpenSansEditText
+            <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
                 android:id="@+id/httpuser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:hint="@string/httpuser" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.OpenSansEditText
+            <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
                 android:id="@+id/httppassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,14 +72,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium">
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 android:id="@+id/l_section2"
                 style="@style/WordPressSettingsSectionHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/media" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 android:id="@+id/l_maxImageWidth"
                 style="@style/WordPressSubHeader"
                 android:layout_width="match_parent"
@@ -108,14 +108,14 @@
                 android:textColor="@color/grey_dark"
                 android:text="@string/upload_scaled_image" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+            <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
                 android:id="@+id/l_scaledImage"
                 style="@style/WordPressSubHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/scaled_image" />
 
-            <org.codeforafrica.citizenreporter.starreports.widgets.OpenSansEditText
+            <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansEditText
                 android:id="@+id/scaledImageWidth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
                 android:singleLine="true" />
         </LinearLayout>
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.OpenSansButton
+        <org.codeforafrica.citizenreporter.eNCA.widgets.OpenSansButton
             android:id="@+id/remove_account"
             android:layout_marginTop="@dimen/margin_medium"
             android:layout_width="match_parent"

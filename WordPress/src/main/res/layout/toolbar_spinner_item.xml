@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<org.codeforafrica.citizenreporter.starreports.widgets.WPTextView xmlns:android="http://schemas.android.com/apk/res/android"
+<org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView xmlns:android="http://schemas.android.com/apk/res/android"
                                                            xmlns:tools="http://schemas.android.com/tools"
                                                            android:id="@+id/text"
                                                            style="?android:spinnerItemStyle"

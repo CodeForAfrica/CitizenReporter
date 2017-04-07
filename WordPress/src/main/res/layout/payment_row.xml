@@ -106,7 +106,7 @@
             android:contentDescription="@string/my_site_btn_comments"
             android:src="@drawable/me_icon_support"/>
 
-        <org.codeforafrica.citizenreporter.starreports.widgets.WPTextView
+        <org.codeforafrica.citizenreporter.eNCA.widgets.WPTextView
             android:id="@+id/messages_text_view"
             style="@style/MySiteListRowTextView"
             android:layout_toRightOf="@id/messages_icon"
