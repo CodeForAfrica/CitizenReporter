@@ -5,6 +5,7 @@ import android.util.Log;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowLog;
@@ -17,8 +18,8 @@ import static junit.framework.Assert.assertFalse;
 import static org.mockito.Mockito.mock;
 import static org.robolectric.shadows.ShadowLog.LogItem;
 
-@Config(emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
+@Config(sdk = 18)
 public class JsCallbackHandlerTest {
     private final static String EDITOR_LOG_TAG = "WordPress-" + AppLog.T.EDITOR.toString();
 

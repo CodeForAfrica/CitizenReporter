@@ -16,7 +16,7 @@ import static org.wordpress.android.editor.Utils.buildMapFromKeyValuePairs;
 import static org.wordpress.android.editor.Utils.getChangeMapFromSets;
 import static org.wordpress.android.editor.Utils.splitDelimitedString;
 
-@Config(emulateSdk = 18)
+@Config(sdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class UtilsTest {
 

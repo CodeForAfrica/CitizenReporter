@@ -81,14 +81,17 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
     private EmailChecker mEmailChecker;
     private boolean mEmailAutoCorrected;
     private boolean mAutoCompleteUrl;
-    public static String email;
-    public static String password;
-    public static String username;
-    public static String phone;
-    public static String address="";
+
     public static String address_gps="";
     private CoordinatorLayout mcoordinatorlayout;
     private ViewGroup rootView;
+
+    private String email;
+    private String password;
+    private String username;
+    private String phone;
+    private String location="";
+    private String address="";
     public NewUserFragment_Org() {
         mEmailChecker = new EmailChecker();
     }
@@ -328,12 +331,6 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
         phone = EditTextUtils.getText(mPhone).trim();
         address = EditTextUtils.getText(mLocation).trim();
 
-        if(mUserLocation != null) {
-            address_gps = mUserLocation.getLatitude() + "," + mUserLocation.getLongitude();
-        }else{
-            address_gps = "0, 0";
-        }
-
         handleLogin();
     }
 
@@ -404,7 +401,7 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
         Log.d("Create account issues", "password: " + password);
 
         APIFunctions userFunction = new APIFunctions();
-        JSONObject json = userFunction.newUser(username, "", password, email, operatorName, deviceId, serialNumber, address_gps, address, phone, true);
+        JSONObject json = userFunction.newUser(username, "", password, email, operatorName, deviceId, serialNumber, location, address, phone, true);
         if(json !=null) {
             try {
                 String res = json.getString("result");
