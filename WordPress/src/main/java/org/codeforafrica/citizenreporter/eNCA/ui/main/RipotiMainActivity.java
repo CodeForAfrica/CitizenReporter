@@ -351,7 +351,7 @@ public class RipotiMainActivity extends RuntimePermissionsActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //toolbar.inflateMenu(R.menu.home_menu);
-        toolbar.setNavigationIcon(R.drawable.app_icon);
+        toolbar.setNavigationIcon(R.drawable.enca_small);
 
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         Display display = getWindowManager().getDefaultDisplay();
