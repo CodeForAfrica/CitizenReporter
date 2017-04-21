@@ -473,7 +473,6 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
             trackAnalyticsSignIn();
 //            getAccountDetails();
             Log.d("CITIZEN", "Before get user ID");
-            new UserDetails().execute();
 
             // get reader tags so they're available as soon as the Reader is accessed - done for
             // both wp.com and self-hosted (self-hosted = "logged out" reader) - note that this
@@ -589,6 +588,7 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
 
     private void signInAndFetchBlogListWPOrg() {
         String url = EditTextUtils.getText(mUrlEditText).trim();
+        Log.d("Signin URL", " " + url);
         FetchBlogListWPOrg fetchBlogListWPOrg = new FetchBlogListWPOrg(mUsername, mPassword, url);
         if (mHttpUsername != null && mHttpPassword != null) {
             fetchBlogListWPOrg.setHttpCredentials(mHttpUsername, mHttpPassword);

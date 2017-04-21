@@ -42,7 +42,7 @@ android {
     defaultConfig {
         applicationId "org.codeforafrica.citizenreporter.starreports"
         versionName "4.2.6"
-        versionCode 198
+        versionCode 200
         minSdkVersion 16
         targetSdkVersion 23
         multiDexEnabled = true
@@ -58,9 +58,17 @@ android {
         }
         eNCA {
             minSdkVersion 16
+            applicationId 'org.codefotafrica.citizenreporter.eNCA'
+            targetSdkVersion 23
+            versionName '1.0.7'
+            versionCode 200
+        }
+        starreports {
+            minSdkVersion 16
             applicationId 'org.codeforafrica.citizenreporter.starreports'
             targetSdkVersion 23
-            versionName '1.0.6-beta'
+            versionName '1.0.7'
+            versionCode 200
         }
     }
 

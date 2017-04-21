@@ -9,6 +9,7 @@ import android.util.Xml;
 import com.google.gson.Gson;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.codeforafrica.citizenreporter.starreports.BuildConfig;
 import org.codeforafrica.citizenreporter.starreports.WordPress;
 import org.codeforafrica.citizenreporter.starreports.chat.Message;
 import org.codeforafrica.citizenreporter.starreports.datasets.AccountTable;
@@ -43,6 +44,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -434,8 +437,26 @@ public class ApiHelper {
             boolean isPage = (Boolean) arguments.get(1);
             int recordCount = (Integer) arguments.get(2);
             boolean loadMore = (Boolean) arguments.get(3);
-            XMLRPCClientInterface client = XMLRPCFactory.instantiate(blog.getUri(), blog.getHttpuser(),
+
+            // get the blog name specified by the default URL
+            // forces app to load assignments from that specific blog for users
+            // whose account is in multiple blogs
+
+
+            URI blog_uri = null;
+            try {
+                blog_uri = new URI(BuildConfig.DEFAULT_URL + "/xmlrpc.php");
+                Log.d("XML Blog ASSIGN: ", blog_uri.toString());
+
+            } catch (URISyntaxException e) {
+                blog_uri = blog.getUri();
+            }
+            XMLRPCClientInterface client = XMLRPCFactory.instantiate(blog_uri, blog.getHttpuser(),
                     blog.getHttppassword());
+
+
+
+            Log.d("XML CLIENT ASSIGN: ", client.toString());
 
             Object[] result;
             Object[] xmlrpcParams = { blog.getRemoteBlogId(),
@@ -535,48 +556,58 @@ public class ApiHelper {
             boolean isPage = (Boolean) arguments.get(1);
             int recordCount = (Integer) arguments.get(2);
             boolean loadMore = (Boolean) arguments.get(3);
-            XMLRPCClientInterface client = XMLRPCFactory.instantiate(blog.getUri(), blog.getHttpuser(),
+
+            // get the blog name specified by the default URL
+            // forces app to load posts from that specific blog for users
+            // whose account is in multiple blogs
+
+            URI blog_uri = null;
+            try {
+                blog_uri = new URI(BuildConfig.DEFAULT_URL + "/xmlrpc.php");
+                Log.d("XML Blog ASSIGN: ", blog_uri.toString());
+
+            } catch (URISyntaxException e) {
+                blog_uri = blog.getUri();
+            }
+
+            XMLRPCClientInterface client = XMLRPCFactory.instantiate(blog_uri, blog.getHttpuser(),
                     blog.getHttppassword());
 
-            Object[] result_from_server;
+            Object[] result;
             Object[] xmlrpcParams = { blog.getRemoteBlogId(),
                     blog.getUsername(),
                     blog.getPassword(), recordCount };
 
             List<Object> sorted_result = new ArrayList<Object>();
             try {
-                result_from_server = (Object[]) client.call((isPage) ? "wp.getPages"
-                        : "metaWeblog.getRecentPosts", xmlrpcParams);
+                result = (Object[]) client.call((isPage) ? "wp.getPages"
+                        : "metaWeblog.getRecentPostsUser", xmlrpcParams);
 
-//                Log.d("CITIZEN", "current blog : " + WordPress.getCurrentBlog().getBlogName());
-//                Log.d("CITIZEN", "Size of result from wordpress " + result.length);
-//                Log.d("CITIZEN", "Stuff from server " + result);
-
-                for (int pst=0; pst<result_from_server.length; pst++){
-//                    Log.d("CITIZEN", "Size of result from wordpress " + result_from_server.length);
-                    Map<?, ?> sample = (Map<?, ?>) result_from_server[pst];
-
-                    Object custom_fields = sample.get("custom_fields");
-                    JSONArray cus = null;
-                    if (Build.VERSION.SDK_INT >= 19){
-                        try{
-                            cus = new JSONArray(custom_fields);
-                        } catch (JSONException e){
-                            AppLog.e(T.POSTS, "No custom fields found for post.");
-                        }
-                    }
-
-                    Account account = AccountTable.getDefaultAccount();
-                    Long user_id = account.getUserId();
-
-                    String wp_user_id = sample.get("userid").toString().trim();
-                    if (user_id == Long.valueOf(wp_user_id)){
-
-                        sorted_result.add(result_from_server[pst]);
-                    }
-                }
-                Object[] result = new Object[sorted_result.size()];
-                sorted_result.toArray(result);
+//
+//                for (int pst=0; pst<result_from_server.length; pst++){
+//                    Map<?, ?> sample = (Map<?, ?>) result_from_server[pst];
+//
+//                    Object custom_fields = sample.get("custom_fields");
+//                    JSONArray cus = null;
+//                    if (Build.VERSION.SDK_INT >= 19){
+//                        try{
+//                            cus = new JSONArray(custom_fields);
+//                        } catch (JSONException e){
+//                            AppLog.e(T.POSTS, "No custom fields found for post.");
+//                        }
+//                    }
+//
+//                    Account account = AccountTable.getDefaultAccount();
+//                    Long user_id = account.getUserId();
+//
+//                    String wp_user_id = sample.get("userid").toString().trim();
+//                    if (user_id == Long.valueOf(wp_user_id)){
+//
+//                        sorted_result.add(result_from_server[pst]);
+//                    }
+//                }
+//                Object[] result = new Object[sorted_result.size()];
+//                sorted_result.toArray(result);
 
                 if (result != null && result.length > 0) {
                     mPostCount = result.length;
@@ -623,6 +654,7 @@ public class ApiHelper {
 
             return false;
         }
+
 
 
         @Override
