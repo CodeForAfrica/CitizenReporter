@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Stories
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+  <ion-item *ngFor="let post of posts" (click)="goToDetails(post)">
+    <ion-thumbnail item-left>
+      <img src="https://i1.wp.com/www.learningspy.co.uk/wp-content/uploads/2016/05/Testing_in_Progress.gif?zoom=2&fit=250%2C250&ssl=1">
+    </ion-thumbnail>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.created | date}}</p>
+    <button ion-button clear item-right>View</button>
+  </ion-item>
+</ion-list>
+
+</ion-content>

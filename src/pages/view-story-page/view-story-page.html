@@ -1,0 +1,80 @@
+<!--
+  Generated template for the ViewStoryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Storyboard</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-row class="image-slider">
+    <ion-slides [pager]="mySlideOptions">
+      <ion-slide *ngFor="let slide of slides">
+        <img [src]="slide">
+      </ion-slide>
+    </ion-slides>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-card-content>
+          <button ion-button clear icon-left>
+          <ion-icon name='help-circler'></ion-icon>
+          {{ story.custom_fields.qwhy }}
+        </button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col width-50>
+      <ion-card>
+        <ion-card-content>
+          <button ion-button clear icon-left>
+          <ion-icon name='pin'></ion-icon>
+          {{ story.custom_fields.string_location }}
+        </button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col width-50>
+      <ion-card>
+        <ion-card-content>
+          <button ion-button clear icon-left>
+          <ion-icon name='people'></ion-icon>
+          {{ story.mt_keywords }}
+        </button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col width-50>
+      <ion-card>
+        <ion-card-content>
+          <button ion-button clear icon-left>
+          <ion-icon name='calendar'></ion-icon>
+          {{ story.custom_fields.qwhen_date }}
+        </button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col width-50>
+      <ion-card>
+        <ion-card-content>
+          <button ion-button clear icon-left>
+          <ion-icon name='help-circler'></ion-icon>
+          {{ story.custom_fields.qwhy }}
+        </button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

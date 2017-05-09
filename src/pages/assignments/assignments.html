@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Assignments</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="crescent"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+    <ion-card *ngFor="let assignment of assignments" (click)="goToAssignmentDetails(assignment)">
+      <img src="{{ assignment.thumbnail }}"/>
+      <ion-card-content>
+        <ion-card-title>
+          {{ assignment.title }}
+        </ion-card-title>
+        <p class="text">
+          {{ assignment.content }}
+        </p>
+      </ion-card-content>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="people"></ion-icon>
+          <ion-badge item-right="">{{ assignment.responses }}</ion-badge>
+          </button>
+
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="clock"></ion-icon>
+            <div>Open</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear small>
+            <ion-icon name="person"></ion-icon>
+            <div>{{ assignment.author_name}}</div>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+</ion-content>
+

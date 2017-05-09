@@ -1,0 +1,80 @@
+<!--
+  Generated template for the ViewStoryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Storyboard</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-row class="image-slider">
+    <ion-slides [pager]="mySlideOptions">
+      <ion-slide *ngFor="let slide of slides">
+        <img [src]="slide">
+      </ion-slide>
+    </ion-slides>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-card-content>
+          <button ion-button clear icon-left>
+          <ion-icon name='help-circler'></ion-icon>
+          Provide a brief, precise summary of your story
+        </button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col width-50>
+      <ion-card>
+        <ion-card-content>
+          <button ion-button clear icon-left>
+          <ion-icon name='pin'></ion-icon>
+          Where is this?
+        </button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col width-50>
+      <ion-card>
+        <ion-card-content>
+          <button ion-button clear icon-left>
+          <ion-icon name='people'></ion-icon>
+          Any people or orgs involved?
+        </button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col width-50>
+      <ion-card>
+        <ion-card-content>
+          <button ion-button clear icon-left>
+          <ion-icon name='calendar'></ion-icon>
+          Attach a date
+        </button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col width-50>
+      <ion-card>
+        <ion-card-content>
+          <button ion-button clear icon-left>
+          <ion-icon name='help-circler'></ion-icon>
+          What caused this?
+        </button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
