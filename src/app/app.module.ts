@@ -18,6 +18,7 @@ import { AboutPage } from "../pages/about-page/about-page";
 import { LoginPage } from "../pages/login-page/login-page";
 import { EditUserDetails } from "../pages/edit-user-details/edit-user-details";
 import { ViewStoryPage } from "../pages/view-story-page/view-story-page";
+import { CreateStoryPage } from "../pages/create-story-page/create-story-page";
 import {Constant} from "../utils/constants";
 
 @NgModule({
@@ -33,6 +34,7 @@ import {Constant} from "../utils/constants";
     LoginPage,
     EditUserDetails,
     ViewStoryPage,
+    CreateStoryPage,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ import {Constant} from "../utils/constants";
     LoginPage,
     EditUserDetails,
     ViewStoryPage,
+    CreateStoryPage,
   ],
   providers: [
     StatusBar,

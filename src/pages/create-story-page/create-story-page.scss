@@ -1,0 +1,41 @@
+page-create-story-page {
+    .image-slider {
+        height: 50%;
+    }
+    .icons {
+    background-color: #fff;
+    border: 1px solid #7f8c8d;
+    color: #7f8c8d;
+    margin: 0;
+    font-size: 0.9em;
+}
+ 
+.name {
+    margin: 0;
+}
+ 
+.handle {
+    margin: 0;
+}
+ 
+.status {
+    white-space: normal;
+    color: #000;
+    margin-top: 5px;
+}
+ 
+.item {
+    align-items: baseline;
+}
+ 
+.button-container {
+    align-self: flex-end;
+    text-align: right;
+}
+
+.card-md {
+    margin: 0px;
+    width: 100%;
+}
+
+}

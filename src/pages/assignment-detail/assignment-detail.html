@@ -40,17 +40,14 @@
       <ion-icon name="add"></ion-icon>
     </button>
     <ion-fab-list side="left">
-      <button ion-fab>
+      <button ion-fab (click)="captureImage()">
         <ion-icon color="primary" name="camera"></ion-icon>
       </button>
-      <button ion-fab>
+      <button ion-fab (click)="captureVideo()">
         <ion-icon color="secondary" name="videocam"></ion-icon>
       </button>
-      <button ion-fab>
+      <button ion-fab (click)="recordAudio()">
         <ion-icon color="vibrant" name="microphone"></ion-icon>
-      </button>
-      <button ion-fab>
-        <ion-icon color="twitter" name="document"></ion-icon>
       </button>
     </ion-fab-list>
   </ion-fab>

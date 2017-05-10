@@ -26,7 +26,7 @@
       <ion-card>
         <ion-card-content icon-left>
           <ion-icon name="create" color="primary"></ion-icon>
-        {{ story.title }}
+        {{data}}
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -36,7 +36,7 @@
       <ion-card>
         <ion-card-content>
           <ion-icon name='pin' color="primary"></ion-icon>
-           {{ story.custom_fields.string_location }}
+           Location
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -44,7 +44,7 @@
       <ion-card>
         <ion-card-content>
           <ion-icon name='people' color="primary"></ion-icon>
-          {{ story.mt_keywords }}
+          Who is involved
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -54,7 +54,7 @@
       <ion-card>
         <ion-card-content>
           <ion-icon name='calendar' color="primary"></ion-icon>
-          {{ story.custom_fields.qwhen_date }}
+          When did this happen
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -62,7 +62,7 @@
       <ion-card>
         <ion-card-content>
           <ion-icon name='help-circle' color="primary"></ion-icon>
-          {{ story.custom_fields.qwhy }}
+          Why did it happen
         </ion-card-content>
       </ion-card>
     </ion-col>
