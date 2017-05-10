@@ -11,6 +11,7 @@ import { MediaPlugin, MediaObject } from '@ionic-native/media';
 @Component({
   selector: 'page-create-story-page',
   templateUrl: 'create-story-page.html',
+  providers: [MediaPlugin]
 })
 export class CreateStoryPage {
 
@@ -29,7 +30,7 @@ export class CreateStoryPage {
     this.audio_file = this.media.create(this.data);
     this.format = this.navParams.get("format");
     if (this.format == "audio/mpeg"){
-      this.slides = ['../../assets/img/audio.png']
+      this.slides = [{file: "../../assets/img/audio.png", "format": this.format}]
     }
     console.log(this.slides);
 
