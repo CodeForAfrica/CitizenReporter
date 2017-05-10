@@ -47,6 +47,10 @@
                         {
                             "xml": "<feature name=\"Capture\"><param name=\"ios-package\" value=\"CDVCapture\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Media\"><param name=\"ios-package\" value=\"CDVSound\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -62,7 +66,7 @@
                     "NSMicrophoneUsageDescription": [
                         {
                             "xml": "<string> </string>",
-                            "count": 1
+                            "count": 2
                         }
                     ],
                     "NSPhotoLibraryUsageDescription": [
@@ -107,6 +111,10 @@
             "CAMERA_USAGE_DESCRIPTION": " ",
             "MICROPHONE_USAGE_DESCRIPTION": " ",
             "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-media": {
+            "MICROPHONE_USAGE_DESCRIPTION": " ",
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
@@ -403,6 +411,22 @@
             "clobbers": [
                 "navigator.device.capture"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-media/www/MediaError.js",
+            "id": "cordova-plugin-media.MediaError",
+            "pluginId": "cordova-plugin-media",
+            "clobbers": [
+                "window.MediaError"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-media/www/Media.js",
+            "id": "cordova-plugin-media.Media",
+            "pluginId": "cordova-plugin-media",
+            "clobbers": [
+                "window.Media"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -415,6 +439,7 @@
         "cordova-sqlite-storage": "2.0.3",
         "cordova-plugin-compat": "1.1.0",
         "cordova-plugin-file": "4.3.3",
-        "cordova-plugin-media-capture": "1.4.3"
+        "cordova-plugin-media-capture": "1.4.3",
+        "cordova-plugin-media": "3.0.1"
     }
 }

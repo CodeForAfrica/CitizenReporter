@@ -281,6 +281,22 @@ module.exports = [
         "file": "plugins/cordova-plugin-media-capture/www/android/init.js",
         "pluginId": "cordova-plugin-media-capture",
         "runs": true
+    },
+    {
+        "id": "cordova-plugin-media.MediaError",
+        "file": "plugins/cordova-plugin-media/www/MediaError.js",
+        "pluginId": "cordova-plugin-media",
+        "clobbers": [
+            "window.MediaError"
+        ]
+    },
+    {
+        "id": "cordova-plugin-media.Media",
+        "file": "plugins/cordova-plugin-media/www/Media.js",
+        "pluginId": "cordova-plugin-media",
+        "clobbers": [
+            "window.Media"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -295,7 +311,8 @@ module.exports.metadata =
     "cordova-sqlite-storage": "2.0.3",
     "cordova-plugin-compat": "1.1.0",
     "cordova-plugin-file": "4.3.3",
-    "cordova-plugin-media-capture": "1.4.3"
+    "cordova-plugin-media-capture": "1.4.3",
+    "cordova-plugin-media": "3.0.1"
 };
 // BOTTOM OF METADATA
 });

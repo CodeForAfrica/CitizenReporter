@@ -28,6 +28,7 @@
 		443A6E2D45ED47418BDA1D08 /* CDVAssetLibraryFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = C992EE5471004B839CE595A8 /* CDVAssetLibraryFilesystem.m */; };
 		83DCC63CBF3648518C22E325 /* CDVCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = E18F00B6957448C2BFBDF44F /* CDVCapture.m */; };
 		79AB88ADB1844D2A8507316E /* CDVCapture.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4AAE59751244429DB00854E1 /* CDVCapture.bundle */; };
+		E67A60EA8FBC407BB223F305 /* CDVSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6BF8D697A41F6ABE721FD /* CDVSound.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,8 @@
 		E18F00B6957448C2BFBDF44F /* CDVCapture.m */ = {isa = PBXFileReference; name = "CDVCapture.m"; path = "cordova-plugin-media-capture/CDVCapture.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		C294EEB5A0834A789C6E9E8F /* CDVCapture.h */ = {isa = PBXFileReference; name = "CDVCapture.h"; path = "cordova-plugin-media-capture/CDVCapture.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		4AAE59751244429DB00854E1 /* CDVCapture.bundle */ = {isa = PBXFileReference; name = "CDVCapture.bundle"; path = "CDVCapture.bundle"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.plug-in; explicitFileType = undefined; includeInIndex = 0; };
+		9AD6BF8D697A41F6ABE721FD /* CDVSound.m */ = {isa = PBXFileReference; name = "CDVSound.m"; path = "cordova-plugin-media/CDVSound.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		3432A1A21049471FA012FD4D /* CDVSound.h */ = {isa = PBXFileReference; name = "CDVSound.h"; path = "cordova-plugin-media/CDVSound.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +222,8 @@
 				8BC65AC59DCC490C99B27968 /* CDVAssetLibraryFilesystem.h */,
 				E18F00B6957448C2BFBDF44F /* CDVCapture.m */,
 				C294EEB5A0834A789C6E9E8F /* CDVCapture.h */,
+				9AD6BF8D697A41F6ABE721FD /* CDVSound.m */,
+				3432A1A21049471FA012FD4D /* CDVSound.h */,
 			);
 			name = Plugins;
 			path = "CitizenReporter/Plugins";
@@ -346,6 +351,7 @@
 				9A98ED938A824C5E9BB6EC98 /* CDVLocalFilesystem.m in Sources */,
 				443A6E2D45ED47418BDA1D08 /* CDVAssetLibraryFilesystem.m in Sources */,
 				83DCC63CBF3648518C22E325 /* CDVCapture.m in Sources */,
+				E67A60EA8FBC407BB223F305 /* CDVSound.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

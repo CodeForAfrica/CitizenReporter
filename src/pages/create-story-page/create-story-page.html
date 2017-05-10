@@ -17,7 +17,11 @@
   <ion-row class="image-slider">
     <ion-slides [pager]="mySlideOptions">
       <ion-slide *ngFor="let slide of slides">
-        <img [src]="slide">
+        <img [src]="slide" class="slide-image">
+        <h2 class="slide-title">
+          <ion-icon name="play" color="danger" (click)="onPlay()" *ngIf="paused"></ion-icon>
+          <ion-icon name="pause" color="danger" (click)="onPause()" *ngIf="playing"></ion-icon>
+        </h2>
       </ion-slide>
     </ion-slides>
   </ion-row>
@@ -26,7 +30,7 @@
       <ion-card>
         <ion-card-content icon-left>
           <ion-icon name="create" color="primary"></ion-icon>
-        {{data}}
+          {{data.fullPath}}
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -36,7 +40,7 @@
       <ion-card>
         <ion-card-content>
           <ion-icon name='pin' color="primary"></ion-icon>
-           Location
+          Location
         </ion-card-content>
       </ion-card>
     </ion-col>
