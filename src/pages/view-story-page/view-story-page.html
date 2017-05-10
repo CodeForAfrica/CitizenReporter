@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Storyboard</ion-title>
+    <ion-title>StoryBoard</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -22,57 +22,47 @@
     </ion-slides>
   </ion-row>
   <ion-row>
-    <ion-col>
+    <ion-col col-12>
       <ion-card>
-        <ion-card-content>
-          <button ion-button clear icon-left>
-          <ion-icon name='help-circler'></ion-icon>
-          {{ story.custom_fields.qwhy }}
-        </button>
+        <ion-card-content icon-left>
+          <ion-icon name="help-circle" color="primary"></ion-icon>
+        {{ story.title }}
         </ion-card-content>
       </ion-card>
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col width-50>
+    <ion-col col-6>
       <ion-card>
         <ion-card-content>
-          <button ion-button clear icon-left>
-          <ion-icon name='pin'></ion-icon>
-          {{ story.custom_fields.string_location }}
-        </button>
+          <ion-icon name='pin' color="primary"></ion-icon>
+           {{ story.custom_fields.string_location }}
         </ion-card-content>
       </ion-card>
     </ion-col>
-    <ion-col width-50>
+    <ion-col col-6>
       <ion-card>
         <ion-card-content>
-          <button ion-button clear icon-left>
-          <ion-icon name='people'></ion-icon>
+          <ion-icon name='people' color="primary"></ion-icon>
           {{ story.mt_keywords }}
-        </button>
         </ion-card-content>
       </ion-card>
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col width-50>
+    <ion-col col-6>
       <ion-card>
         <ion-card-content>
-          <button ion-button clear icon-left>
-          <ion-icon name='calendar'></ion-icon>
+          <ion-icon name='calendar' color="primary"></ion-icon>
           {{ story.custom_fields.qwhen_date }}
-        </button>
         </ion-card-content>
       </ion-card>
     </ion-col>
-    <ion-col width-50>
+    <ion-col col-6>
       <ion-card>
         <ion-card-content>
-          <button ion-button clear icon-left>
-          <ion-icon name='help-circler'></ion-icon>
+          <ion-icon name='help-circler' color="primary"></ion-icon>
           {{ story.custom_fields.qwhy }}
-        </button>
         </ion-card-content>
       </ion-card>
     </ion-col>
