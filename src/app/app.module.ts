@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
+import { Camera } from '@ionic-native/camera';
 import { MyApp } from './app.component';
 
 import { StoriesPage } from '../pages/stories/stories';
@@ -60,6 +61,7 @@ import {Constant} from "../utils/constants";
     StatusBar,
     SplashScreen,
     Constant,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

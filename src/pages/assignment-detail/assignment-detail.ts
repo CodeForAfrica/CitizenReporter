@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
+import { MediaCapture, MediaFile, CaptureError } from '@ionic-native/media-capture';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { CreateStoryPage } from "../create-story-page/create-story-page";
 
 /**
@@ -18,11 +19,13 @@ import { CreateStoryPage } from "../create-story-page/create-story-page";
 export class AssignmentDetailPage {
 
   assignment: any;
+  base64Image: string;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private mediaCapture: MediaCapture
+    private mediaCapture: MediaCapture,
+    private camera: Camera
     ) {
     this.assignment = navParams.get('assignment');
 
@@ -37,20 +40,22 @@ export class AssignmentDetailPage {
       (data: MediaFile[]) => {
         console.log(data[0].fullPath);
         console.log(data[0].type);
-        this.navCtrl.push(CreateStoryPage, {audio: data[0].fullPath, format: data[0].type})
+        this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: data[0].type})
       },
       (err: CaptureError) => console.error(err)
     );
   }
 
   captureImage(){
-    this.mediaCapture.captureImage().then(
-      (data: MediaFile[]) => {
-        console.log(data);
-
-      },
-      (err: CaptureError) => console.error(err)
-    );
+    let options: CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.FILE_URI,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then((imageData) => {
+      this.navCtrl.push(CreateStoryPage, {path: imageData, format: "image/jpeg"})
+    })
   }
 
   captureVideo(){

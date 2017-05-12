@@ -8,7 +8,8 @@
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "ionic:serve": "ionic-app-scripts serve",
+    "ionic:watch": "ionic-app-scripts watch"
   },
   "dependencies": {
     "@angular/common": "4.0.2",
@@ -19,6 +20,7 @@
     "@angular/http": "4.0.2",
     "@angular/platform-browser": "4.0.2",
     "@angular/platform-browser-dynamic": "4.0.2",
+    "@ionic-native/camera": "^3.7.0",
     "@ionic-native/core": "^3.7.0",
     "@ionic-native/media": "^3.7.0",
     "@ionic-native/media-capture": "^3.7.0",

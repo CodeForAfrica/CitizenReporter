@@ -15,23 +15,28 @@ import { MediaPlugin, MediaObject } from '@ionic-native/media';
 })
 export class CreateStoryPage {
 
-  slides: any[];
+  slides: any[] = [];
   data: any;
   format: string;
   playing: boolean = false;
   paused: boolean = true;
+  file = "file:///storage/emuated/0/DCIM/Camera/20170512_133128.jpg"
   audio_file: MediaObject;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     private media: MediaPlugin) {
 
-    this.data = this.navParams.get("audio");
+    this.data = this.navParams.get("path");
     this.audio_file = this.media.create(this.data);
     this.format = this.navParams.get("format");
     if (this.format == "audio/mpeg"){
-      this.slides = [{file: "../../assets/img/audio.png", "format": this.format}]
+      this.slides.push({file: "../../assets/img/audio.png", "format": this.format});
+    } else {
+      this.slides.push({file: this.data, "format": this.format});
     }
+
+
     console.log(this.slides);
 
   }

@@ -47,6 +47,10 @@
                         {
                             "xml": "<feature name=\"Media\"><param name=\"android-package\" value=\"org.apache.cordova.media.AudioHandler\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -56,7 +60,7 @@
                     "/*": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 3
+                            "count": 4
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
@@ -76,6 +80,12 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
+                            "count": 1
+                        }
+                    ],
+                    "application": [
+                        {
+                            "xml": "<provider android:authorities=\"${applicationId}.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"android.support.v4.content.FileProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/provider_paths\" /></provider>",
                             "count": 1
                         }
                     ]
@@ -115,6 +125,9 @@
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         },
         "cordova-plugin-media": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
@@ -417,6 +430,38 @@
             "clobbers": [
                 "window.Media"
             ]
+        },
+        {
+            "id": "cordova-plugin-camera.Camera",
+            "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
+            "pluginId": "cordova-plugin-camera",
+            "clobbers": [
+                "Camera"
+            ]
+        },
+        {
+            "id": "cordova-plugin-camera.CameraPopoverOptions",
+            "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
+            "pluginId": "cordova-plugin-camera",
+            "clobbers": [
+                "CameraPopoverOptions"
+            ]
+        },
+        {
+            "id": "cordova-plugin-camera.camera",
+            "file": "plugins/cordova-plugin-camera/www/Camera.js",
+            "pluginId": "cordova-plugin-camera",
+            "clobbers": [
+                "navigator.camera"
+            ]
+        },
+        {
+            "id": "cordova-plugin-camera.CameraPopoverHandle",
+            "file": "plugins/cordova-plugin-camera/www/CameraPopoverHandle.js",
+            "pluginId": "cordova-plugin-camera",
+            "clobbers": [
+                "CameraPopoverHandle"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -430,6 +475,7 @@
         "cordova-plugin-compat": "1.1.0",
         "cordova-plugin-file": "4.3.3",
         "cordova-plugin-media-capture": "1.4.3",
-        "cordova-plugin-media": "3.0.1"
+        "cordova-plugin-media": "3.0.1",
+        "cordova-plugin-camera": "2.4.1"
     }
 }
