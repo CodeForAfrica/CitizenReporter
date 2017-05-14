@@ -339,6 +339,46 @@ module.exports = [
         "clobbers": [
             "CameraPopoverHandle"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-geolocation/www/Coordinates.js",
+        "id": "cordova-plugin-geolocation.Coordinates",
+        "pluginId": "cordova-plugin-geolocation",
+        "clobbers": [
+            "Coordinates"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+        "id": "cordova-plugin-geolocation.PositionError",
+        "pluginId": "cordova-plugin-geolocation",
+        "clobbers": [
+            "PositionError"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-geolocation/www/Position.js",
+        "id": "cordova-plugin-geolocation.Position",
+        "pluginId": "cordova-plugin-geolocation",
+        "clobbers": [
+            "Position"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-geolocation/www/geolocation.js",
+        "id": "cordova-plugin-geolocation.geolocation",
+        "pluginId": "cordova-plugin-geolocation",
+        "clobbers": [
+            "navigator.geolocation"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-nativegeocoder/www/NativeGeocoder.js",
+        "id": "cordova-plugin-nativegeocoder.NativeGeocoder",
+        "pluginId": "cordova-plugin-nativegeocoder",
+        "clobbers": [
+            "nativegeocoder"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -355,7 +395,10 @@ module.exports.metadata =
     "cordova-plugin-file": "4.3.3",
     "cordova-plugin-media-capture": "1.4.3",
     "cordova-plugin-media": "3.0.1",
-    "cordova-plugin-camera": "2.4.1"
+    "cordova-plugin-camera": "2.4.1",
+    "cordova-plugin-geolocation": "2.4.3",
+    "cordova-plugin-add-swift-support": "1.6.2",
+    "cordova-plugin-nativegeocoder": "1.0.2"
 }
 // BOTTOM OF METADATA
 });

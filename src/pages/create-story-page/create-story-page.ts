@@ -20,8 +20,13 @@ export class CreateStoryPage {
   format: string;
   playing: boolean = false;
   paused: boolean = true;
-  file = "file:///storage/emuated/0/DCIM/Camera/20170512_133128.jpg"
   audio_file: MediaObject;
+
+  location: string = "Location";
+  qWhen: string = "When did this happen";
+  qWho: string = "Who is involved";
+  qWhy: string = "Why did this happen";
+  description: string = "Provide a brief, precise summary of your story";
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,

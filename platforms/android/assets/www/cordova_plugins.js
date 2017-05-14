@@ -329,6 +329,28 @@ module.exports = [
         "clobbers": [
             "CameraPopoverHandle"
         ]
+    },
+    {
+        "id": "cordova-plugin-geolocation.geolocation",
+        "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
+        "pluginId": "cordova-plugin-geolocation",
+        "clobbers": [
+            "navigator.geolocation"
+        ]
+    },
+    {
+        "id": "cordova-plugin-geolocation.PositionError",
+        "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+        "pluginId": "cordova-plugin-geolocation",
+        "runs": true
+    },
+    {
+        "id": "cordova-plugin-nativegeocoder.NativeGeocoder",
+        "file": "plugins/cordova-plugin-nativegeocoder/www/NativeGeocoder.js",
+        "pluginId": "cordova-plugin-nativegeocoder",
+        "clobbers": [
+            "nativegeocoder"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -345,7 +367,9 @@ module.exports.metadata =
     "cordova-plugin-file": "4.3.3",
     "cordova-plugin-media-capture": "1.4.3",
     "cordova-plugin-media": "3.0.1",
-    "cordova-plugin-camera": "2.4.1"
+    "cordova-plugin-camera": "2.4.1",
+    "cordova-plugin-geolocation": "2.4.3",
+    "cordova-plugin-nativegeocoder": "1.0.2"
 };
 // BOTTOM OF METADATA
 });

@@ -48,6 +48,11 @@
           <key>NSExceptionAllowsInsecureHTTPLoads</key>
           <true/>
         </dict>
+        <key>192.168.0.102</key>
+        <dict>
+          <key>NSExceptionAllowsInsecureHTTPLoads</key>
+          <true/>
+        </dict>
       </dict>
       <key>NSAllowsArbitraryLoads</key>
       <true/>
@@ -59,6 +64,6 @@
     <key>NSPhotoLibraryUsageDescription</key>
     <string/>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string/>
+    <string>Using geocoder service</string>
   </dict>
 </plist>

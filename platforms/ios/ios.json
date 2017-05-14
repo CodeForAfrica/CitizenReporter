@@ -59,6 +59,14 @@
                         {
                             "xml": "<preference name=\"CameraUsesGeolocation\" value=\"false\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NativeGeocoder\"><param name=\"ios-package\" value=\"NativeGeocoder\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -86,6 +94,14 @@
                     "NSLocationWhenInUseUsageDescription": [
                         {
                             "xml": "<string />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<string> </string>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<string>Using geocoder service</string>",
                             "count": 1
                         }
                     ]
@@ -134,6 +150,16 @@
         "cordova-plugin-camera": {
             "CAMERA_USAGE_DESCRIPTION": " ",
             "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-geolocation": {
+            "GEOLOCATION_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-add-swift-support": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-nativegeocoder": {
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
@@ -478,6 +504,46 @@
             "clobbers": [
                 "CameraPopoverHandle"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-geolocation/www/Coordinates.js",
+            "id": "cordova-plugin-geolocation.Coordinates",
+            "pluginId": "cordova-plugin-geolocation",
+            "clobbers": [
+                "Coordinates"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+            "id": "cordova-plugin-geolocation.PositionError",
+            "pluginId": "cordova-plugin-geolocation",
+            "clobbers": [
+                "PositionError"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-geolocation/www/Position.js",
+            "id": "cordova-plugin-geolocation.Position",
+            "pluginId": "cordova-plugin-geolocation",
+            "clobbers": [
+                "Position"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-geolocation/www/geolocation.js",
+            "id": "cordova-plugin-geolocation.geolocation",
+            "pluginId": "cordova-plugin-geolocation",
+            "clobbers": [
+                "navigator.geolocation"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-nativegeocoder/www/NativeGeocoder.js",
+            "id": "cordova-plugin-nativegeocoder.NativeGeocoder",
+            "pluginId": "cordova-plugin-nativegeocoder",
+            "clobbers": [
+                "nativegeocoder"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -492,6 +558,9 @@
         "cordova-plugin-file": "4.3.3",
         "cordova-plugin-media-capture": "1.4.3",
         "cordova-plugin-media": "3.0.1",
-        "cordova-plugin-camera": "2.4.1"
+        "cordova-plugin-camera": "2.4.1",
+        "cordova-plugin-geolocation": "2.4.3",
+        "cordova-plugin-add-swift-support": "1.6.2",
+        "cordova-plugin-nativegeocoder": "1.0.2"
     }
 }

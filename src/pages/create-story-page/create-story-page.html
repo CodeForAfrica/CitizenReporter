@@ -17,7 +17,10 @@
   <ion-row class="image-slider">
     <ion-slides [pager]="mySlideOptions">
       <ion-slide *ngFor="let slide of slides">
-        <img [src]="slide.file" class="slide-image">
+        <img [src]="slide.file" class="slide-image" *ngIf="slide.format==='audio/mpeg'">
+        <video *ngIf="slide.format==='video/mp4'" width="320" height="240" controls>
+        <source [src]="slide.file" type="video/mp4">
+        </video>
         <h2 class="slide-title" *ngIf="slide.format==='audio/mpeg'">
           <ion-icon name="play" color="primary" (click)="onPlay()" *ngIf="paused"></ion-icon>
           <ion-icon name="pause" color="primary" (click)="onPause()" *ngIf="playing"></ion-icon>
@@ -40,7 +43,7 @@
       <ion-card>
         <ion-card-content>
           <ion-icon name='pin' color="primary"></ion-icon>
-          Location
+          {{ location }}
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -48,7 +51,7 @@
       <ion-card>
         <ion-card-content>
           <ion-icon name='people' color="primary"></ion-icon>
-          Who is involved
+          {{ qWho }}
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -58,7 +61,7 @@
       <ion-card>
         <ion-card-content>
           <ion-icon name='calendar' color="primary"></ion-icon>
-          When did this happen
+          {{ qWhen }}
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -66,7 +69,7 @@
       <ion-card>
         <ion-card-content>
           <ion-icon name='help-circle' color="primary"></ion-icon>
-          Why did it happen
+          {{ qWhy }}
         </ion-card-content>
       </ion-card>
     </ion-col>

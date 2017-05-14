@@ -51,6 +51,14 @@
                         {
                             "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Geolocation\"><param name=\"android-package\" value=\"org.apache.cordova.geolocation.Geolocation\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NativeGeocoder\"><param name=\"android-package\" value=\"cordova.plugin.nativegeocoder.NativeGeocoder\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -80,6 +88,22 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:name=\"android.hardware.location.gps\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
                             "count": 1
                         }
                     ],
@@ -128,6 +152,12 @@
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         },
         "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-nativegeocoder": {
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
@@ -462,6 +492,28 @@
             "clobbers": [
                 "CameraPopoverHandle"
             ]
+        },
+        {
+            "id": "cordova-plugin-geolocation.geolocation",
+            "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
+            "pluginId": "cordova-plugin-geolocation",
+            "clobbers": [
+                "navigator.geolocation"
+            ]
+        },
+        {
+            "id": "cordova-plugin-geolocation.PositionError",
+            "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+            "pluginId": "cordova-plugin-geolocation",
+            "runs": true
+        },
+        {
+            "id": "cordova-plugin-nativegeocoder.NativeGeocoder",
+            "file": "plugins/cordova-plugin-nativegeocoder/www/NativeGeocoder.js",
+            "pluginId": "cordova-plugin-nativegeocoder",
+            "clobbers": [
+                "nativegeocoder"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -476,6 +528,8 @@
         "cordova-plugin-file": "4.3.3",
         "cordova-plugin-media-capture": "1.4.3",
         "cordova-plugin-media": "3.0.1",
-        "cordova-plugin-camera": "2.4.1"
+        "cordova-plugin-camera": "2.4.1",
+        "cordova-plugin-geolocation": "2.4.3",
+        "cordova-plugin-nativegeocoder": "1.0.2"
     }
 }

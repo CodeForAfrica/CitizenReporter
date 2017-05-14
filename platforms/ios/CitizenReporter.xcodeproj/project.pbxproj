@@ -35,6 +35,8 @@
 		7C4FDAB9481F4F83A73F618D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50EB9772F8484593A2694EBD /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		93706E88A56945D88DDCFEDA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE0FD00F3594C91892DA10A /* CoreLocation.framework */; };
 		023D1CDE1BF843C0AE3D8F9B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0F48ED2F1F47CE9BCDA8C9 /* AVFoundation.framework */; };
+		83FD3A7CF4604E14A5071C3B /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F365B8C24E09487B8803E9D3 /* CDVLocation.m */; };
+		11C5C65CF2B547FCAC59EAD8 /* NativeGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E9FDCFEB64C24B0B8ED85 /* NativeGeocoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,10 @@
 		50EB9772F8484593A2694EBD /* ImageIO.framework */ = {isa = PBXFileReference; name = "ImageIO.framework"; path = "System/Library/Frameworks/ImageIO.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		3CE0FD00F3594C91892DA10A /* CoreLocation.framework */ = {isa = PBXFileReference; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		1F0F48ED2F1F47CE9BCDA8C9 /* AVFoundation.framework */ = {isa = PBXFileReference; name = "AVFoundation.framework"; path = "System/Library/Frameworks/AVFoundation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		F365B8C24E09487B8803E9D3 /* CDVLocation.m */ = {isa = PBXFileReference; name = "CDVLocation.m"; path = "cordova-plugin-geolocation/CDVLocation.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		FE920B1083604C50B2F12A11 /* CDVLocation.h */ = {isa = PBXFileReference; name = "CDVLocation.h"; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		A56E9FDCFEB64C24B0B8ED85 /* NativeGeocoder.swift */ = {isa = PBXFileReference; name = "NativeGeocoder.swift"; path = "cordova-plugin-nativegeocoder/NativeGeocoder.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		60BCBCFA58214C4482ED8B03 /* NativeGeocoder-Bridging-Header.h */ = {isa = PBXFileReference; name = "NativeGeocoder-Bridging-Header.h"; path = "cordova-plugin-nativegeocoder/NativeGeocoder-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +259,10 @@
 				D38502E9158442C7929F8700 /* CDVCamera.h */,
 				ADC535A84D3D4D818BD0BA93 /* CDVJpegHeaderWriter.h */,
 				359CF4AD3A9A42EBB50CF7ED /* CDVExif.h */,
+				F365B8C24E09487B8803E9D3 /* CDVLocation.m */,
+				FE920B1083604C50B2F12A11 /* CDVLocation.h */,
+				A56E9FDCFEB64C24B0B8ED85 /* NativeGeocoder.swift */,
+				60BCBCFA58214C4482ED8B03 /* NativeGeocoder-Bridging-Header.h */,
 			);
 			name = Plugins;
 			path = "CitizenReporter/Plugins";
@@ -384,6 +394,8 @@
 				E853BBC79E71426BA4F0DCA3 /* UIImage+CropScaleOrientation.m in Sources */,
 				AEDBEDA932964365BDD88D14 /* CDVCamera.m in Sources */,
 				A95DD4EE859744CFB630D6A7 /* CDVJpegHeaderWriter.m in Sources */,
+				83FD3A7CF4604E14A5071C3B /* CDVLocation.m in Sources */,
+				11C5C65CF2B547FCAC59EAD8 /* NativeGeocoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +429,10 @@
 				INFOPLIST_FILE = "CitizenReporter/CitizenReporter-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				PRODUCT_NAME = "CitizenReporter";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/Bridging-Header.h";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				SWIFT_VERSION = 3.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -436,6 +452,10 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "CitizenReporter/CitizenReporter-Info.plist";
 				PRODUCT_NAME = "CitizenReporter";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/Bridging-Header.h";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -463,6 +483,10 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				PRODUCT_NAME = "CitizenReporter";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/Bridging-Header.h";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				SWIFT_VERSION = 3.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -489,6 +513,10 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
 				PRODUCT_NAME = "CitizenReporter";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/Bridging-Header.h";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

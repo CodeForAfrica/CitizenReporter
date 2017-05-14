@@ -47,22 +47,19 @@ export class AssignmentDetailPage {
   }
 
   captureImage(){
-    let options: CameraOptions = {
-        quality: 100,
-        destinationType: this.camera.DestinationType.FILE_URI,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE
-    }
-    this.camera.getPicture(options).then((imageData) => {
-      this.navCtrl.push(CreateStoryPage, {path: imageData, format: "image/jpeg"})
-    })
+        this.mediaCapture.captureImage().then(
+      (data: MediaFile[]) => {
+        alert(JSON.stringify(data));
+      })
+
   }
 
   captureVideo(){
     this.mediaCapture.captureVideo().then(
-      (data: MediaFile[]) => console.log(data),
-      (err: CaptureError) => console.error(err)
-    );
+      (data: MediaFile[]) => {
+        this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: data[0].type})
+      })
+    
   }
 
 
