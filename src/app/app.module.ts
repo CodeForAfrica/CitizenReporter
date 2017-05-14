@@ -16,6 +16,8 @@ import { SummaryPipe } from '../utils/summary.pipe';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AboutPage } from "../pages/about-page/about-page";
+import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { LoginPage } from "../pages/login-page/login-page";
 import { EditUserDetails } from "../pages/edit-user-details/edit-user-details";
 import { ViewStoryPage } from "../pages/view-story-page/view-story-page";
@@ -62,6 +64,8 @@ import {Constant} from "../utils/constants";
     SplashScreen,
     Constant,
     Camera,
+    Geolocation,
+    NativeGeocoder,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

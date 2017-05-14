@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MediaPlugin, MediaObject } from '@ionic-native/media';
+import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 /**
  * Generated class for the CreateStoryPage page.
@@ -13,7 +15,7 @@ import { MediaPlugin, MediaObject } from '@ionic-native/media';
   templateUrl: 'create-story-page.html',
   providers: [MediaPlugin]
 })
-export class CreateStoryPage {
+export class CreateStoryPage implements OnInit {
 
   slides: any[] = [];
   data: any;
@@ -27,9 +29,14 @@ export class CreateStoryPage {
   qWho: string = "Who is involved";
   qWhy: string = "Why did this happen";
   description: string = "Provide a brief, precise summary of your story";
+  longitude: number;
+  latitude: number;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
+    private _geolocation: Geolocation,
+    private _geocoder: NativeGeocoder,
     private media: MediaPlugin) {
 
     this.data = this.navParams.get("path");
@@ -62,5 +69,25 @@ export class CreateStoryPage {
 
     this.audio_file.pause()
   }
+
+  getCurrentLocation(){
+    this._geolocation.getCurrentPosition().then((resp) => {
+      this.latitude = resp.coords.latitude;
+      this.longitude = resp.coords.longitude;
+      this.getLocationString(this.longitude, this.latitude);
+    });
+  }
+
+  getLocationString(longitude, latitude){
+    this._geocoder.reverseGeocode(latitude, longitude).then((res) => {
+      this.location = res.street + ", " + res.district + ", " + res.city + ", " + res.countryName;
+    });
+  }
+
+  ngOnInit(): void {
+    this.getCurrentLocation();
+    }
+
+  
 
 }
