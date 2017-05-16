@@ -1,0 +1,94 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "cordova-plugin-datepicker",
+        "scope": null,
+        "escapedName": "cordova-plugin-datepicker",
+        "name": "cordova-plugin-datepicker",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/Ahereza/Work/StudioProjects/CitizenReporter/node_modules"
+    ]
+  ],
+  "_from": "cordova-plugin-datepicker@latest",
+  "_id": "cordova-plugin-datepicker@0.9.3",
+  "_inCache": true,
+  "_location": "/cordova-plugin-datepicker",
+  "_nodeVersion": "0.12.2",
+  "_npmUser": {
+    "name": "vitalii.blagodir",
+    "email": "vitalii.blagodir@gmail.com"
+  },
+  "_npmVersion": "2.7.4",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "cordova-plugin-datepicker",
+    "scope": null,
+    "escapedName": "cordova-plugin-datepicker",
+    "name": "cordova-plugin-datepicker",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-datepicker/-/cordova-plugin-datepicker-0.9.3.tgz",
+  "_shasum": "2558a9ce5998f6d6dc06cf92fd8bbb9d0901f16a",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-datepicker",
+  "_where": "/Users/Ahereza/Work/StudioProjects/CitizenReporter/node_modules",
+  "author": {
+    "name": "Vitalii Blagodir",
+    "email": "vitalii.blagodir@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/VitaliiBlagodir/cordova-plugin-datepicker/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-datepicker",
+    "platforms": [
+      "ios",
+      "android",
+      "windows"
+    ]
+  },
+  "dependencies": {},
+  "description": "Cordova DatePicker Plugin",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "2558a9ce5998f6d6dc06cf92fd8bbb9d0901f16a",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-datepicker/-/cordova-plugin-datepicker-0.9.3.tgz"
+  },
+  "gitHead": "c13cae77f4b5bf15903fdaf78b5605a2375f9208",
+  "homepage": "https://github.com/VitaliiBlagodir/cordova-plugin-datepicker",
+  "keywords": [
+    "cordova",
+    "datepicker",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android",
+    "cordova-windows"
+  ],
+  "license": "Apache 2.0",
+  "maintainers": [
+    {
+      "name": "vitalii.blagodir",
+      "email": "vitalii.blagodir@gmail.com"
+    }
+  ],
+  "name": "cordova-plugin-datepicker",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitaliiBlagodir/cordova-plugin-datepicker.git"
+  },
+  "scripts": {},
+  "version": "0.9.3"
+}
