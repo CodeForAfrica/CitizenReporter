@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { MediaPlugin, MediaObject } from '@ionic-native/media';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
+import { ModalDescriptionPage } from "./modal-desc-content";
 
 /**
  * Generated class for the CreateStoryPage page.
@@ -28,7 +29,7 @@ export class CreateStoryPage implements OnInit {
   qWhen: string = "When did this happen";
   qWho: string = "Who is involved";
   qWhy: string = "Why did this happen";
-  description: string = "Provide a brief, precise summary of your story";
+  public description: string = "Provide a brief, precise summary of your story";
   longitude: number;
   latitude: number;
 
@@ -37,6 +38,7 @@ export class CreateStoryPage implements OnInit {
     public navParams: NavParams,
     private _geolocation: Geolocation,
     private _geocoder: NativeGeocoder,
+    private modalCtrl: ModalController,
     private media: MediaPlugin) {
 
     this.data = this.navParams.get("path");
@@ -81,7 +83,7 @@ export class CreateStoryPage implements OnInit {
   getLocationString(longitude, latitude){
     this._geocoder.reverseGeocode(latitude, longitude).then((res: NativeGeocoderReverseResult) => {
       this.location = res.street + ", " + res.city + ", " + res.countryName;
-    });
+    }).catch((err) => console.log(err));
   }
 
   ngOnInit(): void {
@@ -92,6 +94,18 @@ export class CreateStoryPage implements OnInit {
     this._geocoder.forwardGeocode(area).then((coordinates: NativeGeocoderForwardResult) => {
       
     }).catch((err) => console.log(err));
+  }
+
+  openDescriptionModal(){
+    console.log("clicked");
+    let modal = this.modalCtrl.create(ModalDescriptionPage, {"description": this.description});
+    modal.present();
+    modal.onDidDismiss((data) => {
+      console.log(data);
+      this.description = data.description;
+    })
   } 
+
+
 
 }

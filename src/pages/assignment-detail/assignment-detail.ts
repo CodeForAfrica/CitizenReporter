@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MediaCapture, MediaFile, CaptureError } from '@ionic-native/media-capture';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Camera } from '@ionic-native/camera';
 import { CreateStoryPage } from "../create-story-page/create-story-page";
 
 /**
@@ -49,7 +49,7 @@ export class AssignmentDetailPage {
   captureImage(){
         this.mediaCapture.captureImage().then(
       (data: MediaFile[]) => {
-        alert(JSON.stringify(data));
+        this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: data[0].type})
       })
 
   }

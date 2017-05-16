@@ -30,10 +30,10 @@
   </ion-row>
   <ion-row>
     <ion-col col-12>
-      <ion-card>
+      <ion-card (click)="openDescriptionModal()">
         <ion-card-content icon-left>
           <ion-icon name="create" color="primary"></ion-icon>
-          {{slides | json}}
+          {{ description }}
         </ion-card-content>
       </ion-card>
     </ion-col>
