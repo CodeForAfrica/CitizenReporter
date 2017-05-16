@@ -4,6 +4,8 @@ import { MediaPlugin, MediaObject } from '@ionic-native/media';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { ModalDescriptionPage } from "./modal-desc-content";
+import { ModalWhoInvolvedPage } from "./modal-who-content";
+import { ModalWhyHappenedPage } from "./modal-why-content";
 import { DatePicker } from '@ionic-native/date-picker';
 
 /**
@@ -107,6 +109,23 @@ export class CreateStoryPage implements OnInit {
       this.description = data.description;
     })
   } 
+  openWhoIsInvolvedModal(){
+    let modal = this.modalCtrl.create(ModalWhoInvolvedPage, {"qwho_text": this.qWho});
+    modal.present();
+    modal.onDidDismiss((data) => {
+      console.log(data);
+      this.qWho = data.involved;
+    })
+  }
+
+  openWhyHappenedModal(){
+    let modal = this.modalCtrl.create(ModalWhyHappenedPage, {"qwhy_text": this.qWhy});
+    modal.present();
+    modal.onDidDismiss((data) => {
+      console.log(data);
+      this.qWhy = data.why;
+    })
+  }
 
   openDatePicker(){
     console.log("date picker clicked");

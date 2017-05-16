@@ -24,6 +24,8 @@ import { EditUserDetails } from "../pages/edit-user-details/edit-user-details";
 import { ViewStoryPage } from "../pages/view-story-page/view-story-page";
 import { CreateStoryPage } from "../pages/create-story-page/create-story-page";
 import { ModalDescriptionPage } from "../pages/create-story-page/modal-desc-content";
+import { ModalWhoInvolvedPage } from "../pages/create-story-page/modal-who-content";
+import { ModalWhyHappenedPage } from "../pages/create-story-page/modal-why-content";
 import {Constant} from "../utils/constants";
 
 @NgModule({
@@ -41,6 +43,8 @@ import {Constant} from "../utils/constants";
     ViewStoryPage,
     CreateStoryPage,
     ModalDescriptionPage,
+    ModalWhoInvolvedPage,
+    ModalWhyHappenedPage,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +66,8 @@ import {Constant} from "../utils/constants";
     ViewStoryPage,
     CreateStoryPage,
     ModalDescriptionPage,
+    ModalWhoInvolvedPage,
+    ModalWhyHappenedPage,
   ],
   providers: [
     StatusBar,
