@@ -44,7 +44,7 @@ export class ModalWhyHappenedPage {
   ) {
       let qwhy_text = params.get("qwhy_text");
         this.qWhy = this.formBuilder.group({
-        involved: [qwhy_text],
+        why: [qwhy_text],
         });
 
   }
