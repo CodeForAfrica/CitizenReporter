@@ -375,6 +375,14 @@ module.exports = [
         "clobbers": [
             "window.fabric.Crashlytics"
         ]
+    },
+    {
+        "id": "cordova-plugin-datepicker.DatePicker",
+        "file": "plugins/cordova-plugin-datepicker/www/android/DatePicker.js",
+        "pluginId": "cordova-plugin-datepicker",
+        "clobbers": [
+            "datePicker"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -394,7 +402,8 @@ module.exports.metadata =
     "cordova-plugin-camera": "2.4.1",
     "cordova-plugin-geolocation": "2.4.3",
     "cordova-plugin-nativegeocoder": "1.0.2",
-    "cordova-fabric-plugin": "1.1.7"
+    "cordova-fabric-plugin": "1.1.7",
+    "cordova-plugin-datepicker": "0.9.3"
 };
 // BOTTOM OF METADATA
 });

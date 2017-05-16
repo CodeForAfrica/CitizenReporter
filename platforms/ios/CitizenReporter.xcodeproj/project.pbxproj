@@ -44,6 +44,8 @@
 		5F33D918B4314D72AF188930 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D4852B363B846C4B5514820 /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6CDBB2910A714AC3BE50CAE3 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2B2FAC507AA494DACAE8FAA /* Fabric.framework */; };
 		C5F8B50FF14E4D03B70B155C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C3546E066D84332B1E217B3 /* Crashlytics.framework */; };
+		17E7014C9DA8458D884F47A8 /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F2995789F10C4724998362E7 /* DatePicker.m */; };
+		5270CAD307A44064A4B65ED8 /* DatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4847A63111C40FC8FC39A6A /* DatePicker.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +133,9 @@
 		5D4852B363B846C4B5514820 /* Security.framework */ = {isa = PBXFileReference; name = "Security.framework"; path = "System/Library/Frameworks/Security.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		A2B2FAC507AA494DACAE8FAA /* Fabric.framework */ = {isa = PBXFileReference; name = "Fabric.framework"; path = "CitizenReporter/Plugins/cordova-fabric-plugin/Fabric.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		3C3546E066D84332B1E217B3 /* Crashlytics.framework */ = {isa = PBXFileReference; name = "Crashlytics.framework"; path = "CitizenReporter/Plugins/cordova-fabric-plugin/Crashlytics.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		F2995789F10C4724998362E7 /* DatePicker.m */ = {isa = PBXFileReference; name = "DatePicker.m"; path = "cordova-plugin-datepicker/DatePicker.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		BEAB888A34A347B8B976A929 /* DatePicker.h */ = {isa = PBXFileReference; name = "DatePicker.h"; path = "cordova-plugin-datepicker/DatePicker.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		E4847A63111C40FC8FC39A6A /* DatePicker.xib */ = {isa = PBXFileReference; name = "DatePicker.xib"; path = "DatePicker.xib"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = file.xib; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +215,7 @@
 				3047A50E1AB8057F00498E2A /* config */,
 				8D1107310486CEB800E47090 /* CitizenReporter-Info.plist */,
 				4AAE59751244429DB00854E1 /* CDVCapture.bundle */,
+				E4847A63111C40FC8FC39A6A /* DatePicker.xib */,
 			);
 			name = Resources;
 			path = "CitizenReporter/Resources";
@@ -290,6 +296,8 @@
 				A56E9FDCFEB64C24B0B8ED85 /* NativeGeocoder.swift */,
 				60BCBCFA58214C4482ED8B03 /* NativeGeocoder-Bridging-Header.h */,
 				0C55B46340104E1E92A237B2 /* FabricPlugin.m */,
+				F2995789F10C4724998362E7 /* DatePicker.m */,
+				BEAB888A34A347B8B976A929 /* DatePicker.h */,
 			);
 			name = Plugins;
 			path = "CitizenReporter/Plugins";
@@ -315,7 +323,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
-				166F6AEE69AE436D9C553601 /* "Fabric.io: Crashlytics" */,
+				B6BEC0196E6648CCBBBC80F6 /* "Fabric.io: Crashlytics" */,
 			);
 			buildRules = (
 			);
@@ -375,6 +383,7 @@
 				0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */,
 				3047A5121AB8059700498E2A /* build-debug.xcconfig in Resources */,
 				79AB88ADB1844D2A8507316E /* CDVCapture.bundle in Resources */,
+				5270CAD307A44064A4B65ED8 /* DatePicker.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,7 +405,7 @@
 			shellScript = "NODEJS_PATH=/usr/local/bin; NVM_NODE_PATH=~/.nvm/versions/node/`nvm version 2>/dev/null`/bin; N_NODE_PATH=`find /usr/local/n/versions/node/* -maxdepth 0 -type d 2>/dev/null | tail -1`/bin; XCODE_NODE_PATH=`xcode-select --print-path`/usr/share/xcs/Node/bin; PATH=$NODEJS_PATH:$NVM_NODE_PATH:$N_NODE_PATH:$XCODE_NODE_PATH:$PATH && node cordova/lib/copy-www-build-step.js";
 			showEnvVarsInLog = 0;
 		};
-		166F6AEE69AE436D9C553601 /* "Fabric.io: Crashlytics" */ = {
+		B6BEC0196E6648CCBBBC80F6 /* "Fabric.io: Crashlytics" */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -440,6 +449,7 @@
 				83FD3A7CF4604E14A5071C3B /* CDVLocation.m in Sources */,
 				11C5C65CF2B547FCAC59EAD8 /* NativeGeocoder.swift in Sources */,
 				F46CCF1147DF404B854F7097 /* FabricPlugin.m in Sources */,
+				17E7014C9DA8458D884F47A8 /* DatePicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

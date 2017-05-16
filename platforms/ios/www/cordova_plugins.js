@@ -403,6 +403,14 @@ module.exports = [
         "clobbers": [
             "window.fabric.Crashlytics"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-datepicker/www/ios/DatePicker.js",
+        "id": "cordova-plugin-datepicker.DatePicker",
+        "pluginId": "cordova-plugin-datepicker",
+        "clobbers": [
+            "datePicker"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -423,7 +431,8 @@ module.exports.metadata =
     "cordova-plugin-geolocation": "2.4.3",
     "cordova-plugin-add-swift-support": "1.6.2",
     "cordova-plugin-nativegeocoder": "1.0.2",
-    "cordova-fabric-plugin": "1.1.7"
+    "cordova-fabric-plugin": "1.1.7",
+    "cordova-plugin-datepicker": "0.9.3"
 }
 // BOTTOM OF METADATA
 });

@@ -71,6 +71,10 @@
                         {
                             "xml": "<feature name=\"FabricPlugin\"><param name=\"ios-package\" value=\"FabricPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"DatePicker\"><param name=\"ios-package\" value=\"DatePicker\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -175,6 +179,9 @@
         "cordova-fabric-plugin": {
             "FABRIC_API_KEY": "c99a6a9a2e47604595017b4d8c8e7db46db93b9e",
             "FABRIC_API_SECRET": "253b2a04f8d7532e738ff59cfab786c97e90e6863dabb76e53c9caffc142b29d",
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-datepicker": {
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
@@ -583,6 +590,14 @@
             "clobbers": [
                 "window.fabric.Crashlytics"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-datepicker/www/ios/DatePicker.js",
+            "id": "cordova-plugin-datepicker.DatePicker",
+            "pluginId": "cordova-plugin-datepicker",
+            "clobbers": [
+                "datePicker"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -601,6 +616,7 @@
         "cordova-plugin-geolocation": "2.4.3",
         "cordova-plugin-add-swift-support": "1.6.2",
         "cordova-plugin-nativegeocoder": "1.0.2",
-        "cordova-fabric-plugin": "1.1.7"
+        "cordova-fabric-plugin": "1.1.7",
+        "cordova-plugin-datepicker": "0.9.3"
     }
 }
