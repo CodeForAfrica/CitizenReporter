@@ -29,6 +29,7 @@
     "@ionic-native/splash-screen": "3.4.2",
     "@ionic-native/status-bar": "3.4.2",
     "@ionic/storage": "^2.0.1",
+    "cordova-fabric-plugin": "^1.1.7",
     "ionic-angular": "3.1.1",
     "ionicons": "3.0.0",
     "rxjs": "5.1.1",
@@ -55,5 +56,14 @@
       "locator": "ios"
     }
   ],
-  "description": "CitizenReporter: An Ionic project"
+  "description": "CitizenReporter: An Ionic project",
+  "cordova": {
+    "plugins": {
+      "cordova-fabric-plugin": {
+        "FABRIC_API_KEY": "c99a6a9a2e47604595017b4d8c8e7db46db93b9e",
+        "FABRIC_API_SECRET": "253b2a04f8d7532e738ff59cfab786c97e90e6863dabb76e53c9caffc142b29d"
+      },
+      "cordova-plugin-nativegeocoder": {}
+    }
+  }
 }

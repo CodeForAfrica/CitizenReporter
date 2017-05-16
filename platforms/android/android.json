@@ -59,6 +59,10 @@
                         {
                             "xml": "<feature name=\"NativeGeocoder\"><param name=\"android-package\" value=\"cordova.plugin.nativegeocoder.NativeGeocoder\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FabricPlugin\"><param name=\"android-package\" value=\"com.sarriaroman.fabric.FabricPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -104,12 +108,16 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
-                            "count": 1
+                            "count": 2
                         }
                     ],
                     "application": [
                         {
                             "xml": "<provider android:authorities=\"${applicationId}.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"android.support.v4.content.FileProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/provider_paths\" /></provider>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<meta-data android:name=\"io.fabric.ApiKey\" android:value=\"c99a6a9a2e47604595017b4d8c8e7db46db93b9e\" />",
                             "count": 1
                         }
                     ]
@@ -158,6 +166,11 @@
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         },
         "cordova-plugin-nativegeocoder": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-fabric-plugin": {
+            "FABRIC_API_KEY": "c99a6a9a2e47604595017b4d8c8e7db46db93b9e",
+            "FABRIC_API_SECRET": "253b2a04f8d7532e738ff59cfab786c97e90e6863dabb76e53c9caffc142b29d",
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
@@ -514,6 +527,30 @@
             "clobbers": [
                 "nativegeocoder"
             ]
+        },
+        {
+            "id": "cordova-fabric-plugin.FabricPlugin",
+            "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.js",
+            "pluginId": "cordova-fabric-plugin",
+            "clobbers": [
+                "window.fabric.core"
+            ]
+        },
+        {
+            "id": "cordova-fabric-plugin.FabricAnswersPlugin",
+            "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.Answers.js",
+            "pluginId": "cordova-fabric-plugin",
+            "clobbers": [
+                "window.fabric.Answers"
+            ]
+        },
+        {
+            "id": "cordova-fabric-plugin.FabricCrashlyticsPlugin",
+            "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.Crashlytics.js",
+            "pluginId": "cordova-fabric-plugin",
+            "clobbers": [
+                "window.fabric.Crashlytics"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -530,6 +567,7 @@
         "cordova-plugin-media": "3.0.1",
         "cordova-plugin-camera": "2.4.1",
         "cordova-plugin-geolocation": "2.4.3",
-        "cordova-plugin-nativegeocoder": "1.0.2"
+        "cordova-plugin-nativegeocoder": "1.0.2",
+        "cordova-fabric-plugin": "1.1.7"
     }
 }

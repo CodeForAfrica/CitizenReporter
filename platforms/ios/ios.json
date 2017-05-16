@@ -67,6 +67,10 @@
                         {
                             "xml": "<feature name=\"NativeGeocoder\"><param name=\"ios-package\" value=\"NativeGeocoder\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FabricPlugin\"><param name=\"ios-package\" value=\"FabricPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -102,6 +106,12 @@
                         },
                         {
                             "xml": "<string>Using geocoder service</string>",
+                            "count": 1
+                        }
+                    ],
+                    "Fabric": [
+                        {
+                            "xml": "<dict><key>APIKey</key><string>c99a6a9a2e47604595017b4d8c8e7db46db93b9e</string></dict>",
                             "count": 1
                         }
                     ]
@@ -160,6 +170,11 @@
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         },
         "cordova-plugin-nativegeocoder": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-fabric-plugin": {
+            "FABRIC_API_KEY": "c99a6a9a2e47604595017b4d8c8e7db46db93b9e",
+            "FABRIC_API_SECRET": "253b2a04f8d7532e738ff59cfab786c97e90e6863dabb76e53c9caffc142b29d",
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
@@ -544,6 +559,30 @@
             "clobbers": [
                 "nativegeocoder"
             ]
+        },
+        {
+            "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.js",
+            "id": "cordova-fabric-plugin.FabricPlugin",
+            "pluginId": "cordova-fabric-plugin",
+            "clobbers": [
+                "window.fabric.core"
+            ]
+        },
+        {
+            "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.Answers.js",
+            "id": "cordova-fabric-plugin.FabricAnswersPlugin",
+            "pluginId": "cordova-fabric-plugin",
+            "clobbers": [
+                "window.fabric.Answers"
+            ]
+        },
+        {
+            "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.Crashlytics.js",
+            "id": "cordova-fabric-plugin.FabricCrashlyticsPlugin",
+            "pluginId": "cordova-fabric-plugin",
+            "clobbers": [
+                "window.fabric.Crashlytics"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -561,6 +600,7 @@
         "cordova-plugin-camera": "2.4.1",
         "cordova-plugin-geolocation": "2.4.3",
         "cordova-plugin-add-swift-support": "1.6.2",
-        "cordova-plugin-nativegeocoder": "1.0.2"
+        "cordova-plugin-nativegeocoder": "1.0.2",
+        "cordova-fabric-plugin": "1.1.7"
     }
 }

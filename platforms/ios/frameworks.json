@@ -1,5 +1,9 @@
 {
     "ImageIO.framework": 1,
     "CoreLocation.framework": 3,
-    "AVFoundation.framework": 1
+    "AVFoundation.framework": 1,
+    "libz.dylib": 1,
+    "libc++.dylib": 1,
+    "SystemConfiguration.framework": 1,
+    "Security.framework": 1
 }

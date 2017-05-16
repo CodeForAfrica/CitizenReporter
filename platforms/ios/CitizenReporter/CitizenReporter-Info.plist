@@ -53,6 +53,11 @@
           <key>NSExceptionAllowsInsecureHTTPLoads</key>
           <true/>
         </dict>
+        <key>192.168.0.101</key>
+        <dict>
+          <key>NSExceptionAllowsInsecureHTTPLoads</key>
+          <true/>
+        </dict>
       </dict>
       <key>NSAllowsArbitraryLoads</key>
       <true/>
@@ -65,5 +70,10 @@
     <string/>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Using geocoder service</string>
+    <key>Fabric</key>
+    <dict>
+      <key>APIKey</key>
+      <string>c99a6a9a2e47604595017b4d8c8e7db46db93b9e</string>
+    </dict>
   </dict>
 </plist>

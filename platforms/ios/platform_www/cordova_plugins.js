@@ -379,6 +379,30 @@ module.exports = [
         "clobbers": [
             "nativegeocoder"
         ]
+    },
+    {
+        "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.js",
+        "id": "cordova-fabric-plugin.FabricPlugin",
+        "pluginId": "cordova-fabric-plugin",
+        "clobbers": [
+            "window.fabric.core"
+        ]
+    },
+    {
+        "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.Answers.js",
+        "id": "cordova-fabric-plugin.FabricAnswersPlugin",
+        "pluginId": "cordova-fabric-plugin",
+        "clobbers": [
+            "window.fabric.Answers"
+        ]
+    },
+    {
+        "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.Crashlytics.js",
+        "id": "cordova-fabric-plugin.FabricCrashlyticsPlugin",
+        "pluginId": "cordova-fabric-plugin",
+        "clobbers": [
+            "window.fabric.Crashlytics"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -398,7 +422,8 @@ module.exports.metadata =
     "cordova-plugin-camera": "2.4.1",
     "cordova-plugin-geolocation": "2.4.3",
     "cordova-plugin-add-swift-support": "1.6.2",
-    "cordova-plugin-nativegeocoder": "1.0.2"
+    "cordova-plugin-nativegeocoder": "1.0.2",
+    "cordova-fabric-plugin": "1.1.7"
 }
 // BOTTOM OF METADATA
 });

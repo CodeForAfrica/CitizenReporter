@@ -42,6 +42,11 @@
         },
         "cordova-plugin-nativegeocoder": {
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-fabric-plugin": {
+            "FABRIC_API_KEY": "c99a6a9a2e47604595017b4d8c8e7db46db93b9e",
+            "FABRIC_API_SECRET": "253b2a04f8d7532e738ff59cfab786c97e90e6863dabb76e53c9caffc142b29d",
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
     "dependent_plugins": {

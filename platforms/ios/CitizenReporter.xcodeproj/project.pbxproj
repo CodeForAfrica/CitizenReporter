@@ -37,6 +37,13 @@
 		023D1CDE1BF843C0AE3D8F9B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0F48ED2F1F47CE9BCDA8C9 /* AVFoundation.framework */; };
 		83FD3A7CF4604E14A5071C3B /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F365B8C24E09487B8803E9D3 /* CDVLocation.m */; };
 		11C5C65CF2B547FCAC59EAD8 /* NativeGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56E9FDCFEB64C24B0B8ED85 /* NativeGeocoder.swift */; };
+		F46CCF1147DF404B854F7097 /* FabricPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C55B46340104E1E92A237B2 /* FabricPlugin.m */; };
+		FFBCEC32756D47B0AD6146B0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 996FDF8683AD4ED6AD0A85F2 /* libz.dylib */; };
+		35C85BCCD62140379665197F /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8A6AD64D9744D687F43F6C /* libc++.dylib */; };
+		E0DD3F523A734544B32727A5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC8ADF6B8A654118A0EC9230 /* SystemConfiguration.framework */; };
+		5F33D918B4314D72AF188930 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D4852B363B846C4B5514820 /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		6CDBB2910A714AC3BE50CAE3 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2B2FAC507AA494DACAE8FAA /* Fabric.framework */; };
+		C5F8B50FF14E4D03B70B155C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C3546E066D84332B1E217B3 /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +124,13 @@
 		FE920B1083604C50B2F12A11 /* CDVLocation.h */ = {isa = PBXFileReference; name = "CDVLocation.h"; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		A56E9FDCFEB64C24B0B8ED85 /* NativeGeocoder.swift */ = {isa = PBXFileReference; name = "NativeGeocoder.swift"; path = "cordova-plugin-nativegeocoder/NativeGeocoder.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
 		60BCBCFA58214C4482ED8B03 /* NativeGeocoder-Bridging-Header.h */ = {isa = PBXFileReference; name = "NativeGeocoder-Bridging-Header.h"; path = "cordova-plugin-nativegeocoder/NativeGeocoder-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		0C55B46340104E1E92A237B2 /* FabricPlugin.m */ = {isa = PBXFileReference; name = "FabricPlugin.m"; path = "cordova-fabric-plugin/FabricPlugin.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		996FDF8683AD4ED6AD0A85F2 /* libz.dylib */ = {isa = PBXFileReference; name = "libz.dylib"; path = "usr/lib/libz.dylib"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = compiled.mach-o.dylib; explicitFileType = undefined; includeInIndex = 0; };
+		ED8A6AD64D9744D687F43F6C /* libc++.dylib */ = {isa = PBXFileReference; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = compiled.mach-o.dylib; explicitFileType = undefined; includeInIndex = 0; };
+		DC8ADF6B8A654118A0EC9230 /* SystemConfiguration.framework */ = {isa = PBXFileReference; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		5D4852B363B846C4B5514820 /* Security.framework */ = {isa = PBXFileReference; name = "Security.framework"; path = "System/Library/Frameworks/Security.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		A2B2FAC507AA494DACAE8FAA /* Fabric.framework */ = {isa = PBXFileReference; name = "Fabric.framework"; path = "CitizenReporter/Plugins/cordova-fabric-plugin/Fabric.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		3C3546E066D84332B1E217B3 /* Crashlytics.framework */ = {isa = PBXFileReference; name = "Crashlytics.framework"; path = "CitizenReporter/Plugins/cordova-fabric-plugin/Crashlytics.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +142,12 @@
 				7C4FDAB9481F4F83A73F618D /* ImageIO.framework in Frameworks */,
 				93706E88A56945D88DDCFEDA /* CoreLocation.framework in Frameworks */,
 				023D1CDE1BF843C0AE3D8F9B /* AVFoundation.framework in Frameworks */,
+				FFBCEC32756D47B0AD6146B0 /* libz.dylib in Frameworks */,
+				35C85BCCD62140379665197F /* libc++.dylib in Frameworks */,
+				E0DD3F523A734544B32727A5 /* SystemConfiguration.framework in Frameworks */,
+				5F33D918B4314D72AF188930 /* Security.framework in Frameworks */,
+				6CDBB2910A714AC3BE50CAE3 /* Fabric.framework in Frameworks */,
+				C5F8B50FF14E4D03B70B155C /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +221,12 @@
 				50EB9772F8484593A2694EBD /* ImageIO.framework */,
 				3CE0FD00F3594C91892DA10A /* CoreLocation.framework */,
 				1F0F48ED2F1F47CE9BCDA8C9 /* AVFoundation.framework */,
+				996FDF8683AD4ED6AD0A85F2 /* libz.dylib */,
+				ED8A6AD64D9744D687F43F6C /* libc++.dylib */,
+				DC8ADF6B8A654118A0EC9230 /* SystemConfiguration.framework */,
+				5D4852B363B846C4B5514820 /* Security.framework */,
+				A2B2FAC507AA494DACAE8FAA /* Fabric.framework */,
+				3C3546E066D84332B1E217B3 /* Crashlytics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -263,6 +289,7 @@
 				FE920B1083604C50B2F12A11 /* CDVLocation.h */,
 				A56E9FDCFEB64C24B0B8ED85 /* NativeGeocoder.swift */,
 				60BCBCFA58214C4482ED8B03 /* NativeGeocoder-Bridging-Header.h */,
+				0C55B46340104E1E92A237B2 /* FabricPlugin.m */,
 			);
 			name = Plugins;
 			path = "CitizenReporter/Plugins";
@@ -288,6 +315,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				166F6AEE69AE436D9C553601 /* "Fabric.io: Crashlytics" */,
 			);
 			buildRules = (
 			);
@@ -368,6 +396,21 @@
 			shellScript = "NODEJS_PATH=/usr/local/bin; NVM_NODE_PATH=~/.nvm/versions/node/`nvm version 2>/dev/null`/bin; N_NODE_PATH=`find /usr/local/n/versions/node/* -maxdepth 0 -type d 2>/dev/null | tail -1`/bin; XCODE_NODE_PATH=`xcode-select --print-path`/usr/share/xcs/Node/bin; PATH=$NODEJS_PATH:$NVM_NODE_PATH:$N_NODE_PATH:$XCODE_NODE_PATH:$PATH && node cordova/lib/copy-www-build-step.js";
 			showEnvVarsInLog = 0;
 		};
+		166F6AEE69AE436D9C553601 /* "Fabric.io: Crashlytics" */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Fabric.io: Crashlytics";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${SRCROOT}/\"CitizenReporter\"/Plugins/cordova-fabric-plugin/Fabric.framework/run c99a6a9a2e47604595017b4d8c8e7db46db93b9e 253b2a04f8d7532e738ff59cfab786c97e90e6863dabb76e53c9caffc142b29d";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -396,6 +439,7 @@
 				A95DD4EE859744CFB630D6A7 /* CDVJpegHeaderWriter.m in Sources */,
 				83FD3A7CF4604E14A5071C3B /* CDVLocation.m in Sources */,
 				11C5C65CF2B547FCAC59EAD8 /* NativeGeocoder.swift in Sources */,
+				F46CCF1147DF404B854F7097 /* FabricPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +477,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				SWIFT_VERSION = 3.0;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"CitizenReporter/Plugins/cordova-fabric-plugin\"",
+					"\"CitizenReporter/Plugins/cordova-fabric-plugin\"",
+				);
 			};
 			name = Debug;
 		};
@@ -456,6 +505,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				SWIFT_VERSION = 3.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"CitizenReporter/Plugins/cordova-fabric-plugin\"",
+					"\"CitizenReporter/Plugins/cordova-fabric-plugin\"",
+				);
 			};
 			name = Release;
 		};
@@ -487,6 +541,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				SWIFT_VERSION = 3.0;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"CitizenReporter/Plugins/cordova-fabric-plugin\"",
+					"\"CitizenReporter/Plugins/cordova-fabric-plugin\"",
+				);
 			};
 			name = Debug;
 		};
@@ -517,6 +576,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				SWIFT_VERSION = 3.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"CitizenReporter/Plugins/cordova-fabric-plugin\"",
+					"\"CitizenReporter/Plugins/cordova-fabric-plugin\"",
+				);
 			};
 			name = Release;
 		};

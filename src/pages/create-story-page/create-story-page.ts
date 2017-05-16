@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MediaPlugin, MediaObject } from '@ionic-native/media';
 import { Geolocation } from '@ionic-native/geolocation';
-import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 
 /**
  * Generated class for the CreateStoryPage page.
@@ -79,15 +79,19 @@ export class CreateStoryPage implements OnInit {
   }
 
   getLocationString(longitude, latitude){
-    this._geocoder.reverseGeocode(latitude, longitude).then((res) => {
-      this.location = res.street + ", " + res.district + ", " + res.city + ", " + res.countryName;
+    this._geocoder.reverseGeocode(latitude, longitude).then((res: NativeGeocoderReverseResult) => {
+      this.location = res.street + ", " + res.city + ", " + res.countryName;
     });
   }
 
   ngOnInit(): void {
     this.getCurrentLocation();
-    }
-
+  }
   
+  getForwardGeoCode(area: string){
+    this._geocoder.forwardGeocode(area).then((coordinates: NativeGeocoderForwardResult) => {
+      
+    }).catch((err) => console.log(err));
+  } 
 
 }
