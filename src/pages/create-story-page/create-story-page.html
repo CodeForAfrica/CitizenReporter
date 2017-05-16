@@ -58,7 +58,7 @@
   </ion-row>
   <ion-row>
     <ion-col col-6>
-      <ion-card>
+      <ion-card (click)="openDatePicker()">
         <ion-card-content>
           <ion-icon name='calendar' color="primary"></ion-icon>
           {{ qWhen }}

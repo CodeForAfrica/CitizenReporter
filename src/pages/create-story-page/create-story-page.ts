@@ -4,6 +4,7 @@ import { MediaPlugin, MediaObject } from '@ionic-native/media';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { ModalDescriptionPage } from "./modal-desc-content";
+import { DatePicker } from '@ionic-native/date-picker';
 
 /**
  * Generated class for the CreateStoryPage page.
@@ -39,6 +40,7 @@ export class CreateStoryPage implements OnInit {
     private _geolocation: Geolocation,
     private _geocoder: NativeGeocoder,
     private modalCtrl: ModalController,
+    private datePicker: DatePicker,
     private media: MediaPlugin) {
 
     this.data = this.navParams.get("path");
@@ -105,6 +107,21 @@ export class CreateStoryPage implements OnInit {
       this.description = data.description;
     })
   } 
+
+  openDatePicker(){
+    console.log("date picker clicked");
+    this.datePicker.show({
+      date: new Date(),
+      mode: 'date',
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+    }).then(
+      date => {console.log('Got date: ', date.toDateString());
+                this.qWhen = date.toDateString();
+              },
+      err => console.log('Error occurred while getting date: ', err)
+    );
+
+  }
 
 
 
