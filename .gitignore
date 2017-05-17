@@ -57,3 +57,9 @@ extlibs/
 
 # Log files
 .log
+platforms/
+www/
+node_modules/
+*.log
+manifest-merger-eNCA-release-report.txt
+setup.sh

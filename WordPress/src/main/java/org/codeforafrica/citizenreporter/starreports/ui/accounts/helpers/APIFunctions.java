@@ -62,6 +62,7 @@ public class APIFunctions {
         String url;
         if(newUser){
             url = registerURL;
+            Log.d("Registeration URL", url);
         }else{
             url = updateURL;
             params.add(new BasicNameValuePair("full_name", full_name));

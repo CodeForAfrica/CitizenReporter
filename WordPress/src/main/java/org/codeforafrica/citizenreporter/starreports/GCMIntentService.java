@@ -14,6 +14,7 @@ import com.google.android.gcm.GCMBaseIntentService;
 import org.codeforafrica.citizenreporter.starreports.chat.ChatActivity;
 import org.codeforafrica.citizenreporter.starreports.chat.Message;
 import org.codeforafrica.citizenreporter.starreports.ui.comments.CommentsActivity;
+import org.codeforafrica.citizenreporter.starreports.ui.main.AssignmentsListFragment;
 import org.codeforafrica.citizenreporter.starreports.ui.posts.StoryBoard;
 import org.wordpress.android.util.DeviceUtils;
 import org.codeforafrica.citizenreporter.starreports.wallet.Payment;
@@ -41,6 +42,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     private String pay_amount;
 
     private Bitmap iconFromUrl;
+
     public GCMIntentService() {
         // Call extended class Constructor GCMBaseIntentService
         super(BuildConfig.GCM_ID);
@@ -53,7 +55,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     protected void onRegistered(Context context, String registrationId) {
 
         //Get Global Controller Class object (see application tag in AndroidManifest.xml)
-        if(aController == null)
+        if (aController == null)
             aController = (WordPress) getApplicationContext();
 
         Log.i(TAG, "Device registered: regId = " + registrationId);
@@ -63,10 +65,10 @@ public class GCMIntentService extends GCMBaseIntentService {
 
     /**
      * Method called on device unregistred
-     * */
+     */
     @Override
     protected void onUnregistered(Context context, String registrationId) {
-        if(aController == null)
+        if (aController == null)
             aController = (WordPress) getApplicationContext();
         Log.i(TAG, "Device unregistered");
         aController.displayMessageOnScreen(context, getString(R.string.gcm_unregistered));
@@ -75,29 +77,29 @@ public class GCMIntentService extends GCMBaseIntentService {
 
     /**
      * Method called on Receiving a new message from GCM server
-     * */
+     */
     @Override
     protected void onMessage(Context context, Intent intent) {
 
-        if(aController == null)
+        if (aController == null)
             aController = (WordPress) getApplicationContext();
 
         Log.i(TAG, "Received message");
 
         //compose message depending on type
-        if(intent.hasExtra("assignment")){
+        if (intent.hasExtra("assignment")) {
             messageType = 0;
             message = intent.getExtras().getString("assignment");
             //should have assignmentID
             assignmentID = intent.getExtras().getString("assignmentID");
             assignmentDeadline = "" + intent.getExtras().getString("assignmentDeadline");
-            if(assignmentDeadline.equals("") || assignmentDeadline.equals("null")){
+            if (assignmentDeadline.equals("") || assignmentDeadline.equals("null")) {
                 assignmentDeadline = "Open ended";
-            }else{
+            } else {
                 assignmentDeadline = "Due on " + assignmentDeadline;
             }
             generateAdvancedAssignmentNotification();
-        }else if(intent.hasExtra("feedback")){
+        } else if (intent.hasExtra("feedback")) {
             messageType = 1;
             message = intent.getExtras().getString("feedback");
             user = intent.getExtras().getString("author");
@@ -105,7 +107,7 @@ public class GCMIntentService extends GCMBaseIntentService {
             iconFromUrl = iconFromUrl(intent.getExtras().getString("icon_url"));
 
             generateFeedbackNotification();
-        }else if(intent.hasExtra("chat")){
+        } else if (intent.hasExtra("chat")) {
             messageType = 2;
             message = intent.getExtras().getString("chat");
             user = intent.getExtras().getString("user");
@@ -113,7 +115,7 @@ public class GCMIntentService extends GCMBaseIntentService {
             iconFromUrl = null;//iconFromUrl(intent.getExtras().getString("icon_url"));
 
             generateChatNotification();
-        }else if(intent.hasExtra("payment")){
+        } else if (intent.hasExtra("payment")) {
             messageType = 3;
             message = intent.getExtras().getString("payment");
             receipt = intent.getExtras().getString("receipt");
@@ -131,11 +133,11 @@ public class GCMIntentService extends GCMBaseIntentService {
 
     /**
      * Method called on receiving a deleted message
-     * */
+     */
     @Override
     protected void onDeletedMessages(Context context, int total) {
 
-        if(aController == null)
+        if (aController == null)
             aController = (WordPress) getApplicationContext();
 
         Log.i(TAG, "Received deleted messages notification");
@@ -147,11 +149,11 @@ public class GCMIntentService extends GCMBaseIntentService {
 
     /**
      * Method called on Error
-     * */
+     */
     @Override
     public void onError(Context context, String errorId) {
 
-        if(aController == null)
+        if (aController == null)
             aController = (WordPress) getApplicationContext();
 
         Log.i(TAG, "Received error: " + errorId);
@@ -161,7 +163,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     @Override
     protected boolean onRecoverableError(Context context, String errorId) {
 
-        if(aController == null)
+        if (aController == null)
             aController = (WordPress) getApplicationContext();
 
         // log message
@@ -171,7 +173,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         return super.onRecoverableError(context, errorId);
     }
 
-    public Intent imageIntent(){
+    public Intent imageIntent() {
         Intent intent = new Intent(this, StoryBoard.class);
         intent.putExtra("quick-media", DeviceUtils.getInstance().hasCamera(getApplicationContext())
                 ? Constants.QUICK_POST_PHOTO_CAMERA
@@ -182,7 +184,8 @@ public class GCMIntentService extends GCMBaseIntentService {
 
         return intent;
     }
-    public Intent videoIntent(){
+
+    public Intent videoIntent() {
         Intent intent = new Intent(this, StoryBoard.class);
         intent.putExtra("quick-media", DeviceUtils.getInstance().hasCamera(getApplicationContext())
                 ? Constants.QUICK_POST_VIDEO_CAMERA
@@ -193,7 +196,8 @@ public class GCMIntentService extends GCMBaseIntentService {
 
         return intent;
     }
-    public Intent audioIntent(){
+
+    public Intent audioIntent() {
         Intent intent = new Intent(this, StoryBoard.class);
         intent.putExtra("quick-media", Constants.QUICK_POST_AUDIO_MIC);
         intent.putExtra("isNew", true);
@@ -203,46 +207,50 @@ public class GCMIntentService extends GCMBaseIntentService {
         return intent;
     }
 
-    private Bitmap iconFromUrl(String strURL){
-            try {
-                URL url = new URL(strURL);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(input);
-                return myBitmap;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
+    private Bitmap iconFromUrl(String strURL) {
+        try {
+            URL url = new URL(strURL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
-
-
-    private void generateAdvancedAssignmentNotification(){
-            PendingIntent imageIntent = PendingIntent.getActivity(this, 0, imageIntent(), 0);
-            PendingIntent videoIntent = PendingIntent.getActivity(this, 0, videoIntent(), 0);
-            PendingIntent audioIntent = PendingIntent.getActivity(this, 0, audioIntent(), 0);
-
-            Notification notif = new Notification.Builder(getApplicationContext())
-                    .setContentTitle("New Assignment" )
-                    .setContentText(getResources().getString(R.string.expand_to_view))
-                    .setSmallIcon(R.drawable.app_icon)
-                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ab_icon_edit))
-                    .setStyle(new Notification.InboxStyle()
-                            .addLine(message)
-                            .setBigContentTitle("New Assignment")
-                            .setSummaryText(assignmentDeadline))
-                    .setPriority(Notification.PRIORITY_HIGH)
-                    .addAction(R.mipmap.ic_camera_white, "", imageIntent)
-                    .addAction(R.mipmap.ic_video_white, "", videoIntent)
-                    .addAction(R.mipmap.ic_audio_white, "", audioIntent)
-                    .build();
-            NotificationManager notificationManager = (NotificationManager)getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(55, notif);
     }
+
+
+    private void generateAdvancedAssignmentNotification() {
+        PendingIntent imageIntent = PendingIntent.getActivity(this, 0, imageIntent(), 0);
+        PendingIntent videoIntent = PendingIntent.getActivity(this, 0, videoIntent(), 0);
+        PendingIntent audioIntent = PendingIntent.getActivity(this, 0, audioIntent(), 0);
+
+        Intent appIntent = new Intent(this, AssignmentsListFragment.class);
+        PendingIntent openIntent = PendingIntent.getActivity(this, 0, appIntent, 0);
+
+        PendingIntent.getActivity(this, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification notif = new Notification.Builder(getApplicationContext())
+                .setContentTitle("New Assignment")
+                .setContentText(getResources().getString(R.string.expand_to_view))
+                .setSmallIcon(R.drawable.app_icon)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ab_icon_edit))
+                .setStyle(new Notification.InboxStyle()
+                        .addLine(message)
+                        .setBigContentTitle("New Assignment")
+                        .setSummaryText(assignmentDeadline))
+                .setContentIntent(openIntent)
+                .setPriority(Notification.PRIORITY_HIGH)
+                .build();
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(55, notif);
+    }
+
     private void generatePaymentNotification() {
-        if(iconFromUrl==null){
+        if (iconFromUrl == null) {
             iconFromUrl = BitmapFactory.decodeResource(getResources(), R.drawable.ic_bounty);
         }
         //insert to db
@@ -284,8 +292,9 @@ public class GCMIntentService extends GCMBaseIntentService {
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(57, notif);
     }
+
     private void generateChatNotification() {
-        if(iconFromUrl==null){
+        if (iconFromUrl == null) {
             iconFromUrl = BitmapFactory.decodeResource(getResources(), R.drawable.me_icon_support);
         }
         //insert to db
@@ -314,8 +323,9 @@ public class GCMIntentService extends GCMBaseIntentService {
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(56, notif);
     }
+
     private void generateFeedbackNotification() {
-        if(iconFromUrl==null){
+        if (iconFromUrl == null) {
             iconFromUrl = BitmapFactory.decodeResource(getResources(), R.drawable.my_site_icon_comments);
         }
 
@@ -327,7 +337,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         Notification notif = new Notification.Builder(getApplicationContext())
                 .setContentTitle(user)
                 .setContentText(message)
-                        .setSmallIcon(R.drawable.app_icon)
+                .setSmallIcon(R.drawable.app_icon)
                 .setLargeIcon(iconFromUrl)
                 .setStyle(new Notification.InboxStyle()
                         .addLine(message)
@@ -342,7 +352,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     public static void clearNotificationsMap() {
     }
 
-    public static int PUSH_NOTIFICATION_ID=0;
+    public static int PUSH_NOTIFICATION_ID = 0;
 
     public boolean shouldCircularizeNoteIcon(String type) {
         return false;
