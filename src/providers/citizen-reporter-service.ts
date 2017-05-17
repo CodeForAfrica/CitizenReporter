@@ -53,7 +53,6 @@ export class CitizenReporterService {
     console.log("get user posts");
     this.getPostsCallback(user_id)
 
-
   }
 
   getPostsCallback(userID: string){
@@ -68,8 +67,9 @@ export class CitizenReporterService {
         .subscribe(
           
           res => {
-            console.log("p", res);
-            this._storage.set("posts", res);}
+          this._storage.set("user", res.user);
+
+          }
         );
 
     })
@@ -78,6 +78,24 @@ export class CitizenReporterService {
     //   .subscribe(
     //     res => this._storage.set("posts", res)
     //   );
+  }
+
+  editUserDetails(id: string, body){
+     let url = this.url + "wp-json/wp/v2/users/" + id;
+     this._storage.get("auth_token").then((token) => {
+        console.log(token);
+        let headers = new Headers();
+        headers.append("Authorization", "Bearer " + token);
+        return this._http.post(url, JSON.stringify(body), {headers: headers})
+          .map(res => res.json())
+          .subscribe(
+            
+            res => {
+              console.log("p", res);
+              this.getCurrentUser()}
+          );
+
+    })
   }
 
 }

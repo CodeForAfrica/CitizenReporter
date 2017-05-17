@@ -15,29 +15,29 @@
 
 <ion-content padding>
 
-<ion-list>
+<form [formGroup]="editUserForm" (ngSubmit)="onSaveUserForm()">
   <ion-item>
-    <h4>Firstname</h4>
-    <h2>{{ first_name }}</h2>
+    <ion-label stacked>First Name</ion-label>
+    <ion-input type="text" formControlName="first_name"></ion-input>
   </ion-item>
   <ion-item>
-    <h3>Last name</h3>
-    <h2>{{last_name}}</h2>
+    <ion-label stacked>Last Name</ion-label>
+    <ion-input type="text" formControlName="last_name"></ion-input>
   </ion-item>
   <ion-item>
-    <h4>Email</h4>
-    <h2>{{ email }}</h2>
+    <ion-label stacked>Email</ion-label>
+    <ion-input type="email" formControlName="email"></ion-input>
   </ion-item>
   <ion-item>
-    <h3>Location</h3>
-    <h2>{{location}}</h2>
+    <ion-label stacked>Location</ion-label>
+    <ion-input type="text" formControlName="location"></ion-input>
   </ion-item>
     <ion-item>
-    <h3>Phone Number</h3>
-    <h2>{{ phone_number }}</h2>
+    <ion-label stacked>Phone Number</ion-label>
+    <ion-input type="text" formControlName="phone_number"></ion-input>
   </ion-item>
-</ion-list>
-
-{{ userDetails | json }}
-
+  <div padding>
+    <button ion-button block type="submit">Edit</button>
+  </div>
+</form>
 </ion-content>

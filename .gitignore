@@ -57,3 +57,6 @@ extlibs/
 
 # Log files
 .log
+.vscode/
+node_modules/
+www.zip

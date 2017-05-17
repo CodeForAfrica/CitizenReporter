@@ -17,6 +17,10 @@ export class MorePage {
   last_name: string;
   username: string;
   avatar: string;
+  email: string;
+  phone_number: string;
+  location: string;
+  user_id: string;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -30,6 +34,10 @@ export class MorePage {
                   this.last_name = data.last_name;
                   this.username = data.username;
                   this.avatar = data.avatar;
+                  this.email = data.email;
+                  this.phone_number = data.phone_number;
+                  this.location = data.location;
+                  this.user_id = data.user_id;
                 })
 
   }
@@ -39,7 +47,14 @@ export class MorePage {
   }
 
   gotToEditUserDetails(){
-    this.navCtrl.push(EditUserDetails);
+    this.navCtrl.push(EditUserDetails, {
+      first_name: this.first_name,
+      last_name: this.last_name,
+      email: this.email,
+      phone_number: this.phone_number,
+      location: this.location,
+      id: this.user_id
+    });
   }
 
   logout(){
