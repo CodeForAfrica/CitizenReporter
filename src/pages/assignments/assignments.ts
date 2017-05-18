@@ -24,7 +24,6 @@ export class AssignmentsPage implements OnInit{
     this._storage.get("assignments").then((value) => {
       this.assignments = value;
     
-    
     });
 
     console.log("Auth", this._storage.get('auth_token'));
@@ -35,11 +34,9 @@ export class AssignmentsPage implements OnInit{
   ngOnInit() {
     Observable.forkJoin(
       this._crService.getCurrentAssignments(),
-      //  this._crService.getCurrentUser()
     ).subscribe(
       res => {
         this._storage.set("assignments", res[0].assignments);
-        // this._storage.set("user", res[1].user);
       }
     );
 
@@ -50,10 +47,6 @@ export class AssignmentsPage implements OnInit{
       });
 
       this._crService.getCurrentUser();
-
-      // this._crService.getUserPosts();
-      
-
 
   }
 

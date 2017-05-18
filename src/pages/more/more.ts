@@ -28,7 +28,7 @@ export class MorePage {
               private _storage: Storage,
               private _app: App) {
 
-                this._storage.get("user").then(data => {
+                this._storage.get("user_dets").then((data) => {
                   console.log("user data", data);
                   this.first_name = data.first_name;
                   this.last_name = data.last_name;
@@ -38,7 +38,8 @@ export class MorePage {
                   this.phone_number = data.phone_number;
                   this.location = data.location;
                   this.user_id = data.user_id;
-                })
+                });
+                console.log(this._storage.keys());
 
   }
 

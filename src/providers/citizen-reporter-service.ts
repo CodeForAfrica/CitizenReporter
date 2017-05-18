@@ -40,7 +40,7 @@ export class CitizenReporterService {
       .map(res => res.json())
       .subscribe(
         res => {
-          this._storage.set("user", res.user);
+          this._storage.set("user_dets", res.user);
           // get user posts immeadiately after getting user details
           console.log("user id",res.user.user_id);
           this.getUserPosts(res.user.user_id);
@@ -82,6 +82,7 @@ export class CitizenReporterService {
 
   editUserDetails(id: string, body){
      let url = this.url + "wp-json/wp/v2/users/" + id;
+     console.log(url);
      this._storage.get("auth_token").then((token) => {
         console.log(token);
         let headers = new Headers();
@@ -89,7 +90,6 @@ export class CitizenReporterService {
         return this._http.post(url, JSON.stringify(body), {headers: headers})
           .map(res => res.json())
           .subscribe(
-            
             res => {
               console.log("p", res);
               this.getCurrentUser()}
@@ -97,5 +97,4 @@ export class CitizenReporterService {
 
     })
   }
-
 }

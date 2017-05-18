@@ -57,8 +57,8 @@ export class EditUserDetails implements OnInit {
 
      onSaveUserForm(){
        console.log(this.editUserForm.value);
-      //  let body = 
-      //  this._crService.editUserDetails(this.id, )
+       let body = this.editUserForm.value;
+       this._crService.editUserDetails(this.id,body);
      }
 
 }
