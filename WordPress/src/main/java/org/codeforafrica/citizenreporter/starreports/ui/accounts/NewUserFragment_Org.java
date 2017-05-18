@@ -405,6 +405,7 @@ public class NewUserFragment_Org extends AbstractFragment implements TextWatcher
         if(json !=null) {
             try {
                 String res = json.getString("result");
+                Log.v("RESPONSE", res);
                 if (res.equals("OK")) {
                     mHandler.sendEmptyMessage(0);
                 } else {

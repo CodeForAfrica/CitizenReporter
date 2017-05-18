@@ -67,8 +67,8 @@ android {
             minSdkVersion 16
             applicationId 'org.codeforafrica.citizenreporter.starreports'
             targetSdkVersion 23
-            versionName '1.0.7'
-            versionCode 200
+            versionName '1.0.8'
+            versionCode 201
         }
     }
 

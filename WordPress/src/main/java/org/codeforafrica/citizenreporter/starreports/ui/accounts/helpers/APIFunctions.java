@@ -32,21 +32,6 @@ public class APIFunctions {
         // Building Parameters
         Log.d("new User json", "PASSWORD: " + password);
 
-//        ContentValues values=new ContentValues();
-//        values.put("username",name);
-//        values.put("password",password);
-//        ContentValues params = new ContentValues();
-//        params.put("username", username);
-//        params.put("password", password);
-//        params.put("email", email);
-//        params.put("tag", "register");
-//        params.put("operatorName", operatorName);
-//        params.put("deviceId", deviceId);
-//        params.put("serialNumber", serialNumber);
-//        params.put("location", location);
-//        params.put("phone_number", phone_number);
-//        params.put("address", address);
-
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("username", username));
         params.add(new BasicNameValuePair("password", password));
