@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
+import { File } from '@ionic-native/file';
 import 'rxjs/add/observable/forkJoin';
 
 import { CitizenReporterService } from '../../providers/citizen-reporter-service';
@@ -19,6 +20,7 @@ export class AssignmentsPage implements OnInit{
 
   constructor(public navCtrl: NavController,
               private _crService: CitizenReporterService,
+              private file: File,
               private _storage: Storage) {
 
     this._storage.get("assignments").then((value) => {
@@ -28,6 +30,23 @@ export class AssignmentsPage implements OnInit{
 
     console.log("Auth", this._storage.get('auth_token'));
     console.log("login", this._storage.get('login'));
+
+    this.file.checkDir(this.file.dataDirectory, 'recording').then(
+      (value) => {
+        if(!value){
+          this.file.createDir(this.file.dataDirectory, 'recording', false).then(
+            (value) => {
+                    console.log(value);
+                }
+            );
+
+        }
+      }
+    );
+
+    console.log(Math.ceil(new Date().getTime() / 1000));
+
+
 
   }
 

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { MediaCapture, MediaFile, CaptureError } from '@ionic-native/media-capture';
 import { Camera } from '@ionic-native/camera';
 import { CreateStoryPage } from "../create-story-page/create-story-page";
+import { RecordAudioModal } from "./modal-record-audio";
+import { File } from '@ionic-native/file';
 
 /**
  * Generated class for the AssignmentDetail page.
@@ -25,9 +27,12 @@ export class AssignmentDetailPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private mediaCapture: MediaCapture,
-    private camera: Camera
+    private camera: Camera,
+    private modalCtrl: ModalController,
+    private file: File
     ) {
     this.assignment = navParams.get('assignment');
+    console.log(this.file.dataDirectory);
 
   }
 
@@ -36,14 +41,19 @@ export class AssignmentDetailPage {
   }
 
   recordAudio(){
-    this.mediaCapture.captureAudio().then(
-      (data: MediaFile[]) => {
-        console.log(data[0].fullPath);
-        console.log(data[0].type);
-        this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: data[0].type})
-      },
-      (err: CaptureError) => console.error(err)
-    );
+    // this.mediaCapture.captureAudio().then(
+    //   (data: MediaFile[]) => {
+    //     console.log(data[0].fullPath);
+    //     console.log(data[0].type);
+    //     alert(data[0].type);
+    //     this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: 'audio'})
+    //   },
+    //   (err: CaptureError) => console.error(err)
+    // );
+    let modal = this.modalCtrl.create(RecordAudioModal);
+    modal.present();
+
+
   }
 
   captureImage(){

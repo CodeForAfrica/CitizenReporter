@@ -17,11 +17,11 @@
   <ion-row class="image-slider">
     <ion-slides [pager]="mySlideOptions">
       <ion-slide *ngFor="let slide of slides">
-        <img [src]="slide.file" class="slide-image" *ngIf="slide.format==='audio/mpeg'">
+        <img [src]="slide.file" class="slide-image" *ngIf="slide.format==='audio'">
         <video *ngIf="slide.format==='video/mp4'" width="320" height="240" controls>
         <source [src]="slide.file" type="video/mp4">
         </video>
-        <h2 class="slide-title" *ngIf="slide.format==='audio/mpeg'">
+        <h2 class="slide-title" *ngIf="slide.format==='audio'">
           <ion-icon name="play" color="primary" (click)="onPlay()" *ngIf="paused"></ion-icon>
           <ion-icon name="pause" color="primary" (click)="onPause()" *ngIf="playing"></ion-icon>
         </h2>

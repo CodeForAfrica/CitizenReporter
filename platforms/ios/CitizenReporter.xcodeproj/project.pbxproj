@@ -323,7 +323,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
-				B6BEC0196E6648CCBBBC80F6 /* "Fabric.io: Crashlytics" */,
+				D32D0B4E1D574005AE5726E6 /* "Fabric.io: Crashlytics" */,
 			);
 			buildRules = (
 			);
@@ -405,7 +405,7 @@
 			shellScript = "NODEJS_PATH=/usr/local/bin; NVM_NODE_PATH=~/.nvm/versions/node/`nvm version 2>/dev/null`/bin; N_NODE_PATH=`find /usr/local/n/versions/node/* -maxdepth 0 -type d 2>/dev/null | tail -1`/bin; XCODE_NODE_PATH=`xcode-select --print-path`/usr/share/xcs/Node/bin; PATH=$NODEJS_PATH:$NVM_NODE_PATH:$N_NODE_PATH:$XCODE_NODE_PATH:$PATH && node cordova/lib/copy-www-build-step.js";
 			showEnvVarsInLog = 0;
 		};
-		B6BEC0196E6648CCBBBC80F6 /* "Fabric.io: Crashlytics" */ = {
+		D32D0B4E1D574005AE5726E6 /* "Fabric.io: Crashlytics" */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

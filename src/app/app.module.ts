@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
 import { MyApp } from './app.component';
 
 import { StoriesPage } from '../pages/stories/stories';
@@ -75,6 +76,7 @@ import {Constant} from "../utils/constants";
     Constant,
     Camera,
     Geolocation,
+    File,
     DatePicker,
     NativeGeocoder,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
