@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, ModalController} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {MediaCapture, MediaFile, CaptureError} from '@ionic-native/media-capture';
 import {Camera} from '@ionic-native/camera';
 import {CreateStoryPage} from "../create-story-page/create-story-page";
 import {File} from '@ionic-native/file';
-import { ModalScenePicker } from "./scene-picker.modal";
+import {ScenePicker} from "../scene-picker/scene-picker";
 
 /**
  * Generated class for the AssignmentDetail page.
@@ -27,7 +27,6 @@ export class AssignmentDetailPage {
                 public navParams: NavParams,
                 private mediaCapture: MediaCapture,
                 private camera: Camera,
-                private modalCtrl: ModalController,
                 private file: File) {
         this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
         this.assignment = navParams.get('assignment');
@@ -82,11 +81,7 @@ export class AssignmentDetailPage {
     }
 
     openScenePicker(){
-        let modal = this.modalCtrl.create(ModalScenePicker);
-        modal.present();
-        modal.onDidDismiss(()=>{
-
-        });
+        this.navCtrl.push(ScenePicker);
     }
 
 

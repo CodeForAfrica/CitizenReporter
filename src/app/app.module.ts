@@ -28,8 +28,8 @@ import {ModalDescriptionPage} from "../pages/create-story-page/modal-desc-conten
 import {ModalWhoInvolvedPage} from "../pages/create-story-page/modal-who-content";
 import {ModalWhyHappenedPage} from "../pages/create-story-page/modal-why-content";
 import {Constant} from "../utils/constants";
-import {ModalScenePicker} from "../pages/assignment-detail/scene-picker.modal";
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
+import {ScenePicker} from "../pages/scene-picker/scene-picker";
 
 @NgModule({
     declarations: [
@@ -48,7 +48,7 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation";
         ModalDescriptionPage,
         ModalWhoInvolvedPage,
         ModalWhyHappenedPage,
-        ModalScenePicker,
+        ScenePicker,
 
     ],
     imports: [
@@ -73,7 +73,7 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation";
         ModalDescriptionPage,
         ModalWhoInvolvedPage,
         ModalWhyHappenedPage,
-        ModalScenePicker
+        ScenePicker,
     ],
     providers: [
         StatusBar,
