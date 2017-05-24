@@ -3,7 +3,6 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { MediaCapture, MediaFile, CaptureError } from '@ionic-native/media-capture';
 import { Camera } from '@ionic-native/camera';
 import { CreateStoryPage } from "../create-story-page/create-story-page";
-import { RecordAudioModal } from "./modal-record-audio";
 import { File } from '@ionic-native/file';
 
 /**
@@ -50,17 +49,24 @@ export class AssignmentDetailPage {
     //   },
     //   (err: CaptureError) => console.error(err)
     // );
-    let modal = this.modalCtrl.create(RecordAudioModal);
-    modal.present();
 
 
   }
 
   captureImage(){
-        this.mediaCapture.captureImage().then(
-      (data: MediaFile[]) => {
-        this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: data[0].type})
-      })
+    this.camera.getPicture({
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      saveToPhotoAlbum: true
+    }).then((imagePath) => {
+      console.log(imagePath);
+      this.navCtrl.push(CreateStoryPage, {path: imagePath, format: "image/jpeg"})
+    })
+      // this.mediaCapture.captureImage().then(
+      // (data: MediaFile[]) => {
+      //   alert("name: " + data[0].name + "/nPath: " + data[0].fullPath);
+      //   this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: data[0].type})
+      // })
 
   }
 

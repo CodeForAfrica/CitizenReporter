@@ -55,7 +55,7 @@ export class CreateStoryPage implements OnInit {
     }
 
 
-    console.log(this.slides);
+    console.log("Slides: " + this.slides);
 
   }
 

@@ -31,18 +31,18 @@ export class AssignmentsPage implements OnInit{
     console.log("Auth", this._storage.get('auth_token'));
     console.log("login", this._storage.get('login'));
 
-    this.file.checkDir(this.file.dataDirectory, 'recording').then(
-      (value) => {
-        if(!value){
-          this.file.createDir(this.file.dataDirectory, 'recording', false).then(
-            (value) => {
-                    console.log(value);
-                }
-            );
+    // this.file.checkDir(this.file.dataDirectory, 'recording').then(
+    //   (value) => {
+    //     if(!value){
+    //       this.file.createDir(this.file.dataDirectory, 'recording', false).then(
+    //         (value) => {
+    //                 console.log(value);
+    //             }
+    //         );
 
-        }
-      }
-    );
+    //     }
+    //   }
+    // );
 
     console.log(Math.ceil(new Date().getTime() / 1000));
 
