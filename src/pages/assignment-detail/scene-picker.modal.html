@@ -15,35 +15,35 @@
     <h2>Pick Scene</h2>
     <h3>What kind of scene are you trying to capture?</h3>
     <ion-list>
-        <ion-item>
+        <ion-item (click)="onScenePortrait()">
             <ion-thumbnail item-left>
                 <img src="../../assets/img/scene_potrait.png">
             </ion-thumbnail>
             <h2>Portrait</h2>
             <p>Introduce the character. Get close</p>
         </ion-item>
-        <ion-item>
+        <ion-item (click)="onSceneSignature()">
             <ion-thumbnail item-left>
                 <img src="./../assets/img/scene_signature.png">
             </ion-thumbnail>
             <h2>Signature</h2>
             <p>Summarise the entire issue by illustrating an essential element of the story.</p>
         </ion-item>
-        <ion-item>
+        <ion-item (click)="onSceneReaction()">
             <ion-thumbnail item-left>
                 <img src="../../assets/img/scene_reaction.png">
             </ion-thumbnail>
             <h2>Reaction/Interaction</h2>
             <p>Depict how people are responding to the event or its aftermath.</p>
         </ion-item>
-        <ion-item>
+        <ion-item (click)="onSceneCandid()">
             <ion-thumbnail item-left>
                 <img src="../../assets/img/scene_candid.png">
             </ion-thumbnail>
             <h2>Candid</h2>
             <p>Show the character engaged in his or her environment</p>
         </ion-item>
-        <ion-item>
+        <ion-item (click)="onSceneEnvironment()">
             <ion-thumbnail item-left>
                 <img src="../../assets/img/scene_environmental.png">
             </ion-thumbnail>

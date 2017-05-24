@@ -28,6 +28,7 @@
     "@ionic-native/media": "^3.7.0",
     "@ionic-native/media-capture": "^3.7.0",
     "@ionic-native/native-geocoder": "^3.8.0",
+    "@ionic-native/screen-orientation": "^3.10.3",
     "@ionic-native/splash-screen": "3.4.2",
     "@ionic-native/status-bar": "3.4.2",
     "@ionic/storage": "^2.0.1",

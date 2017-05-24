@@ -4,6 +4,7 @@ import {MediaCapture, MediaFile, CaptureError} from '@ionic-native/media-capture
 import {Camera} from '@ionic-native/camera';
 import {CreateStoryPage} from "../create-story-page/create-story-page";
 import {File} from '@ionic-native/file';
+import { ModalScenePicker } from "./scene-picker.modal";
 
 /**
  * Generated class for the AssignmentDetail page.
@@ -69,11 +70,6 @@ export class AssignmentDetailPage {
             console.log(imagePath);
             this.navCtrl.push(CreateStoryPage, {path: imagePath, format: "image/jpeg"})
         })
-        // this.mediaCapture.captureImage().then(
-        // (data: MediaFile[]) => {
-        //   alert("name: " + data[0].name + "/nPath: " + data[0].fullPath);
-        //   this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: data[0].type})
-        // })
 
     }
 
@@ -83,6 +79,14 @@ export class AssignmentDetailPage {
                 this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: data[0].type})
             })
 
+    }
+
+    openScenePicker(){
+        let modal = this.modalCtrl.create(ModalScenePicker);
+        modal.present();
+        modal.onDidDismiss(()=>{
+
+        });
     }
 
 
