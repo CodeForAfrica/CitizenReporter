@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 
 /**
  * Generated class for the ViewStoryPage page.
@@ -8,24 +8,36 @@ import { NavController, NavParams } from 'ionic-angular';
  * on Ionic pages and navigation.
  */
 @Component({
-  selector: 'page-view-story-page',
-  templateUrl: 'view-story-page.html',
+    selector: 'page-view-story-page',
+    templateUrl: 'view-story-page.html',
 })
 export class ViewStoryPage {
 
-  slides: any[];
-  mySlideOptions = true;
-  story: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.story = navParams.get('story');
-    console.log(this.story);
+    slides: any[];
+    mySlideOptions = true;
+    story: any;
+    tabBarElement: any;
 
-    this.slides = [
-      'https://lorempixel.com/400/200/?1',
-      'https://lorempixel.com/400/200/?2',
-      'https://lorempixel.com/400/200/?3',
-      'https://lorempixel.com/800/1000/?4'
-    ]
-  }
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+        this.story = navParams.get('story');
+        console.log(this.story);
+
+        this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+
+        this.slides = [
+            'https://lorempixel.com/400/200/?1',
+            'https://lorempixel.com/400/200/?2',
+            'https://lorempixel.com/400/200/?3',
+            'https://lorempixel.com/800/1000/?4'
+        ]
+    }
+
+    ionViewWillEnter() {
+        this.tabBarElement.style.display = 'none';
+    }
+
+    ionViewWillLeave() {
+        this.tabBarElement.style.display = 'flex';
+    }
 
 }

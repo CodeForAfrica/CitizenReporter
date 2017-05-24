@@ -35,6 +35,7 @@ export class CreateStoryPage implements OnInit {
   public description: string = "Provide a brief, precise summary of your story";
   longitude: number;
   latitude: number;
+  tabBarElement: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -45,6 +46,7 @@ export class CreateStoryPage implements OnInit {
     private datePicker: DatePicker,
     private media: MediaPlugin) {
 
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.data = this.navParams.get("path");
     this.audio_file = this.media.create(this.data);
     this.format = this.navParams.get("format");
@@ -61,6 +63,14 @@ export class CreateStoryPage implements OnInit {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateStoryPage');
+  }
+
+  ionViewWillEnter(){
+    this.tabBarElement.style.display = 'none';
+  }
+
+  ionViewWillLeave(){
+    this.tabBarElement.style.display = 'flex';
   }
 
   onPlay(){

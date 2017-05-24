@@ -14,11 +14,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EditStoryPage {
 
+  tabBarElement: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+      this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditStoryPage');
+  }
+
+  ionViewWillEnter(){
+    this.tabBarElement.style.display = 'none';
+  }
+
+  ionViewWillLeave(){
+    this.tabBarElement.style.display = 'flex';
   }
 
 }
