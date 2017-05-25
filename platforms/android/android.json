@@ -67,6 +67,10 @@
                         {
                             "xml": "<feature name=\"DatePickerPlugin\"><param name=\"android-package\" value=\"com.plugin.datepicker.DatePickerPlugin\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"CDVOrientation\"><param name=\"android-package\" value=\"cordova.plugins.screenorientation.CDVOrientation\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -178,6 +182,12 @@
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         },
         "cordova-plugin-datepicker": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "es6-promise-plugin": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-screen-orientation": {
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
@@ -566,6 +576,20 @@
             "clobbers": [
                 "datePicker"
             ]
+        },
+        {
+            "id": "es6-promise-plugin.Promise",
+            "file": "plugins/es6-promise-plugin/www/promise.js",
+            "pluginId": "es6-promise-plugin",
+            "runs": true
+        },
+        {
+            "id": "cordova-plugin-screen-orientation.screenorientation",
+            "file": "plugins/cordova-plugin-screen-orientation/www/screenorientation.js",
+            "pluginId": "cordova-plugin-screen-orientation",
+            "clobbers": [
+                "cordova.plugins.screenorientation"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -584,6 +608,8 @@
         "cordova-plugin-geolocation": "2.4.3",
         "cordova-plugin-nativegeocoder": "1.0.2",
         "cordova-fabric-plugin": "1.1.7",
-        "cordova-plugin-datepicker": "0.9.3"
+        "cordova-plugin-datepicker": "0.9.3",
+        "es6-promise-plugin": "4.1.0",
+        "cordova-plugin-screen-orientation": "2.0.1"
     }
 }

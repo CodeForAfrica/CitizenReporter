@@ -46,6 +46,7 @@
 		C5F8B50FF14E4D03B70B155C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C3546E066D84332B1E217B3 /* Crashlytics.framework */; };
 		17E7014C9DA8458D884F47A8 /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F2995789F10C4724998362E7 /* DatePicker.m */; };
 		5270CAD307A44064A4B65ED8 /* DatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4847A63111C40FC8FC39A6A /* DatePicker.xib */; };
+		9B7B8538F92D445F895C3ADD /* CDVOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = B070962361CB4E40991B2405 /* CDVOrientation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,8 @@
 		F2995789F10C4724998362E7 /* DatePicker.m */ = {isa = PBXFileReference; name = "DatePicker.m"; path = "cordova-plugin-datepicker/DatePicker.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		BEAB888A34A347B8B976A929 /* DatePicker.h */ = {isa = PBXFileReference; name = "DatePicker.h"; path = "cordova-plugin-datepicker/DatePicker.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		E4847A63111C40FC8FC39A6A /* DatePicker.xib */ = {isa = PBXFileReference; name = "DatePicker.xib"; path = "DatePicker.xib"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = file.xib; explicitFileType = undefined; includeInIndex = 0; };
+		B070962361CB4E40991B2405 /* CDVOrientation.m */ = {isa = PBXFileReference; name = "CDVOrientation.m"; path = "cordova-plugin-screen-orientation/CDVOrientation.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		82D28DEE8FC143FBA0330FB5 /* CDVOrientation.h */ = {isa = PBXFileReference; name = "CDVOrientation.h"; path = "cordova-plugin-screen-orientation/CDVOrientation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +301,8 @@
 				0C55B46340104E1E92A237B2 /* FabricPlugin.m */,
 				F2995789F10C4724998362E7 /* DatePicker.m */,
 				BEAB888A34A347B8B976A929 /* DatePicker.h */,
+				B070962361CB4E40991B2405 /* CDVOrientation.m */,
+				82D28DEE8FC143FBA0330FB5 /* CDVOrientation.h */,
 			);
 			name = Plugins;
 			path = "CitizenReporter/Plugins";
@@ -323,7 +328,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
-				D32D0B4E1D574005AE5726E6 /* "Fabric.io: Crashlytics" */,
+				864199C59A0B4A20BBD9DC8B /* "Fabric.io: Crashlytics" */,
 			);
 			buildRules = (
 			);
@@ -405,7 +410,7 @@
 			shellScript = "NODEJS_PATH=/usr/local/bin; NVM_NODE_PATH=~/.nvm/versions/node/`nvm version 2>/dev/null`/bin; N_NODE_PATH=`find /usr/local/n/versions/node/* -maxdepth 0 -type d 2>/dev/null | tail -1`/bin; XCODE_NODE_PATH=`xcode-select --print-path`/usr/share/xcs/Node/bin; PATH=$NODEJS_PATH:$NVM_NODE_PATH:$N_NODE_PATH:$XCODE_NODE_PATH:$PATH && node cordova/lib/copy-www-build-step.js";
 			showEnvVarsInLog = 0;
 		};
-		D32D0B4E1D574005AE5726E6 /* "Fabric.io: Crashlytics" */ = {
+		864199C59A0B4A20BBD9DC8B /* "Fabric.io: Crashlytics" */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -450,6 +455,7 @@
 				11C5C65CF2B547FCAC59EAD8 /* NativeGeocoder.swift in Sources */,
 				F46CCF1147DF404B854F7097 /* FabricPlugin.m in Sources */,
 				17E7014C9DA8458D884F47A8 /* DatePicker.m in Sources */,
+				9B7B8538F92D445F895C3ADD /* CDVOrientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

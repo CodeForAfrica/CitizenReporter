@@ -383,6 +383,20 @@ module.exports = [
         "clobbers": [
             "datePicker"
         ]
+    },
+    {
+        "id": "es6-promise-plugin.Promise",
+        "file": "plugins/es6-promise-plugin/www/promise.js",
+        "pluginId": "es6-promise-plugin",
+        "runs": true
+    },
+    {
+        "id": "cordova-plugin-screen-orientation.screenorientation",
+        "file": "plugins/cordova-plugin-screen-orientation/www/screenorientation.js",
+        "pluginId": "cordova-plugin-screen-orientation",
+        "clobbers": [
+            "cordova.plugins.screenorientation"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -403,7 +417,9 @@ module.exports.metadata =
     "cordova-plugin-geolocation": "2.4.3",
     "cordova-plugin-nativegeocoder": "1.0.2",
     "cordova-fabric-plugin": "1.1.7",
-    "cordova-plugin-datepicker": "0.9.3"
+    "cordova-plugin-datepicker": "0.9.3",
+    "es6-promise-plugin": "4.1.0",
+    "cordova-plugin-screen-orientation": "2.0.1"
 };
 // BOTTOM OF METADATA
 });

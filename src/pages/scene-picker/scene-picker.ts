@@ -23,7 +23,6 @@ export class ScenePicker {
                 private platform: Platform,
                 private screenOrientation: ScreenOrientation) {
         this.platform.ready().then(()=>{
-            this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
             this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
         });
 
@@ -63,11 +62,13 @@ export class ScenePicker {
 
 
     ionViewWillEnter() {
+        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
         this.tabBarElement.style.display = 'none';
     }
 
     ionViewWillLeave() {
         this.tabBarElement.style.display = 'flex';
+        this.screenOrientation.unlock();
     }
 
 

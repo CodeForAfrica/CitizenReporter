@@ -75,6 +75,10 @@
                         {
                             "xml": "<feature name=\"DatePicker\"><param name=\"ios-package\" value=\"DatePicker\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"CDVOrientation\"><param name=\"ios-package\" value=\"CDVOrientation\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -182,6 +186,9 @@
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         },
         "cordova-plugin-datepicker": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-screen-orientation": {
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
@@ -598,6 +605,14 @@
             "clobbers": [
                 "datePicker"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-screen-orientation/www/screenorientation.js",
+            "id": "cordova-plugin-screen-orientation.screenorientation",
+            "pluginId": "cordova-plugin-screen-orientation",
+            "clobbers": [
+                "cordova.plugins.screenorientation"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -617,6 +632,7 @@
         "cordova-plugin-add-swift-support": "1.6.2",
         "cordova-plugin-nativegeocoder": "1.0.2",
         "cordova-fabric-plugin": "1.1.7",
-        "cordova-plugin-datepicker": "0.9.3"
+        "cordova-plugin-datepicker": "0.9.3",
+        "cordova-plugin-screen-orientation": "2.0.1"
     }
 }

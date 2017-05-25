@@ -411,6 +411,14 @@ module.exports = [
         "clobbers": [
             "datePicker"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-screen-orientation/www/screenorientation.js",
+        "id": "cordova-plugin-screen-orientation.screenorientation",
+        "pluginId": "cordova-plugin-screen-orientation",
+        "clobbers": [
+            "cordova.plugins.screenorientation"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -432,7 +440,8 @@ module.exports.metadata =
     "cordova-plugin-add-swift-support": "1.6.2",
     "cordova-plugin-nativegeocoder": "1.0.2",
     "cordova-fabric-plugin": "1.1.7",
-    "cordova-plugin-datepicker": "0.9.3"
+    "cordova-plugin-datepicker": "0.9.3",
+    "cordova-plugin-screen-orientation": "2.0.1"
 }
 // BOTTOM OF METADATA
 });

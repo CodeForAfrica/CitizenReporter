@@ -72,6 +72,9 @@
     <feature name="DatePicker">
         <param name="ios-package" value="DatePicker" />
     </feature>
+    <feature name="CDVOrientation">
+        <param name="ios-package" value="CDVOrientation" />
+    </feature>
     <name>CitizenReporter</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -81,6 +84,9 @@
     <allow-navigation href="http://192.168.1.35:8100" />
     <allow-navigation href="http://192.168.0.102:8100" />
     <allow-navigation href="http://192.168.0.101:8100" />
+    <allow-navigation href="http://192.168.1.20:8100" />
+    <allow-navigation href="*" />
+    <allow-navigation href="file://*/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

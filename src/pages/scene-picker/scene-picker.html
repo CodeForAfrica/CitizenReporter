@@ -6,19 +6,19 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>scene-picker</ion-title>
-    </ion-navbar>
+    <!--<ion-navbar>-->
+        <!--<ion-title>scene-picker</ion-title>-->
+    <!--</ion-navbar>-->
 
 </ion-header>
 
 <ion-content padding class="main-content">
     <ion-slides pager>
         <ion-slide *ngFor="let scene of scenes">
-            <ion-toolbar>
-                <h2 class="slide-title" [innerHTML]="scene.title"></h2>
-                <p class="desc-text" [innerHTML]="scene.description"></p>
-            </ion-toolbar>
+            <!--<ion-toolbar>-->
+                <!--<h2 class="slide-title" [innerHTML]="scene.title"></h2>-->
+                <!--<p class="desc-text" [innerHTML]="scene.description"></p>-->
+            <!--</ion-toolbar>-->
             <img [src]="scene.image" class="slide-image"/>
         </ion-slide>
     </ion-slides>
