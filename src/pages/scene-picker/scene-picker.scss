@@ -1,11 +1,12 @@
 page-scene-picker {
   .main-content{
-    background-color: black;
+    background-color: #FFFFFF;
   }
 
   .toolbar-background {
-    background: #000000;
+    background: transparent;
     border-color: transparent;
+    color: #000;
   }
 
   .slide-zoom {
@@ -15,16 +16,17 @@ page-scene-picker {
   .slide-title {
     margin-top: 1.8rem;
     color: #ffffff;
+    margin-bottom: 0px;
   }
 
   .slide-image {
-    max-height: 100%;
-    max-width: 100%;
+    max-height: 90%;
+    max-width: 90%;
     margin: 5px 0;
   }
 
   .desc-text{
-    color: #ffffff;
+    color: #167bff;
   }
 
   b {
@@ -37,9 +39,13 @@ page-scene-picker {
     line-height: 1.5;
     color: #60646B;
 
-    b {
-      color: #ffffff;
-    }
   }
+
+  .text-overlay{
+    z-index: 100;
+    background-color: #8f8f8f;
+    color: white;
+  }
+
 
 }

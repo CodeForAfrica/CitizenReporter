@@ -80,9 +80,11 @@ export class AssignmentDetailPage {
 
     }
 
-    openScenePicker(){
-        this.navCtrl.push(ScenePicker);
+    openScenePickerImage(){
+        this.navCtrl.push(ScenePicker, {camera: "image"});
     }
-
+    openScenePickerVideo(){
+        this.navCtrl.push(ScenePicker, {camera: "video"});
+    }
 
 }

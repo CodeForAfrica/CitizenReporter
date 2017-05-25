@@ -15,11 +15,13 @@
 <ion-content padding class="main-content">
     <ion-slides pager>
         <ion-slide *ngFor="let scene of scenes">
-            <!--<ion-toolbar>-->
-                <!--<h2 class="slide-title" [innerHTML]="scene.title"></h2>-->
-                <!--<p class="desc-text" [innerHTML]="scene.description"></p>-->
-            <!--</ion-toolbar>-->
+            <ion-toolbar>
+                <p class="desc-text" [innerHTML]="scene.description"></p>
+                <ion-icon name="camera" item-right *ngIf="action === 'image'" (click)="captureImage()"></ion-icon>
+                <ion-icon name="videocam" item-right *ngIf="action === 'video'"></ion-icon>
+            </ion-toolbar>
             <img [src]="scene.image" class="slide-image"/>
+
         </ion-slide>
     </ion-slides>
 
