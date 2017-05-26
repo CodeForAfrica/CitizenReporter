@@ -14,7 +14,7 @@
     </ion-refresher-content>
   </ion-refresher>
 
-    <ion-card *ngFor="let assignment of assignments" (click)="goToAssignmentDetails(assignment)">
+    <ion-card *ngFor="let assignment of assignments" (tap)="goToAssignmentDetails(assignment)">
       <img src="{{ assignment.thumbnail }}"/>
       <ion-card-content>
         <ion-card-title>

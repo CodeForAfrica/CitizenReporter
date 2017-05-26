@@ -71,6 +71,14 @@
                         {
                             "xml": "<feature name=\"CDVOrientation\"><param name=\"android-package\" value=\"cordova.plugins.screenorientation.CDVOrientation\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Permissions\"><param name=\"android-package\" value=\"com.android.plugins.Permissions\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"ImagePicker\"><param name=\"android-package\" value=\"com.synconset.ImagePicker\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -126,6 +134,18 @@
                         },
                         {
                             "xml": "<meta-data android:name=\"io.fabric.ApiKey\" android:value=\"c99a6a9a2e47604595017b4d8c8e7db46db93b9e\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<activity android:label=\"@string/multi_app_name\" android:name=\"com.synconset.MultiImageChooserActivity\" android:theme=\"@android:style/Theme.Holo.Light\"></activity>",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
                             "count": 1
                         }
                     ]
@@ -188,6 +208,12 @@
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         },
         "cordova-plugin-screen-orientation": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-android-permissions": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-image-picker": {
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
@@ -590,6 +616,22 @@
             "clobbers": [
                 "cordova.plugins.screenorientation"
             ]
+        },
+        {
+            "id": "cordova-plugin-android-permissions.Permissions",
+            "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+            "pluginId": "cordova-plugin-android-permissions",
+            "clobbers": [
+                "cordova.plugins.permissions"
+            ]
+        },
+        {
+            "id": "cordova-plugin-image-picker.ImagePicker",
+            "file": "plugins/cordova-plugin-image-picker/www/imagepicker.js",
+            "pluginId": "cordova-plugin-image-picker",
+            "clobbers": [
+                "plugins.imagePicker"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -610,6 +652,8 @@
         "cordova-fabric-plugin": "1.1.7",
         "cordova-plugin-datepicker": "0.9.3",
         "es6-promise-plugin": "4.1.0",
-        "cordova-plugin-screen-orientation": "2.0.1"
+        "cordova-plugin-screen-orientation": "2.0.1",
+        "cordova-plugin-android-permissions": "0.11.0",
+        "cordova-plugin-image-picker": "1.1.1"
     }
 }

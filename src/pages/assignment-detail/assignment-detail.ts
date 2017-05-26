@@ -5,6 +5,8 @@ import {Camera} from '@ionic-native/camera';
 import {CreateStoryPage} from "../create-story-page/create-story-page";
 import {File} from '@ionic-native/file';
 import {ScenePicker} from "../scene-picker/scene-picker";
+import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 /**
  * Generated class for the AssignmentDetail page.
@@ -27,6 +29,7 @@ export class AssignmentDetailPage {
                 public navParams: NavParams,
                 private mediaCapture: MediaCapture,
                 private camera: Camera,
+                private androidPermissions: AndroidPermissions,
                 private file: File) {
         this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
         this.assignment = navParams.get('assignment');
@@ -57,28 +60,44 @@ export class AssignmentDetailPage {
         //   (err: CaptureError) => console.error(err)
         // );
 
-
     }
 
     captureImage() {
-        this.camera.getPicture({
-            sourceType: this.camera.PictureSourceType.CAMERA,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            saveToPhotoAlbum: true
-        }).then((imagePath) => {
-            console.log(imagePath);
-            this.navCtrl.push(CreateStoryPage, {path: imagePath, format: "image/jpeg"})
-        })
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+            (success) => {
+                this.camera.getPicture({
+                    sourceType: this.camera.PictureSourceType.CAMERA,
+                    destinationType: this.camera.DestinationType.FILE_URI,
+                    saveToPhotoAlbum: true
+                }).then((imagePath) => {
+                    console.log(imagePath);
+                    this.navCtrl.push(CreateStoryPage, {path: imagePath, format: "image/jpeg"})
+                })
+            },
+            (err) => {
+                this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
+            })
 
     }
 
     captureVideo() {
-        this.mediaCapture.captureVideo().then(
-            (data: MediaFile[]) => {
-                this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: data[0].type})
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+            (success) => {
+                this.mediaCapture.captureVideo().then(
+                    (data: MediaFile[]) => {
+                        this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: data[0].type})
+                    })
+            },
+            (err) => {
+                this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
             })
 
     }
+
+    openGallery(){
+    }
+
+
 
     openScenePickerImage(){
         this.navCtrl.push(ScenePicker, {camera: "image"});

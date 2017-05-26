@@ -29,6 +29,7 @@ import {ModalWhoInvolvedPage} from "../pages/create-story-page/modal-who-content
 import {ModalWhyHappenedPage} from "../pages/create-story-page/modal-why-content";
 import {Constant} from "../utils/constants";
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 import {ScenePicker} from "../pages/scene-picker/scene-picker";
 
 @NgModule({
@@ -83,6 +84,7 @@ import {ScenePicker} from "../pages/scene-picker/scene-picker";
         Geolocation,
         File,
         DatePicker,
+        AndroidPermissions,
         NativeGeocoder,
         ScreenOrientation,
         {provide: ErrorHandler, useClass: IonicErrorHandler}

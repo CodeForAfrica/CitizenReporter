@@ -419,6 +419,14 @@ module.exports = [
         "clobbers": [
             "cordova.plugins.screenorientation"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-image-picker/www/imagepicker.js",
+        "id": "cordova-plugin-image-picker.ImagePicker",
+        "pluginId": "cordova-plugin-image-picker",
+        "clobbers": [
+            "plugins.imagePicker"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -441,7 +449,9 @@ module.exports.metadata =
     "cordova-plugin-nativegeocoder": "1.0.2",
     "cordova-fabric-plugin": "1.1.7",
     "cordova-plugin-datepicker": "0.9.3",
-    "cordova-plugin-screen-orientation": "2.0.1"
+    "cordova-plugin-screen-orientation": "2.0.1",
+    "cordova-plugin-android-permissions": "0.11.0",
+    "cordova-plugin-image-picker": "1.1.1"
 }
 // BOTTOM OF METADATA
 });

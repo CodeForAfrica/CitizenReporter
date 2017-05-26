@@ -32,17 +32,6 @@
     <feature name="Keyboard">
         <param name="ios-package" onload="true" value="IonicKeyboard" />
     </feature>
-    <splash height="1136" src="resources/ios/splash/Default-568h@2x~iphone.png" width="640" />
-    <splash height="1334" src="resources/ios/splash/Default-667h.png" width="750" />
-    <splash height="2208" src="resources/ios/splash/Default-736h.png" width="1242" />
-    <splash height="1242" src="resources/ios/splash/Default-Landscape-736h.png" width="2208" />
-    <splash height="1536" src="resources/ios/splash/Default-Landscape@2x~ipad.png" width="2048" />
-    <splash height="2048" src="resources/ios/splash/Default-Landscape@~ipadpro.png" width="2732" />
-    <splash height="768" src="resources/ios/splash/Default-Landscape~ipad.png" width="1024" />
-    <splash height="2048" src="resources/ios/splash/Default-Portrait@2x~ipad.png" width="1536" />
-    <splash height="2732" src="resources/ios/splash/Default-Portrait@~ipadpro.png" width="2048" />
-    <splash height="1024" src="resources/ios/splash/Default-Portrait~ipad.png" width="768" />
-    <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
     <feature name="SQLitePlugin">
         <param name="ios-package" value="SQLitePlugin" />
     </feature>
@@ -74,6 +63,9 @@
     </feature>
     <feature name="CDVOrientation">
         <param name="ios-package" value="CDVOrientation" />
+    </feature>
+    <feature name="ImagePicker">
+        <param name="ios-package" value="SOSPicker" />
     </feature>
     <name>CitizenReporter</name>
     <description>An awesome Ionic/Cordova app.</description>

@@ -14,6 +14,25 @@
 
 
 <ion-content padding>
+  <ion-fab right top>
+    <button ion-fab color="danger">
+      <ion-icon name="add"></ion-icon>
+    </button>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="openScenePickerImage()">
+        <ion-icon color="primary" name="camera"></ion-icon>
+      </button>
+      <button ion-fab (click)="openScenePickerVideo()">
+        <ion-icon color="secondary" name="videocam"></ion-icon>
+      </button>
+      <button ion-fab (click)="recordAudio()">
+        <ion-icon color="vibrant" name="microphone"></ion-icon>
+      </button>
+      <button ion-fab (click)="recordAudio()">
+        <ion-icon color="danger" name="images"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
   <ion-row class="image-slider">
     <ion-slides [pager]="mySlideOptions">
       <ion-slide *ngFor="let slide of slides">

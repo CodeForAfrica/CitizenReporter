@@ -79,6 +79,10 @@
                         {
                             "xml": "<feature name=\"CDVOrientation\"><param name=\"ios-package\" value=\"CDVOrientation\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"ImagePicker\"><param name=\"ios-package\" value=\"SOSPicker\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -100,7 +104,7 @@
                     "NSPhotoLibraryUsageDescription": [
                         {
                             "xml": "<string> </string>",
-                            "count": 2
+                            "count": 3
                         }
                     ],
                     "NSLocationWhenInUseUsageDescription": [
@@ -189,6 +193,13 @@
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         },
         "cordova-plugin-screen-orientation": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-android-permissions": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-image-picker": {
+            "PHOTO_LIBRARY_USAGE_DESCRIPTION": " ",
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
@@ -613,6 +624,14 @@
             "clobbers": [
                 "cordova.plugins.screenorientation"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-image-picker/www/imagepicker.js",
+            "id": "cordova-plugin-image-picker.ImagePicker",
+            "pluginId": "cordova-plugin-image-picker",
+            "clobbers": [
+                "plugins.imagePicker"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -633,6 +652,8 @@
         "cordova-plugin-nativegeocoder": "1.0.2",
         "cordova-fabric-plugin": "1.1.7",
         "cordova-plugin-datepicker": "0.9.3",
-        "cordova-plugin-screen-orientation": "2.0.1"
+        "cordova-plugin-screen-orientation": "2.0.1",
+        "cordova-plugin-android-permissions": "0.11.0",
+        "cordova-plugin-image-picker": "1.1.1"
     }
 }

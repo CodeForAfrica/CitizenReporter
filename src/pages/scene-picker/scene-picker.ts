@@ -1,6 +1,6 @@
 ///<reference path="../../../node_modules/ionic-angular/platform/platform.d.ts"/>
 import {Component} from '@angular/core';
-import {NavController, NavParams, Platform} from 'ionic-angular';
+import {NavController, NavParams, Platform, ViewController} from 'ionic-angular';
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
 import {CreateStoryPage} from "../create-story-page/create-story-page";
 import {Camera} from '@ionic-native/camera';
@@ -79,17 +79,23 @@ export class ScenePicker {
 
     captureImage() {
         this.camera.getPicture({
+            quality: 75,
             sourceType: this.camera.PictureSourceType.CAMERA,
             destinationType: this.camera.DestinationType.FILE_URI,
-            saveToPhotoAlbum: true
+            saveToPhotoAlbum: true,
+            encodingType: this.camera.EncodingType.JPEG,
+            targetWidth: 500,
+            targetHeight: 500,
         }).then((imagePath) => {
-            console.log(imagePath);
-            this.navCtrl.push(CreateStoryPage, {path: imagePath, format: "image/jpeg"}).then(()=>{
-                let startIndex = this.navCtrl.getActive().index - 1;
-                this.navCtrl.remove(startIndex, 1);
-            })
-        });
+            // let previousView: ViewController = this.navCtrl.getPrevious();
+            console.log(this.navCtrl.getViews());
+            // this.navCtrl.removeView(previousView);
+            let startIndex = this.navCtrl.getActive().index - 1;
+            this.navCtrl.remove(startIndex, 1);
+            console.log(this.navCtrl.getViews());
+            this.navCtrl.push(CreateStoryPage, {path: imagePath, format: "image/jpeg"});
 
+            })
     }
 
 

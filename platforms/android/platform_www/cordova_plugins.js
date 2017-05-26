@@ -397,6 +397,22 @@ module.exports = [
         "clobbers": [
             "cordova.plugins.screenorientation"
         ]
+    },
+    {
+        "id": "cordova-plugin-android-permissions.Permissions",
+        "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+        "pluginId": "cordova-plugin-android-permissions",
+        "clobbers": [
+            "cordova.plugins.permissions"
+        ]
+    },
+    {
+        "id": "cordova-plugin-image-picker.ImagePicker",
+        "file": "plugins/cordova-plugin-image-picker/www/imagepicker.js",
+        "pluginId": "cordova-plugin-image-picker",
+        "clobbers": [
+            "plugins.imagePicker"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -419,7 +435,9 @@ module.exports.metadata =
     "cordova-fabric-plugin": "1.1.7",
     "cordova-plugin-datepicker": "0.9.3",
     "es6-promise-plugin": "4.1.0",
-    "cordova-plugin-screen-orientation": "2.0.1"
+    "cordova-plugin-screen-orientation": "2.0.1",
+    "cordova-plugin-android-permissions": "0.11.0",
+    "cordova-plugin-image-picker": "1.1.1"
 };
 // BOTTOM OF METADATA
 });
