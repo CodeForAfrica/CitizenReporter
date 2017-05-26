@@ -29,6 +29,7 @@ export class AssignmentDetailPage {
                 public navParams: NavParams,
                 private mediaCapture: MediaCapture,
                 private camera: Camera,
+                private imagePicker: ImagePicker,
                 private androidPermissions: AndroidPermissions,
                 private file: File) {
         this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
@@ -85,16 +86,34 @@ export class AssignmentDetailPage {
             (success) => {
                 this.mediaCapture.captureVideo().then(
                     (data: MediaFile[]) => {
-                        this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: data[0].type})
+                        this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: data[0].type});
                     })
             },
             (err) => {
-                this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
+                this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA);
             })
 
     }
 
     openGallery(){
+        console.log("open gallery");
+        this.imagePicker.hasReadPermission().then((success) =>{
+            let options = {
+                maximumImagesCount: 5,
+                width: 500,
+                height: 500,
+                quality: 75
+            }
+
+            this.imagePicker.getPictures(options).then(
+                file_uris => this.navCtrl.push(CreateStoryPage, {images: file_uris}),
+                err => console.log('uh oh')
+            );
+        },
+            (err) => {
+            this.imagePicker.requestReadPermission();
+            }
+        );
     }
 
 

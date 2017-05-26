@@ -26,6 +26,7 @@
         "@ionic-native/date-picker": "^3.8.1",
         "@ionic-native/file": "^3.10.3",
         "@ionic-native/geolocation": "^3.8.0",
+        "@ionic-native/image-picker": "^3.10.3",
         "@ionic-native/media": "^3.7.0",
         "@ionic-native/media-capture": "^3.7.0",
         "@ionic-native/native-geocoder": "^3.8.0",
