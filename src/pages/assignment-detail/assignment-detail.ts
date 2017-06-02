@@ -103,7 +103,7 @@ export class AssignmentDetailPage {
                 width: 500,
                 height: 500,
                 quality: 75
-            }
+            };
 
             this.imagePicker.getPictures(options).then(
                 file_uris => this.navCtrl.push(CreateStoryPage, {images: file_uris}),

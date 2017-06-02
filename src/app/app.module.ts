@@ -32,6 +32,7 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation";
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import {ScenePicker} from "../pages/scene-picker/scene-picker";
 import { ImagePicker } from '@ionic-native/image-picker';
+import {MediaCapture} from '@ionic-native/media-capture';
 
 @NgModule({
     declarations: [
@@ -87,6 +88,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
         DatePicker,
         AndroidPermissions,
         NativeGeocoder,
+        MediaCapture,
         ImagePicker,
         ScreenOrientation,
         {provide: ErrorHandler, useClass: IonicErrorHandler}

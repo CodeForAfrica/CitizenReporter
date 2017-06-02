@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController, NavParams, ModalController} from 'ionic-angular';
+import {NavController, NavParams, ModalController, ViewController} from 'ionic-angular';
 import {MediaPlugin, MediaObject} from '@ionic-native/media';
+import {MediaCapture, MediaFile, CaptureError} from '@ionic-native/media-capture';
 import {Geolocation} from '@ionic-native/geolocation';
 import {NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult} from '@ionic-native/native-geocoder';
 import {ModalDescriptionPage} from "./modal-desc-content";
@@ -8,6 +9,11 @@ import {ModalWhoInvolvedPage} from "./modal-who-content";
 import {ModalWhyHappenedPage} from "./modal-why-content";
 import {DatePicker} from '@ionic-native/date-picker';
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
+import {AndroidPermissions} from "@ionic-native/android-permissions";
+import {ImagePicker} from "@ionic-native/image-picker";
+import {Camera} from '@ionic-native/camera';
+import {ScenePicker} from "../scene-picker/scene-picker";
+
 
 /**
  * Generated class for the CreateStoryPage page.
@@ -44,6 +50,11 @@ export class CreateStoryPage implements OnInit {
                 private orientation: ScreenOrientation,
                 private _geocoder: NativeGeocoder,
                 private modalCtrl: ModalController,
+                private camera: Camera,
+                private viewCtrl: ViewController,
+                private mediaCapture: MediaCapture,
+                private imagePicker: ImagePicker,
+                private androidPermissions: AndroidPermissions,
                 private datePicker: DatePicker,
                 private media: MediaPlugin) {
 
@@ -59,12 +70,16 @@ export class CreateStoryPage implements OnInit {
             this.slides.push({file: this.data, "format": this.format});
         }
 
+        const prevView: ViewController = this.navCtrl.getPrevious();
+        this.navCtrl.removeView(prevView).then(res => console.log("View removed: " + res + "  " + prevView.component.toString()));
 
-        console.log("Slides: " + this.slides);
+
+        console.log(this.slides);
 
     }
 
     ionViewDidLoad() {
+        console.log(this.navCtrl.getViews())
         console.log('ionViewDidLoad CreateStoryPage');
     }
 
@@ -157,6 +172,66 @@ export class CreateStoryPage implements OnInit {
         );
 
     }
+    captureImage() {
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+            (success) => {
+                this.camera.getPicture({
+                    sourceType: this.camera.PictureSourceType.CAMERA,
+                    destinationType: this.camera.DestinationType.FILE_URI,
+                    saveToPhotoAlbum: true
+                }).then((imagePath) => {
+                    console.log(imagePath);
+                    this.slides.push({file: imagePath, format: "image/jpeg"});
+                })
+            },
+            (err) => {
+                this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
+            })
+
+    }
+
+    captureVideo() {
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+            (success) => {
+                this.mediaCapture.captureVideo().then(
+                    (data: MediaFile[]) => {
+
+                    })
+            },
+            (err) => {
+                this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA);
+            })
+
+    }
+
+    openGallery(){
+        console.log("open gallery");
+        this.imagePicker.hasReadPermission().then((success) =>{
+                let options = {
+                    maximumImagesCount: 5,
+                    width: 500,
+                    height: 500,
+                    quality: 75
+                };
+
+                this.imagePicker.getPictures(options).then(
+                    file_uris => this.navCtrl.push(CreateStoryPage, {images: file_uris}),
+                    err => console.log('uh oh')
+                );
+            },
+            (err) => {
+                this.imagePicker.requestReadPermission();
+            }
+        );
+    }
+
+    openScenePickerImage(){
+        this.navCtrl.push(ScenePicker, {camera: "image"});
+    }
+    openScenePickerVideo(){
+        this.navCtrl.push(ScenePicker, {camera: "video"});
+    }
+
 
 
 }

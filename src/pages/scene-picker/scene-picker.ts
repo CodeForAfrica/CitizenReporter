@@ -25,6 +25,7 @@ export class ScenePicker {
                 public navParams: NavParams,
                 private platform: Platform,
                 private camera: Camera,
+                private viewController: ViewController,
                 private screenOrientation: ScreenOrientation) {
         this.action = this.navParams.get("camera");
 
@@ -75,11 +76,15 @@ export class ScenePicker {
     ionViewWillLeave() {
         this.tabBarElement.style.display = 'flex';
         this.screenOrientation.unlock();
+        const index = this.viewController.index;
+        // this.navCtrl.remove(index).then((result)=>{
+        //     console.log("removed: ",result);
+        // });
     }
 
     captureImage() {
         this.camera.getPicture({
-            quality: 75,
+            quality: 100,
             sourceType: this.camera.PictureSourceType.CAMERA,
             destinationType: this.camera.DestinationType.FILE_URI,
             saveToPhotoAlbum: true,

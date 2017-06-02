@@ -169,5 +169,13 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "nl.x-services.plugins.videocaptureplus": {
+        "source": {
+            "type": "local",
+            "path": "/Users/Ahereza/Work/StudioProjects/CitizenReporter/node_modules/cordova-plugin-linkedin"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }
