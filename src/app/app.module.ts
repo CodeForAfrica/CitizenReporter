@@ -30,9 +30,10 @@ import {ModalWhyHappenedPage} from "../pages/create-story-page/modal-why-content
 import {Constant} from "../utils/constants";
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import {ScenePicker} from "../pages/scene-picker/scene-picker";
 import { ImagePicker } from '@ionic-native/image-picker';
 import {MediaCapture} from '@ionic-native/media-capture';
+import {CameraPreview} from "@ionic-native/camera-preview";
+import {ScenePopover} from "../pages/scene-popover/scene-popover";
 
 @NgModule({
     declarations: [
@@ -51,7 +52,7 @@ import {MediaCapture} from '@ionic-native/media-capture';
         ModalDescriptionPage,
         ModalWhoInvolvedPage,
         ModalWhyHappenedPage,
-        ScenePicker,
+        ScenePopover,
 
     ],
     imports: [
@@ -76,7 +77,7 @@ import {MediaCapture} from '@ionic-native/media-capture';
         ModalDescriptionPage,
         ModalWhoInvolvedPage,
         ModalWhyHappenedPage,
-        ScenePicker,
+        ScenePopover,
     ],
     providers: [
         StatusBar,
@@ -91,6 +92,7 @@ import {MediaCapture} from '@ionic-native/media-capture';
         MediaCapture,
         ImagePicker,
         ScreenOrientation,
+        CameraPreview,
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })

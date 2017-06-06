@@ -1,0 +1,99 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "cordova-plugin-camera-preview",
+        "scope": null,
+        "escapedName": "cordova-plugin-camera-preview",
+        "name": "cordova-plugin-camera-preview",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/Ahereza/Work/StudioProjects/CitizenReporter/node_modules"
+    ]
+  ],
+  "_from": "cordova-plugin-camera-preview@latest",
+  "_id": "cordova-plugin-camera-preview@0.9.0",
+  "_inCache": true,
+  "_location": "/cordova-plugin-camera-preview",
+  "_nodeVersion": "7.9.0",
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/cordova-plugin-camera-preview-0.9.0.tgz_1494352705984_0.3242937698960304"
+  },
+  "_npmUser": {
+    "name": "westonganger",
+    "email": "westonganger@gmail.com"
+  },
+  "_npmVersion": "4.2.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "cordova-plugin-camera-preview",
+    "scope": null,
+    "escapedName": "cordova-plugin-camera-preview",
+    "name": "cordova-plugin-camera-preview",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-camera-preview/-/cordova-plugin-camera-preview-0.9.0.tgz",
+  "_shasum": "d65f9f37ac79bed46d0fb2707dc9c34e75c87631",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-camera-preview",
+  "_where": "/Users/Ahereza/Work/StudioProjects/CitizenReporter/node_modules",
+  "author": {
+    "name": "Weston Ganger",
+    "email": "westonganger@gmail.com",
+    "url": "solidfoundationwebdev.com"
+  },
+  "bugs": {
+    "url": "https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview/issues"
+  },
+  "dependencies": {
+    "cordova": "*"
+  },
+  "description": "Cordova plugin that allows camera interaction from HTML code for showing camera preview below or on top of the HTML.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "d65f9f37ac79bed46d0fb2707dc9c34e75c87631",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-camera-preview/-/cordova-plugin-camera-preview-0.9.0.tgz"
+  },
+  "gitHead": "727710cbaa5e184b5209f34eafa14d46fb1cda2a",
+  "homepage": "https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview",
+  "keywords": [
+    "cordova",
+    "phonegap",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "android",
+    "ios",
+    "ionic",
+    "camera",
+    "cam",
+    "camera-preview",
+    "preview"
+  ],
+  "license": "Apache 2.0",
+  "maintainers": [
+    {
+      "name": "westonganger",
+      "email": "westonganger@gmail.com"
+    }
+  ],
+  "name": "cordova-plugin-camera-preview",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cordova-plugin-camera-preview/cordova-plugin-camera-preview.git"
+  },
+  "scripts": {},
+  "version": "0.9.0"
+}

@@ -12,7 +12,6 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation";
 import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {ImagePicker} from "@ionic-native/image-picker";
 import {Camera} from '@ionic-native/camera';
-import {ScenePicker} from "../scene-picker/scene-picker";
 
 
 /**
@@ -21,6 +20,7 @@ import {ScenePicker} from "../scene-picker/scene-picker";
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+
 @Component({
     selector: 'page-create-story-page',
     templateUrl: 'create-story-page.html',
@@ -226,10 +226,10 @@ export class CreateStoryPage implements OnInit {
     }
 
     openScenePickerImage(){
-        this.navCtrl.push(ScenePicker, {camera: "image"});
+        // this.navCtrl.push(ScenePicker, {camera: "image"});
     }
     openScenePickerVideo(){
-        this.navCtrl.push(ScenePicker, {camera: "video"});
+        // this.navCtrl.push(ScenePicker, {camera: "video"});
     }
 
 

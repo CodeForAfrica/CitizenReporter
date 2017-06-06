@@ -58,6 +58,15 @@
 		F728398A2CD64233A109A64B /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D28C79FF6BA49FBA3D2CC74 /* ELCAssetTablePicker.xib */; };
 		6C570238875F4C6B83860083 /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 93FF4DE1086746238CB8DCD1 /* Overlay.png */; };
 		71CFD9D2F84F45799801F53F /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4B47A777DE74D1C9EF23E40 /* Overlay@2x.png */; };
+		16B30D0966164AD98AD5A2C3 /* CameraPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 42499C49F9584D7FAEEEB5FF /* CameraPreview.m */; };
+		57AF022BB4204C388B2EC563 /* TemperatureAndTint.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA8DBDF43214BF686736FCF /* TemperatureAndTint.m */; };
+		0D41647D06E941C589C031E3 /* CameraSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C015BD462C4F0084528256 /* CameraSessionManager.m */; };
+		3F52146DFE9B4EDEB49D6711 /* CameraRenderController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF05B5C2B44341C5BA411E74 /* CameraRenderController.m */; };
+		687045471F94486B8FF010F9 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7902BD6678D3408B9D952793 /* CoreImage.framework */; };
+		AA6F62416F5A4CF3B492EFA3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC700C6C39A42C4AB9268F6 /* OpenGLES.framework */; };
+		BB48CA965A024ED3A30EDD93 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BBB6F3B45E048BF94AD1F55 /* GLKit.framework */; };
+		A28F0FB4858547DC98B16E15 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF189FDC6EA49DC95E6D3AD /* CoreVideo.framework */; };
+		3C0D645CAC394FDA9B11077D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486C30D6D7924D0B9D9E276A /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +178,19 @@
 		6D28C79FF6BA49FBA3D2CC74 /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; name = "ELCAssetTablePicker.xib"; path = "ELCAssetTablePicker.xib"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = file.xib; explicitFileType = undefined; includeInIndex = 0; };
 		93FF4DE1086746238CB8DCD1 /* Overlay.png */ = {isa = PBXFileReference; name = "Overlay.png"; path = "Overlay.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C4B47A777DE74D1C9EF23E40 /* Overlay@2x.png */ = {isa = PBXFileReference; name = "Overlay@2x.png"; path = "Overlay@2x.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		42499C49F9584D7FAEEEB5FF /* CameraPreview.m */ = {isa = PBXFileReference; name = "CameraPreview.m"; path = "cordova-plugin-camera-preview/CameraPreview.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		EBA8DBDF43214BF686736FCF /* TemperatureAndTint.m */ = {isa = PBXFileReference; name = "TemperatureAndTint.m"; path = "cordova-plugin-camera-preview/TemperatureAndTint.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		E8C015BD462C4F0084528256 /* CameraSessionManager.m */ = {isa = PBXFileReference; name = "CameraSessionManager.m"; path = "cordova-plugin-camera-preview/CameraSessionManager.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		FF05B5C2B44341C5BA411E74 /* CameraRenderController.m */ = {isa = PBXFileReference; name = "CameraRenderController.m"; path = "cordova-plugin-camera-preview/CameraRenderController.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		6DB48F0B2B1A4428B0FDD9AA /* CameraPreview.h */ = {isa = PBXFileReference; name = "CameraPreview.h"; path = "cordova-plugin-camera-preview/CameraPreview.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		9E2BE5DBA9114270AC71CBE3 /* TemperatureAndTint.h */ = {isa = PBXFileReference; name = "TemperatureAndTint.h"; path = "cordova-plugin-camera-preview/TemperatureAndTint.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		851B7E8AB21E43A395CF7E38 /* CameraSessionManager.h */ = {isa = PBXFileReference; name = "CameraSessionManager.h"; path = "cordova-plugin-camera-preview/CameraSessionManager.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		1B7F82141AFF413A95410E3E /* CameraRenderController.h */ = {isa = PBXFileReference; name = "CameraRenderController.h"; path = "cordova-plugin-camera-preview/CameraRenderController.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		7902BD6678D3408B9D952793 /* CoreImage.framework */ = {isa = PBXFileReference; name = "CoreImage.framework"; path = "System/Library/Frameworks/CoreImage.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		AFC700C6C39A42C4AB9268F6 /* OpenGLES.framework */ = {isa = PBXFileReference; name = "OpenGLES.framework"; path = "System/Library/Frameworks/OpenGLES.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		1BBB6F3B45E048BF94AD1F55 /* GLKit.framework */ = {isa = PBXFileReference; name = "GLKit.framework"; path = "System/Library/Frameworks/GLKit.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		4CF189FDC6EA49DC95E6D3AD /* CoreVideo.framework */ = {isa = PBXFileReference; name = "CoreVideo.framework"; path = "System/Library/Frameworks/CoreVideo.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		486C30D6D7924D0B9D9E276A /* QuartzCore.framework */ = {isa = PBXFileReference; name = "QuartzCore.framework"; path = "System/Library/Frameworks/QuartzCore.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +208,11 @@
 				5F33D918B4314D72AF188930 /* Security.framework in Frameworks */,
 				6CDBB2910A714AC3BE50CAE3 /* Fabric.framework in Frameworks */,
 				C5F8B50FF14E4D03B70B155C /* Crashlytics.framework in Frameworks */,
+				687045471F94486B8FF010F9 /* CoreImage.framework in Frameworks */,
+				AA6F62416F5A4CF3B492EFA3 /* OpenGLES.framework in Frameworks */,
+				BB48CA965A024ED3A30EDD93 /* GLKit.framework in Frameworks */,
+				A28F0FB4858547DC98B16E15 /* CoreVideo.framework in Frameworks */,
+				3C0D645CAC394FDA9B11077D /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +298,11 @@
 				5D4852B363B846C4B5514820 /* Security.framework */,
 				A2B2FAC507AA494DACAE8FAA /* Fabric.framework */,
 				3C3546E066D84332B1E217B3 /* Crashlytics.framework */,
+				7902BD6678D3408B9D952793 /* CoreImage.framework */,
+				AFC700C6C39A42C4AB9268F6 /* OpenGLES.framework */,
+				1BBB6F3B45E048BF94AD1F55 /* GLKit.framework */,
+				4CF189FDC6EA49DC95E6D3AD /* CoreVideo.framework */,
+				486C30D6D7924D0B9D9E276A /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -352,6 +384,14 @@
 				506AF76B6792444E82DE9D59 /* ELCAssetSelectionDelegate.h */,
 				CEE4ED0A17754B67A749DC7A /* ELCAssetTablePicker.h */,
 				062949B99D8A4A27BE609907 /* ELCImagePickerController.h */,
+				42499C49F9584D7FAEEEB5FF /* CameraPreview.m */,
+				EBA8DBDF43214BF686736FCF /* TemperatureAndTint.m */,
+				E8C015BD462C4F0084528256 /* CameraSessionManager.m */,
+				FF05B5C2B44341C5BA411E74 /* CameraRenderController.m */,
+				6DB48F0B2B1A4428B0FDD9AA /* CameraPreview.h */,
+				9E2BE5DBA9114270AC71CBE3 /* TemperatureAndTint.h */,
+				851B7E8AB21E43A395CF7E38 /* CameraSessionManager.h */,
+				1B7F82141AFF413A95410E3E /* CameraRenderController.h */,
 			);
 			name = Plugins;
 			path = "CitizenReporter/Plugins";
@@ -377,7 +417,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
-				1BFDD68F7724416A9257BA6F /* "Fabric.io: Crashlytics" */,
+				9053E69582AC4E348DC529DA /* "Fabric.io: Crashlytics" */,
 			);
 			buildRules = (
 			);
@@ -464,7 +504,7 @@
 			shellScript = "NODEJS_PATH=/usr/local/bin; NVM_NODE_PATH=~/.nvm/versions/node/`nvm version 2>/dev/null`/bin; N_NODE_PATH=`find /usr/local/n/versions/node/* -maxdepth 0 -type d 2>/dev/null | tail -1`/bin; XCODE_NODE_PATH=`xcode-select --print-path`/usr/share/xcs/Node/bin; PATH=$NODEJS_PATH:$NVM_NODE_PATH:$N_NODE_PATH:$XCODE_NODE_PATH:$PATH && node cordova/lib/copy-www-build-step.js";
 			showEnvVarsInLog = 0;
 		};
-		1BFDD68F7724416A9257BA6F /* "Fabric.io: Crashlytics" */ = {
+		9053E69582AC4E348DC529DA /* "Fabric.io: Crashlytics" */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -516,6 +556,10 @@
 				EB1E2BEB24BB464A9AD2A590 /* ELCAssetCell.m in Sources */,
 				0D8ACA9E4FBE450F8C4C2437 /* ELCAssetTablePicker.m in Sources */,
 				A516EE5DAA60437EAD5DEE55 /* ELCImagePickerController.m in Sources */,
+				16B30D0966164AD98AD5A2C3 /* CameraPreview.m in Sources */,
+				57AF022BB4204C388B2EC563 /* TemperatureAndTint.m in Sources */,
+				0D41647D06E941C589C031E3 /* CameraSessionManager.m in Sources */,
+				3F52146DFE9B4EDEB49D6711 /* CameraRenderController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

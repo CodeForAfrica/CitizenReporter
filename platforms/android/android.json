@@ -79,6 +79,10 @@
                         {
                             "xml": "<feature name=\"ImagePicker\"><param name=\"android-package\" value=\"com.synconset.ImagePicker\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"CameraPreview\"><param name=\"android-package\" value=\"com.cordovaplugincamerapreview.CameraPreview\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -141,11 +145,27 @@
                         {
                             "xml": "<activity android:label=\"@string/multi_app_name\" android:name=\"com.synconset.MultiImageChooserActivity\" android:theme=\"@android:style/Theme.Holo.Light\"></activity>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<activity android:name=\"com.cordovaplugincamerapreview.CameraActivity\" android:screenOrientation=\"portrait\" android:theme=\"@style/CameraPreviewTheme\" />",
+                            "count": 1
                         }
                     ],
                     "/manifest": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:name=\"android.hardware.camera\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:name=\"android.hardware.camera.autofocus\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.CAMERA\" />",
                             "count": 1
                         }
                     ]
@@ -214,6 +234,9 @@
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         },
         "cordova-plugin-image-picker": {
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-camera-preview": {
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
@@ -632,6 +655,14 @@
             "clobbers": [
                 "plugins.imagePicker"
             ]
+        },
+        {
+            "id": "cordova-plugin-camera-preview.CameraPreview",
+            "file": "plugins/cordova-plugin-camera-preview/www/CameraPreview.js",
+            "pluginId": "cordova-plugin-camera-preview",
+            "clobbers": [
+                "CameraPreview"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -654,6 +685,7 @@
         "es6-promise-plugin": "4.1.0",
         "cordova-plugin-screen-orientation": "2.0.1",
         "cordova-plugin-android-permissions": "0.11.0",
-        "cordova-plugin-image-picker": "1.1.1"
+        "cordova-plugin-image-picker": "1.1.1",
+        "cordova-plugin-camera-preview": "0.9.0"
     }
 }

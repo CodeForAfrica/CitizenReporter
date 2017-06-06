@@ -1,0 +1,13 @@
+
+default_platform :android
+
+lane :beta do
+
+  # upload to Beta by Crashlytics
+  crashlytics(
+    apk_path: "/Users/Ahereza/Work/StudioProjects/CitizenReporter/platforms/android/build/outputs/apk/android-debug.apk",
+    api_token: "c99a6a9a2e47604595017b4d8c8e7db46db93b9e",
+    build_secret: "253b2a04f8d7532e738ff59cfab786c97e90e6863dabb76e53c9caffc142b29d",
+    emails: ["david@codeforafrica.org", "phillip@codeforuganda.org"]
+  )
+end

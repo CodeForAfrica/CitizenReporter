@@ -1,0 +1,73 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "/Users/Ahereza/VideoCapturePlus-PhoneGap-Plugin",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/Users/Ahereza/VideoCapturePlus-PhoneGap-Plugin",
+        "spec": "/Users/Ahereza/VideoCapturePlus-PhoneGap-Plugin",
+        "type": "directory"
+      },
+      "/Users/Ahereza/Work/StudioProjects/CitizenReporter/node_modules"
+    ]
+  ],
+  "_from": "../../../VideoCapturePlus-PhoneGap-Plugin",
+  "_id": "cordova-plugin-linkedin@1.2.1",
+  "_inCache": true,
+  "_location": "/cordova-plugin-linkedin",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/Users/Ahereza/VideoCapturePlus-PhoneGap-Plugin",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/Users/Ahereza/VideoCapturePlus-PhoneGap-Plugin",
+    "spec": "/Users/Ahereza/VideoCapturePlus-PhoneGap-Plugin",
+    "type": "directory"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "file:../../../VideoCapturePlus-PhoneGap-Plugin",
+  "_shasum": "c186d3c644bfe877a03096979fe057240d3a2ba1",
+  "_shrinkwrap": null,
+  "_spec": "/Users/Ahereza/VideoCapturePlus-PhoneGap-Plugin",
+  "_where": "/Users/Ahereza/Work/StudioProjects/CitizenReporter/node_modules",
+  "author": {
+    "name": "Ibby Hadeed",
+    "email": "i.hadeed@zyra.ca"
+  },
+  "bugs": {
+    "url": "https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-linkedin",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "dependencies": {},
+  "description": "Cordova plugin for LinkedIn",
+  "devDependencies": {},
+  "gitHead": "28d89e6e6acfbfa4297e3eaa67d797e342caabc9",
+  "homepage": "https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin#readme",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-linkedin",
+  "optionalDependencies": {},
+  "readme": "# VideoCapturePlus PhoneGap plugin\n\n> PR's are welcome, but I'm no longer actively maintaining this plugin.\n\n## 0. Index\n\n1. [Description](https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin#1-description)\n2. [Screenshots](https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin#2-screenshots)\n3. [Installation](https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin#3-installation)\n\t3. [Automatically (CLI / Plugman)](https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin#automatically-cli--plugman)\n\t3. [Manually](https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin#manually)\n\t3. [PhoneGap Build](https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin#phonegap-build)\n4. [Usage](https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin#4-usage)\n5. [Credits](https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin#5-credits)\n6. [License](https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin#6-license)\n\n## 1. Description\n\n* This plugin offers some useful extras on top of the [default PhoneGap Video Capture capabilities](http://docs.phonegap.com/en/3.3.0/cordova_media_capture_capture.md.html#capture.captureVideo):\n  * HD recording.\n  * Starting with the front camera.\n  * A custom overlay (currently iOS only).\n* For PhoneGap 3.0.0 and up.\n* Works on the same Android and iOS versions as the [original plugin](http://docs.phonegap.com/en/3.3.0/cordova_media_capture_capture.md.html#capture.captureVideo).\n* Compatible with [Cordova Plugman](https://github.com/apache/cordova-plugman).\n* Pending official support at [PhoneGap Build](https://build.phonegap.com/plugins).\n\n## 2. Screenshots\n\nBefore recording, portrait mode (the 'Please rotate' text is part of the [overlay png file](demo/img/cameraoverlays/overlay-iPhone-portrait.png)):\n\n![ScreenShot](screenshots/screenshot-before-recording-portrait.png)\n\nDuring recording, landscape mode:\n\n![ScreenShot](screenshots/screenshot-during-recording-landscape.png)\n\nReviewing the recording, portrait mode:\n\n![ScreenShot](screenshots/screenshot-reviewing-recording-landscape.png)\n\nAfter recording you can extract the metadata, [see the demo folder for the code of this example](demo):\n\n![ScreenShot](screenshots/screenshot-after-recording.png)\n\n## 3. Installation\n\n\nIMPORTANT NOTE for plugin version < 1.2: if you currently use the org.apache.cordova.media-capture plugin, remove it (otherwise your build will fail).\n\n\n### Automatically (CLI / Plugman)\nVideoCapturePlus is compatible with [Cordova Plugman](https://github.com/apache/cordova-plugman), compatible with [PhoneGap 3.0 CLI](http://docs.phonegap.com/en/3.0.0/guide_cli_index.md.html#The%20Command-line%20Interface_add_features), here's how it works with the CLI:\n\n```\n$ phonegap local plugin add https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin.git\n```\nor\n```\n$ cordova plugin add https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin.git\n```\nrun this command afterwards:\n```\n$ cordova prepare\n```\n\nVideoCapturePlus.js is brought in automatically. There is no need to change or add anything in your html.\n\n### Manually\n\n1\\. Add the following xml to your `config.xml` in the root directory of your `www` folder:\n```xml\n<!-- for iOS -->\n<feature name=\"VideoCapturePlus\">\n  <param name=\"ios-package\" value=\"VideoCapturePlus\" />\n</feature>\n```\n```xml\n<!-- for Android -->\n<feature name=\"VideoCapturePlus\">\n  <param name=\"android-package\" value=\"nl.xservices.plugins.videocaptureplus.VideoCapturePlus\" />\n</feature>\n```\n\nFor Android, add these to your `AndroidManifest.xml`:\n```xml\n<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />\n<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />\n<uses-permission android:name=\"android.permission.CAMERA\" />\n```\n\nFor iOS, you'll need to add the `CoreGraphics.framework` and `MobileCoreServices.framework` to your project.\n\n2\\. Grab a copy of VideoCapturePlus.js, add it to your project and reference it in `index.html`:\n```html\n<script type=\"text/javascript\" src=\"js/VideoCapturePlus.js\"></script>\n```\n\n3\\. Download the source files for iOS and/or Android and copy them to your project.\n\niOS: Copy `VideoCapturePlus.h` and `VideoCapturePlus.m` to `platforms/ios/<ProjectName>/Plugins`\n\nAndroid: Copy `VideoCapturePlus.java` and `FileHelper.java` to `platforms/android/src/nl/xservices/plugins/videocaptureplus` (create the folders).\n\n### PhoneGap Build\n\nVideoCapturePlus is pending approval at [PhoneGap Build](http://build.phonegap.com/plugins). Once it's approved, just add the following xml to your `config.xml` to always use the latest version of this plugin:\n```xml\n<gap:plugin name=\"nl.x-services.plugins.videocaptureplus\" />\n```\nor to use this exact version:\n```xml\n<gap:plugin name=\"nl.x-services.plugins.videocaptureplus\" version=\"1.0\" />\n```\n\nVideoCapturePlus.js is brought in automatically. There is no need to change or add anything in your html.\n\n## 4. Usage\nSee the [demo project](demo) for all details, but the most interesting part is this:\n```javascript\n  window.plugins.videocaptureplus.captureVideo(\n      captureSuccess, // your success callback\n      captureError,   // your error callback\n      {\n        limit: 1, // the nr of videos to record, default 1 (on iOS always 1)\n        duration: duration, // max duration in seconds, default 0, which is 'forever'\n        highquality: highquality, // set to true to override the default low quality setting\n        frontcamera: frontcamera, // set to true to override the default backfacing camera setting. iOS: works fine, Android: YMMV (#18)\n        // you'll want to sniff the useragent/device and pass the best overlay based on that.. assuming iphone here\n        portraitOverlay: 'www/img/cameraoverlays/overlay-iPhone-portrait.png', // put the png in your www folder\n        landscapeOverlay: 'www/img/cameraoverlays/overlay-iPhone-landscape.png', // not passing an overlay means no image is shown for the landscape orientation\n        overlayText: 'Please rotate to landscape for the best result' // iOS only\n      }\n  );\n```\n\n## 5. CREDITS ##\n\nCordova, for [the original plugin repository](https://github.com/apache/cordova-plugin-media-capture), which is the basis for this one.\n\n(James Gillmore)[https://github.com/faceyspacey] for the overlayText feature on iOS.\n\n## 6. License\n\n[The MIT License (MIT)](http://www.opensource.org/licenses/mit-license.html)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EddyVerbruggen/VideoCapturePlus-PhoneGap-Plugin.git"
+  },
+  "version": "1.2.1"
+}

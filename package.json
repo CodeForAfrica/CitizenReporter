@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "4.0.2",
     "@ionic-native/android-permissions": "^3.10.3",
     "@ionic-native/camera": "^3.7.0",
+    "@ionic-native/camera-preview": "^3.12.1",
     "@ionic-native/core": "^3.7.0",
     "@ionic-native/date-picker": "^3.8.1",
     "@ionic-native/file": "^3.10.3",
@@ -38,6 +39,7 @@
     "cordova-fabric-plugin": "^1.1.7",
     "cordova-plugin-android-permissions": "^0.11.0",
     "cordova-plugin-camera": "~2.4.1",
+    "cordova-plugin-camera-preview": "^0.9.0",
     "cordova-plugin-console": "1.0.5",
     "cordova-plugin-datepicker": "^0.9.3",
     "cordova-plugin-device": "1.1.4",
@@ -115,7 +117,8 @@
       "cordova-plugin-android-permissions": {},
       "cordova-plugin-image-picker": {
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": " "
-      }
+      },
+      "cordova-plugin-camera-preview": {}
     }
   }
 }

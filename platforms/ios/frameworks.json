@@ -1,9 +1,14 @@
 {
-    "ImageIO.framework": 1,
-    "CoreLocation.framework": 3,
+    "ImageIO.framework": 2,
+    "CoreLocation.framework": 4,
     "AVFoundation.framework": 1,
     "libz.dylib": 1,
     "libc++.dylib": 1,
     "SystemConfiguration.framework": 1,
-    "Security.framework": 1
+    "Security.framework": 1,
+    "CoreImage.framework": 1,
+    "OpenGLES.framework": 1,
+    "GLKit.framework": 1,
+    "CoreVideo.framework": 1,
+    "QuartzCore.framework": 1
 }

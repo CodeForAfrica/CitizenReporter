@@ -177,5 +177,13 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "cordova-plugin-camera-preview": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-camera-preview"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

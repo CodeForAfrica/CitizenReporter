@@ -427,6 +427,14 @@ module.exports = [
         "clobbers": [
             "plugins.imagePicker"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-camera-preview/www/CameraPreview.js",
+        "id": "cordova-plugin-camera-preview.CameraPreview",
+        "pluginId": "cordova-plugin-camera-preview",
+        "clobbers": [
+            "CameraPreview"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -451,7 +459,8 @@ module.exports.metadata =
     "cordova-plugin-datepicker": "0.9.3",
     "cordova-plugin-screen-orientation": "2.0.1",
     "cordova-plugin-android-permissions": "0.11.0",
-    "cordova-plugin-image-picker": "1.1.1"
+    "cordova-plugin-image-picker": "1.1.1",
+    "cordova-plugin-camera-preview": "0.9.0"
 }
 // BOTTOM OF METADATA
 });

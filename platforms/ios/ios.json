@@ -83,6 +83,10 @@
                         {
                             "xml": "<feature name=\"ImagePicker\"><param name=\"ios-package\" value=\"SOSPicker\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"CameraPreview\"><param name=\"ios-package\" onload=\"true\" value=\"CameraPreview\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -200,6 +204,9 @@
         },
         "cordova-plugin-image-picker": {
             "PHOTO_LIBRARY_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
+        },
+        "cordova-plugin-camera-preview": {
             "PACKAGE_NAME": "com.ionicframework.citizenreporter267509"
         }
     },
@@ -632,6 +639,14 @@
             "clobbers": [
                 "plugins.imagePicker"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-camera-preview/www/CameraPreview.js",
+            "id": "cordova-plugin-camera-preview.CameraPreview",
+            "pluginId": "cordova-plugin-camera-preview",
+            "clobbers": [
+                "CameraPreview"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -654,6 +669,7 @@
         "cordova-plugin-datepicker": "0.9.3",
         "cordova-plugin-screen-orientation": "2.0.1",
         "cordova-plugin-android-permissions": "0.11.0",
-        "cordova-plugin-image-picker": "1.1.1"
+        "cordova-plugin-image-picker": "1.1.1",
+        "cordova-plugin-camera-preview": "0.9.0"
     }
 }

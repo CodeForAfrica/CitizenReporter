@@ -1,12 +1,10 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {MediaCapture, MediaFile, CaptureError} from '@ionic-native/media-capture';
-import {Camera} from '@ionic-native/camera';
-import {CreateStoryPage} from "../create-story-page/create-story-page";
+import {NavController, NavParams, ModalController} from 'ionic-angular';
+import {MediaCapture} from '@ionic-native/media-capture';
 import {File} from '@ionic-native/file';
-import {ScenePicker} from "../scene-picker/scene-picker";
-import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { ImagePicker } from '@ionic-native/image-picker';
+import {ScenePopover} from "../scene-popover/scene-popover";
+
+
 
 /**
  * Generated class for the AssignmentDetail page.
@@ -27,10 +25,7 @@ export class AssignmentDetailPage {
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
-                private mediaCapture: MediaCapture,
-                private camera: Camera,
-                private imagePicker: ImagePicker,
-                private androidPermissions: AndroidPermissions,
+                public popoverCtrl: ModalController,
                 private file: File) {
         this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
         this.assignment = navParams.get('assignment');
@@ -63,66 +58,10 @@ export class AssignmentDetailPage {
 
     }
 
-    captureImage() {
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
-            (success) => {
-                this.camera.getPicture({
-                    sourceType: this.camera.PictureSourceType.CAMERA,
-                    destinationType: this.camera.DestinationType.FILE_URI,
-                    saveToPhotoAlbum: true
-                }).then((imagePath) => {
-                    console.log(imagePath);
-                    this.navCtrl.push(CreateStoryPage, {path: imagePath, format: "image/jpeg"})
-                })
-            },
-            (err) => {
-                this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
-            })
-
+    presentPopover() {
+        let popover = this.popoverCtrl.create(ScenePopover);
+        popover.present();
     }
 
-    captureVideo() {
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
-            (success) => {
-                this.mediaCapture.captureVideo().then(
-                    (data: MediaFile[]) => {
-                        this.navCtrl.push(CreateStoryPage, {path: data[0].fullPath, format: data[0].type});
-                    })
-            },
-            (err) => {
-                this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA);
-            })
-
-    }
-
-    openGallery(){
-        console.log("open gallery");
-        this.imagePicker.hasReadPermission().then((success) =>{
-            let options = {
-                maximumImagesCount: 5,
-                width: 500,
-                height: 500,
-                quality: 75
-            };
-
-            this.imagePicker.getPictures(options).then(
-                file_uris => this.navCtrl.push(CreateStoryPage, {images: file_uris}),
-                err => console.log('uh oh')
-            );
-        },
-            (err) => {
-            this.imagePicker.requestReadPermission();
-            }
-        );
-    }
-
-
-
-    openScenePickerImage(){
-        this.navCtrl.push(ScenePicker, {camera: "image"});
-    }
-    openScenePickerVideo(){
-        this.navCtrl.push(ScenePicker, {camera: "video"});
-    }
 
 }
