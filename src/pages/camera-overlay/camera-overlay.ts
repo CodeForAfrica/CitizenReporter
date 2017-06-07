@@ -19,6 +19,9 @@ export class CameraOverlay {
     imageOverlayElement: any;
     fabButtons: any;
     cameraPreviewOpts: CameraPreviewOptions;
+    imagePath: String;
+    captureType: any;
+    buttons: any;
 
 
     constructor(public navCtrl: NavController,
@@ -26,6 +29,9 @@ export class CameraOverlay {
                 private cameraPreview: CameraPreview,
                 private screenOrientation: ScreenOrientation,
                 private platform: Platform) {
+
+        this.imagePath = this.navParams.get('path');
+        this.captureType = this.navParams.get('capture');
 
         this.cameraPreviewOpts = {
             x: 0,
@@ -49,7 +55,7 @@ export class CameraOverlay {
             this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
             this.htmlElement = document.getElementsByTagName('html')[0];
             this.imageOverlayElement = document.getElementById('image-overlay');
-            this.fabButtons = document.getElementsByTagName('ion-fab')[0];
+            this.fabButtons = document.getElementById('floating-buttons');
         });
     }
 
@@ -57,7 +63,7 @@ export class CameraOverlay {
         // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
         this.tabBarElement.style.display = 'none';
         this.htmlElement.style.visibility = 'hidden';
-        // this.fabButtons.style.visibility = 'hidden';
+        this.fabButtons.style.visibility = 'hidden';
         this.imageOverlayElement.style.visibility = 'visible';
 
     }
@@ -67,10 +73,8 @@ export class CameraOverlay {
         this.htmlElement.style.visibility = 'visible';
         this.tabBarElement.style.display = 'flex';
         this.cameraPreview.stopCamera();
-        // this.screenOrientation.unlock();
-        // this.htmlElement.style.backgroundColor = 'visible';
-        // this.fabButtons.style.backgroundColor = 'visible';
         this.imageOverlayElement.style.visibility = 'hidden';
+        this.fabButtons.style.visibility = 'visible';
 
     }
 
@@ -82,6 +86,16 @@ export class CameraOverlay {
             (err) => {
                 console.log(err)
             });
+    }
+
+    onTapOverlay(){
+        if(this.captureType == "camera"){
+            console.log("start the camera for image capture");
+        }else if(this.captureType == "video"){
+            console.log("start the camera for video capture");
+        }else{
+            console.log("do nothing with the camera");
+        }
     }
 
 }

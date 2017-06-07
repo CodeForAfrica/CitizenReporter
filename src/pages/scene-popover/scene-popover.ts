@@ -13,8 +13,10 @@ import {CameraOverlay} from "../camera-overlay/camera-overlay";
   templateUrl: 'scene-popover.html',
 })
 export class ScenePopover {
+    captureType: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+      this.captureType = this.navParams.get('capture');
   }
 
   ionViewDidLoad() {
@@ -24,9 +26,13 @@ export class ScenePopover {
     this.viewCtrl.dismiss();
   }
 
-  openCameraOverlay(){
-      this.navCtrl.push(CameraOverlay);
-      // this.viewCtrl.dismiss();
+  openCameraOverlay(imagePath){
+      this.navCtrl.push(CameraOverlay,
+          {
+              path: imagePath,
+              capture: this.captureType
+
+          });
   }
 
 }

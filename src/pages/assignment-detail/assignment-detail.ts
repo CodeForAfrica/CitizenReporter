@@ -58,8 +58,10 @@ export class AssignmentDetailPage {
 
     }
 
-    presentPopover() {
-        let popover = this.popoverCtrl.create(ScenePopover);
+    presentPopover(media) {
+        let popover = this.popoverCtrl.create(ScenePopover, {
+            capture: media
+        });
         popover.present();
     }
 

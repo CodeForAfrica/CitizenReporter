@@ -35,15 +35,15 @@
     </ion-row>
   </ion-card>
 
-  <ion-fab right bottom>
+  <ion-fab right bottom >
     <button ion-fab color="danger">
       <ion-icon name="add"></ion-icon>
     </button>
-    <ion-fab-list side="left">
-      <button ion-fab (tap)="presentPopover()">
+    <ion-fab-list side="left" id="floating-buttons">
+      <button ion-fab (tap)="presentPopover('camera')">
         <ion-icon color="primary" name="camera"></ion-icon>
       </button>
-      <button ion-fab (tap)="presentPopover()">
+      <button ion-fab (tap)="presentPopover('video')">
         <ion-icon color="secondary" name="videocam"></ion-icon>
       </button>
       <button ion-fab>
