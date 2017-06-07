@@ -34,6 +34,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import {MediaCapture} from '@ionic-native/media-capture';
 import {CameraPreview} from "@ionic-native/camera-preview";
 import {ScenePopover} from "../pages/scene-popover/scene-popover";
+import {CameraOverlay} from "../pages/camera-overlay/camera-overlay";
 
 @NgModule({
     declarations: [
@@ -53,6 +54,7 @@ import {ScenePopover} from "../pages/scene-popover/scene-popover";
         ModalWhoInvolvedPage,
         ModalWhyHappenedPage,
         ScenePopover,
+        CameraOverlay,
 
     ],
     imports: [
@@ -78,6 +80,7 @@ import {ScenePopover} from "../pages/scene-popover/scene-popover";
         ModalWhoInvolvedPage,
         ModalWhyHappenedPage,
         ScenePopover,
+        CameraOverlay,
     ],
     providers: [
         StatusBar,

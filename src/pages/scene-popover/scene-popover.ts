@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
+import {CameraOverlay} from "../camera-overlay/camera-overlay";
 
 /**
  * Generated class for the ScenePopover page.
@@ -21,6 +22,11 @@ export class ScenePopover {
   }
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  openCameraOverlay(){
+      this.navCtrl.push(CameraOverlay);
+      // this.viewCtrl.dismiss();
   }
 
 }

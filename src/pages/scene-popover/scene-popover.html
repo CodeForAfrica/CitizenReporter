@@ -7,7 +7,7 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>
-            What kind of scene are you trying to capture?
+            Scene Picker
         </ion-title>
         <ion-buttons start>
             <button ion-button (click)="dismiss()">
@@ -21,7 +21,7 @@
 <ion-content>
     <ion-list>
 
-        <ion-item>
+        <ion-item (click)="openCameraOverlay()">
             <ion-thumbnail item-left>
                 <img src="../../assets/img/scene_potrait.png">
             </ion-thumbnail>
@@ -34,7 +34,9 @@
                 <img src="../../assets/img/scene_signature.png">
             </ion-thumbnail>
             <h2>Signature</h2>
-            <p>Summarise the entire issue by illustrating an essential element of the story</p>
+            <p>Summarise the entire issue by </p>
+            <p>illustrating an essential element </p>
+            <p>of the story</p>
         </ion-item>
 
         <ion-item>
@@ -42,7 +44,8 @@
                 <img src="../../assets/img/scene_reaction.png">
             </ion-thumbnail>
             <h2>Reaction/Interaction</h2>
-            <p>Depict how people are responding to an event or its aftermath</p>
+            <p>Depict how people are responding</p>
+            <p>to an event or its aftermath</p>
         </ion-item>
 
         <ion-item>
@@ -50,7 +53,8 @@
                 <img src="../../assets/img/scene_candid.png">
             </ion-thumbnail>
             <h2>Candid</h2>
-            <p>Show the character engaged in her environment</p>
+            <p>Show the character engaged in her</p>
+            <p>environment</p>
         </ion-item>
 
         <ion-item>
