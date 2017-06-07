@@ -57,17 +57,19 @@ export class CameraOverlay {
         // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
         this.tabBarElement.style.display = 'none';
         this.htmlElement.style.visibility = 'hidden';
-        this.fabButtons.style.visibility = 'hidden';
+        // this.fabButtons.style.visibility = 'hidden';
         this.imageOverlayElement.style.visibility = 'visible';
 
     }
 
     ionViewWillLeave() {
+        console.log("camera overlay left");
+        this.htmlElement.style.visibility = 'visible';
         this.tabBarElement.style.display = 'flex';
         this.cameraPreview.stopCamera();
         // this.screenOrientation.unlock();
-        this.htmlElement.style.backgroundColor = 'visible';
-        this.fabButtons.style.backgroundColor = 'visible';
+        // this.htmlElement.style.backgroundColor = 'visible';
+        // this.fabButtons.style.backgroundColor = 'visible';
         this.imageOverlayElement.style.visibility = 'hidden';
 
     }
