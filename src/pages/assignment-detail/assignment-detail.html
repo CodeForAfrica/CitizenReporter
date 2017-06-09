@@ -39,17 +39,17 @@
     <button ion-fab color="danger">
       <ion-icon name="add"></ion-icon>
     </button>
-    <ion-fab-list side="left" id="floating-buttons">
-      <button ion-fab (tap)="presentPopover('camera')">
+    <ion-fab-list side="left">
+      <button ion-fab (tap)="presentPopover('camera')" id="floating-buttons">
         <ion-icon color="primary" name="camera"></ion-icon>
       </button>
-      <button ion-fab (tap)="presentPopover('video')">
+      <button ion-fab (tap)="presentPopover('video')" id="floating-buttons1">
         <ion-icon color="secondary" name="videocam"></ion-icon>
       </button>
-      <button ion-fab>
+      <button ion-fab id="floating-buttons2">
         <ion-icon color="vibrant" name="microphone"></ion-icon>
       </button>
-      <button ion-fab>
+      <button ion-fab id="floating-buttons3">
         <ion-icon color="danger" name="images"></ion-icon>
       </button>
     </ion-fab-list>

@@ -19,16 +19,16 @@
       <ion-icon name="add"></ion-icon>
     </button>
     <ion-fab-list side="left">
-      <button ion-fab (click)="openScenePickerImage()">
+      <button ion-fab (tap)="presentPopover('camera')" id="floating-buttons">
         <ion-icon color="primary" name="camera"></ion-icon>
       </button>
-      <button ion-fab (click)="openScenePickerVideo()">
+      <button ion-fab (tap)="presentPopover('video')" id="floating-buttons1">
         <ion-icon color="secondary" name="videocam"></ion-icon>
       </button>
-      <button ion-fab (click)="recordAudio()">
+      <button ion-fab id="floating-buttons2">
         <ion-icon color="vibrant" name="microphone"></ion-icon>
       </button>
-      <button ion-fab (click)="recordAudio()">
+      <button ion-fab id="floating-buttons3">
         <ion-icon color="danger" name="images"></ion-icon>
       </button>
     </ion-fab-list>
