@@ -73,11 +73,12 @@ export class CreateStoryPage implements OnInit {
     }
 
     ionViewDidLoad() {
-        console.log(this.navCtrl.getViews())
+        console.log(this.navCtrl.getViews());
         console.log('ionViewDidLoad CreateStoryPage');
     }
 
     ionViewWillEnter() {
+        console.log(this.slides);
         this.tabBarElement.style.display = 'none';
     }
 
@@ -189,6 +190,7 @@ export class CreateStoryPage implements OnInit {
     }
 
     presentPopover(media) {
+        console.log('media selected: ' + media);
         let popover = this.popoverCtrl.create(ScenePopover, {
             capture: media
         });
