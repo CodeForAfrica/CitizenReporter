@@ -18,7 +18,11 @@
         <ion-list>
             <ion-item>
                 <ion-input type="text" placeholder="Username" formControlName="username" value=""></ion-input>
+                <div padding *ngIf="has_error" class="error">
+                        Username Exists
+                </div>
             </ion-item>
+
 
             <ion-item>
                 <ion-input type="text" placeholder="Email" formControlName="email" value=""></ion-input>
@@ -29,11 +33,6 @@
                 <ion-input placeholder="Password" formControlName="password" type="password"></ion-input>
             </ion-item>
 
-            <div padding *ngIf="has_error" class="error">
-                <div *ngIf="!signupForm.controls.password.valid">
-                    Incorrect username or password
-                </div>
-            </div>
 
         </ion-list>
         <div padding>

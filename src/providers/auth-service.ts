@@ -55,7 +55,8 @@ export class AuthService {
             "password": password
         };
 
-        return this._http.post(this.signup_url, JSON.stringify(obj), {headers: headers});
+        return this._http.post(this.signup_url, JSON.stringify(obj), {headers: headers})
+            .map((response)=> response.json());
     }
 
 

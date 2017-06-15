@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LoadingController, NavController, NavParams} from 'ionic-angular';
+import {LoadingController, NavController, NavParams, AlertController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { AuthService } from "../../providers/auth-service";
 import {LoginPage} from "../login-page/login-page";
@@ -21,11 +21,13 @@ export class SignUpPage {
     private signupForm: FormGroup;
     private loader: any;
     private queryingServer = false;
+    private hasError = false;
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private _authService: AuthService,
                 private _loadingCtrl: LoadingController,
+                private alertCtrl: AlertController,
                 private fb: FormBuilder) {
 
         this.signupForm = this.fb.group({
@@ -55,7 +57,15 @@ export class SignUpPage {
             (data) => {
             this.loader.dismiss();
             console.log(data);
-            this.goToLogin();
+            if(data.message == "Registration successful!"){
+                this.signupSuccessAlert();
+                this.goToLogin();
+            } else if (data.message == "User already exists!"){
+                this.hasError = true;
+                this.signupForm.controls['username'].setErrors({usernameExists: true});
+                this.signupFailureAlert('User already exists!');
+            }
+
         },
             (err) => {
                 this.loader.dismiss();
@@ -76,6 +86,24 @@ export class SignUpPage {
 
     goToLogin(){
         this.navCtrl.pop(LoginPage);
+    }
+
+    signupSuccessAlert(){
+        let alert = this.alertCtrl.create({
+            title: 'Sign Up',
+            subTitle: 'You have successfully created an account',
+            buttons: ['OK']
+        });
+        alert.present();
+    }
+
+    signupFailureAlert(message){
+        let alert = this.alertCtrl.create({
+            title: 'Sign Up',
+            subTitle: message,
+            buttons: ['OK']
+        });
+        alert.present();
     }
 
 }
