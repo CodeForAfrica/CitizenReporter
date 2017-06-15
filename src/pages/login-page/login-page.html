@@ -6,40 +6,41 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Welcome</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Welcome</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
 
-  <div class="spacer" style="height: 100px;"></div>
-  <div class="spacer" style="height: 100px;"></div>
+    <div class="spacer" style="height: 100px;"></div>
+    <div class="spacer" style="height: 100px;"></div>
 
-  <form [formGroup]="loginForm" (ngSubmit)="login()" #form="ngForm">
-    <ion-list>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" #form="ngForm">
+        <ion-list>
 
-      <ion-item>
-        <ion-input type="text" placeholder="Email" formControlName="email" value=""></ion-input>
-      </ion-item>
+            <ion-item>
+                <ion-input type="text" placeholder="Email" formControlName="email" value=""></ion-input>
+            </ion-item>
 
 
-      <ion-item>
-        <ion-input placeholder="Password" formControlName="password" type="password"></ion-input>
-      </ion-item>
+            <ion-item>
+                <ion-input placeholder="Password" formControlName="password" type="password"></ion-input>
+            </ion-item>
 
-      <div padding *ngIf="has_error" class="error">
-        <div *ngIf="!loginForm.controls.password.valid">
-          Incorrect username or password
+            <div padding *ngIf="has_error" class="error">
+                <div *ngIf="!loginForm.controls.password.valid">
+                    Incorrect username or password
+                </div>
+            </div>
+
+        </ion-list>
+        <div padding>
+            <button (click)="presentLoading()" type="submit" ion-button color="primary" block>Sign In</button>
         </div>
-      </div>
+    </form>
 
-    </ion-list>
-    <div padding>
-      <button (click)="presentLoading()" type="submit" ion-button color="primary" block>Sign In</button>
-    </div>
-  </form>
-
+    <button ion-button clear (click)="goToSignUp()">Sign Up</button>
 </ion-content>

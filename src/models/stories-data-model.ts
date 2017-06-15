@@ -1,19 +1,15 @@
+
+
 export class StoryDataModel {
     assignmentDeadline: any;
     localTablePostId: number;
     localTableBlogId: number;
-    categories: string;
     customFields: any[];
     dateCreated: any;
     dateCreatedGmt: any;
     description: string;
     link: string;
-    allowComments: boolean;
-    allowPings: boolean;
-    excerpt: string;
     keywords: string;
-    moreText: string;
-    permaLink: string;
     status: string;
     remotePostId: string;
     title: string;
@@ -21,25 +17,14 @@ export class StoryDataModel {
     authorDisplayName: string;
     authorId: string;
     password: string;
-    postFormat: string;
-    slug: string;
     location: string;
-    bounty: string;
     media_types: string;
     deadline: string;
     localDraft: boolean;
     uploaded: boolean;
     mIsUploading: boolean;
-    mChangedFromLocalDraftToPublished: boolean;
-    isPage: boolean;
-    pageParentId: string;
-    pageParentTitle: string;
-    isLocalChange: boolean;
     mediaPaths: string;
-    quickPostType: string;
     assignment_id: string;
-    PostLocation: string;
-    mPostLocation: string;
     remoteMediaPaths: string[];
 
     coordinates: string[];
@@ -48,7 +33,10 @@ export class StoryDataModel {
     qwhen: string;
     qhow: string;
 
-    constructor() {
+
+    constructor(assignmentID: string) {
+        this.setAssignment_id(assignmentID);
+
     }
 
     public getQwhen_date() {
@@ -267,5 +255,21 @@ export class StoryDataModel {
 
     public setQhow(qhow) {
         this.qhow = qhow;
+    }
+
+    public uploadPost(){
+        // do upload stuff
+    }
+
+    public savePosttoDB(){
+        // do save to db stuff
+    }
+
+    public updatePostDB(){
+        // do update stuff
+    }
+
+    public deletePostDB(){
+        // do delete stuff
     }
 }

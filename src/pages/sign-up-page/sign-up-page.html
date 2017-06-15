@@ -6,13 +6,39 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>SignUpPage</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>SignUpPage</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <form [formGroup]="signupForm" (ngSubmit)="signup()" #form="ngForm">
+        <ion-list>
+            <ion-item>
+                <ion-input type="text" placeholder="Username" formControlName="username" value=""></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-input type="text" placeholder="Email" formControlName="email" value=""></ion-input>
+            </ion-item>
+
+
+            <ion-item>
+                <ion-input placeholder="Password" formControlName="password" type="password"></ion-input>
+            </ion-item>
+
+            <div padding *ngIf="has_error" class="error">
+                <div *ngIf="!signupForm.controls.password.valid">
+                    Incorrect username or password
+                </div>
+            </div>
+
+        </ion-list>
+        <div padding>
+            <button (click)="presentLoading()" type="submit" ion-button color="primary" block>Sign In</button>
+        </div>
+    </form>
 
 </ion-content>

@@ -35,6 +35,7 @@ import {MediaCapture} from '@ionic-native/media-capture';
 import {CameraPreview} from "@ionic-native/camera-preview";
 import {ScenePopover} from "../pages/scene-popover/scene-popover";
 import {CameraOverlay} from "../pages/camera-overlay/camera-overlay";
+import {SignUpPage} from "../pages/sign-up-page/sign-up-page";
 
 @NgModule({
     declarations: [
@@ -55,6 +56,7 @@ import {CameraOverlay} from "../pages/camera-overlay/camera-overlay";
         ModalWhyHappenedPage,
         ScenePopover,
         CameraOverlay,
+        SignUpPage,
 
     ],
     imports: [
@@ -81,6 +83,7 @@ import {CameraOverlay} from "../pages/camera-overlay/camera-overlay";
         ModalWhyHappenedPage,
         ScenePopover,
         CameraOverlay,
+        SignUpPage,
     ],
     providers: [
         StatusBar,
