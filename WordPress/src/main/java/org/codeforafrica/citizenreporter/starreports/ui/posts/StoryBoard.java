@@ -273,13 +273,14 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
         //is this from assignment
         int assignmentID = getIntent().getIntExtra("assignment_id", 0);
+
         if (assignmentID != 0) {
-            Log.d("assignment id", "" + assignmentID);
+            Log.d("assignmentId", "" + assignmentID);
             mPost.setAssignment_id(assignmentID);
+            WordPress.wpDB.savePost(mPost);
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(true);
