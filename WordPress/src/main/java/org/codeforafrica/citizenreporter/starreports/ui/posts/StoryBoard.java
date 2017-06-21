@@ -1,3 +1,4 @@
+
 package org.codeforafrica.citizenreporter.starreports.ui.posts;
 
 import android.Manifest;
@@ -57,6 +58,7 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.android.datetimepicker.date.DatePickerDialog;
+import com.google.gson.Gson;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.codeforafrica.citizenreporter.starreports.BuildConfig;
@@ -137,6 +139,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     private Button submitButton;
     private EditText editTextSummary;
 
+
     public static final String EXTRA_POSTID = "selectedId";
     public static final String EXTRA_IS_PAGE = "isPage";
     public static final String EXTRA_IS_NEW_POST = "isNewPost";
@@ -149,6 +152,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     private Post mOriginalPost;
     private boolean mIsNewPost;
     private boolean mIsPage;
+    private Gson gson;
     private LinearLayout button_camera;
     private LinearLayout button_video;
     private LinearLayout button_mic;
@@ -270,6 +274,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         //is this from assignment
         int assignmentID = getIntent().getIntExtra("assignment_id", 0);
         if (assignmentID != 0) {
+            Log.d("assignment id", "" + assignmentID);
             mPost.setAssignment_id(assignmentID);
         }
 
@@ -434,7 +439,6 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         /*
         TODO: doesn't work, but will come back to it
         ArrayList<MediaFile> postMedia = WordPress.wpDB.getMediaFilesForPost(mPost);
-
         if(postMedia.size()>0){
             for(int i = 0; i<postMedia.size(); i++){
                 generateThumbAndAddToSlider(postMedia.get(i));
@@ -778,7 +782,6 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
     /*
     private void launchVideoCamera() {
-
         WordPressMediaUtils.launchVideoCamera(this);
         AppLockManager.getInstance().setExtendedTimeout();
     }
@@ -1156,7 +1159,6 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         if(TextUtils.isEmpty(mPost.getKeywords())) {
             hasEmpty = true;
         }
-
         if(TextUtils.isEmpty(mPost.getQwhy())){
             hasEmpty = true;
         }
@@ -1246,7 +1248,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         } else {
             savePost(true);
             WordPress.currentPost = mPost;
-
+            Log.d("Post before upload", mPost.getRemoteMediaPaths());
             PostUploadService.addPostToUpload(mPost);
             startService(new Intent(this, PostUploadService.class));
             Intent i = new Intent();
@@ -1652,19 +1654,21 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     public void attachObjectToPost(String mimeType, File file) {
         String attachURL = "";
 
-        //get name
-        String filename = file.getName();
+        //get name and changr it to lowercase
+        String filename = file.getName().toLowerCase();
 
         Calendar c = Calendar.getInstance();
         String year = c.get(Calendar.YEAR) + "";
         int month_int = c.get(Calendar.MONTH) + 1;
         String month = String.format("%02d", month_int);
 
+        Log.d("Upload", mPost.getRemoteMediaPaths()+"");
+
         //compose file url
         String file_url = BuildConfig.DEFAULT_URL + "/wp-content/uploads/sites/4/" + year + "/" + month + "/" + filename;
 
         if (mimeType.startsWith("image")) {
-            attachURL = "<a href=\"" + file_url + "\"><img class=\"alignnone size-medium wp-image-400\" src=\"" + file_url + "\" alt=\"" + filename + "\" width=\"300\" height=\"225\" /></a>";
+            attachURL = "<a href=\"" + file_url + "\"><img class=\"alignnone size-medium wp-image-400\" src=\"" + file_url + "\" alt=\"" + filename + "\" /></a>";
             //For thumbnail
             mPost.setRemoteMediaPaths(mPost.getRemoteMediaPaths() + "-:-" + file_url);
 

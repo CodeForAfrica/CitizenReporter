@@ -20,6 +20,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.content.IntentCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import org.json.JSONArray;
@@ -225,6 +226,7 @@ public class PostUploadService extends Service {
             }
 
             String descriptionContent = processPostMedia(mPost.getDescription());
+            Log.d("Uploaded", descriptionContent);
 
             String moreContent = "";
             if (!TextUtils.isEmpty(mPost.getMoreText())) {
@@ -407,6 +409,7 @@ public class PostUploadService extends Service {
             remote_mediapaths.put("key", "remote_mediapaths");
 
             remote_mediapaths.put("value", mPost.getRemoteMediaPaths()+"");
+
 
             Map<Object, Object> mediaPaths = new HashMap<>();
             mediaPaths.put("key", "mediaPaths");
