@@ -335,23 +335,6 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
         });
         mPayment.setVisibility(View.GONE);
 
-        /*
-        text_summary.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                boolean showTemplate = false;
-                togglePanes(showTemplate);
-            }
-        });
-        text_template.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                boolean showTemplate = true;
-                togglePanes(showTemplate);
-            }
-        });
-        */
-
 
         //quick capture icons
         final Calendar calendar = Calendar.getInstance();

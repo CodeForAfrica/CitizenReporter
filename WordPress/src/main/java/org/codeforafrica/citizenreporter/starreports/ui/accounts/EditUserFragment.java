@@ -437,7 +437,6 @@ public class EditUserFragment extends AbstractFragment implements TextWatcher,  
 
         mSignupButton = (WPTextView) rootView.findViewById(R.id.signup_button);
         edit_account_label = (WPTextView) rootView.findViewById(R.id.edit_account_label);
-        edit_account_label.setText(WordPress.getCurrentBlog().getUsername());
         mSignupButton.setOnClickListener(mSignupClickListener);
         mSignupButton.setEnabled(false);
 
@@ -448,6 +447,7 @@ public class EditUserFragment extends AbstractFragment implements TextWatcher,  
         mEmailTextField.setText(UserEmailUtils.getPrimaryEmail(getActivity()));
         mEmailTextField.setSelection(EditTextUtils.getText(mEmailTextField).length());
         mPasswordTextField = (EditText) rootView.findViewById(R.id.password);
+        mPasswordTextField.setVisibility(View.INVISIBLE);
         mUsernameTextField = (EditText) rootView.findViewById(R.id.username);
         mSiteUrlTextField = (EditText) rootView.findViewById(R.id.site_url);
         mLocation = (EditText) rootView.findViewById(R.id.location);
@@ -546,7 +546,6 @@ public class EditUserFragment extends AbstractFragment implements TextWatcher,  
 
             try {
                 String fullname = "";
-
                 String s_first_name = "" + user.get("first_name");
                 if(s_first_name.equals("false") || s_first_name.equals("null")) {
                     s_first_name = "";
