@@ -225,6 +225,11 @@ public class PostUploadService extends Service {
                 mPost.setPostStatus(PostStatus.toString(PostStatus.PUBLISHED));
             }
 
+            String old_description = mPost.getDescription() + "";
+            mPost.setDescription(old_description + "<hr><p>" + mPost.getQwhy() +"</p><br>" + "\n" + "<br><p> Location: " + mPost.getStringLocation() + "</p>");
+            WordPress.wpDB.updatePost(mPost);
+
+
             String descriptionContent = processPostMedia(mPost.getDescription());
             Log.d("Uploaded", descriptionContent);
 

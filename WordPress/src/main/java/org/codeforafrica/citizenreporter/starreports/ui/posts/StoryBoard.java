@@ -1638,7 +1638,7 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
     public void attachObjectToPost(String mimeType, File file) {
         String attachURL = "";
 
-        //get name and changr it to lowercase
+        //get name and change it to lowercase
         String filename = file.getName().toLowerCase();
 
         Calendar c = Calendar.getInstance();
@@ -1666,7 +1666,8 @@ public class StoryBoard extends ActionBarActivity implements BaseSliderView.OnSl
 
 
         String old_description = mPost.getDescription() + "";
-        mPost.setDescription(old_description + "<br><p>" + mPost.getQwhy() +"</p><br>" + "\n" + attachURL + "<br><p> Location: " + mPost.getStringLocation() + "</p>");
+        mPost.setDescription(old_description + attachURL);
+//        mPost.setDescription(old_description + "<br><p>" + mPost.getQwhy() +"</p><br>" + "\n" + attachURL + "<br><p> Location: " + mPost.getStringLocation() + "</p>");
         WordPress.wpDB.updatePost(mPost);
     }
 
