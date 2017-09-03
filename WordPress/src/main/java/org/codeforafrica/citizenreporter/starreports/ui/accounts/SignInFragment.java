@@ -207,6 +207,7 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
         moveBottomButtons();
 
         mUrlEditText.setText(org.codeforafrica.citizenreporter.starreports.BuildConfig.DEFAULT_URL);
+        Log.d("Signin URL", "210 -  " + mUrlEditText.getText().toString());
         //autofill sign in details if app is in debug mode
         if (BuildConfig.IS_DEMO_APP.equals("1")) {
             mUsernameEditText.setText(org.codeforafrica.citizenreporter.starreports.BuildConfig.DEFAULT_USERNAME);
@@ -322,7 +323,9 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
     }
 
     private boolean isWPComLogin() {
+        Log.d("Signin URL", "326 -  " + mUrlEditText.getText().toString());
         String selfHostedUrl = EditTextUtils.getText(mUrlEditText).trim();
+        Log.d("Signin URL", "327 -  " + mUrlEditText.getText().toString());
         return !mSelfHosted || TextUtils.isEmpty(selfHostedUrl) || selfHostedUrl.contains("wordpress.com");
     }
 
@@ -361,6 +364,7 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
         String baseUrl = DOT_COM_BASE_URL;
         if (!isWPComLogin()) {
             baseUrl = EditTextUtils.getText(mUrlEditText).trim();
+            Log.d("Signin URL", "366 -  " + mUrlEditText.getText().toString());
             String lowerCaseBaseUrl = baseUrl.toLowerCase(Locale.getDefault());
             if (!lowerCaseBaseUrl.startsWith("https://") && !lowerCaseBaseUrl.startsWith("http://")) {
                 baseUrl = "http://" + baseUrl;
@@ -587,7 +591,7 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
     }
 
     private void signInAndFetchBlogListWPOrg() {
-        String url = EditTextUtils.getText(mUrlEditText).trim();
+        String url = BuildConfig.DEFAULT_URL;
         Log.d("Signin URL", " " + url);
         FetchBlogListWPOrg fetchBlogListWPOrg = new FetchBlogListWPOrg(mUsername, mPassword, url);
         if (mHttpUsername != null && mHttpPassword != null) {
@@ -828,6 +832,7 @@ public class SignInFragment extends AbstractFragment implements TextWatcher {
         Bundle bundle = nuxAlert.getArguments();
         bundle.putString(SignInDialogFragment.ARG_OPEN_URL_PARAM, getForgotPasswordURL());
         bundle.putString(ENTERED_URL_KEY, EditTextUtils.getText(mUrlEditText));
+        Log.d("Signin URL", "833 -  " + mUrlEditText.getText().toString());
         bundle.putString(ENTERED_USERNAME_KEY, EditTextUtils.getText(mUsernameEditText));
         nuxAlert.setArguments(bundle);
         ft.add(nuxAlert, "alert");

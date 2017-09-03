@@ -416,19 +416,19 @@
             android:name="com.sec.android.support.multiwindow"
             android:value="true" />
 
-        <receiver
-            android:name="com.google.android.gcm.GCMBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
+        <!--<receiver-->
+            <!--android:name="com.google.android.gcm.GCMBroadcastReceiver"-->
+            <!--android:permission="com.google.android.c2dm.permission.SEND">-->
+            <!--<intent-filter>-->
 
-                <!-- Receives the actual messages. -->
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <!-- Receives the registration id. -->
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <!--&lt;!&ndash; Receives the actual messages. &ndash;&gt;-->
+                <!--<action android:name="com.google.android.c2dm.intent.RECEIVE" />-->
+                <!--&lt;!&ndash; Receives the registration id. &ndash;&gt;-->
+                <!--<action android:name="com.google.android.c2dm.intent.REGISTRATION" />-->
 
-                <category android:name="org.codeforafrica.citizenreporter.starreports" />
-            </intent-filter>
-        </receiver>
+                <!--<category android:name="org.codeforafrica.citizenreporter.starreports" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
         <receiver
             android:name="org.codeforafrica.citizenreporter.starreports.ui.main.QuickCaptureWidget"
             android:label="Quick Capture Widget">

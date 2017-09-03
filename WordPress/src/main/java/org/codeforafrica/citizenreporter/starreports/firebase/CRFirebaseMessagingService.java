@@ -38,6 +38,7 @@ public class CRFirebaseMessagingService extends FirebaseMessagingService{
             Log.d("FIREBASE", "Message data payload: " + remoteMessage.getData());
         }
         if (remoteMessage.getNotification() != null) {
+            Log.d("FIREBASE", "(remoteMessage.getNotification() != null)");
 
             NotificationCompat.Builder notificationBuilder = new
                     NotificationCompat.Builder(this)
